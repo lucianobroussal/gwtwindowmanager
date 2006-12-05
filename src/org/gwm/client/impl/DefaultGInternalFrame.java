@@ -101,7 +101,7 @@ public class DefaultGInternalFrame implements GInternalFrame {
             options.add(new WindowOption("title", title));
         }
         this.title = title;
-    };
+    }
 
     public void setHeight(int height) {
         if (nativeFrame == null) {
@@ -110,7 +110,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setMaximumHeight(int maxHeight) {
@@ -120,7 +119,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setMaximumWidth(int maxWidth) {
@@ -130,7 +128,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setMinimumHeight(int minHeight) {
@@ -140,7 +137,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setMinimumWidth(int minWidth) {
@@ -150,7 +146,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setWidth(int width) {
@@ -160,7 +155,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setClosable(boolean closable) {
@@ -170,7 +164,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setDraggable(boolean draggable) {
@@ -180,7 +173,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setMaximizable(boolean maximizable) {
@@ -190,7 +182,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setMinimizable(boolean minimizable) {
@@ -200,7 +191,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setResizable(boolean resizable) {
@@ -210,7 +200,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setLeft(int left) {
@@ -220,7 +209,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public void setTop(int top) {
@@ -250,8 +238,7 @@ public class DefaultGInternalFrame implements GInternalFrame {
             setContent("<div id='" + getWinContainerId() + "'/>");
         }
         RootPanel.get(getWinContainerId()).add(widget);
-
-    };
+    }
 
     public void show(boolean modal) {
         if (nativeFrame == null) {
@@ -286,7 +273,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_BEFORE_CALL_TO_SHOW_METHOD);
         }
-
     }
 
     public String getTitle() {
@@ -462,7 +448,6 @@ public class DefaultGInternalFrame implements GInternalFrame {
         public Object getValue() {
             return value;
         }
-
     }
 
     /**
