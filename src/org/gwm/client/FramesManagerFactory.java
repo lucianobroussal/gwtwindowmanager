@@ -19,14 +19,14 @@ package org.gwm.client;
 import org.gwm.client.impl.DefaultFramesManager;
 
 /**
- * Provides an implementation of the FramesManager.
- * Typically the first class, you have to instanciate.
+ * Provides an implementation of the FramesManager. Typically the first class,
+ * you have to instanciate.
  * 
  * 
  * @author luciano broussal
- *
+ * 
  * Type FramesManagerFactory, created on 27 nov. 06 at 18:11:31
- *
+ * 
  */
 public class FramesManagerFactory {
 
@@ -35,7 +35,7 @@ public class FramesManagerFactory {
      * 
      * @return a FramesManager instance.
      */
-	public FramesManager createFramesManager(){
-		return new DefaultFramesManager();
-	}
+    public FramesManager createFramesManager() {
+        return new DefaultFramesManager();
+    }
 }
