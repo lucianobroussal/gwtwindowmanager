@@ -305,12 +305,7 @@ public class DefaultGInternalFrame implements GInternalFrame {
      frame.setTitle(title); 
      }-*/;
 
-    private native void nativeSetUrl(String url)/*-{
-     frame = this.@org.gwm.client.impl.DefaultGInternalFrame::nativeFrame;
-     if(frame != null)
-     frame.setUrl(url); 
-     }-*/;
-
+   
     private native JavaScriptObject newWindow(String id,
             JavaScriptObject options) /*-{
      return  new $wnd.Window(id ,options );
