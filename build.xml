@@ -14,7 +14,12 @@
  * the License.
  */
 -->
+
+
 <project basedir="." name="gwm">
+
+	<!-- To be set to the root dir of your gwt binaries installation-->
+	<property name="GWT_HOME" value="C:/desk/gwt-windows-1.2.11/gwt-windows-1.2.11/"/>
 	
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
@@ -22,12 +27,11 @@
 		</classpath>
 	</taskdef>
 	
-	<property name="module" value="org.gwm.GwtWindowManager"/>
-
+	
 	
 	<target name="package" description="Package jar">
-		<delete file="dist/gwtwindowmanager.jar"/>
-		<jar destfile="dist/gwtwindowmanager.jar" update="false" manifest="MANIFEST.MF">
+		<delete file="dist/gwm.jar"/>
+		<jar destfile="dist/gwm.jar" update="false" manifest="MANIFEST.MF">
 			<fileset dir="src" excludes="**/*.html"/>
 			<fileset dir="classes" includes="**/*.class"/>
 			<fileset dir="LICENSES" includes="*.txt"></fileset>
@@ -38,8 +42,8 @@
         <javadoc destdir="doc" access="public" source="1.4" use="true" notree="false" nonavbar="false" noindex="false" splitindex="true" author="true" version="true" nodeprecatedlist="false" nodeprecated="false">
         	<sourcepath path="src"/>
         	<package name="org.gwm.client"/>
-        	<classpath location="lib/gwt-dev-windows.jar"/>
-        	<classpath location="lib/gwt-user.jar"/>
+        	<classpath location="${GWT_HOME}/gwt-dev-windows.jar"/>
+        	<classpath location="${GWT_HOME}/gwt-user.jar"/>
             <link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
         	<doctitle> <![CDATA[<h1>GwtWindowManager Documentation</h1>]]>
 			</doctitle>
