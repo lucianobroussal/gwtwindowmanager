@@ -1,4 +1,0 @@
-Bundle-SymbolicName: GWM
-Bundle-Version: 0.1b
-Bundle-Vendor: http://www.gwtwindowmanager.org
-Bundle-Name: GWT Window Manager
