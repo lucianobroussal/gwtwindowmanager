@@ -1,0 +1,56 @@
+<!--
+ /* Copyright 2006 gwtwindowmanager.org .
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+-->
+
+
+<project basedir="." name="gwm">
+
+	<!-- To be set to the root dir of your gwt binaries installation-->
+	<property name="GWT_HOME" value="C:/desk/gwt-windows-1.2.11/gwt-windows-1.2.11/"/>
+	
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="../lib/ant-contrib.jar"/>
+		</classpath>
+	</taskdef>
+	
+	
+	
+	<target name="package" description="Package jar">
+		<delete file="dist/gwm.jar"/>
+		<jar destfile="dist/gwm.jar" update="false" manifest="MANIFEST.MF">
+			<fileset dir="src" excludes="**/*.html"/>
+			<fileset dir="classes" includes="**/*.class"/>
+			<fileset dir="LICENSES" includes="*.txt"></fileset>
+		</jar>
+	</target>
+
+    <target name="javadoc" description="">
+        <javadoc destdir="doc" access="public" source="1.4" use="true" notree="false" nonavbar="false" noindex="false" splitindex="true" author="true" version="true" nodeprecatedlist="false" nodeprecated="false">
+        	<sourcepath path="src"/>
+        	<package name="org.gwm.client"/>
+        	<classpath location="${GWT_HOME}/gwt-dev-windows.jar"/>
+        	<classpath location="${GWT_HOME}/gwt-user.jar"/>
+            <link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+        	<doctitle> <![CDATA[<h1>GwtWindowManager Documentation</h1>]]>
+			</doctitle>
+        	<bottom>
+        		<![CDATA[<i>Copyright &#169; 2006 <a href="http://www.gwtwindowmanager.org">gwtwindowmaanger.org</a>.</i>]]>
+        	</bottom>
+        </javadoc>
+    </target>
+	
+</project>
