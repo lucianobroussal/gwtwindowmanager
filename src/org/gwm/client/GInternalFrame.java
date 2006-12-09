@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * Type GInternalFrame, created on 28 nov. 06 at 16:35:31
  * 
- */
+ */ 
 public interface GInternalFrame {
 
     /**
