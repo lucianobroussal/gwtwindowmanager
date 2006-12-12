@@ -19,7 +19,7 @@
 <project basedir="." name="gwm">
 
 	<!-- To be set to the root dir of your gwt binaries installation-->
-	<property name="GWT_HOME" value="C:/desk/gwt-windows-1.2.11/gwt-windows-1.2.11/"/>
+	<property name="GWT_HOME" value="/home/johan/gwt-linux-1.2.11/"/>
 	
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
