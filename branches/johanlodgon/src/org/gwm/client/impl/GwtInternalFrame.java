@@ -33,6 +33,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
   private Label caption;
   private Widget myContent;
   private int dragStartX, dragStartY;
+  private int resizeStartX, resizeStartY;
   private boolean dragging;
   private static final int DEFAULT_WIDTH  = 200;
   private static final int DEFAULT_HEIGHT = 300;
@@ -48,6 +49,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
   private boolean closable, maximizable, minimizable, draggable, resizable;
   private HTML resizeHTML;
   private Element resizeElement;
+  private boolean resizing;
 
 
   private FlexTable panel = new FlexTable();
@@ -128,7 +130,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
       resizeElement = resizeHTML.getElement ();
       DOM.sinkEvents (resizeElement, Event.ONCLICK);
       DOM.setEventListener (resizeElement, this);
-System.out.println ("Created listener for "+resizeElement);
     }
     else {
       panel.getCellFormatter().setStyleName(2,2, currentStyle+ "_se");
@@ -321,7 +322,6 @@ System.out.println ("Created listener for "+resizeElement);
     int type = DOM.eventGetType (event);
     if (type == Event.ONCLICK) {
       Element parent = DOM.getParent (target);
-   System.out.println ("event on " + target+" and parent = "+parent);
       if (parent.equals (closeElement)) {
         this.hide();
         return;
@@ -341,12 +341,29 @@ System.out.println ("Created listener for "+resizeElement);
       }
       return;
     }
-System.out.println ("resize? "+type);
-    if (type == Event.ONMOUSEDOWN) {
+    if ((type == Event.ONMOUSEDOWN) && (target.equals (resizeElement))) {
+      this.resizing = true;
+      resizeStartX = DOM.eventGetClientX (event);
+      resizeStartY = DOM.eventGetClientY (event);
     }
-    if (target.equals(resizeElement)) {
+    if (type == Event.ONMOUSEUP) {
+      this.resizing = false;
     }
-// System.out.println ("resize el = "+resizeElement);
+    if ((type == Event.ONMOUSEMOVE) && this.resizing) {
+      int nx = DOM.eventGetClientX (event);
+      int ny = DOM.eventGetClientY (event);
+      int newWidth = this.width + nx - resizeStartX;
+      int newHeight = this.height + ny - resizeStartY;
+      if (newWidth > minWidth) {
+        this.width = this.width + nx - resizeStartX;
+        resizeStartX = nx;
+      }
+      if (newHeight > minHeight) {
+        this.height = this.height + ny - resizeStartY;
+        resizeStartY = ny;
+      }
+      buildGui();
+    }
   }
 
   public boolean onEventPreview (Event evt) {
