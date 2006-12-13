@@ -19,6 +19,7 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -58,13 +59,19 @@ public class DefaultGInternalFrame implements GInternalFrame {
     private JavaScriptObject nativeFrame;
 
     private List options;
+    
+    private GDesktopPane parent;
 
     public DefaultGInternalFrame(String id) {
         this.id = id;
         options = new ArrayList();
     }
 
-    /**
+    public void setParent(GDesktopPane parent) {
+		this.parent = parent;
+	}
+
+	/**
      * Used for Gwt Widget content type
      * 
      * @return the id of the Element which receive the widget content
@@ -472,5 +479,9 @@ public class DefaultGInternalFrame implements GInternalFrame {
         }
         return jso;
     }
+
+	public GDesktopPane getParent() {
+		return this.parent;
+	}
 
 }
