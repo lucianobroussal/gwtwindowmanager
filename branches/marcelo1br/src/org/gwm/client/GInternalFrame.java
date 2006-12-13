@@ -300,5 +300,10 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setDraggable(boolean draggable);
-
+    
+    /**
+     * Returns the GDesktopPane who owns this GInternalFrame
+     * @return
+     */
+    public GDesktopPane getParent();
 }

@@ -1,13 +1,13 @@
 package org.gwm.client.oldwindow;
 
 public class WindowEvent {
-	private CoreWindow source;
+	private GWTInternalFrame source;
 	
-	public WindowEvent(CoreWindow source){
+	public WindowEvent(GWTInternalFrame source){
 		this.source = source;
 	}
 	
-	public CoreWindow getSource(){
+	public GWTInternalFrame getSource(){
 		return this.source;
 	}
 }
