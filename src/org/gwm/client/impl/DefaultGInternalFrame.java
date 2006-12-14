@@ -484,4 +484,16 @@ public class DefaultGInternalFrame implements GInternalFrame {
 		return this.parent;
 	}
 
+	public void setModal(boolean modal) {
+
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean isModal() {
+
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
