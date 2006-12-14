@@ -480,7 +480,7 @@ public class DefaultGInternalFrame implements GInternalFrame {
         return jso;
     }
 
-	public GDesktopPane getParent() {
+	public GDesktopPane getParentDesktop() {
 		return this.parent;
 	}
 
