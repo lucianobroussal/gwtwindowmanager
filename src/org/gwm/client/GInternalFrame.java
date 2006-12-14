@@ -305,5 +305,5 @@ public interface GInternalFrame {
      * Returns the GDesktopPane who owns this GInternalFrame
      * @return
      */
-    public GDesktopPane getParent();
+    public GDesktopPane getParentDesktop();
 }
