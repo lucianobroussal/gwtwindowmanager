@@ -306,4 +306,16 @@ public interface GInternalFrame {
      * @return
      */
     public GDesktopPane getParentDesktop();
+    
+    /**
+     * Sets if the window is Modal or Non-Modal. A modal window block all the 
+     * events that is not directed to it. Can be changed after the exibition of 
+     * the window.
+     */
+    public void setModal(boolean modal);
+    
+    /**
+     * Tells if the window is modal or non-modal.
+     */
+    public boolean isModal();
 }
