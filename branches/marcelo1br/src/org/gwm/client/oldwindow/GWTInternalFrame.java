@@ -4,12 +4,13 @@ package org.gwm.client.oldwindow;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gwm.client.GDesktopPane;
+import org.gwm.client.GInternalFrame;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -20,7 +21,7 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class GWTInternalFrame extends PopupPanel implements MouseListener, WindowResizeListener{
+public class GWTInternalFrame extends PopupPanel implements MouseListener, GInternalFrame{
 	
 	private DockPanel windowLayout;
 	private HorizontalPanel top;
@@ -254,13 +255,13 @@ public class GWTInternalFrame extends PopupPanel implements MouseListener, Windo
 		});
 	}
 
-	protected void minimize() {
+	public void minimize() {
 		setPopupPosition(0, Window.getClientHeight()-44);
 		setPixelHeight(44);
 		fireWindowMinimized();
 	}
 
-	protected void maximize() {
+	public void maximize() {
 		setPopupPosition(0, 0);
 		int diferencaY = Window.getClientHeight() - getPixelHeight() - 70;
 		int diferencaX = Window.getClientWidth() - getPixelWidth() - 65;
@@ -285,8 +286,8 @@ public class GWTInternalFrame extends PopupPanel implements MouseListener, Windo
 	}
 	private void fireWindowActivated() {
 		for(int i=0; i < listeners.size();i++){
-			WindowListener listener = (WindowListener) listeners.get(i);
-			listener.windowActivated(new WindowEvent(this));
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameActivated(new GFrameEvent(this));
 		}
 	}
 	public void centraliza(int width, int height) {
@@ -324,38 +325,38 @@ public class GWTInternalFrame extends PopupPanel implements MouseListener, Windo
 	
 	private void fireWindowResized(){
 		for(int i=0; i < listeners.size(); i++){
-			WindowListener listener = (WindowListener) listeners.get(i);
-			listener.windowResized(new WindowEvent(this));
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameResized(new GFrameEvent(this));
 		}
 	}
 	private void fireWindowClosing(){
 		for(int i=0; i < listeners.size(); i++){
-			WindowListener listener = (WindowListener) listeners.get(i);
-			listener.windowClosing(new WindowEvent(this));
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameClosing(new GFrameEvent(this));
 		}
 	}
 	private void fireWindowClosed(){
 		for(int i=0; i < listeners.size(); i++){
-			WindowListener listener = (WindowListener) listeners.get(i);
-			listener.windowClosed(new WindowEvent(this));
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameClosed(new GFrameEvent(this));
 		}
 	}
 	private void fireWindowMaximized(){
 		for(int i=0; i < listeners.size(); i++){
-			WindowListener listener = (WindowListener) listeners.get(i);
-			listener.windowMaximized(new WindowEvent(this));
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameMaximized(new GFrameEvent(this));
 		}
 	}
 	private void fireWindowMinimized(){
 		for(int i=0; i < listeners.size(); i++){
-			WindowListener listener = (WindowListener) listeners.get(i);
-			listener.windowMinimized(new WindowEvent(this));
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameMinimized(new GFrameEvent(this));
 		}
 	}
 	private void fireWindowMoved(){
 		for(int i=0; i < listeners.size(); i++){
-			WindowListener listener = (WindowListener) listeners.get(i);
-			listener.windowMoved(new WindowEvent(this));
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameMoved(new GFrameEvent(this));
 		}
 	}
 	
@@ -476,14 +477,143 @@ public class GWTInternalFrame extends PopupPanel implements MouseListener, Windo
 	public void onMouseEnter(Widget sender) {}
 	public void onMouseLeave(Widget sender) {}
 	
-	public void addWindowListener(WindowListener listener){
+	public void addWindowListener(GFrameListener listener){
 		listeners.add(listener);
 	}
 	
-	public void removeWindowListener(WindowListener listener){
+	public void removeWindowListener(GFrameListener listener){
 		listeners.remove(listener);
 	}
 	public void onWindowResized(int width, int height) {
 		
+	}
+	public void destroy() {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public String getId() {
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public boolean isMaximized() {
+
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public boolean isMinimized() {
+
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public void setContent(Widget widget) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setContent(String content) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setDestroyOnClose() {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setDraggable(boolean draggable) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setHeight(int height) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setLeft(int left) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setLocation(int top, int left) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setMaximumHeight(int maxHeight) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setMaximumWidth(int maxWidth) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setMinimumHeight(int minHeight) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setMinimumWidth(int minWidth) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setSize(int width, int height) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setStyle(String style) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setTop(int top) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setUrl(String url) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void setWidth(int width) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void show(boolean modal) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void showCenter(boolean modal) {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void toFront() {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void updateHeight() {
+
+		// TODO Auto-generated method stub
+		
+	}
+	public void updateWidth() {
+
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public GDesktopPane getParentDesktop(){
+		return null;
 	}
 }
