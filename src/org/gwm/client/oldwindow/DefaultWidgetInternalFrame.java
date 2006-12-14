@@ -333,7 +333,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 					bottomGradient.setWidth(bottomGradientWidth+"px");
 					left.setHeight(leftHeight+"px");
 					right.setHeight(rightHeight+"px");
-					fireWindowResized();
+					fireFrameResized();
 				}
 			}
 		
@@ -383,7 +383,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void minimize() {
 		setPopupPosition(0, Window.getClientHeight()-44);
 		setPixelHeight(44);
-		fireWindowMinimized();
+		fireFrameMinimized();
 	}
 	/*
 	 * (non-Javadoc)
@@ -395,7 +395,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		int diferencaX = Window.getClientWidth() - getPixelWidth() - 65;
 		setPixelHeight(getPixelHeight() + diferencaY);
 		setPixelWidth(getPixelWidth() + diferencaX);
-		fireWindowMaximized();
+		fireFrameMaximized();
 	}
 	/**
 	 * Closes this window. Fires two events: frameClosing and frameClosed.
@@ -403,9 +403,9 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * after the closing of the window.
 	 */
 	protected void close() {
-		fireWindowClosing();
+		fireFrameClosing();
 		hide();
-		fireWindowClosed();
+		fireFrameClosed();
 	}
 	/**
 	 * Shows the window. Fires the frameActivated event.
@@ -413,7 +413,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void show() {
 		super.show();
 		if(firstTimeShow)
-			ajusta();
+			update();
 		if(!modal){
 			DOM.removeEventPreview(this);
 		}
@@ -428,9 +428,9 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	}
 
 	/**
-	 * Ajusta os divs para que a janela continue desenhada.
+	 * Ajusts the sizes of the gradients.
 	 */
-	private void ajusta() {
+	private void update() {
 		DeferredCommand.add(new Command() {
 			public void execute() {
 				int width = getOffsetWidth();
@@ -463,37 +463,61 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 			listener.frameActivated(new GFrameEvent(this));
 		}
 	}
-	private void fireWindowResized(){
+	
+	/**
+	 * Fires the event of the resizing of this frame to its listeners.
+	 */
+	private void fireFrameResized(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameResized(new GFrameEvent(this));
 		}
 	}
-	private void fireWindowClosing(){
+	
+	/**
+	 * Fires the closing event of this frame to its listeners.
+	 */
+	private void fireFrameClosing(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameClosing(new GFrameEvent(this));
 		}
 	}
-	private void fireWindowClosed(){
+	
+	/**
+	 * Fires the closed event of this frame to its listeners.
+	 */
+	private void fireFrameClosed(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameClosed(new GFrameEvent(this));
 		}
 	}
-	private void fireWindowMaximized(){
+	
+	/**
+	 * Fires the frameMaximized event of this frame to its listeners.
+	 */
+	private void fireFrameMaximized(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameMaximized(new GFrameEvent(this));
 		}
 	}
-	private void fireWindowMinimized(){
+	
+	/**
+	 * Fires the frameMinimized event of this frame to its listeners.
+	 */
+	private void fireFrameMinimized(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameMinimized(new GFrameEvent(this));
 		}
 	}
-	private void fireWindowMoved(){
+	
+	/**
+	 * Fires the frameMoved event of this frame to its listeners.
+	 */
+	private void fireFrameMoved(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameMoved(new GFrameEvent(this));
@@ -503,42 +527,65 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	/*
 	 * Gets and Sets 
 	 */
-	
+	/**
+	 * Returns the content of this window.
+	 */
 	public Composite getContentPane() {
 		return contentPane;
 	}
-
+	/**
+	 * Sets the contentPane of this window.
+	 * @param contentPane
+	 */
 	public void setContentPane(Composite contentPane) {
 		if(contentPane != null){
 			windowLayout.remove(this.contentPane);
 			windowLayout.add(contentPane, DockPanel.CENTER);
 			contentPane.setWidth("100%");
 			contentPane.setHeight("100%");
-			contentPane.setStyleName("com_core_window_content");
+			contentPane.setStyleName("content");
 		}
 		this.contentPane = contentPane;
-		ajusta();
+		update();
 	}
-	
+	/**
+	 * Returns the Caption text of this window.
+	 * @return
+	 */
 	public String getCaption() {
 		return caption;
 	}
 	
+	/**
+	 * Sets the Caption text of this window.
+	 * @param caption
+	 */
 	public void setCaption(String caption) {
 		String newCaption = (caption != null ? caption : "");
 		topGradient.setHTML(newCaption);
 		this.caption = caption;
 	}
-
+	
+	/**
+	 * Returns wether this is window is closable or not.
+	 * @return
+	 */
 	public boolean isClosable() {
 		return closable;
 	}
-
+	
+	/**
+	 * Sets the closable property of this window.
+	 */
 	public void setClosable(boolean closable) {
 		closeButton.setVisible(closable);
 		this.closable = closable;
 	}
-
+	
+	/**
+	 * Returns wether this window is maximizable or not.
+	 * @return
+	 */
 	public boolean isMaximizable() {
 		return maximizable;
 	}
@@ -605,7 +652,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 			int absX = x + getAbsoluteLeft();
 			int absY = y + getAbsoluteTop();
 			setPopupPosition(absX - dragStartX, absY - dragStartY);
-			fireWindowMoved();
+			fireFrameMoved();
 		}
 	}
 	
@@ -634,45 +681,38 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		return false;
 	}
 	public boolean isMinimized() {
-
-		// TODO Auto-generated method stub
 		return false;
 	}
 	public void setContent(Widget widget) {
-
-		// TODO Auto-generated method stub
 		
 	}
 	public void setContent(String content) {
-
-		// TODO Auto-generated method stub
 		
 	}
 	public void setDestroyOnClose() {
-
-		// TODO Auto-generated method stub
 		
 	}
 	public void setDraggable(boolean draggable) {
-
-		// TODO Auto-generated method stub
 		
 	}
 	public void setHeight(int height) {
-
-		// TODO Auto-generated method stub
-		
+		setPixelHeight(pixelHeight);
 	}
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setLeft(int)
+	 */
 	public void setLeft(int left) {
-
-		// TODO Auto-generated method stub
-		
+		setPopupPosition(left, getPopupTop());
 	}
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setLocation(int, int)
+	 */
 	public void setLocation(int top, int left) {
-
-		// TODO Auto-generated method stub
-		
+		setPopupPosition(left, top);
 	}
+	
 	public void setMaximumHeight(int maxHeight) {
 
 		// TODO Auto-generated method stub
@@ -694,20 +734,22 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		
 	}
 	public void setSize(int width, int height) {
-
-		// TODO Auto-generated method stub
-		
+		setPixelSize(width, height);
 	}
 	public void setStyle(String style) {
 
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setTop(int)
+	 */
 	public void setTop(int top) {
-
-		// TODO Auto-generated method stub
-		
+		setPopupPosition(getPopupLeft(), top);
 	}
+	
 	public void setUrl(String url) {
 
 		// TODO Auto-generated method stub
