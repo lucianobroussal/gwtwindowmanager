@@ -16,6 +16,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MouseListener;
@@ -126,13 +127,26 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	private int dragStartY;
 	private int pixelHeight;
 	private int pixelWidth;
+	private int minimumHeight;
+	private int minimumWidth;
+	private int maximumHeight;
+	private int maximumWidth;
 	private boolean closable;
 	private boolean maximizable;
 	private boolean minimizable;
 	private boolean resizable;
-	private boolean dragging;
+	private boolean draggable;
 	private boolean firstTimeShow;
+	
+	/*
+	 * The states of the window
+	 */
+	private boolean dragging;
 	private boolean resizing;
+	private boolean minimized;
+	private boolean maximized;
+	private boolean closed;
+	
 	private boolean modal;
 	private List listeners;
 	
@@ -335,6 +349,9 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 					bottomGradient.setWidth(bottomGradientWidth+"px");
 					left.setHeight(leftHeight+"px");
 					right.setHeight(rightHeight+"px");
+					
+					setMaximized(false);
+					setMinimized(false);
 					fireFrameResized();
 				}
 			}
@@ -371,6 +388,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		
 		this.modal = modal;
 	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#isModal()
@@ -378,6 +396,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public boolean isModal(){
 		return this.modal;
 	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#minimize()
@@ -385,8 +404,19 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void minimize() {
 		setPopupPosition(0, Window.getClientHeight()-44);
 		setPixelHeight(44);
+		setMinimized(true);
+		setMaximized(false);
 		fireFrameMinimized();
 	}
+	
+	/**
+	 * Alter the minimized state of the window.
+	 * @param b
+	 */	
+	private void setMinimized(boolean b) {
+		this.minimized = b;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#maximize()
@@ -397,8 +427,19 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		int diferencaX = Window.getClientWidth() - getPixelWidth() - 65;
 		setPixelHeight(getPixelHeight() + diferencaY);
 		setPixelWidth(getPixelWidth() + diferencaX);
+		setMinimized(false);
+		setMaximized(true);
 		fireFrameMaximized();
 	}
+
+	/**
+	 * Alter the maximized state of the window.
+	 * @param b
+	 */
+	private void setMaximized(boolean b) {
+		this.maximized = b;
+	}
+
 	/**
 	 * Closes this window. Fires two events: frameClosing and frameClosed.
 	 * FrameClosing event is fired before the window close and frameClosed just 
@@ -591,25 +632,37 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public boolean isMaximizable() {
 		return maximizable;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setMaximizable(boolean)
+	 */
 	public void setMaximizable(boolean maximizable) {
 		maxButton.setVisible(maximizable);
 		this.maximizable = maximizable;
 	}
-
+	
 	public boolean isMinimizable() {
 		return minimizable;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setMinimizable(boolean)
+	 */
 	public void setMinimizable(boolean minimizable) {
 		minButton.setVisible(minimizable);
 		this.minimizable = minimizable;
 	}
-
+	
 	public boolean isResizable() {
 		return resizable;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setResizable(boolean)
+	 */
 	public void setResizable(boolean resizable) {
 		String style = "com_core_window_bottom_right_corner";
 		if(!resizable){
@@ -663,8 +716,8 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		DOM.releaseCapture(sender.getElement());
 	}
 	
-	public void onMouseEnter(Widget sender) {}
-	public void onMouseLeave(Widget sender) {}
+	public void onMouseEnter(Widget sender) {/* Do nothing here */}
+	public void onMouseLeave(Widget sender) {/* Do nothing here */}
 	
 	public void addWindowListener(GFrameListener listener){
 		listeners.add(listener);
@@ -673,33 +726,80 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void removeWindowListener(GFrameListener listener){
 		listeners.remove(listener);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#destroy()
+	 */
 	public void destroy() {
 		close();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#getId()
+	 */
 	public String getId() {
 		return getCaption();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#isMaximized()
+	 */
 	public boolean isMaximized() {
-		return false;
+		return this.maximized;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#isMinimized()
+	 */
 	public boolean isMinimized() {
-		return false;
+		return this.minimized;
 	}
-	public void setContent(Widget widget) {
-		
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setContent(com.google.gwt.user.client.ui.Composite)
+	 */
+	public void setContent(Composite theContent) {
+		setContentPane(theContent);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setContent(java.lang.String)
+	 */
 	public void setContent(String content) {
-		
+		Composite newContentPane = new BlankComposite(content);
+		setContent(newContentPane);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setDestroyOnClose()
+	 */
 	public void setDestroyOnClose() {
-		
+		//TODO what should I put here?
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setDraggable(boolean)
+	 */
 	public void setDraggable(boolean draggable) {
-		
+		this.draggable = draggable;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setHeight(int)
+	 */
 	public void setHeight(int height) {
 		setPixelHeight(pixelHeight);
 	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#setLeft(int)
@@ -707,6 +807,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void setLeft(int left) {
 		setPopupPosition(left, getPopupTop());
 	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#setLocation(int, int)
@@ -715,33 +816,52 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		setPopupPosition(left, top);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setMaximumHeight(int)
+	 */
 	public void setMaximumHeight(int maxHeight) {
-
-		// TODO Auto-generated method stub
-		
+		this.maximumHeight = maxHeight;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setMaximumWidth(int)
+	 */
 	public void setMaximumWidth(int maxWidth) {
-
-		// TODO Auto-generated method stub
-		
+		this.maximumWidth = maxWidth;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setMinimumHeight(int)
+	 */
 	public void setMinimumHeight(int minHeight) {
-
-		// TODO Auto-generated method stub
-		
+		this.minimumHeight = minHeight;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setMinimumWidth(int)
+	 */
 	public void setMinimumWidth(int minWidth) {
-
-		// TODO Auto-generated method stub
-		
+		this.minimumWidth = minWidth;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setSize(int, int)
+	 */
 	public void setSize(int width, int height) {
 		setPixelSize(width, height);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setStyle(java.lang.String)
+	 */
 	public void setStyle(String style) {
-
-		// TODO Auto-generated method stub
-		
+		//TODO what should I put here??
 	}
 	
 	/*
@@ -752,40 +872,134 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		setPopupPosition(getPopupLeft(), top);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setUrl(java.lang.String)
+	 */
 	public void setUrl(String url) {
-
-		// TODO Auto-generated method stub
-		
+		Frame theFrame = new Frame(url);
+		Composite theComposite = new WidgetComposite(theFrame);
+		setContent(theComposite);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#setWidth(int)
+	 */
 	public void setWidth(int width) {
 		setPixelWidth(width);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#show(boolean)
+	 */
 	public void show(boolean modal) {
 		setModal(modal);
 		show();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#showCenter(boolean)
+	 */
 	public void showCenter(boolean modal) {
 		setModal(modal);
 		show();
 		centraliza(Window.getClientWidth(), Window.getClientHeight());
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#toFront()
+	 */
 	public void toFront() {
-
-		// TODO Auto-generated method stub
-		
+		//I hope it works :)
+		DOM.setIntStyleAttribute(getElement(), "zIndex", Integer.MAX_VALUE);
+		// TODO What should I put here?
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#updateHeight()
+	 */
 	public void updateHeight() {
 
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#updateWidth()
+	 */
 	public void updateWidth() {
 
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#getParentDesktop()
+	 */
 	public GDesktopPane getParentDesktop(){
 		return null;
+	}
+
+	/**
+	 * @return the closed
+	 */
+	public boolean isClosed() {
+	
+		return closed;
+	}
+
+	/**
+	 * @param closed the closed to set
+	 */
+	public void setClosed(boolean closed) {
+	
+		this.closed = closed;
+	}
+
+	/**
+	 * @return the draggable
+	 */
+	public boolean isDraggable() {
+	
+		return draggable;
+	}
+
+	/**
+	 * @return the maximumHeight
+	 */
+	public int getMaximumHeight() {
+	
+		return maximumHeight;
+	}
+
+	/**
+	 * @return the maximumWidth
+	 */
+	public int getMaximumWidth() {
+	
+		return maximumWidth;
+	}
+
+	/**
+	 * @return the minimumHeight
+	 */
+	public int getMinimumHeight() {
+	
+		return minimumHeight;
+	}
+
+	/**
+	 * @return the minimumWidth
+	 */
+	public int getMinimumWidth() {
+	
+		return minimumWidth;
 	}
 }

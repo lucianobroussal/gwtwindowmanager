@@ -12,12 +12,15 @@ import com.google.gwt.user.client.ui.HTML;
  */
 public class BlankComposite extends Composite {
 
+	public BlankComposite(){
+		this("");
+	}
 	/**
 	 * Build a BlankComposite.
 	 */
-	public BlankComposite() {
+	public BlankComposite(String html) {
 
-		initWidget(new HTML());
+		initWidget(new HTML(html,true));
 		setWidth("100%");
 		setHeight("100%");
 	}

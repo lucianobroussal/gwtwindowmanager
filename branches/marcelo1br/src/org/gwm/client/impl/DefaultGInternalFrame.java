@@ -23,8 +23,8 @@ import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * The PWC nativeFrame implementation.
@@ -236,7 +236,7 @@ public class DefaultGInternalFrame implements GInternalFrame {
      *      href="http://code.google.com/webtoolkit/documentation/com.google.gwt.user.client.ui.Widget.html">GWT
      *      Widget</a>
      */
-    public void setContent(Widget widget) {
+    public void setContent(Composite widget) {
         if (nativeFrame == null) {
             throw new IllegalStateException(
                     ERROR_ONLY_POSSIBLE_AFTER_CALL_TO_SHOW_METHOD);
