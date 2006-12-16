@@ -15,7 +15,7 @@
  */
 package org.gwm.client;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.Composite;
 
 /**
  * Provides methods to interact with a frame.
@@ -69,7 +69,7 @@ public interface GInternalFrame {
      *      Widget</a>
      * 
      */
-    public void setContent(Widget widget);
+    public void setContent(Composite theContent);
 
     /**
      * Sets window content using an Plain-Text or Html code.
