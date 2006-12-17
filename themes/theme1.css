@@ -1,3 +1,17 @@
+.float {
+  float: right;
+}
+
+.caption {
+  float: right;
+  text-align:center;
+}
+
+.topBar {
+  width: 100%;
+  float: right;
+}
+
 .theme1_nw {
 	width: 16px;
 	height: 36px;
