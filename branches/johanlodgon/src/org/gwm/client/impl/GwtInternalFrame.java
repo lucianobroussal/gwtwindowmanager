@@ -83,14 +83,20 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
       this.height = DEFAULT_HEIGHT;
     }
     this.panel.setSize (this.width+"px", this.height+"px");
-    panel.setHTML(0, 0, "&nbsp;");
-    panel.getCellFormatter().setStyleName(0,0, currentStyle+ "_nw");
+    Image imgTopLeft = new Image();
+    imgTopLeft.setUrl ("themes/"+this.currentStyle+"/top_left.gif");
+    Image imgTopRight = new Image();
+    imgTopRight.setUrl ("themes/"+this.currentStyle+"/top_right.gif");
+    Image imgBotLeft = new Image();
+    imgBotLeft.setUrl ("themes/"+this.currentStyle+"/bot_left.gif");
+    Image imgBotRight = new Image();
+    imgBotRight.setUrl ("themes/"+this.currentStyle+"/bot_right.gif");
+    panel.setWidget (0, 0, imgTopLeft);
     panel.setWidget(0, 1, topBar);
     panel.getCellFormatter().setStyleName(0,1, currentStyle+ "_n");
-    panel.setHTML(0, 2, "&nbsp;");
-    panel.getCellFormatter().setStyleName(0,2, currentStyle+ "_ne");
-    panel.setHTML(1, 0, "&nbsp;");
-    panel.getCellFormatter().setStyleName(1,0, currentStyle+ "_w");
+    panel.setWidget (0, 2, imgTopRight);
+    panel.setWidget (2, 0, imgBotLeft);
+    panel.setWidget (2, 2, imgBotRight);
     panel.setWidget (1, 1, myContent);
     panel.getCellFormatter().setStyleName(1,1, currentStyle+ "_content");
     panel.setHTML(1, 2, "&nbsp;");
@@ -121,7 +127,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
     panel.getCellFormatter().setWidth(1, 1, "100%");
     panel.getCellFormatter().setAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER, HasVerticalAlignment.ALIGN_MIDDLE);
     setStyleName("gwt-DialogBox");
-    // this.caption.addMouseListener (this);
     super.setWidget (panel);
     this.maxWidth = Window.getClientWidth();
     this.maxHeight = Window.getClientHeight();
@@ -269,34 +274,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   public void setDraggable(boolean draggable) {
     this.draggable = draggable;
   }
-
-/*
-   public void onMouseDown(Widget sender, int x, int y) {
-    dragging = true;
-    DOM.setCapture(caption.getElement());
-    dragStartX = x;
-    dragStartY = y;
-  }
-
-  public void onMouseEnter(Widget sender) {
-  }
-
-  public void onMouseLeave(Widget sender) {
-  }
-
-  public void onMouseMove(Widget sender, int x, int y) {
-    if (dragging) {
-      int absX = x + getAbsoluteLeft();
-      int absY = y + getAbsoluteTop();
-      setPopupPosition(absX - dragStartX, absY - dragStartY);
-    }
-  }
-
-  public void onMouseUp(Widget sender, int x, int y) {
-    dragging = false;
-    DOM.releaseCapture(caption.getElement());
-  }
-*/
 
   public void onBrowserEvent(Event event) {
     Element target = DOM.eventGetTarget (event);
