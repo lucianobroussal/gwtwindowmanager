@@ -25,11 +25,11 @@ import org.gwm.client.*;
  *
  * @author Johan Vos 
  */
-public class GwtInternalFrame extends PopupPanel implements GInternalFrame, MouseListener, EventListener  {
+public class GwtInternalFrame extends PopupPanel implements GInternalFrame, EventListener  {
 
   private String id;
   private String title;
-  private HorizontalPanel topBar;
+  private TopBar topBar;
   private Label caption;
   private Widget myContent;
   private int dragStartX, dragStartY;
@@ -37,7 +37,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
   private boolean dragging;
   private static final int DEFAULT_WIDTH  = 200;
   private static final int DEFAULT_HEIGHT = 300;
-  private static final String DEFAULT_STYLE = "dialog";
+  private static final String DEFAULT_STYLE = "theme1";
   private Element closeElement;
   private Element minElement;
   private Element maxElement;
@@ -75,28 +75,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
     this.caption = new Label (title);
     this.caption.addStyleName (currentStyle+"_title");
     this.caption.setHorizontalAlignment (HasHorizontalAlignment.ALIGN_CENTER);
-    Element parentElement = panel.getElement();
-    if (closable) {
-      closeElement = DOM.createDiv();
-      DOM.setInnerHTML (closeElement, "<div class=\""+cm+"\"/>");
-      DOM.appendChild (parentElement, closeElement);
-      DOM.sinkEvents (closeElement, Event.ONCLICK);
-      DOM.setEventListener (closeElement, this);
-    }
-    if (minimizable) {
-      minElement = DOM.createDiv();
-      DOM.setInnerHTML (minElement, "<div class=\""+min+"\"/>");
-      DOM.appendChild (parentElement, minElement);
-      DOM.sinkEvents (minElement, Event.ONCLICK);
-      DOM.setEventListener (minElement, this);
-    }
-    if (maximizable) {
-      maxElement = DOM.createDiv();
-      DOM.setInnerHTML (maxElement, "<div class=\""+max+"\"/>");
-      DOM.appendChild (parentElement, maxElement);
-      DOM.sinkEvents (maxElement, Event.ONCLICK);
-      DOM.setEventListener (maxElement, this);
-    }
+    topBar = new TopBar(this);
     if (this.width < 0) {
       this.width = DEFAULT_WIDTH;
     }
@@ -106,7 +85,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
     this.panel.setSize (this.width+"px", this.height+"px");
     panel.setHTML(0, 0, "&nbsp;");
     panel.getCellFormatter().setStyleName(0,0, currentStyle+ "_nw");
-    panel.setWidget(0, 1, caption);
+    panel.setWidget(0, 1, topBar);
     panel.getCellFormatter().setStyleName(0,1, currentStyle+ "_n");
     panel.setHTML(0, 2, "&nbsp;");
     panel.getCellFormatter().setStyleName(0,2, currentStyle+ "_ne");
@@ -142,7 +121,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
     panel.getCellFormatter().setWidth(1, 1, "100%");
     panel.getCellFormatter().setAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER, HasVerticalAlignment.ALIGN_MIDDLE);
     setStyleName("gwt-DialogBox");
-    this.caption.addMouseListener (this);
+    // this.caption.addMouseListener (this);
     super.setWidget (panel);
     this.maxWidth = Window.getClientWidth();
     this.maxHeight = Window.getClientHeight();
@@ -291,6 +270,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
     this.draggable = draggable;
   }
 
+/*
    public void onMouseDown(Widget sender, int x, int y) {
     dragging = true;
     DOM.setCapture(caption.getElement());
@@ -316,6 +296,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Mous
     dragging = false;
     DOM.releaseCapture(caption.getElement());
   }
+*/
 
   public void onBrowserEvent(Event event) {
     Element target = DOM.eventGetTarget (event);
