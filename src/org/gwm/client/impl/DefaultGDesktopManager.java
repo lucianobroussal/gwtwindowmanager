@@ -47,6 +47,13 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	}
 	
 	/**
+	 * Build a new GInternalFrame.
+	 */
+	public GInternalFrame newFrame() {
+		return new DefaultWidgetInternalFrame("");
+	}
+	
+	/**
 	 * Adds a new GInternalFrame to this GDesktopPane and select it if its the 
 	 * first one.
 	 * @param internalFrame The GInternalFrame to be added.
@@ -188,27 +195,14 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 		windowConfig.remove(window);
 	}
 
-	public void frameActivated(GFrameEvent evt) {
-	}
-
-	public void frameClosed(GFrameEvent evt) {
-	}
-
-	public void frameClosing(GFrameEvent evt) {
-	}
-
-	public void frameMaximized(GFrameEvent evt) {
-	}
-
-	public void frameMinimized(GFrameEvent evt) {
-	}
-
-	public void frameMoved(GFrameEvent evt) {
-	}
-
-	public void frameResized(GFrameEvent evt) {
-	}
-
+	public void frameActivated(GFrameEvent evt) {}
+	public void frameClosed(GFrameEvent evt) {}
+	public void frameClosing(GFrameEvent evt) {}
+	public void frameMaximized(GFrameEvent evt) {}
+	public void frameMinimized(GFrameEvent evt) {}
+	public void frameMoved(GFrameEvent evt) {}
+	public void frameResized(GFrameEvent evt) {}
+	
 	public void frameMaximizing(GFrameEvent evt) {
 		captureTheProperties(evt.getSource());
 	}
@@ -216,6 +210,7 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	public void frameMinimizing(GFrameEvent evt) {
 		captureTheProperties(evt.getSource());
 	}
+	
 	/**
 	 * Capture the properties of a GInternalFrame and stores on the map.
 	 * @param evt
@@ -233,4 +228,5 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 		
 		windowConfig.put(source, properties);
 	}
+
 }
