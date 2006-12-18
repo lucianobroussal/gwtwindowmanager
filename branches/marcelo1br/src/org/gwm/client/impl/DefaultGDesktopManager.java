@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.gwm.client.GDesktopManager;
+import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrameEvent;
 import org.gwm.client.GFrameListener;
 import org.gwm.client.GInternalFrame;
+
+import com.google.gwt.user.client.DOM;
 
 public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 
@@ -17,6 +20,7 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	private Map windowConfig; 
 	private List allFrames;
 	private int dragStyle;
+	private GDesktopPane desktop;
 	private static final String HEIGHT = "height";
 	private static final String WIDTH = "width";
 	private static final String LEFT = "left";
@@ -38,19 +42,20 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	/**
 	 * Constructs a new GDesktopPane with the default settings.
 	 */
-	public DefaultGDesktopManager(){
+	public DefaultGDesktopManager(GDesktopPane desktopPane){
 		setSelectedGInternalFrame(null);
 		setDragMode(LIVE_DRAG_MODE);
 		this.allFrames = new ArrayList();
 		this.layers = new HashMap();
 		this.windowConfig = new HashMap();
+		this.desktop = desktopPane;
 	}
 	
 	/**
 	 * Build a new GInternalFrame.
 	 */
 	public GInternalFrame newFrame() {
-		return new DefaultWidgetInternalFrame("");
+		return new DefaultWidgetInternalFrame("", desktop);
 	}
 	
 	/**
@@ -228,5 +233,40 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 		
 		windowConfig.put(source, properties);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#maximize()
+	 */
+	public void maximize(GInternalFrame internalFrame) {
+		if(internalFrame.isMaximizable()){
+			internalFrame.setLocation(desktop.getAbsoluteTop(), 0);
+			internalFrame.setHeight(internalFrame.getMaximumHeight());
+			internalFrame.setWidth(internalFrame.getMaximumWidth());
+			internalFrame.setMaximized(true);
+			internalFrame.fireFrameMaximized();
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#minimize()
+	 */
+	public void minimize(GInternalFrame internalFrame) {
+		internalFrame.setLocation(desktop.getOffsetHeight() - internalFrame.getMinimumHeight(), 0);
+		internalFrame.setHeight(internalFrame.getMinimumHeight());
+		internalFrame.setMinimized(true);
+		internalFrame.setMaximized(false);
+		internalFrame.fireFrameMinimized();
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#toFront()
+	 */
+	public void toFront(GInternalFrame iFrame) {
+		//I hope it works :)
+		DOM.setIntStyleAttribute(iFrame.getElement(), "zIndex", Integer.MAX_VALUE);
+		// TODO What should I put here?
+	}
 }

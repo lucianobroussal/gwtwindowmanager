@@ -15,8 +15,7 @@
  */
 package org.gwm.client;
 
-import org.gwm.client.impl.DefaultGDesktopManager;
-
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
@@ -87,20 +86,6 @@ public interface GInternalFrame {
      */
     public Composite getContent();
     
-    /**
-     * Minimizes the window, only top bar will be displayed.
-     */
-    public void minimize();
-
-    /**
-     * Maximizes the window, the window will fit the viewable area of the page.
-     */
-    public void maximize();
-
-    /**
-     * Brings current window in front of all others.
-     */
-    public void toFront();
 
     /**
      * Window destructor.
@@ -365,7 +350,7 @@ public interface GInternalFrame {
      * Returns the GDesktopPane who owns this GInternalFrame
      * @return
      */
-    public DefaultGDesktopManager getParentDesktop();
+    public GDesktopPane getParentDesktop();
     
     /**
      * Sets if the window is Modal or Non-Modal. A modal window block all the 
@@ -391,4 +376,15 @@ public interface GInternalFrame {
 	 */
 	public void removeGFrameListener(GFrameListener listener);
 
+	public void setMaximized(boolean b);
+
+	public void fireFrameMaximized();
+
+	public void fireFrameMinimized();
+
+	public void setMinimized(boolean b);
+
+	public Element getElement();
+
+	public String getCaption();
 	}
