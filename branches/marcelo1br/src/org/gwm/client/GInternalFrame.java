@@ -15,6 +15,8 @@
  */
 package org.gwm.client;
 
+import org.gwm.client.impl.DefaultGDesktopManager;
+
 import com.google.gwt.user.client.ui.Composite;
 
 /**
@@ -363,7 +365,7 @@ public interface GInternalFrame {
      * Returns the GDesktopPane who owns this GInternalFrame
      * @return
      */
-    public GDesktopPane getParentDesktop();
+    public DefaultGDesktopManager getParentDesktop();
     
     /**
      * Sets if the window is Modal or Non-Modal. A modal window block all the 

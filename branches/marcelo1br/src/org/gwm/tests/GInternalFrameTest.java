@@ -147,4 +147,8 @@ class MyPersonalListener implements GFrameListener{
 	public boolean isMinimized(){
 		return this.minimized;
 	}
+
+	public void frameMaximizing(GFrameEvent evt) {}
+
+	public void frameMinimizing(GFrameEvent evt) {}
 }
