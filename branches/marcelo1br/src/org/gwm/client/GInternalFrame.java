@@ -78,7 +78,13 @@ public interface GInternalFrame {
      *            the content to show into the window
      */
     public void setContent(String content);
-
+    
+    /**
+     * Return the content of this window.
+     * @return
+     */
+    public Composite getContent();
+    
     /**
      * Minimizes the window, only top bar will be displayed.
      */
@@ -156,6 +162,18 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setHeight(int height);
+    
+    /**
+     * Returns the window's width.
+     * @return
+     */
+    public int getWidth();
+    
+    /**
+     * Returns the window's height.
+     * @return
+     */
+	public int getHeight();
 
     /**
      * Sets the minimum window width.
@@ -196,7 +214,30 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximumHeight(int maxHeight);
-
+    
+    /**
+     * Returns the window's minimum height.
+     * @return
+     */
+    public int getMinimumHeight();
+    
+    /**
+     * Returns the window's minimum width.
+     * @return
+     */
+    public int getMinimumWidth();
+    
+    /**
+     * Returns the window's maximum height.
+     * @return
+     */
+    public int getMaximumHeight();
+    
+    /**
+     * Returns the window's maximum width.
+     * @return
+     */
+    public int getMaximumWidth();
     /**
      * Sets the position from the top.
      * 
@@ -208,6 +249,12 @@ public interface GInternalFrame {
     public void setTop(int top);
 
     /**
+     * Returns the position from the top.
+     * @return
+     */
+    public int getTop();
+    
+    /**
      * Sets the position from the left.
      * 
      * @param left
@@ -216,7 +263,13 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setLeft(int left);
-
+    
+    /**
+     * Returns the position from the left.
+     * @return
+     */
+    public int getLeft();
+    
     /**
      * Recomputes window width, useful when you change window content and do not
      * want scrolling.
@@ -285,12 +338,17 @@ public interface GInternalFrame {
     /**
      * Sets if the window is maximizable.
      * 
-     * 
      * @param maximizable
      * @throws IllegalStateException
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximizable(boolean maximizable);
+    
+    /**
+     * Returns if the window is maximizable.
+     * @return
+     */
+    public boolean isMaximizable();
 
     /**
      * Sets if the window is draggable.
@@ -318,4 +376,17 @@ public interface GInternalFrame {
      * Tells if the window is modal or non-modal.
      */
     public boolean isModal();
-}
+    
+    /**
+     * Adds a new GFrameListener to this GInternalFrame.
+     * @param listener
+     */
+	public void addGFrameListener(GFrameListener listener);
+	
+	/**
+	 * Remove a GFrameListener from this GInternalFrame.
+	 * @param listener
+	 */
+	public void removeGFrameListener(GFrameListener listener);
+
+	}

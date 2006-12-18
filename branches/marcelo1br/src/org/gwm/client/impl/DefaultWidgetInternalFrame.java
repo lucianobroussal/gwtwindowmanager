@@ -125,8 +125,8 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	private String caption;
 	private int dragStartX;
 	private int dragStartY;
-	private int pixelHeight;
-	private int pixelWidth;
+	private int height;
+	private int width;
 	private int minimumHeight;
 	private int minimumWidth;
 	private int maximumHeight;
@@ -402,8 +402,8 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#minimize()
 	 */
 	public void minimize() {
-		setPopupPosition(0, Window.getClientHeight()-44);
-		setPixelHeight(44);
+		setLocation(Window.getClientHeight() - getMinimumHeight(), 0);
+		setHeight(getMinimumHeight());
 		setMinimized(true);
 		setMaximized(false);
 		fireFrameMinimized();
@@ -422,14 +422,14 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#maximize()
 	 */
 	public void maximize() {
-		setPopupPosition(0, 0);
-		int diferencaY = Window.getClientHeight() - getPixelHeight() - 70;
-		int diferencaX = Window.getClientWidth() - getPixelWidth() - 65;
-		setPixelHeight(getPixelHeight() + diferencaY);
-		setPixelWidth(getPixelWidth() + diferencaX);
-		setMinimized(false);
-		setMaximized(true);
-		fireFrameMaximized();
+		if(isMaximizable()){
+			setPopupPosition(0, 0);
+			setHeight(getMaximumHeight());
+			setWidth(getMaximumWidth());
+			setMinimized(false);
+			setMaximized(true);
+			fireFrameMaximized();
+		}
 	}
 
 	/**
@@ -464,10 +464,10 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		fireFrameActivated();
 	}
 	
-	public void centraliza(int width, int height) {
-		int altura = getOffsetHeight();
-		int largura = getOffsetWidth();
-		setPopupPosition((width - largura)/2, (height - altura)/2);
+	public void centraliza() {
+		int altura = getHeight();
+		int largura = getWidth();
+		setLocation((Window.getClientHeight() - altura)/2 , (Window.getClientWidth() - largura)/2);
 	}
 
 	/**
@@ -672,24 +672,12 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		this.resizable = resizable;
 	}
 	
-	public int getPixelHeight() {
-		return pixelHeight;
+	public int getHeight() {
+		return height;
 	}
 
-	public void setPixelHeight(int pixelHeight) {
-		this.pixelHeight = pixelHeight;
-		this.setHeight(pixelHeight+"px");
-//		ajusta();
-	}
-
-	public int getPixelWidth() {
-		return pixelWidth;
-	}
-
-	public void setPixelWidth(int pixelWidth) {
-		this.pixelWidth = pixelWidth;
-		this.setWidth(pixelWidth+"px");
-//		ajusta();
+	public int getWidth() {
+		return width;
 	}
 
 	/*
@@ -719,11 +707,11 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void onMouseEnter(Widget sender) {/* Do nothing here */}
 	public void onMouseLeave(Widget sender) {/* Do nothing here */}
 	
-	public void addWindowListener(GFrameListener listener){
+	public void addGFrameListener(GFrameListener listener){
 		listeners.add(listener);
 	}
 	
-	public void removeWindowListener(GFrameListener listener){
+	public void removeGFrameListener(GFrameListener listener){
 		listeners.remove(listener);
 	}
 	
@@ -769,6 +757,13 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	
 	/*
 	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#getContent()
+	 */
+	public Composite getContent(){
+		return getContentPane();
+	}
+	/*
+	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#setContent(java.lang.String)
 	 */
 	public void setContent(String content) {
@@ -797,7 +792,8 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#setHeight(int)
 	 */
 	public void setHeight(int height) {
-		setPixelHeight(pixelHeight);
+		this.height = height;
+		this.setHeight(height+"px");
 	}
 	
 	/*
@@ -808,6 +804,14 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		setPopupPosition(left, getPopupTop());
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#getLeft()
+	 */
+	public int getLeft() {
+		return getPopupLeft();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#setLocation(int, int)
@@ -874,6 +878,14 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	
 	/*
 	 * (non-Javadoc)
+	 * @see org.gwm.client.GInternalFrame#getTop()
+	 */
+	public int getTop() {
+		return getPopupTop();
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#setUrl(java.lang.String)
 	 */
 	public void setUrl(String url) {
@@ -887,7 +899,8 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#setWidth(int)
 	 */
 	public void setWidth(int width) {
-		setPixelWidth(width);
+		this.width = width;
+		this.setWidth(width+"px");
 	}
 	
 	/*
@@ -906,7 +919,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void showCenter(boolean modal) {
 		setModal(modal);
 		show();
-		centraliza(Window.getClientWidth(), Window.getClientHeight());
+		centraliza();
 	}
 	
 	/*
