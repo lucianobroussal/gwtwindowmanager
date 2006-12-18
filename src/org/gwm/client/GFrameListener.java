@@ -3,7 +3,6 @@
  */
 package org.gwm.client;
 
-
 /**
  * This is the interface should be implemented for those objects who want to
  * know about the events of a GInternalFrame.
@@ -38,12 +37,30 @@ public interface GFrameListener {
 	public void frameClosed(GFrameEvent evt);
 
 	/**
+	 * This method tells the listener when the GInternalFrame is about to
+	 * maximize. Generally used to store the internalFrame position and size.
+	 * 
+	 * @param evt
+	 *            The event containing the source GInternalFrame.
+	 */
+	public void frameMaximizing(GFrameEvent evt);
+
+	/**
 	 * This method is called when the GInternalFrame has been maximized.
 	 * 
 	 * @param evt
 	 *            The event containing the source GInternalFrame.
 	 */
 	public void frameMaximized(GFrameEvent evt);
+
+	/**
+	 * This method tells the listener when the GInternalFrame is about to
+	 * minimize. Generally used to store the internalFrame position and size.
+	 * 
+	 * @param evt
+	 *            The event containing the source GInternalFrame.
+	 */
+	public void frameMinimizing(GFrameEvent evt);
 
 	/**
 	 * This method is called when the GInternalFrame has been minimized.

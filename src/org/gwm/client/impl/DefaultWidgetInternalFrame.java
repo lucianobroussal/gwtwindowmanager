@@ -4,7 +4,6 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrameEvent;
 import org.gwm.client.GFrameListener;
 import org.gwm.client.GInternalFrame;
@@ -307,7 +306,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		
 		closeButton.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				close();
+				destroy();
 			}
 		});
 		maxButton.addClickListener(new ClickListener() {
@@ -441,16 +440,6 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	}
 
 	/**
-	 * Closes this window. Fires two events: frameClosing and frameClosed.
-	 * FrameClosing event is fired before the window close and frameClosed just 
-	 * after the closing of the window.
-	 */
-	protected void close() {
-		fireFrameClosing();
-		hide();
-		fireFrameClosed();
-	}
-	/**
 	 * Shows the window. Fires the frameActivated event.
 	 */
 	public void show() {
@@ -464,7 +453,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		fireFrameActivated();
 	}
 	
-	public void centraliza() {
+	public void center() {
 		int altura = getHeight();
 		int largura = getWidth();
 		setLocation((Window.getClientHeight() - altura)/2 , (Window.getClientWidth() - largura)/2);
@@ -720,7 +709,9 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#destroy()
 	 */
 	public void destroy() {
-		close();
+		fireFrameClosing();
+		hide();
+		fireFrameClosed();
 	}
 	
 	/*
@@ -919,7 +910,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public void showCenter(boolean modal) {
 		setModal(modal);
 		show();
-		centraliza();
+		center();
 	}
 	
 	/*
@@ -956,7 +947,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#getParentDesktop()
 	 */
-	public GDesktopPane getParentDesktop(){
+	public DefaultGDesktopManager getParentDesktop(){
 		return null;
 	}
 
