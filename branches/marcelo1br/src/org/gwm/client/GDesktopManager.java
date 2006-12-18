@@ -17,6 +17,12 @@ public interface GDesktopManager {
 	public static final int OUTLINE_DRAG_MODE = 1;
 	
 	/**
+	 * Build a new GInternalFrame
+	 * @return
+	 */
+	public GInternalFrame newFrame();
+	
+	/**
 	 * Adds a new GInternalFrame to this GDesktopPane and select it if its the 
 	 * first one.
 	 * @param internalFrame The GInternalFrame to be added.
