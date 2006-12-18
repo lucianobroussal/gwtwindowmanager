@@ -4,6 +4,8 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gwm.client.GDesktopManager;
+import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrameEvent;
 import org.gwm.client.GFrameListener;
 import org.gwm.client.GInternalFrame;
@@ -11,6 +13,7 @@ import org.gwm.client.GInternalFrame;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -104,7 +107,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Marcelo Emanoel
  * @since 14/12/2006
  */
-public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListener, GInternalFrame{
+public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListener, GInternalFrame, ClickListener{
 	
 	private DockPanel windowLayout;
 	private HorizontalPanel top;
@@ -148,18 +151,21 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	
 	private boolean modal;
 	private List listeners;
+	private GDesktopPane parentDesktop;
 	
 	/**
 	 * Constructs a DefaultWidgetInternalFrame with the default settings
 	 * @param caption The Caption of the window.
 	 */
-	public DefaultWidgetInternalFrame(String caption){
+	public DefaultWidgetInternalFrame(String caption, GDesktopPane parentDesktop){
+		setParentDesktop(parentDesktop);
 		initialize();
 		mount();
 		setupListeners();
 		setupSise();
 		setupStyle();
-		setCaption(caption);
+		setTitle(caption);
+		
 	}
 	
 	/**
@@ -311,12 +317,12 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		});
 		maxButton.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				maximize();
+				maximizar();
 			}
 		});
 		minButton.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				minimize();
+				minimizar();
 			}
 		});
 		rightBottomCorner.addMouseListener(new MouseListener() {
@@ -372,6 +378,13 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 				}
 			}
 		});
+		topGradient.addClickListener(this);
+		leftTopCorner.addClickListener(this);
+		rightTopCorner.addClickListener(this);
+		left.addClickListener(this);
+		right.addClickListener(this);
+		bottomGradient.addClickListener(this);
+		leftBottomCorner.addClickListener(this);
 	}
 
 	/*
@@ -396,46 +409,19 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		return this.modal;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see org.gwm.client.GInternalFrame#minimize()
-	 */
-	public void minimize() {
-		setLocation(Window.getClientHeight() - getMinimumHeight(), 0);
-		setHeight(getMinimumHeight());
-		setMinimized(true);
-		setMaximized(false);
-		fireFrameMinimized();
-	}
-	
 	/**
 	 * Alter the minimized state of the window.
 	 * @param b
 	 */	
-	private void setMinimized(boolean b) {
+	public void setMinimized(boolean b) {
 		this.minimized = b;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.gwm.client.GInternalFrame#maximize()
-	 */
-	public void maximize() {
-		if(isMaximizable()){
-			setPopupPosition(0, 0);
-			setHeight(getMaximumHeight());
-			setWidth(getMaximumWidth());
-			setMinimized(false);
-			setMaximized(true);
-			fireFrameMaximized();
-		}
 	}
 
 	/**
 	 * Alter the maximized state of the window.
 	 * @param b
 	 */
-	private void setMaximized(boolean b) {
+	public void setMaximized(boolean b) {
 		this.maximized = b;
 	}
 
@@ -529,7 +515,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	/**
 	 * Fires the frameMaximized event of this frame to its listeners.
 	 */
-	private void fireFrameMaximized(){
+	public void fireFrameMaximized(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameMaximized(new GFrameEvent(this));
@@ -539,7 +525,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	/**
 	 * Fires the frameMinimized event of this frame to its listeners.
 	 */
-	private void fireFrameMinimized(){
+	public void fireFrameMinimized(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameMinimized(new GFrameEvent(this));
@@ -592,7 +578,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * Sets the Caption text of this window.
 	 * @param caption
 	 */
-	public void setCaption(String caption) {
+	public void setTitle(String caption) {
 		String newCaption = (caption != null ? caption : "");
 		topGradient.setHTML(newCaption);
 		this.caption = caption;
@@ -833,6 +819,9 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 */
 	public void setMinimumHeight(int minHeight) {
 		this.minimumHeight = minHeight;
+		if(getHeight() < minHeight){
+			setHeight(minHeight);
+		}
 	}
 	
 	/*
@@ -841,6 +830,9 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 */
 	public void setMinimumWidth(int minWidth) {
 		this.minimumWidth = minWidth;
+		if(getWidth() < minWidth){
+			setWidth(minWidth);
+		}
 	}
 	
 	/*
@@ -915,16 +907,6 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	
 	/*
 	 * (non-Javadoc)
-	 * @see org.gwm.client.GInternalFrame#toFront()
-	 */
-	public void toFront() {
-		//I hope it works :)
-		DOM.setIntStyleAttribute(getElement(), "zIndex", Integer.MAX_VALUE);
-		// TODO What should I put here?
-	}
-	
-	/*
-	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#updateHeight()
 	 */
 	public void updateHeight() {
@@ -947,8 +929,8 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * (non-Javadoc)
 	 * @see org.gwm.client.GInternalFrame#getParentDesktop()
 	 */
-	public DefaultGDesktopManager getParentDesktop(){
-		return null;
+	public GDesktopPane getParentDesktop(){
+		return this.parentDesktop;
 	}
 
 	/**
@@ -1005,5 +987,31 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	public int getMinimumWidth() {
 	
 		return minimumWidth;
+	}
+
+	public void onClick(Widget sender) {
+		getParentDesktop().getDesktopManager().toFront(this);
+	}
+
+	/**
+	 * @param parentDesktop the parentDesktop to set
+	 */
+	private void setParentDesktop(GDesktopPane parentDesktop) {
+		this.parentDesktop = parentDesktop;
+	}
+
+	/**
+	 * 
+	 */
+	private void maximizar() {
+
+		getParentDesktop().getDesktopManager().maximize(this);
+	}
+
+	/**
+	 * 
+	 */
+	private void minimizar() {
+		getParentDesktop().getDesktopManager().minimize(this);
 	}
 }
