@@ -91,7 +91,12 @@ public interface GInternalFrame {
      * Window destructor.
      */
     public void destroy();
-
+    
+    /**
+     * Hides the window without destoying it
+     *
+     */
+    public void hide();
     /**
      * Provides the window minimized status.
      * 
@@ -387,4 +392,12 @@ public interface GInternalFrame {
 	public Element getElement();
 
 	public String getCaption();
+
+	public void fireFrameMinimizing();
+
+	public void fireFrameMaximizing();
+
+	public boolean isVisible();
+
+	public void setVisible(boolean b);
 	}
