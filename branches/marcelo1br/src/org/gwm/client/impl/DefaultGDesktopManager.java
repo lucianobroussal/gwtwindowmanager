@@ -189,12 +189,15 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	 * Restore the window's original state.
 	 */
 	public void restore(GInternalFrame window) {
-		Map configurations = (Map) windowConfig.get(window);
+		Map configurations = (Map) windowConfig.get(window.getId());
 		int width = ((Integer)configurations.get(WIDTH)).intValue();
 		int height = ((Integer)configurations.get(HEIGHT)).intValue();
 		int left = ((Integer)configurations.get(LEFT)).intValue();
 		int top = ((Integer)configurations.get(TOP)).intValue();
 		
+		if(!window.isVisible()){
+			window.show(window.isModal());
+		}
 		window.setLocation(top, left);
 		window.setSize(width, height);
 		windowConfig.remove(window);
@@ -203,7 +206,6 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	public void frameActivated(GFrameEvent evt) {}
 	public void frameClosed(GFrameEvent evt) {}
 	public void frameClosing(GFrameEvent evt) {}
-	public void frameMaximized(GFrameEvent evt) {}
 	public void frameMinimized(GFrameEvent evt) {}
 	public void frameMoved(GFrameEvent evt) {}
 	public void frameResized(GFrameEvent evt) {}
@@ -213,9 +215,15 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	}
 
 	public void frameMinimizing(GFrameEvent evt) {
-		captureTheProperties(evt.getSource());
+		GInternalFrame source = evt.getSource();
+		source.setVisible(false);
+		captureTheProperties(source);
 	}
 	
+	public void frameMaximized(GFrameEvent evt) {
+//		GInternalFrame source = evt.getSource();
+//		source.hide();
+	}
 	/**
 	 * Capture the properties of a GInternalFrame and stores on the map.
 	 * @param evt
@@ -231,7 +239,7 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 		properties.put(LEFT, new Integer(left));
 		properties.put(TOP, new Integer(top));
 		
-		windowConfig.put(source, properties);
+		windowConfig.put(source.getId(), properties);
 	}
 	
 	/*
@@ -240,6 +248,7 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	 */
 	public void maximize(GInternalFrame internalFrame) {
 		if(internalFrame.isMaximizable()){
+			internalFrame.fireFrameMaximizing();
 			internalFrame.setLocation(desktop.getAbsoluteTop(), 0);
 			internalFrame.setHeight(internalFrame.getMaximumHeight());
 			internalFrame.setWidth(internalFrame.getMaximumWidth());
@@ -253,6 +262,7 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	 * @see org.gwm.client.GInternalFrame#minimize()
 	 */
 	public void minimize(GInternalFrame internalFrame) {
+		internalFrame.fireFrameMinimizing();
 		internalFrame.setLocation(desktop.getOffsetHeight() - internalFrame.getMinimumHeight(), 0);
 		internalFrame.setHeight(internalFrame.getMinimumHeight());
 		internalFrame.setMinimized(true);

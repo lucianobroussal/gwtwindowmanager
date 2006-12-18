@@ -4,7 +4,6 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gwm.client.GDesktopManager;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrameEvent;
 import org.gwm.client.GFrameListener;
@@ -13,7 +12,6 @@ import org.gwm.client.GInternalFrame;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -152,6 +150,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	private boolean modal;
 	private List listeners;
 	private GDesktopPane parentDesktop;
+	private boolean visible;
 	
 	/**
 	 * Constructs a DefaultWidgetInternalFrame with the default settings
@@ -436,6 +435,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 			DOM.removeEventPreview(this);
 		}
 		firstTimeShow = false;
+		setVisible(true);
 		fireFrameActivated();
 	}
 	
@@ -515,10 +515,30 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	/**
 	 * Fires the frameMaximized event of this frame to its listeners.
 	 */
+	public void fireFrameMaximizing(){
+		for(int i=0; i < listeners.size(); i++){
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameMaximizing(new GFrameEvent(this));
+		}
+	}
+	
+	/**
+	 * Fires the frameMaximized event of this frame to its listeners.
+	 */
 	public void fireFrameMaximized(){
 		for(int i=0; i < listeners.size(); i++){
 			GFrameListener listener = (GFrameListener) listeners.get(i);
 			listener.frameMaximized(new GFrameEvent(this));
+		}
+	}
+	
+	/**
+	 * Fires the frameMinimized event of this frame to its listeners.
+	 */
+	public void fireFrameMinimizing(){
+		for(int i=0; i < listeners.size(); i++){
+			GFrameListener listener = (GFrameListener) listeners.get(i);
+			listener.frameMinimizing(new GFrameEvent(this));
 		}
 	}
 	
@@ -778,7 +798,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#setLeft(int)
 	 */
 	public void setLeft(int left) {
-		setPopupPosition(left, getPopupTop());
+		setPopupPosition(left, getAbsoluteTop());
 	}
 	
 	/*
@@ -786,7 +806,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#getLeft()
 	 */
 	public int getLeft() {
-		return getPopupLeft();
+		return getAbsoluteLeft();
 	}
 
 	/*
@@ -864,7 +884,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * @see org.gwm.client.GInternalFrame#getTop()
 	 */
 	public int getTop() {
-		return getPopupTop();
+		return getAbsoluteTop();
 	}
 
 	/*
@@ -1004,7 +1024,6 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * 
 	 */
 	private void maximizar() {
-
 		getParentDesktop().getDesktopManager().maximize(this);
 	}
 
@@ -1012,6 +1031,16 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * 
 	 */
 	private void minimizar() {
+		this.hide();
 		getParentDesktop().getDesktopManager().minimize(this);
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+		super.setVisible(visible);
+	}
+	
+	public boolean isVisible(){
+		return this.visible;
 	}
 }
