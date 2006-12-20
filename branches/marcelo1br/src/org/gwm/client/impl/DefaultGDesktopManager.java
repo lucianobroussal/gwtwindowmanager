@@ -249,10 +249,13 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	public void maximize(GInternalFrame internalFrame) {
 		if(internalFrame.isMaximizable()){
 			internalFrame.fireFrameMaximizing();
+			
 			internalFrame.setLocation(desktop.getAbsoluteTop(), 0);
-			internalFrame.setHeight(internalFrame.getMaximumHeight());
-			internalFrame.setWidth(internalFrame.getMaximumWidth());
+			internalFrame.setHeight(desktop.getOffsetHeight() - 30);
+			internalFrame.setWidth(desktop.getOffsetWidth());
 			internalFrame.setMaximized(true);
+			internalFrame.setMinimized(false);
+			
 			internalFrame.fireFrameMaximized();
 		}
 	}
@@ -262,12 +265,16 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	 * @see org.gwm.client.GInternalFrame#minimize()
 	 */
 	public void minimize(GInternalFrame internalFrame) {
-		internalFrame.fireFrameMinimizing();
-		internalFrame.setLocation(desktop.getOffsetHeight() - internalFrame.getMinimumHeight(), 0);
-		internalFrame.setHeight(internalFrame.getMinimumHeight());
-		internalFrame.setMinimized(true);
-		internalFrame.setMaximized(false);
-		internalFrame.fireFrameMinimized();
+		if(internalFrame.isMinimizable()){
+			internalFrame.fireFrameMinimizing();
+			
+//			internalFrame.setLocation(desktop.getOffsetHeight() - internalFrame.getMinimumHeight(), 0);
+//			internalFrame.setHeight(internalFrame.getMinimumHeight());
+			internalFrame.setMinimized(true);
+			internalFrame.setMaximized(false);
+			
+			internalFrame.fireFrameMinimized();
+		}
 	}
 
 	/*

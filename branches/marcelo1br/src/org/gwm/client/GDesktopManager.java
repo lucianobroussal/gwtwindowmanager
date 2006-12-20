@@ -2,8 +2,6 @@ package org.gwm.client;
 
 import java.util.List;
 
-import org.gwm.client.impl.DefaultWidgetInternalFrame;
-
 public interface GDesktopManager {
 
 	/**
@@ -105,9 +103,17 @@ public interface GDesktopManager {
      * Brings current window in front of all others.
      */
     public void toFront(GInternalFrame internalFrame);
-
+    
+    /**
+     * Maximize a determinated window.
+     * @param internalFrame
+     */
 	public void maximize(GInternalFrame internalFrame);
-
+	
+	/**
+	 * Minimize a determinated window.
+	 * @param internalFrame
+	 */
 	public void minimize(GInternalFrame internalFrame);
 
 }

@@ -319,16 +319,21 @@ public interface GInternalFrame {
     public void setClosable(boolean closable);
 
     /**
-     * Sets if the window is minimizable.
+     * Sets the window's minimizable state.
      * 
      * @param minimizable
      * @throws IllegalStateException
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMinimizable(boolean minimizable);
-
+    
     /**
-     * Sets if the window is maximizable.
+     * Returns the window minimizable state.
+     */
+    public boolean isMinimizable();
+    
+    /**
+     * Sets the window's maximizable state.
      * 
      * @param maximizable
      * @throws IllegalStateException
@@ -337,7 +342,7 @@ public interface GInternalFrame {
     public void setMaximizable(boolean maximizable);
     
     /**
-     * Returns if the window is maximizable.
+     * Returns the window maximizable state.
      * @return
      */
     public boolean isMaximizable();
