@@ -23,7 +23,7 @@ package org.gwm.client;
  * @author luciano broussal
  * 
  * Type FramesManager, created on 27 nov. 06 at 16:18:58
- * 
+ * @deprecated The user should use a GDesktopPane instead.
  */
 public interface FramesManager {
 
@@ -31,12 +31,13 @@ public interface FramesManager {
      * Creates a new instance of GInternalFrame.
      * 
      * @return GInternalFrame
+     * @deprecated 
      */
     public abstract GInternalFrame newFrame();
 
     /**
      * Closes All windows managed by FramesManager.
-     * 
+     * @deprecated
      */
     public abstract void closeAllFrames();
 
@@ -46,6 +47,7 @@ public interface FramesManager {
      * @param id
      *            The id of the window
      * @return GInternalFrame
+     * @deprecated
      */
     public abstract GInternalFrame getFrame(String id);
 
@@ -53,6 +55,7 @@ public interface FramesManager {
      * Permits to retrieve all GInternalFrame managed by FramesManager.
      * 
      * @return GInternalFrame[]
+     * @deprecated
      */
     public abstract GInternalFrame[] getAllFrames();
 
