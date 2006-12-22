@@ -15,7 +15,8 @@
  */
 package org.gwm.client;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.Composite;
 
 /**
  * Provides methods to interact with a frame.
@@ -24,7 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * Type GInternalFrame, created on 28 nov. 06 at 16:35:31
  * 
- */ 
+ */
 public interface GInternalFrame {
 
     /**
@@ -69,7 +70,7 @@ public interface GInternalFrame {
      *      Widget</a>
      * 
      */
-    public void setContent(Widget widget);
+    public void setContent(Composite theContent);
 
     /**
      * Sets window content using an Plain-Text or Html code.
@@ -78,27 +79,24 @@ public interface GInternalFrame {
      *            the content to show into the window
      */
     public void setContent(String content);
-
+    
     /**
-     * Minimizes the window, only top bar will be displayed.
+     * Return the content of this window.
+     * @return
      */
-    public void minimize();
-
-    /**
-     * Maximizes the window, the window will fit the viewable area of the page.
-     */
-    public void maximize();
-
-    /**
-     * Brings current window in front of all others.
-     */
-    public void toFront();
+    public Composite getContent();
+    
 
     /**
      * Window destructor.
      */
     public void destroy();
-
+    
+    /**
+     * Hides the window without destoying it
+     *
+     */
+    public void hide();
     /**
      * Provides the window minimized status.
      * 
@@ -156,6 +154,18 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setHeight(int height);
+    
+    /**
+     * Returns the window's width.
+     * @return
+     */
+    public int getWidth();
+    
+    /**
+     * Returns the window's height.
+     * @return
+     */
+	public int getHeight();
 
     /**
      * Sets the minimum window width.
@@ -196,7 +206,30 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximumHeight(int maxHeight);
-
+    
+    /**
+     * Returns the window's minimum height.
+     * @return
+     */
+    public int getMinimumHeight();
+    
+    /**
+     * Returns the window's minimum width.
+     * @return
+     */
+    public int getMinimumWidth();
+    
+    /**
+     * Returns the window's maximum height.
+     * @return
+     */
+    public int getMaximumHeight();
+    
+    /**
+     * Returns the window's maximum width.
+     * @return
+     */
+    public int getMaximumWidth();
     /**
      * Sets the position from the top.
      * 
@@ -208,6 +241,12 @@ public interface GInternalFrame {
     public void setTop(int top);
 
     /**
+     * Returns the position from the top.
+     * @return
+     */
+    public int getTop();
+    
+    /**
      * Sets the position from the left.
      * 
      * @param left
@@ -216,7 +255,13 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setLeft(int left);
-
+    
+    /**
+     * Returns the position from the left.
+     * @return
+     */
+    public int getLeft();
+    
     /**
      * Recomputes window width, useful when you change window content and do not
      * want scrolling.
@@ -274,23 +319,33 @@ public interface GInternalFrame {
     public void setClosable(boolean closable);
 
     /**
-     * Sets if the window is minimizable.
+     * Sets the window's minimizable state.
      * 
      * @param minimizable
      * @throws IllegalStateException
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMinimizable(boolean minimizable);
-
+    
     /**
-     * Sets if the window is maximizable.
-     * 
+     * Returns the window minimizable state.
+     */
+    public boolean isMinimizable();
+    
+    /**
+     * Sets the window's maximizable state.
      * 
      * @param maximizable
      * @throws IllegalStateException
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximizable(boolean maximizable);
+    
+    /**
+     * Returns the window maximizable state.
+     * @return
+     */
+    public boolean isMaximizable();
 
     /**
      * Sets if the window is draggable.
@@ -300,5 +355,54 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setDraggable(boolean draggable);
+    
+    /**
+     * Returns the GDesktopPane who owns this GInternalFrame
+     * @return
+     */
+    public GDesktopPane getParentDesktop();
+    
+    /**
+     * Sets if the window is Modal or Non-Modal. A modal window block all the 
+     * events that is not directed to it. Can be changed after the exibition of 
+     * the window.
+     */
+    public void setModal(boolean modal);
+    
+    /**
+     * Tells if the window is modal or non-modal.
+     */
+    public boolean isModal();
+    
+    /**
+     * Adds a new GFrameListener to this GInternalFrame.
+     * @param listener
+     */
+	public void addGFrameListener(GFrameListener listener);
+	
+	/**
+	 * Remove a GFrameListener from this GInternalFrame.
+	 * @param listener
+	 */
+	public void removeGFrameListener(GFrameListener listener);
 
-}
+	public void setMaximized(boolean b);
+
+	public void fireFrameMaximized();
+
+	public void fireFrameMinimized();
+
+	public void setMinimized(boolean b);
+
+	public Element getElement();
+
+	public String getCaption();
+
+	public void fireFrameMinimizing();
+
+	public void fireFrameMaximizing();
+
+	public boolean isVisible();
+
+	public void setVisible(boolean b);
+	}
