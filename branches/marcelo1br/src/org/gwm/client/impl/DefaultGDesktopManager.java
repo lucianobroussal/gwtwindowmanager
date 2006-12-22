@@ -228,7 +228,7 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	 * Capture the properties of a GInternalFrame and stores on the map.
 	 * @param evt
 	 */
-	private void captureTheProperties(GInternalFrame source) {
+	protected void captureTheProperties(GInternalFrame source) {
 		int height = source.getHeight();
 		int width = source.getWidth();
 		int left = source.getLeft();
