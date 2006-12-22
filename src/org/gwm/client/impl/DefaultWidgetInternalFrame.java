@@ -203,6 +203,9 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 		setMaximizable(false);
 		setMinimizable(false);
 		setClosable(true);
+		
+		minimumHeight = 30;
+		minimumWidth = 50;
 	}
 	
 	/**
@@ -1031,7 +1034,7 @@ public class DefaultWidgetInternalFrame extends PopupPanel implements MouseListe
 	 * 
 	 */
 	private void minimizar() {
-		this.hide();
+//		this.hide();
 		getParentDesktop().getDesktopManager().minimize(this);
 	}
 	
