@@ -26,7 +26,7 @@ import org.gwm.client.impl.DefaultFramesManager;
  * @author luciano broussal
  * 
  * Type FramesManagerFactory, created on 27 nov. 06 at 18:11:31
- * 
+ * @deprecated
  */
 public class FramesManagerFactory {
 
