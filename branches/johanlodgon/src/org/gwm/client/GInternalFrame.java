@@ -407,4 +407,4 @@ public interface GInternalFrame {
 	public boolean isVisible();
 
 	public void setVisible(boolean b);
-	}
+}
