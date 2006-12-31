@@ -40,10 +40,8 @@ public class ResizeImage extends FlowPanel implements MouseListener {
 
   private void buildGui() {
     this.currentStyle = parent.getStyle();
-    // addStyleName ("topBar");
-
-    label = new Label("rr");
-label.addStyleName ("lodgon-ResizeWindowImage");
+    label = new Label("");
+    label.addStyleName ("resizeCorner");
     label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
     label.addMouseListener (this);
     add (label);

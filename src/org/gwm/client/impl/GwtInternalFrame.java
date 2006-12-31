@@ -50,10 +50,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   private String currentStyle;
   private boolean closable, maximizable, minimizable, draggable, resizable;
   private boolean resizing;
-  Image imgTopLeft;
-  Image imgTopRight;
-  Image imgBotLeft;
-  Image imgBotRight;
+  Label imgTopLeft;
+  Label imgTopRight;
+  Label imgBotLeft;
+  Label imgBotRight;
 
 
   private FlexTable panel = new FlexTable();
@@ -88,14 +88,14 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
     this.mainPanel = new FocusPanel();
     this.mainPanel.setWidget (myContent);
     this.mainPanel.addClickListener (this);
-    imgTopLeft = new Image();
-    imgTopLeft.setUrl ("themes/"+this.currentStyle+"/top_left.gif");
-    imgTopRight = new Image();
-    imgTopRight.setUrl ("themes/"+this.currentStyle+"/top_right.gif");
-    imgBotLeft = new Image();
-    imgBotLeft.setUrl ("themes/"+this.currentStyle+"/bot_left.gif");
-    imgBotRight = new Image();
-    imgBotRight.setUrl ("themes/"+this.currentStyle+"/bot_right.gif");
+    imgTopLeft = new Label();
+    imgTopLeft.addStyleName (this.currentStyle+"_nw");
+    imgTopRight = new Label();
+    imgTopRight.addStyleName (this.currentStyle+"_ne");
+    imgBotLeft = new Label();
+    imgBotLeft.addStyleName (this.currentStyle+"_sw");
+    imgBotRight = new Label();
+    imgBotRight.addStyleName (this.currentStyle+"_se");
     this.maxWidth = Window.getClientWidth();
     this.maxHeight = Window.getClientHeight();
     this.minWidth = 100;
