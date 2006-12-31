@@ -63,7 +63,7 @@
 	cursor:se-resize;	
 }
 
-.lodgon-ResizeWindowImage {
+.resizeCorner {
   cursor: se-resize;
   background: #fff url(theme1/resize.png) bottom right no-repeat;
   width: 12px;
