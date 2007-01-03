@@ -49,11 +49,14 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   private int height = -1;
   private String currentStyle;
   private boolean closable, maximizable, minimizable, draggable, resizable;
+  private boolean maximized;
   private boolean resizing;
   Label imgTopLeft;
   Label imgTopRight;
   Label imgBotLeft;
   Label imgBotRight;
+  private int previousWidth;
+  private int previousHeight;
 
 
   private FlexTable panel = new FlexTable();
@@ -189,9 +192,19 @@ System.out.println ("ready to show");
   }
 
   public void maximize () {
-    this.setPopupPosition (0,0);
-    this.width = maxWidth;
-    this.height = maxHeight;
+    if (!this.maximized) {
+      this.setPopupPosition (0,0);
+      this.previousWidth = getWidth();
+      this.previousHeight = getHeight();
+      this.width = maxWidth;
+      this.height = maxHeight;
+      this.maximized = true;
+    }
+    else {
+      this.width = previousWidth;
+      this.height = previousHeight;
+      this.maximized = false;
+    }
     buildGui();
   }
 
@@ -206,7 +219,7 @@ System.out.println ("ready to show");
   }
 
   public boolean isMaximized () {
-    return false;
+    return this.maximized;
   }
 
   public void setDestroyOnClose () {
