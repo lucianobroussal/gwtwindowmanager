@@ -12,9 +12,19 @@
 }
 
 .theme1_nw {
-	width: 16px;
-	height: 36px;
-	background: transparent url(theme1/top_left.gif) no-repeat 0 0;		
+  width: 16px;
+  height: 36px;
+  background: transparent url(theme1/top_left.gif) no-repeat 0 0;		
+}
+
+.icon_button {
+  background: transparent url(theme1/minimize.gif) no-repeat 0 0;
+  width: 19px;
+  height: 19px;
+}
+
+.icon_title {
+  border: 1px;
 }
 
 .theme1_n {

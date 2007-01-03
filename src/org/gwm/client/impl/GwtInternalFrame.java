@@ -49,14 +49,14 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   private int height = -1;
   private String currentStyle;
   private boolean closable, maximizable, minimizable, draggable, resizable;
-  private boolean maximized;
+  private boolean maximized, minimized;
   private boolean resizing;
   Label imgTopLeft;
   Label imgTopRight;
   Label imgBotLeft;
   Label imgBotRight;
-  private int previousWidth;
-  private int previousHeight;
+  private int previousWidth, restoreWidth;
+  private int previousHeight, restoreHeight;
 
 
   private FlexTable panel = new FlexTable();
@@ -101,12 +101,16 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
     imgBotRight.addStyleName (this.currentStyle+"_se");
     this.maxWidth = Window.getClientWidth();
     this.maxHeight = Window.getClientHeight();
-    this.minWidth = 100;
-    this.minHeight = 120;
+    this.minWidth = 240;
+    this.minHeight = 40;
   }
 
-   void buildGui() {
+  void buildGui() {
     this.panel = new FlexTable();
+    if (minimized) {
+      showIcon();
+      return;
+    }
     if (this.width < 0) {
       this.width = DEFAULT_WIDTH;
     }
@@ -114,7 +118,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
       this.height = DEFAULT_HEIGHT;
     }
     this.panel.setSize (this.width+"px", this.height+"px");
-System.out.println ("width = "+this.width);
     panel.setWidget (0, 0, imgTopLeft);
     panel.setWidget(0, 1, topBar);
     panel.getCellFormatter().setStyleName(0,1, currentStyle+ "_n");
@@ -127,29 +130,49 @@ System.out.println ("width = "+this.width);
     panel.getCellFormatter().setStyleName(1,0, currentStyle+ "_w");
     panel.setHTML(1, 2, "&nbsp;");
     panel.getCellFormatter().setStyleName(1,2, currentStyle+ "_e");
-
+  
     panel.setHTML(2, 0, "&nbsp;");
     panel.getCellFormatter().setStyleName(2,0, currentStyle+ "_sw");
-
+  
     panel.setHTML(2, 1, "&nbsp;");
     panel.getCellFormatter().setStyleName(2,1, currentStyle+ "_s");
-
+  
     if (resizable) {
-      // panel.getCellFormatter().setStyleName(2,2, currentStyle+ "_sizer");
-      // panel.setWidget(2, 2, resizeHTML);
       panel.setWidget(2, 2, resizeImage);
     }
     else {
       panel.getCellFormatter().setStyleName(2,2, currentStyle+ "_se");
       panel.setHTML(2, 2, "&nbsp;");
     }
-    panel.setBorderWidth(0);
-    panel.setCellPadding(0);
-    panel.setCellSpacing(0);
     panel.getCellFormatter().setHeight(1, 1, "100%");
     panel.getCellFormatter().setWidth(1, 1, "100%");
     panel.getCellFormatter().setAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER, HasVerticalAlignment.ALIGN_MIDDLE);
+    panel.setBorderWidth(0);
+    panel.setCellPadding(0);
+    panel.setCellSpacing(0);
     setStyleName("gwt-DialogBox");
+    super.setWidget (panel);
+  }
+
+  private void showIcon () {
+    Label l = new Label (title);
+    Label i = new Label ("");
+    l.addMouseListener (topBar);
+    i.addClickListener (new ClickListener() {
+        public void onClick (Widget sender) {
+          GwtInternalFrame.this.minimized = false;
+          buildGui();
+        }
+      }
+    );
+    i.addStyleName ("icon_button");
+    l.addStyleName ("icon_title");
+    // this.panel.setSize (this.minWidth+"px", this.minHeight+"px");
+    panel.setWidget (0, 0, i);
+    panel.setWidget (0, 1, l);
+    panel.setBorderWidth(0);
+    panel.setCellPadding(0);
+    panel.setCellSpacing(0);
     super.setWidget (panel);
   }
 
@@ -186,8 +209,7 @@ System.out.println ("ready to show");
   }
 
   public void minimize () {
-    this.width = minWidth;
-    this.height = minHeight;
+    this.minimized = !this.minimized;
     buildGui();
   }
 
