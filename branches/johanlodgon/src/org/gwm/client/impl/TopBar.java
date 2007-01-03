@@ -78,7 +78,6 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
   }
 
   public void onBrowserEvent (Event e) {
-System.out.println ("top-bar: "+ DOM.eventGetType (e));
     int type = DOM.eventGetType (e);
     Element em = caption.getElement();
     int x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
@@ -96,9 +95,8 @@ System.out.println ("top-bar: "+ DOM.eventGetType (e));
   }
 
   public void onMouseDown(Widget sender, int x, int y) {
-System.out.println ("x = " +x);
     dragging = true;
-    DOM.setCapture(caption.getElement());
+    DOM.setCapture(sender.getElement());
     dragStartX = x;
     dragStartY = y;
   }
@@ -111,15 +109,15 @@ System.out.println ("x = " +x);
 
   public void onMouseMove(Widget sender, int x, int y) {
     if (dragging) {
-      int absX = x + getAbsoluteLeft();
-      int absY = y + getAbsoluteTop();
+      int absX = x + sender.getAbsoluteLeft();
+      int absY = y + sender.getAbsoluteTop();
       parent.setPopupPosition(absX - dragStartX, absY - dragStartY);
     }
   }
 
   public void onMouseUp(Widget sender, int x, int y) {
     dragging = false;
-    DOM.releaseCapture(caption.getElement());
+    DOM.releaseCapture(sender.getElement());
   }
 
 
