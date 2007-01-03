@@ -80,10 +80,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   }
 
   private void initializeListeners () {
-    // resizeHTML = new HTML ("&nbsp;");
-    // resizeHTML.addMouseListener (this);
     resizeImage = new ResizeImage(this);
-    // resizeImage.addStyleName("lodgon-ResizeWindowImage");
     this.caption = new Label (title);
     this.caption.addStyleName (currentStyle+"_title");
     this.caption.setHorizontalAlignment (HasHorizontalAlignment.ALIGN_CENTER);
@@ -167,7 +164,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
     );
     i.addStyleName ("icon_button");
     l.addStyleName ("icon_title");
-    // this.panel.setSize (this.minWidth+"px", this.minHeight+"px");
     panel.setWidget (0, 0, i);
     panel.setWidget (0, 1, l);
     panel.setBorderWidth(0);
@@ -190,7 +186,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   }
 
   public void show (boolean modal) {
-System.out.println ("ready to show");
     super.show();
   }
 
@@ -362,58 +357,8 @@ System.out.println ("ready to show");
     }
   }
 
-/*
-  public void onMouseDown(Widget sender, int x, int y) {
-System.out.println ("MOUSEDOWN");
-    resizing = true;
-    DOM.setCapture(resizeHTML.getElement());
-    resizeStartX = x;
-    resizeStartY = y;
-  }
-
-  public void onMouseEnter(Widget sender) {
-  }
-
-  public void onMouseLeave(Widget sender) {
-  }
-
-  public void onMouseMove(Widget sender, int x, int y) {
-System.out.println ("MOUSEMOVE");
-    if (resizing) {
-int newHeight = this.resizeHTML.getAbsoluteTop() + y - this.panel.getAbsoluteTop();
-System.out.println ("x = "+x+", y = "+y+" top = "+this.panel.getAbsoluteTop()+", left = "+this.panel.getAbsoluteLeft());
-int newWidth = this.resizeHTML.getAbsoluteLeft() + x - this.panel.getAbsoluteLeft();
-      // int newWidth = this.width + x - resizeStartX;
-      // int newHeight = this.height + y - resizeStartY;
-System.out.println ("newwidth = "+newWidth);
-      if (newWidth > minWidth) {
-        // this.width = this.width + x - resizeStartX;
-        // this.width = newWidth;
-        // resizeStartX = x;
-      }
-      if (newHeight > minHeight) {
-        // this.height = this.height + y - resizeStartY;
-        // this.height = newHeight;
-        // resizeStartY = y;
-      }
-int absX = x + getAbsoluteLeft();
-int absY = y + getAbsoluteTop();
-this.setPopupPosition (absX-resizeStartX, absY-resizeStartY);
-      // buildGui();
-    }
-  }
-
-  public void onMouseUp(Widget sender, int x, int y) {
-System.out.println ("MOUSEUP");
-    resizing = false;
-Window.alert ("Release capture");
-    DOM.releaseCapture(resizeHTML.getElement());
-    buildGui();
-  }
-*/
 
   public void onClick (Widget sender) {
-System.out.println ("Clicked on "+this.title);
     this.hide();
     this.show();
   }
@@ -422,58 +367,6 @@ System.out.println ("Clicked on "+this.title);
     boolean answer = super.onEventPreview(evt);
     return true;
   }
-
-/*
-  class ResizeImage extends Label {
-    private int dragStartX;
-    private int dragStartY;
-
-    private int initialWidth;
-    private int initialHeight;
-
-    public ResizeImage() {
-      setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-      sinkEvents(Event.MOUSEEVENTS);
-    }
-
-    public void onBrowserEvent(Event e) {
-System.out.println ("RESIZEIMG GOT EVENT ");
-      Element target = DOM.eventGetTarget(e);
-      int x = DOM.eventGetClientX(e);
-      int y = DOM.eventGetClientY(e);
-      int type = DOM.eventGetType (e);
-      if (Event.ONMOUSEDOWN == type) {
-        resizing = true;
-        DOM.setCapture(this.getElement());
-        resizeStartX = x;
-        resizeStartY = y;
-      }
-      if (Event.ONMOUSEUP == type) {
-        resizing = false;
-Window.alert ("release capture");
-        DOM.releaseCapture(this.getElement());
-        buildGui();
-      }
-      if (Event.ONMOUSEMOVE == type) {
-        if (resizing) {
-          int newHeight = GwtInternalFrame.this.height + y - resizeStartY;
-          int newWidth = GwtInternalFrame.this.width + x - resizeStartX;
-          if (newWidth > minWidth) {
-            GwtInternalFrame.this.width = newWidth;
-            resizeStartX = x;
-          }
-          if (newHeight > minHeight) {
-            GwtInternalFrame.this.height = newHeight;
-            resizeStartY = y;
-          }
-          int absX = x + getAbsoluteLeft();
-          int absY = y + getAbsoluteTop();
-          buildGui();
-        }
-      }
-    }
-  }
-*/
 
   public void fireFrameMaximized() {
   }
