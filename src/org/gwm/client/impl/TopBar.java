@@ -62,6 +62,7 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     add (imgMinimize);
     add (imgMaximize);
     add (imgClose);
+    System.out.println ("width = "+this.getOffsetWidth());
   }
 
   public void onClick (Widget w) {
@@ -77,10 +78,25 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
   }
 
   public void onBrowserEvent (Event e) {
+System.out.println ("top-bar: "+ DOM.eventGetType (e));
+    int type = DOM.eventGetType (e);
+    Element em = caption.getElement();
+    int x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
+    int y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
+    if (type == Event.ONMOUSEDOWN) {
+      onMouseDown (this, x, y);
+    }
+    if (type == Event.ONMOUSEMOVE) {
+      onMouseMove (this, x, y);
+    }
+    if (type == Event.ONMOUSEUP) {
+      onMouseUp (this, x, y);
+    }
     super.onBrowserEvent (e);
   }
 
   public void onMouseDown(Widget sender, int x, int y) {
+System.out.println ("x = " +x);
     dragging = true;
     DOM.setCapture(caption.getElement());
     dragStartX = x;
@@ -94,16 +110,6 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
   }
 
   public void onMouseMove(Widget sender, int x, int y) {
-/*
-try {
-int a =0;
-int b = 2/a;
-}
-catch (Throwable et) {
-et.printStackTrace();
-}
-*/
-System.out.println ("mouse moving, dragging = "+dragging);
     if (dragging) {
       int absX = x + getAbsoluteLeft();
       int absY = y + getAbsoluteTop();
@@ -114,8 +120,6 @@ System.out.println ("mouse moving, dragging = "+dragging);
   public void onMouseUp(Widget sender, int x, int y) {
     dragging = false;
     DOM.releaseCapture(caption.getElement());
-System.out.println ("done releasing capture");
-System.out.println ("cap = "+DOM.getCaptureElement());
   }
 
 

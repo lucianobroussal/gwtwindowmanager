@@ -48,7 +48,6 @@ public class ResizeImage extends FlowPanel implements MouseListener {
   }
 
   public void onMouseDown(Widget sender, int x, int y) {
-System.out.println ("start resize");
     resizing = true;
     DOM.setCapture(label.getElement());
     resizeStartX = x;
@@ -72,28 +71,15 @@ System.out.println ("start resize");
   }
 
   public void onMouseMove(Widget sender, int x, int y) {
-System.out.println ("mousemove");
     if (resizing) {
-/*
-      int absX = x + parent.getAbsoluteLeft();
-      int absY = y + parent.getAbsoluteTop();
-      parent.setPopupPosition(absX - resizeStartX, absY - resizeStartY);
-*/
-
-System.out.println ("x = "+x+", resizeStartx = "+resizeStartX);
       int newHeight = parent.getHeight() + y - resizeStartY;
       int newWidth = parent.getWidth() + x - resizeStartX;
-System.out.println ("nw = "+newWidth);
       if (newWidth > parent.getMinimumWidth()) {
         parent.setWidth (newWidth);
-System.out.println ("REALLY nw = "+newWidth);
-        // resizeStartX = x;
       }
       if (newHeight > parent.getMinimumHeight()) {
         parent.setHeight (newHeight);
-        // resizeStartY = y;
       }
-      // parent.buildGui();
     }
   }
 
