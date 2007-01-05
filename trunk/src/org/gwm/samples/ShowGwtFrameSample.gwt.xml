@@ -1,0 +1,6 @@
+<module>
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='org.gwm.GwtWindowManager'/>
+  <entry-point class='org.gwm.samples.client.ShowGwtFrameSample'/>
+</module>
+

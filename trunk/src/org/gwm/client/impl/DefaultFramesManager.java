@@ -16,43 +16,65 @@
 
 package org.gwm.client.impl;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import org.gwm.client.FramesManager;
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 
 /**
  * 
- * @author Marcelo Emanoel
- * @since 21/12/2006
+ * @author lb
+ * 
  */
 public class DefaultFramesManager implements FramesManager {
-	
-	private GDesktopPane desktop;
-	
-	public DefaultFramesManager(){
-		desktop = new GDesktopPane();
-	}
 
-	public void closeAllFrames() {
-		desktop.closeAllInternalFrames();
-	}
+    private HashMap windows;
 
-	public GInternalFrame[] getAllFrames() {
-		List allFrames = desktop.getAllGInternalFrames();
-		GInternalFrame[] internalFrames = new GInternalFrame[allFrames.size()];
-		for(int i=0; i < allFrames.size(); i++){
-			internalFrames[i] = (GInternalFrame) allFrames.get(i);
-		}
-		return internalFrames;
-	}
+    private long windowCount;
 
-	public GInternalFrame getFrame(String id) {
-		return desktop.getGInternalFrame(id);
-	}
+    /** *************************************************************** */
+    /** ****************************** PUBLIC ************************* */
+    /** *************************************************************** */
 
-	public GInternalFrame newFrame() {
-		return desktop.newFrame();
-	}
+    public DefaultFramesManager() {
+        windows = new HashMap();
+    }
+
+    public GInternalFrame getFrame(String id) {
+        return (GInternalFrame) windows.get(id);
+    }
+
+    public GInternalFrame[] getAllFrames() {
+        GInternalFrame[] allWindows = new GInternalFrame[windows.values()
+                .size()];
+        int index = 0;
+        for (Iterator iter = windows.values().iterator(); iter.hasNext();) {
+            GInternalFrame window = (GInternalFrame) iter.next();
+            allWindows[index] = window;
+            index++;
+        }
+        return allWindows;
+    }
+
+    public GInternalFrame newFrame() {
+System.out.println ("creating new frame");
+        String windowId = "win_" + windowCount++;
+        GInternalFrame window = new GwtInternalFrame(windowId);
+        windows.put(windowId, window);
+        return window;
+    }
+
+    public void closeAllFrames() {
+        closeAll();
+        windows.clear();
+    }
+
+    /** *************************************************************** */
+    /** ****************************** PRIVATE ************************ */
+    /** *************************************************************** */
+    private native void closeAll()/*-{
+     $wnd.Windows.closeAll();
+     }-*/;
+
 }

@@ -1,5 +1,4 @@
 .float {
-  float: right;
 }
 
 .caption {
@@ -10,12 +9,24 @@
 .topBar {
   width: 100%;
   float: right;
+  cursor: move;
 }
 
 .theme1_nw {
-	width: 16px;
-	height: 36px;
-	background: transparent url(theme1/top_left.gif) no-repeat 0 0;		
+  width: 16px;
+  height: 36px;
+  background: transparent url(theme1/top_left.gif) no-repeat 0 0;		
+}
+
+.icon_button {
+  background: transparent url(theme1/minimize.gif) no-repeat 0 0;
+  width: 19px;
+  height: 19px;
+}
+
+.icon_title {
+  border: 1px;
+  border-style:dashed;
 }
 
 .theme1_n {
@@ -35,8 +46,8 @@
 }
 
 .theme1_w {
-	width: 7px;
-	background: transparent url(theme1/center_left.gif) repeat-y 0 0;		
+	width: 16px;
+	background: transparent url(theme1/center_left.gif) repeat-y 0 0;	
 }
 
 .theme1_sw {
@@ -62,6 +73,14 @@
 	background: transparent url(theme1/sizer.gif) no-repeat 0 0;	
 	cursor:se-resize;	
 }
+
+.resizeCorner {
+  cursor: se-resize;
+  background: #fff url(theme1/resize.png) bottom right no-repeat;
+  width: 12px;
+  height: 24px;
+}
+
 
 .theme1_close {
 	width: 19px;
