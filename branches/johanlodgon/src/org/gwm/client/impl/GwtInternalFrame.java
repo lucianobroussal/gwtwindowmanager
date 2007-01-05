@@ -57,6 +57,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   Label imgBotRight;
   private int previousWidth, restoreWidth;
   private int previousHeight, restoreHeight;
+  private int previousTop, previousLeft;
 
 
   private FlexTable panel = new FlexTable();
@@ -210,19 +211,23 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
 
   public void maximize () {
     if (!this.maximized) {
+      this.previousTop = getPopupTop();
+      this.previousLeft = getPopupLeft();
       this.setPopupPosition (0,0);
       this.previousWidth = getWidth();
       this.previousHeight = getHeight();
       this.width = maxWidth;
       this.height = maxHeight;
       this.maximized = true;
+      buildGui();
     }
     else {
       this.width = previousWidth;
       this.height = previousHeight;
       this.maximized = false;
+      buildGui();
+      setLocation (this.previousTop, this.previousLeft);
     }
-    buildGui();
   }
 
   public void toFront () {
