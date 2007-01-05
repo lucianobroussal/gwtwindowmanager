@@ -231,6 +231,8 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame, Even
   }
 
   public void toFront () {
+    this.hide();
+    this.show();
   }
 
   public void destroy () {
