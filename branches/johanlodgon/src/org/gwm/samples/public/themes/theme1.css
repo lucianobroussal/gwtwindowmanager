@@ -9,6 +9,7 @@
 .topBar {
   width: 100%;
   float: right;
+  cursor: move;
 }
 
 .theme1_nw {
