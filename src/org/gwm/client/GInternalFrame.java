@@ -15,8 +15,8 @@
  */
 package org.gwm.client;
 
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.*;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * Provides methods to interact with a frame.
@@ -70,7 +70,8 @@ public interface GInternalFrame {
      *      Widget</a>
      * 
      */
-    public void setContent(Composite theContent);
+    // public void setContent(Composite theContent);
+    public void setContent(Widget theContent);
 
     /**
      * Sets window content using an Plain-Text or Html code.
@@ -84,7 +85,8 @@ public interface GInternalFrame {
      * Return the content of this window.
      * @return
      */
-    public Composite getContent();
+    // public Composite getContent();
+    public Widget getContent();
     
 
     /**
@@ -405,4 +407,4 @@ public interface GInternalFrame {
 	public boolean isVisible();
 
 	public void setVisible(boolean b);
-	}
+}
