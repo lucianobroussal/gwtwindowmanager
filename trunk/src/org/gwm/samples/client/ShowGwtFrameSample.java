@@ -15,6 +15,10 @@ public class ShowGwtFrameSample implements EntryPoint {
     GInternalFrame gif = new GwtInternalFrame();
     gif.setContent (new Button ("a button"));
     gif.show(true);
+    GInternalFrame gif2 = new GwtInternalFrame();
+    gif2.setContent (new HTML ("A second frame"));
+    gif2.setLocation (100,180);
+    gif2.show(true);
     // pane.addGInternalFrame (gif);
   }
 
