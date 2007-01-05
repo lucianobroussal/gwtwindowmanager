@@ -55,7 +55,7 @@ public class DefaultGDesktopManager implements GDesktopManager, GFrameListener{
 	 * Build a new GInternalFrame.
 	 */
 	public GInternalFrame newFrame() {
-		return new DefaultWidgetInternalFrame("", desktop);
+		return new GwtInternalFrame();
 	}
 	
 	/**
