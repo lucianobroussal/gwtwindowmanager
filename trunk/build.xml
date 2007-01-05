@@ -18,6 +18,11 @@
 
 <project basedir="." name="gwm">
 
+  <property name="class.dir" value="class"/>
+  <property name="source.dir" value="src"/>
+  <property name="ext.dir" value="/opt/ext"/>
+
+
 	<!-- To be set to the root dir of your gwt binaries installation-->
 	<property name="GWT_HOME" value="/home/johan/gwt-linux-1.2.11/"/>
 	
@@ -52,5 +57,20 @@
         	</bottom>
         </javadoc>
     </target>
+
+  <target name="prepare">
+    <mkdir dir="${class.dir}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${class.dir}"/>
+  </target>
+
+  <target name="compile" depends="prepare">
+    <javac destdir="${class.dir}" debug="true" srcdir="${source.dir}"
+      classpath="${ext.dir}/gwt-user.jar:${ext.dir}/gwt-dev-linux.jar:${ext.dir}/junit.jar"
+      includes="com/**/*,org/**"/>
+  </target>
+
 	
 </project>
