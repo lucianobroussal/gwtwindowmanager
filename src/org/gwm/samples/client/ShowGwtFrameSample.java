@@ -4,15 +4,15 @@ import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.GDesktopPane;
 import org.gwm.client.impl.GwtInternalFrame;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.core.client.*;
+import com.google.gwt.user.client.ui.*;
 
 public class ShowGwtFrameSample implements EntryPoint {
 
     private GDesktopPane pane;
 
     public void onModuleLoad() {
-        if (true) {
+        if (false) {
             testWindow();
             return;
         }
@@ -25,6 +25,8 @@ public class ShowGwtFrameSample implements EntryPoint {
         gif.setContent(new Button("a button"));
         pane.addFrame(gif);
         gif.setVisible(true);
+        RootPanel root = RootPanel.get("pane");
+        root.add (pane);
 
     }
 

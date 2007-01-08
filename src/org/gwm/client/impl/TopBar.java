@@ -73,6 +73,7 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
   }
 
   public void onClick (Widget w) {
+System.out.println ("Clicked on "+w);
     if (w.equals (imgClose)) {
       parent.hide();
     }
