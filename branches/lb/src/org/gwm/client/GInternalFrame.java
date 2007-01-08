@@ -29,32 +29,45 @@ import com.google.gwt.user.client.ui.*;
 public interface GInternalFrame {
 
     /**
-     * Retrieves the window's id.
+     * Permits to change the property style on a window.
      * 
-     * @return String id.
+     * @param style
+     * @deprecated
+     * @see
      */
-    public String getId();
+    public void setStyle(String style);
 
     /**
      * Permits to change the property style on a window.
      * 
-     * @param style
+     * @param theme
      */
-    public void setStyle(String style);
+    public void setTheme(String theme);
 
     /**
      * Shows window at its current position.
      * 
      * @param modal
      *            if true the screen is disabled
+     * @deprecated
+     * @see org.gwm.client.GDialog
      */
     public void show(boolean modal);
+
+    /**
+     * Shows window at its current position.
+     * 
+     */
+    public void setVisible(boolean isVisible);
 
     /**
      * Shows window in page's center.
      * 
      * @param modal
      *            if true the screen is disabled
+     * @deprecated
+     * @see org.gwm.client.GDialog
+     * 
      */
     public void showCenter(boolean modal);
 
@@ -70,7 +83,6 @@ public interface GInternalFrame {
      *      Widget</a>
      * 
      */
-    // public void setContent(Composite theContent);
     public void setContent(Widget theContent);
 
     /**
@@ -80,25 +92,25 @@ public interface GInternalFrame {
      *            the content to show into the window
      */
     public void setContent(String content);
-    
+
     /**
      * Return the content of this window.
+     * 
      * @return
      */
-    // public Composite getContent();
     public Widget getContent();
-    
 
     /**
      * Window destructor.
      */
-    public void destroy();
-    
+    public void dispose();
+
     /**
      * Hides the window without destoying it
-     *
+     * 
      */
     public void hide();
+
     /**
      * Provides the window minimized status.
      * 
@@ -117,7 +129,7 @@ public interface GInternalFrame {
      * The window will be destroy by clicking on close button instead of being
      * hidden.
      */
-    public void setDestroyOnClose();
+    public void setOperationOnClose(int operation);
 
     /**
      * Sets window top-left position.
@@ -156,18 +168,20 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setHeight(int height);
-    
+
     /**
      * Returns the window's width.
+     * 
      * @return
      */
     public int getWidth();
-    
+
     /**
      * Returns the window's height.
+     * 
      * @return
      */
-	public int getHeight();
+    public int getHeight();
 
     /**
      * Sets the minimum window width.
@@ -208,30 +222,35 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximumHeight(int maxHeight);
-    
+
     /**
      * Returns the window's minimum height.
+     * 
      * @return
      */
     public int getMinimumHeight();
-    
+
     /**
      * Returns the window's minimum width.
+     * 
      * @return
      */
     public int getMinimumWidth();
-    
+
     /**
      * Returns the window's maximum height.
+     * 
      * @return
      */
     public int getMaximumHeight();
-    
+
     /**
      * Returns the window's maximum width.
+     * 
      * @return
      */
     public int getMaximumWidth();
+
     /**
      * Sets the position from the top.
      * 
@@ -244,10 +263,11 @@ public interface GInternalFrame {
 
     /**
      * Returns the position from the top.
+     * 
      * @return
      */
     public int getTop();
-    
+
     /**
      * Sets the position from the left.
      * 
@@ -257,13 +277,14 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setLeft(int left);
-    
+
     /**
      * Returns the position from the left.
+     * 
      * @return
      */
     public int getLeft();
-    
+
     /**
      * Recomputes window width, useful when you change window content and do not
      * want scrolling.
@@ -328,12 +349,12 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMinimizable(boolean minimizable);
-    
+
     /**
      * Returns the window minimizable state.
      */
     public boolean isMinimizable();
-    
+
     /**
      * Sets the window's maximizable state.
      * 
@@ -343,8 +364,18 @@ public interface GInternalFrame {
      */
     public void setMaximizable(boolean maximizable);
     
+    
+    public void setMaximum(boolean flag);
+    
+    public void setMinimum(boolean flag);
+    
+    public void setIconified(boolean flag);
+    
+    public void setClosed(boolean flag);
+
     /**
      * Returns the window maximizable state.
+     * 
      * @return
      */
     public boolean isMaximizable();
@@ -357,54 +388,37 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setDraggable(boolean draggable);
-    
+
     /**
      * Returns the GDesktopPane who owns this GInternalFrame
+     * 
      * @return
      */
     public GDesktopPane getParentDesktop();
-    
+
     /**
-     * Sets if the window is Modal or Non-Modal. A modal window block all the 
-     * events that is not directed to it. Can be changed after the exibition of 
-     * the window.
-     */
-    public void setModal(boolean modal);
-    
-    /**
-     * Tells if the window is modal or non-modal.
-     */
-    public boolean isModal();
-    
-    /**
-     * Adds a new GFrameListener to this GInternalFrame.
+     * Adds a new GInternalFrameListener to this GInternalFrame.
+     * 
      * @param listener
      */
-	public void addGFrameListener(GFrameListener listener);
-	
-	/**
-	 * Remove a GFrameListener from this GInternalFrame.
-	 * @param listener
-	 */
-	public void removeGFrameListener(GFrameListener listener);
+    public void addInternalFrameListener(GInternalFrameListener listener);
 
-	public void setMaximized(boolean b);
+    /**
+     * Remove a GInternalFrameListener from this GInternalFrame.
+     * 
+     * @param listener
+     */
+    public void removeInternalFrameListener(GInternalFrameListener listener);
 
-	public void fireFrameMaximized();
+    public void setMaximized(boolean b);
 
-	public void fireFrameMinimized();
 
-	public void setMinimized(boolean b);
+    public String getCaption();
 
-	public Element getElement();
+    public boolean isVisible();
 
-	public String getCaption();
+    public Element getElement();
 
-	public void fireFrameMinimizing();
+    public Object getId();
 
-	public void fireFrameMaximizing();
-
-	public boolean isVisible();
-
-	public void setVisible(boolean b);
 }
