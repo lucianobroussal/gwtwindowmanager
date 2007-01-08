@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 
 import com.google.gwt.user.client.Command;

@@ -19,7 +19,6 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
