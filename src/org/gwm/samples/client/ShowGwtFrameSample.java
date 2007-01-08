@@ -1,10 +1,11 @@
 package org.gwm.samples.client;
 
-import com.google.gwt.core.client.*;
-import com.google.gwt.user.client.*;
-import com.google.gwt.user.client.ui.*;
-import org.gwm.client.*;
-import org.gwm.client.impl.*;
+import org.gwm.client.GDesktopPane;
+import org.gwm.client.GInternalFrame;
+import org.gwm.client.impl.GwtInternalFrame;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.Button;
 
 public class ShowGwtFrameSample implements EntryPoint {
 
