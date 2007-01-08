@@ -1,4 +1,6 @@
-package org.gwm.client;
+package org.gwm.client.impl;
+
+import org.gwm.client.GInternalFrame;
 
 
 /**

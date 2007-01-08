@@ -5,7 +5,6 @@ import java.util.List;
 import org.gwm.client.GDesktopManager;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.GInternalFrameEvent;
 
 import com.google.gwt.user.client.DOM;
 

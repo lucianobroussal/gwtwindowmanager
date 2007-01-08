@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.GInternalFrameEvent;
 import org.gwm.client.GInternalFrameListener;
 
 import com.google.gwt.user.client.DOM;

@@ -3,6 +3,8 @@
  */
 package org.gwm.client;
 
+import org.gwm.client.impl.GInternalFrameEvent;
+
 /**
  * This is the interface should be implemented for those objects who want to
  * know about the events of a GInternalFrame.
