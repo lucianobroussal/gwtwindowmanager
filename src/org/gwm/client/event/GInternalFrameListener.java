@@ -1,9 +1,8 @@
 /**
  * 
  */
-package org.gwm.client;
+package org.gwm.client.event;
 
-import org.gwm.client.impl.GInternalFrameEvent;
 
 /**
  * This is the interface should be implemented for those objects who want to

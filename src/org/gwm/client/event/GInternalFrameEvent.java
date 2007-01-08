@@ -1,4 +1,4 @@
-package org.gwm.client.impl;
+package org.gwm.client.event;
 
 import org.gwm.client.GInternalFrame;
 

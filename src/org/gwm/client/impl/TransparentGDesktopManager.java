@@ -5,6 +5,7 @@ package org.gwm.client.impl;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.event.GInternalFrameEvent;
 
 /**
  * @author Marcelo Emanoel

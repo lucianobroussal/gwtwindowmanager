@@ -15,6 +15,8 @@
  */
 package org.gwm.client;
 
+import org.gwm.client.event.GInternalFrameListener;
+
 import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.ui.*;
 
