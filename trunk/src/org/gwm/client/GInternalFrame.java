@@ -400,6 +400,11 @@ public interface GInternalFrame {
     public GDesktopPane getParentDesktop();
 
     /**
+     * Sets the GDesktopPane who owns this GInternalFrame
+     */
+    public void setParentDesktop (GDesktopPane desktopPane);
+
+    /**
      * Adds a new GInternalFrameListener to this GInternalFrame.
      * 
      * @param listener
@@ -413,7 +418,7 @@ public interface GInternalFrame {
      */
     public void removeInternalFrameListener(GInternalFrameListener listener);
 
-    public void setMaximized(boolean b);
+    public void maximize();
 
 
     public String getCaption();

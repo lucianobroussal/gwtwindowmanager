@@ -11,9 +11,7 @@ import org.gwm.client.event.GInternalFrameAdapter;
 import org.gwm.client.event.GInternalFrameEvent;
 
 import com.google.gwt.user.client.WindowResizeListener;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * @author Marcelo Emanoel
@@ -40,6 +38,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
     private DockPanel layout;
 
     private MinimizedButtonBar buttonBar;
+    private HorizontalPanel iconBar;
 
     private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
         public void internalFrameIconified(GInternalFrameEvent evt) {
@@ -62,6 +61,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
         centerWidget = new HTML();
         layout = new DockPanel();
         buttonBar = new MinimizedButtonBar(this);
+        iconBar = new HorizontalPanel ();
         this.initWidget(layout);
 
     }
@@ -91,12 +91,19 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
      */
     private void minimize(GInternalFrame theWindow) {
         buttonBar.addWindow(theWindow);
+        Icon icon = new Icon (theWindow);
+        iconBar.add (icon);
+        // icon.addClickListener (new ClickListener() {
+            // public void onClick(Widget sender) {
+            // }
+        // });
         // Button theButton = makeAButtonFromAWindow(theWindow);
         // minimizedWindows.add(theButton);
 
     }
     
-    private void iconify(GInternalFrame theWindow) {
+    public void iconify(GInternalFrame theWindow) {
+        theWindow.hide();
         buttonBar.addWindow(theWindow);
         // Button theButton = makeAButtonFromAWindow(theWindow);
         // minimizedWindows.add(theButton);
@@ -124,6 +131,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
      * @param internalFrame
      */
     public void addFrame(GInternalFrame internalFrame) {
+        internalFrame.setParentDesktop (this);
         internalFrame.addInternalFrameListener(adapter);
         desktopManager.addGInternalFrame(internalFrame);
     }
@@ -141,7 +149,8 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
      * @see org.gwm.client.GDesktopManager#getAllGInternalFrames()
      */
     public List getAllFrames() {
-        return desktopManager.getAllGInternalFrames();
+        // return desktopManager.getAllGInternalFrames();
+return null;
     }
 
     /**
@@ -185,4 +194,30 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
     public void addInTaskBar(GInternalFrame internalFrame) {
        buttonBar.addWindow(internalFrame);
     }
+
+    class Icon extends HorizontalPanel {
+
+        private GInternalFrame parent;
+
+        Icon (GInternalFrame f) {
+            parent = f;
+            Label l = new Label (parent.getCaption());
+            Label i = new Label ("");
+            i.addStyleName("icon_button");
+            l.addStyleName("icon_title");
+            i.addClickListener(new ClickListener() {
+                public void onClick(Widget sender) {
+                    // buildGui();
+                }
+            });
+            add (i);
+            add (l);
+       }
+
+       GInternalFrame getFrame() {
+         return parent;
+       }
+
+    }
+
 }

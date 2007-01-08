@@ -1,6 +1,6 @@
 package org.gwm.client.impl;
 
-import java.util.List;
+import java.util.*;
 
 import org.gwm.client.GDesktopManager;
 import org.gwm.client.GInternalFrame;
@@ -33,12 +33,15 @@ public class DefaultGDesktopManager implements GDesktopManager
      */
     public static final int OUTLINE_DRAG_MODE = 1;
 
+    private List frames;
+
     /**
      * Constructs a new GDesktopPane with the default settings.
      */
     public DefaultGDesktopManager(GDesktopPane desktopPane) {
-        setSelectedGInternalFrame(null);
+        // setSelectedGInternalFrame(null);
         this.desktop = desktopPane;
+        this.frames = new ArrayList ();
     }
 
     /**
@@ -49,16 +52,15 @@ public class DefaultGDesktopManager implements GDesktopManager
      *            The GInternalFrame to be added.
      */
     public void addGInternalFrame(GInternalFrame internalFrame) {
-        desktop.getAllFrames().add(internalFrame);
+        frames.add(internalFrame);
     }
 
     /**
      * Closes all GInternalFrames contained in this GDesktopPane.
      */
     public void closeAllGInternalFrames() {
-        List allFrames = desktop.getAllFrames();
-        for (int i = 0; i < allFrames.size(); i++) {
-            ((GInternalFrame) allFrames.get(i)).dispose();
+        for (int i = 0; i < frames.size(); i++) {
+            ((GInternalFrame) frames.get(i)).dispose();
         }
     }
 
@@ -66,7 +68,7 @@ public class DefaultGDesktopManager implements GDesktopManager
      * Returns all GInternalFrames currently displayed in the desktop.
      */
     public List getAllGInternalFrames() {
-        return desktop.getAllFrames();
+        return frames;
     }
 
     /**
@@ -108,14 +110,6 @@ public class DefaultGDesktopManager implements GDesktopManager
     }
 
     public void maximize(GInternalFrame internalFrame) {
-        if (internalFrame.isMaximizable()) {
-            internalFrame.getParentDesktop();
-            internalFrame.setLocation(desktop.getAbsoluteTop(), 0);
-            internalFrame.setHeight(desktop.getOffsetHeight() - 30);
-            internalFrame.setWidth(desktop.getOffsetWidth());
-            internalFrame.setMaximized(true);
-            internalFrame.setIconified(false);
-        }
     }
 
      public void iconify(GInternalFrame internalFrame) {

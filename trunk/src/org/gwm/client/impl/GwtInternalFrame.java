@@ -198,6 +198,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         super.setWidget(panel);
     }
 
+    public void setParentDesktop (GDesktopPane pane) {
+        this.desktopPane = pane;
+    }
+
     private void showIcon() {
         Label l = new Label(title);
         Label i = new Label("");
@@ -250,31 +254,31 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void minimize() {
-        desktopPane.getDesktopManager().iconify(this);
+        desktopPane.iconify(this);
         this.minimized = !this.minimized;
         //buildGui();
         fireFrameIconified();
     }
 
     public void maximize() {
-//        if (!this.maximized) {
-//            this.previousTop = getPopupTop();
-//            this.previousLeft = getPopupLeft();
-//            this.setPopupPosition(0, 0);
-//            this.previousWidth = getWidth();
-//            this.previousHeight = getHeight();
-//            this.width = maxWidth;
-//            this.height = maxHeight;
-//            this.maximized = true;
-//            buildGui();
-//        } else {
-//            this.width = previousWidth;
-//            this.height = previousHeight;
-//            this.maximized =  false;
-//            buildGui();
-//            setLocation(this.previousTop, this.previousLeft);
-//        }
-        getParentDesktop().getDesktopManager().maximize(this);
+        if (!this.maximized) {
+            this.previousTop = getPopupTop();
+            this.previousLeft = getPopupLeft();
+            this.setPopupPosition(0, 0);
+            this.previousWidth = getWidth();
+            this.previousHeight = getHeight();
+            this.width = maxWidth;
+            this.height = maxHeight;
+            this.maximized = true;
+            buildGui();
+        } else {
+            this.width = previousWidth;
+            this.height = previousHeight;
+            this.maximized =  false;
+            buildGui();
+            setLocation(this.previousTop, this.previousLeft);
+        }
+        // getParentDesktop().getDesktopManager().maximize(this);
         fireFrameMaximized();
     }
 
@@ -369,7 +373,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public String getCaption() {
-        return this.title;
+        return "title: " + this.title;
     }
 
     public void setUrl(String url) {
@@ -521,11 +525,11 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     // """""""""""""""""""""
     
     public boolean isMaximizable() {
-        return false;
+        return true;
     }
 
     public boolean isMinimizable() {
-        return false;
+        return true;
     }
 
     public int getLeft() {
