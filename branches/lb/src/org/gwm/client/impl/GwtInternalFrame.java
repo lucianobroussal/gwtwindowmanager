@@ -111,8 +111,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     
     List listeners;
 
-    public GwtInternalFrame(String id , String title, GDesktopPane desktopPane) {
-        this.desktopPane = desktopPane;
+    public GwtInternalFrame(String id , String title) {
         this.currentStyle = DEFAULT_STYLE;
         this.title = title;
         this.myContent = new HTML("MY CONTENT");

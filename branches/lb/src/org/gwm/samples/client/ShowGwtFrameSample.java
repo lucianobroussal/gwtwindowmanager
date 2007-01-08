@@ -8,14 +8,30 @@ import org.gwm.client.impl.*;
 
 public class ShowGwtFrameSample implements EntryPoint {
 
-  private GDesktopPane pane;
+    private GDesktopPane pane;
 
-  public void onModuleLoad() {
-    pane = new GDesktopPane();
-    GInternalFrame gif = new GwtInternalFrame("1" , "ssss" , null);
-    gif.setContent (new Button ("a button"));
-    gif.show(true);
-    //pane.addGInternalFrame (gif);
-  }
+    public void onModuleLoad() {
+        if (true) {
+            testWindow();
+            return;
+        }
+        testPane();
+    }
+
+    private void testPane() {
+        pane = new GDesktopPane();
+        GInternalFrame gif = new GwtInternalFrame("1", "ssss");
+        gif.setContent(new Button("a button"));
+        pane.addFrame(gif);
+        gif.setVisible(true);
+
+    }
+
+    private void testWindow() {
+        GInternalFrame gif = new GwtInternalFrame("1", "ssss");
+        gif.setContent(new Button("a button"));
+        gif.setVisible(true);
+
+    }
 
 }
