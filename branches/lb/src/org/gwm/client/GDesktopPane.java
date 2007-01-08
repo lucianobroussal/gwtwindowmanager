@@ -5,9 +5,9 @@ package org.gwm.client;
 
 import java.util.List;
 
+import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.impl.DefaultGDesktopManager;
 import org.gwm.client.impl.GInternalFrameAdapter;
-import org.gwm.client.impl.GInternalFrameEvent;
 import org.gwm.client.impl.MinimizedButtonBar;
 
 import com.google.gwt.user.client.WindowResizeListener;
