@@ -1,6 +1,8 @@
-package org.gwm.client;
+package org.gwm.client.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import org.gwm.client.ScrollableIterator;
 
 
 /**

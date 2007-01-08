@@ -1,18 +1,21 @@
-package org.gwm.client;
+package org.gwm.client.event;
+
+import org.gwm.client.GInternalFrame;
+
 
 /**
  * This class is an event object and has a GInternalFrame as the source.
  * @author Marcelo Emanoel
  * @since 14/12/2006
  */
-public class GFrameEvent {
+public class GInternalFrameEvent {
 	private GInternalFrame source;
 	
 	/**
-	 * Build a GFrameEvent from a GInternalFrame as the source.
+	 * Build a GInternalFrameEvent from a GInternalFrame as the source.
 	 * @param source
 	 */
-	public GFrameEvent(GInternalFrame source){
+	public GInternalFrameEvent(GInternalFrame source){
 		this.source = source;
 	}
 	
@@ -20,7 +23,7 @@ public class GFrameEvent {
 	 * Returns the source of the event.
 	 * @return
 	 */
-	public GInternalFrame getSource(){
+	public GInternalFrame getGInternalFrame(){
 		return this.source;
 	}
 }

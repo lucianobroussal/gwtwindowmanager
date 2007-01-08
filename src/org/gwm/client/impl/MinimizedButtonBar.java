@@ -1,12 +1,15 @@
 /**
  * 
  */
-package org.gwm.client;
+package org.gwm.client.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.gwm.client.GDesktopPane;
+import org.gwm.client.GInternalFrame;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -177,7 +180,7 @@ public class MinimizedButtonBar extends Composite {
 
 	private void restoreWindow(Button button) {
 		GInternalFrame minimizedWindow = (GInternalFrame) windowMap.get(button);
-		getOwner().getDesktopManager().restore(minimizedWindow);
+		getOwner().getDesktopManager().deiconifyFrame(minimizedWindow);
 		HorizontalPanel panel = (HorizontalPanel) button.getParent();
 		button.removeFromParent();
 		if(panel.getWidgetCount() == 0){
