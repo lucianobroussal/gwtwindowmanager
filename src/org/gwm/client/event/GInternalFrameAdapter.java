@@ -1,10 +1,8 @@
 /**
  * 
  */
-package org.gwm.client.impl;
+package org.gwm.client.event;
 
-import org.gwm.client.event.GInternalFrameEvent;
-import org.gwm.client.event.GInternalFrameListener;
 
 /**
  * A convenience class for use as a GInternalFrameListener that don't need to implement
