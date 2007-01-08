@@ -3,7 +3,6 @@ package org.gwm.client.impl;
 import java.util.List;
 
 import org.gwm.client.GDesktopManager;
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameEvent;
 

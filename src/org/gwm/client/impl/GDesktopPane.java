@@ -1,14 +1,14 @@
 /**
  * 
  */
-package org.gwm.client;
+package org.gwm.client.impl;
 
 import java.util.List;
 
+import org.gwm.client.GDesktopManager;
+import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameAdapter;
 import org.gwm.client.event.GInternalFrameEvent;
-import org.gwm.client.impl.DefaultGDesktopManager;
-import org.gwm.client.impl.MinimizedButtonBar;
 
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.Composite;

@@ -1,7 +1,7 @@
 package org.gwm.samples.client;
 
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.impl.GDesktopPane;
 import org.gwm.client.impl.GwtInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
