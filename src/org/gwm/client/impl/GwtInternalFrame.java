@@ -255,7 +255,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     public void minimize() {
         desktopPane.iconify(this);
-        this.minimized = !this.minimized;
+        this.minimized = true;
         //buildGui();
         fireFrameIconified();
     }
@@ -608,6 +608,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
             if(isVisible()){
                 return;
             }
+            this.minimized = false;
             show();
         }else{
             if(!isVisible()){
