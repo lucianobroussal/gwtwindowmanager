@@ -10,8 +10,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class WidgetComposite extends Composite {
 	private Widget widget;
 
-	public WidgetComposite(Widget aWidget) {
-		initWidget(aWidget);
+    public WidgetComposite(Widget aWidget) {
+	    initWidget(aWidget);
 		setWidget(aWidget);
 		setSize("100%", "100%");
 	}
