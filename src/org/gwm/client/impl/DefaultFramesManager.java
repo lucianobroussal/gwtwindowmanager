@@ -58,11 +58,12 @@ public class DefaultFramesManager implements FramesManager {
     }
 
     public GInternalFrame newFrame() {
-System.out.println ("creating new frame");
+/*System.out.println ("creating new frame");
         String windowId = "win_" + windowCount++;
         GInternalFrame window = new GwtInternalFrame(windowId);
         windows.put(windowId, window);
-        return window;
+        return window;*/
+        return null;
     }
 
     public void closeAllFrames() {

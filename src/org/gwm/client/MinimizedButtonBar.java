@@ -177,7 +177,7 @@ public class MinimizedButtonBar extends Composite {
 
 	private void restoreWindow(Button button) {
 		GInternalFrame minimizedWindow = (GInternalFrame) windowMap.get(button);
-		getOwner().getDesktopManager().restore(minimizedWindow);
+		getOwner().getDesktopManager().deiconifyFrame(minimizedWindow);
 		HorizontalPanel panel = (HorizontalPanel) button.getParent();
 		button.removeFromParent();
 		if(panel.getWidgetCount() == 0){

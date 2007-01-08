@@ -12,10 +12,10 @@ public class ShowGwtFrameSample implements EntryPoint {
 
   public void onModuleLoad() {
     pane = new GDesktopPane();
-    GInternalFrame gif = new GwtInternalFrame();
+    GInternalFrame gif = new GwtInternalFrame("1" , "ssss" , null);
     gif.setContent (new Button ("a button"));
     gif.show(true);
-    // pane.addGInternalFrame (gif);
+    //pane.addGInternalFrame (gif);
   }
 
 }

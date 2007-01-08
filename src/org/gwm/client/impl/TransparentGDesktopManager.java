@@ -4,8 +4,8 @@
 package org.gwm.client.impl;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GFrameEvent;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.GInternalFrameEvent;
 
 /**
  * @author Marcelo Emanoel
@@ -17,14 +17,9 @@ public class TransparentGDesktopManager extends DefaultGDesktopManager {
 		super(desktopPane);
 	}
 	
-	public void frameMinimizing(GFrameEvent evt) {
-		captureTheProperties(evt.getSource());		
+	public void frameMinimizing(GInternalFrameEvent evt) {
 	}
 	
-	public void minimize(GInternalFrame internalFrame) {
-		internalFrame.fireFrameMinimizing();
-		internalFrame.setHeight(internalFrame.getMinimumHeight());
-		internalFrame.setWidth(internalFrame.getMinimumWidth());
-		internalFrame.fireFrameMinimized();
+	public void iconify(GInternalFrame internalFrame) {
 	}
 }
