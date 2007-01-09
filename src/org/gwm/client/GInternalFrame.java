@@ -52,7 +52,7 @@ public interface GInternalFrame {
      * @param modal
      *            if true the screen is disabled
      * @deprecated
-     * @see org.gwm.client.GDialog
+     * @see org.gwm.client.impl.GDialog
      */
     public void show(boolean modal);
 
@@ -68,7 +68,7 @@ public interface GInternalFrame {
      * @param modal
      *            if true the screen is disabled
      * @deprecated
-     * @see org.gwm.client.GDialog
+     * @see org.gwm.client.impl.GDialog
      * 
      */
     public void showCenter(boolean modal);

@@ -19,7 +19,8 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gwm.client.*;
+import org.gwm.client.GDesktopPane;
+import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
 
@@ -109,6 +110,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     private GDesktopPane desktopPane;
     
     List listeners;
+
 
     public GwtInternalFrame(String title) {
         this.currentStyle = DEFAULT_STYLE;
@@ -291,6 +293,8 @@ System.out.println ("Frame minimize");
     }
 
     public void dispose() {
+        //TODO to check with Johan !!!
+        setVisible(false);
     }
 
     public boolean isMinimized() {
@@ -370,11 +374,11 @@ System.out.println ("Frame minimize");
 
     public void setTitle(String title) {
         this.title = title;
-        this.caption.setText(title);
+        this.topBar.setCaption(title);
     }
 
     public String getTitle() {
-        return this.title;
+        return this.caption.getText();
     }
 
     public String getCaption() {
@@ -402,7 +406,10 @@ System.out.println ("Frame minimize");
 
     public void setMaximizable(boolean maximizable) {
         this.maximizable = maximizable;
+        topBar.updateTopBar();
     }
+
+    
 
     public void setDraggable(boolean draggable) {
         this.draggable = draggable;
@@ -530,11 +537,11 @@ System.out.println ("Frame minimize");
     // """""""""""""""""""""
     
     public boolean isMaximizable() {
-        return true;
+        return maximizable;
     }
 
     public boolean isMinimizable() {
-        return true;
+        return minimizable;
     }
 
     public int getLeft() {
@@ -608,15 +615,23 @@ System.out.println ("Frame minimize");
         return visible;
     }
 
-    public void setVisible(boolean v) {
-        if(v && !visible){
+    public void setVisible(boolean visible) {
+        if(this.visible == visible)
+            return;
+        if(visible){
             this.minimized = false;
             show();
-        }
-        if (!v && visible){
+        }else{
             hide();
         }
+        this.visible = visible;
     }
+
+    public boolean isCloseable() {
+        return closable;
+    }
+
+
 
     
 
