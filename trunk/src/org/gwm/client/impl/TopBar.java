@@ -127,6 +127,17 @@ System.out.println ("Clicked on "+w);
     dragging = false;
     DOM.releaseCapture(sender.getElement());
   }
+  
+  public void setCaption(String caption){
+      this.caption.setText(caption);
+  }
+
+public void updateTopBar() {
+    imgMaximize.setVisible(parent.isMaximizable());
+    imgMinimize.setVisible(parent.isMinimizable());
+    imgClose.setVisible(parent.isCloseable());
+    
+}
 
 
 
