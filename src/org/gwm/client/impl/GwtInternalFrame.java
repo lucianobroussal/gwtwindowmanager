@@ -561,7 +561,7 @@ System.out.println ("Frame minimize");
     }
 
     public Widget getContent() {
-        return null;
+        return myContent;
     }
 
     // public void setContent (Widget c) {
