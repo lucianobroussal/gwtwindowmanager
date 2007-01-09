@@ -134,24 +134,35 @@ public class GDialog {
     public static void showMessage(Object message, String title,
             int messageType, Option[] options, String imagePath,
             GDialogChoiceListener choiceListener) {
-        if (currentDialog != null) {
-            throw new IllegalStateException("A Dialog is already opened!");
-        }
-        currentDialog = new GwtInternalFrame("");
-        currentDialog.setTheme(theme);
-        if (title != null) {
-            currentDialog.setTitle(title);
-        }
-
+        setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
         currentDialog.setContent(new DialogPane(message, options, icon,
                 choiceListener));
         currentDialog.setVisible(true);
+        adjustDialogSizeToContent(currentDialog);
+        
+    }
+
+    private static void adjustDialogSizeToContent(GInternalFrame internalFrame) {
+        Widget content = internalFrame.getContent();
+        int height = content.getOffsetHeight();
+        currentDialog.setHeight(height);
+        int width = content.getOffsetWidth();
+        currentDialog.setWidth(width);
     }
 
     public static void showInputDialog(Object message, String title,
             int messageType, Option[] options, String imagePath,
             Object initialValue, GDialogChoiceListener choiceListener) {
+        setDefaultDialogProperties(title, messageType);
+        Image icon = getIcon(messageType, imagePath);
+        currentDialog.setContent(new InputDialogPane(message, options, icon,
+                initialValue, choiceListener));
+        currentDialog.setVisible(true);
+        adjustDialogSizeToContent(currentDialog);
+    }
+
+    private static void setDefaultDialogProperties(String title, int messageType) {
         if (currentDialog != null) {
             throw new IllegalStateException("A Dialog is already opened!");
         }
@@ -165,10 +176,7 @@ public class GDialog {
         if (title != null) {
             currentDialog.setTitle(title);
         }
-        Image icon = getIcon(messageType, imagePath);
-        currentDialog.setContent(new InputDialogPane(message, options, icon,
-                initialValue, choiceListener));
-        currentDialog.setVisible(true);
+        
     }
 
     private static Image getIcon(int messageType, String imagePath) {

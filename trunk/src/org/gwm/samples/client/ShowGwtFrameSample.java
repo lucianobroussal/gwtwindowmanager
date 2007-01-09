@@ -30,7 +30,7 @@ public class ShowGwtFrameSample implements EntryPoint {
 //            //testWindow();
 //            return;
 //        }
-        testPane();
+  //      testPane();
     }
 
     private void testPane() {
@@ -53,8 +53,8 @@ public class ShowGwtFrameSample implements EntryPoint {
 
     private void testGDialog() {
         GDialog.setTheme("theme1");
-         //GDialog.showMessage("TUTUUTUU");
-        GDialog.showConfirmDialog("Alors ??????", "Mon titre" , GDialog.YES_NO_CANCEL_OPTION , GDialog.PLAIN_MESSAGE, new GDialogChoiceListener() {
+//         GDialog.showMessage("TUTUUTUU");
+        GDialog.showConfirmDialog("Alors ??????\nL1\nL2\nL3", "Mon titre" , GDialog.YES_NO_CANCEL_OPTION , GDialog.PLAIN_MESSAGE, new GDialogChoiceListener() {
             public void onChoice(Option option, Object inputValue) {
                 if (option != null) {
                     Window.alert("Option : "
