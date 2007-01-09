@@ -427,6 +427,6 @@ public interface GInternalFrame {
 
     public Element getElement();
 
-    public Object getId();
+    public int getId();
 
 }

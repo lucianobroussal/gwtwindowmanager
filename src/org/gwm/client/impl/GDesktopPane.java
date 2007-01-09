@@ -38,6 +38,8 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
     private MinimizedButtonBar buttonBar;
     private HorizontalPanel iconBar;
 
+    private int uniqueId = 0;
+
     private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
         public void internalFrameIconified(GInternalFrameEvent evt) {
             minimize(evt.getGInternalFrame());
@@ -49,6 +51,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
     private GInternalFrame selectedFrame;
 
     private List frames;
+    private HashMap frameMap;
 
     public GDesktopPane() {
         initialize();
@@ -64,6 +67,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
         iconBar = new HorizontalPanel ();
         this.initWidget(layout);
         this.frames = new ArrayList();
+        this.frameMap = new HashMap();
     }
 
     private void setupUI() {
@@ -91,8 +95,6 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
      */
     private void minimize(GInternalFrame theWindow) {
         buttonBar.addWindow(theWindow);
-        // Button theButton = makeAButtonFromAWindow(theWindow);
-        // minimizedWindows.add(theButton);
 
     }
 
@@ -126,32 +128,19 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
     }
 
     /**
-     * @return the manager
-     */
-    // public GDesktopManager getDesktopManager() {
-        // return desktopManager;
-    // }
-
-    /**
-     * @param manager
-     *            the manager to set
-     */
-    // public void setDesktopManager(GDesktopManager manager) {
-        // this.desktopManager = manager;
-    // }
-
-    /**
      * Add a GInternalFrame to this GDesktopPane.
      * 
      * @param internalFrame
      */
-    public void addFrame(GInternalFrame internalFrame) {
+    public int addFrame(GInternalFrame internalFrame) {
+        uniqueId ++;
         internalFrame.setParentDesktop (this);
         int spos = (frames.size() + 1) * 10;
         internalFrame.setLocation (spos, spos);
         internalFrame.addInternalFrameListener(adapter);
         frames.add (internalFrame);
-        // desktopManager.addGInternalFrame(internalFrame);
+        frameMap.put (new Integer (uniqueId), internalFrame);
+        return uniqueId;
     }
 
     /**
@@ -161,6 +150,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
         for (int i = 0; i < frames.size(); i++) {
             ((GInternalFrame) frames.get(i)).dispose();
         }
+        this.frameMap = new HashMap();
     }
 
     /*
@@ -168,7 +158,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
      * 
      * @see org.gwm.client.GDesktopManager#getAllGInternalFrames()
      */
-    public List getAllGInternalFrames() {
+    public List getAllFrames() {
         return frames;
     }
 
@@ -212,20 +202,9 @@ public class GDesktopPane extends Composite implements WindowResizeListener, GDe
         buttonBar.adjustSize();
     }
 
-    public GInternalFrame getGInternalFrame(String id) {
+    public GInternalFrame getFrame(int id) {
         // TODO Auto-generated method stub
         return null;
     }
-
-    /**
-     * Closes all GInternalFrames contained in this GDesktopPane.
-     */
-    public void closeAllGInternalFrames() {
-        for (int i = 0; i < frames.size(); i++) {
-            ((GInternalFrame) frames.get(i)).dispose();
-        }
-    }
-
-
 
 }
