@@ -21,7 +21,7 @@ public class ShowGwtFrameSample implements EntryPoint {
 
     private void testPane() {
         pane = new GDesktopPane();
-        GInternalFrame gif = new GwtInternalFrame("1", "ssss");
+        GInternalFrame gif = new GwtInternalFrame("ssss");
         gif.setContent(new Button("a button"));
         pane.addFrame(gif);
         gif.setVisible(true);
@@ -31,7 +31,7 @@ public class ShowGwtFrameSample implements EntryPoint {
     }
 
     private void testWindow() {
-        GInternalFrame gif = new GwtInternalFrame("1", "ssss");
+        GInternalFrame gif = new GwtInternalFrame("ssss");
         gif.setContent(new Button("a button"));
         gif.setVisible(true);
 

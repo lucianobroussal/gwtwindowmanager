@@ -5,31 +5,32 @@ import java.util.List;
 public interface GDesktopManager {
 
 	
-	/**
-	 * Adds a new GInternalFrame to this GDesktopPane and select it if its the 
-	 * first one.
-	 * @param internalFrame The GInternalFrame to be added.
-	 */
-	public void addFrame(GInternalFrame internalFrame);
+    /**
+     * Adds a new GInternalFrame to this GDesktopPane and select it if its the 
+     * first one.
+     * @param internalFrame The GInternalFrame to be added.
+     * @return a unique identifier for this frame
+     */
+    public int addFrame(GInternalFrame internalFrame);
 	
-	
-	/**
-	 * Closes all GInternalFrames contained in this GDesktopPane.
-	 */
-	public void closeAllFrames();
+    /**
+     * Closes all GInternalFrames contained in this GDesktopPane.
+     */
+    public void closeAllFrames();
 
-	/**
-	 * Permits to retrieve a GInternalFrame by its id.
-	 * Returns null if there is no GInternalFrame with this id.
-	 * @param id
-	 *            The id of the window
-	 * @return GInternalFrame 
-	 */
-	public GInternalFrame getGInternalFrame(String id);
-	/**
-	 * Returns all GInternalFrames currently displayed in the desktop.
-	 */
-	public List getAllGInternalFrames();
+    /**
+     * Permits to retrieve a GInternalFrame by its id.
+     * Returns null if there is no GInternalFrame with this id.
+     * @param id
+     *            The id of the window
+     * @return GInternalFrame 
+     */
+    public GInternalFrame getFrame(int id);
+
+    /**
+     * Returns all GInternalFrames currently displayed in the desktop.
+     */
+    public List getAllFrames();
 	
 
 	/**

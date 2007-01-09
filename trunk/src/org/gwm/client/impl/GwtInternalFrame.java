@@ -46,7 +46,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         EventListener, ClickListener {
 
-    private String id;
+    private int id;
 
     private String title;
 
@@ -110,7 +110,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     
     List listeners;
 
-    public GwtInternalFrame(String id , String title) {
+    public GwtInternalFrame(String title) {
         this.currentStyle = DEFAULT_STYLE;
         this.title = title;
         this.myContent = new HTML("MY CONTENT");
@@ -222,8 +222,12 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         super.setWidget(panel);
     }
 
-    public Object getId() {
+    public int getId() {
         return this.id;
+    }
+
+    public void setId (int v) {
+      this.id = v;
     }
 
     public void setStyle(String v) {
