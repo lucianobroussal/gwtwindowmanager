@@ -16,7 +16,7 @@ public interface GDesktopManager {
 	/**
 	 * Closes all GInternalFrames contained in this GDesktopPane.
 	 */
-	public void closeAllGInternalFrames();
+	public void closeAllFrames();
 
 	/**
 	 * Permits to retrieve a GInternalFrame by its id.
