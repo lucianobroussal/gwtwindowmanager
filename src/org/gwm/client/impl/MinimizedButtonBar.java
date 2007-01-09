@@ -159,6 +159,7 @@ public class MinimizedButtonBar extends Composite {
 					setCurrentButtonList(newButtonList);
 					newButtonList.add(newButton);
 				}
+
 			}
 
 		
@@ -179,7 +180,7 @@ public class MinimizedButtonBar extends Composite {
 
 	private void restoreWindow(Button button) {
 		GInternalFrame minimizedWindow = (GInternalFrame) windowMap.get(button);
-		getOwner().getDesktopManager().deiconifyFrame(minimizedWindow);
+		getOwner().deIconify(minimizedWindow);
 		HorizontalPanel panel = (HorizontalPanel) button.getParent();
 		button.removeFromParent();
 		if(panel.getWidgetCount() == 0){

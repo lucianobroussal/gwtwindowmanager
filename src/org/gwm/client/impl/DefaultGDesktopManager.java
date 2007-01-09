@@ -8,8 +8,7 @@ import org.gwm.client.event.GInternalFrameEvent;
 
 import com.google.gwt.user.client.DOM;
 
-public class DefaultGDesktopManager implements GDesktopManager
-         {
+public class DefaultGDesktopManager {
 
     private GDesktopPane desktop;
 
@@ -110,11 +109,6 @@ public class DefaultGDesktopManager implements GDesktopManager
     }
 
     public void maximize(GInternalFrame internalFrame) {
-    }
-
-     public void iconify(GInternalFrame internalFrame) {
-        internalFrame.hide();
-        internalFrame.getParentDesktop().addInTaskBar(internalFrame);
     }
 
     public void toFront(GInternalFrame internalFrame) {

@@ -10,7 +10,7 @@ public interface GDesktopManager {
 	 * first one.
 	 * @param internalFrame The GInternalFrame to be added.
 	 */
-	public void addGInternalFrame(GInternalFrame internalFrame);
+	public void addFrame(GInternalFrame internalFrame);
 	
 	
 	/**
@@ -41,7 +41,7 @@ public interface GDesktopManager {
 	 * Restore the minimized window to its original state.
 	 * @param minimizedWindow
 	 */
-	public void deiconifyFrame(GInternalFrame minimizedWindow);
+	public void deIconify(GInternalFrame minimizedWindow);
 	
     /**
      * Brings current window in front of all others.

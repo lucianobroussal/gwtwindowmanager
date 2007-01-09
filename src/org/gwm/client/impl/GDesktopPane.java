@@ -10,14 +10,14 @@ import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameAdapter;
 import org.gwm.client.event.GInternalFrameEvent;
 
-import com.google.gwt.user.client.WindowResizeListener;
+import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.ui.*;
 
 /**
  * @author Marcelo Emanoel
  * @since 18/12/2006
  */
-public class GDesktopPane extends Composite implements WindowResizeListener {
+public class GDesktopPane extends Composite implements WindowResizeListener, GDesktopManager {
 
     /**
      * Indicates that the entire contents of the item being dragged should
@@ -30,8 +30,6 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
      * inside the desktop pane.
      */
     public static final int OUTLINE_DRAG_MODE = 1;
-
-    private GDesktopManager desktopManager;
 
     private HTML centerWidget;
 
@@ -59,7 +57,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
     }
 
     private void initialize() {
-        setDesktopManager(new DefaultGDesktopManager(this));
+        // setDesktopManager(new DefaultGDesktopManager(this));
         centerWidget = new HTML();
         layout = new DockPanel();
         buttonBar = new MinimizedButtonBar(this);
@@ -97,29 +95,50 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
         // minimizedWindows.add(theButton);
 
     }
+
+    public void maximize (GInternalFrame theWindow) {
+        theWindow.maximize();
+    }
+
+    public void toFront(GInternalFrame internalFrame) {
+        // I hope it works :)
+        DOM.setIntStyleAttribute(internalFrame.getElement(), "zIndex",
+                Integer.MAX_VALUE);
+        // TODO What should I put here?
+    }
+
+    public void toBack(GInternalFrame internalFrame) {
+        DOM.setIntStyleAttribute(internalFrame.getElement(), "zIndex",
+                Integer.MIN_VALUE);
+    }
+
+
     
     public void iconify(GInternalFrame theWindow) {
         theWindow.hide();
         buttonBar.addWindow(theWindow);
         // Button theButton = makeAButtonFromAWindow(theWindow);
         // minimizedWindows.add(theButton);
+    }
 
+    public void deIconify (GInternalFrame theWindow) {
+        theWindow.setVisible (true);
     }
 
     /**
      * @return the manager
      */
-    public GDesktopManager getDesktopManager() {
-        return desktopManager;
-    }
+    // public GDesktopManager getDesktopManager() {
+        // return desktopManager;
+    // }
 
     /**
      * @param manager
      *            the manager to set
      */
-    public void setDesktopManager(GDesktopManager manager) {
-        this.desktopManager = manager;
-    }
+    // public void setDesktopManager(GDesktopManager manager) {
+        // this.desktopManager = manager;
+    // }
 
     /**
      * Add a GInternalFrame to this GDesktopPane.
@@ -149,7 +168,7 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
      * 
      * @see org.gwm.client.GDesktopManager#getAllGInternalFrames()
      */
-    public List getAllFrames() {
+    public List getAllGInternalFrames() {
         return frames;
     }
 
@@ -184,15 +203,29 @@ public class GDesktopPane extends Composite implements WindowResizeListener {
      * @see org.gwm.client.GDesktopManager#setSelectedGInternalFrame(org.gwm.client.GInternalFrame)
      */
     public void setSelectedGInternalFrame(GInternalFrame newSelectedFrame) {
-        desktopManager.setSelectedGInternalFrame(newSelectedFrame);
+        this.selectedFrame = newSelectedFrame;
+        this.selectedFrame.setVisible (true);
+        // desktopManager.setSelectedGInternalFrame(newSelectedFrame);
     }
 
     public void onWindowResized(int width, int height) {
         buttonBar.adjustSize();
     }
 
-    public void addInTaskBar(GInternalFrame internalFrame) {
-       buttonBar.addWindow(internalFrame);
+    public GInternalFrame getGInternalFrame(String id) {
+        // TODO Auto-generated method stub
+        return null;
     }
+
+    /**
+     * Closes all GInternalFrames contained in this GDesktopPane.
+     */
+    public void closeAllGInternalFrames() {
+        for (int i = 0; i < frames.size(); i++) {
+            ((GInternalFrame) frames.get(i)).dispose();
+        }
+    }
+
+
 
 }
