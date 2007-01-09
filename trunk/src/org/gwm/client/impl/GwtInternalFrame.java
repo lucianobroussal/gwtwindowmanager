@@ -254,6 +254,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void minimize() {
+System.out.println ("Frame minimize");
         desktopPane.iconify(this);
         this.minimized = true;
         //buildGui();
@@ -440,12 +441,12 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
             if(v){
                 if(minimized)
                     return;
-                desktopPane.getDesktopManager().iconify(this);
+                desktopPane.iconify(this);
                 
             }else{
                 if(!minimized)
                     return;
-                desktopPane.getDesktopManager().deiconifyFrame(this);
+                desktopPane.deIconify(this);
             }
         minimized = v;
         }
@@ -603,17 +604,12 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         return visible;
     }
 
-    public void setVisible(boolean visible) {
-        if(visible){
-            if(isVisible()){
-                return;
-            }
+    public void setVisible(boolean v) {
+        if(v && !visible){
             this.minimized = false;
             show();
-        }else{
-            if(!isVisible()){
-                return;
-            }
+        }
+        if (!v && visible){
             hide();
         }
     }
