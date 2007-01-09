@@ -1,15 +1,14 @@
 package org.gwm.samples.client;
 
-import org.gwm.client.GInternalFrame;
-import org.gwm.client.impl.GDesktopPane;
-import org.gwm.client.impl.GwtInternalFrame;
+import org.gwm.client.*;
+import org.gwm.client.impl.*;
 
 import com.google.gwt.core.client.*;
 import com.google.gwt.user.client.ui.*;
 
 public class ShowGwtFrameSample implements EntryPoint {
 
-    private GDesktopPane pane;
+    private DefaultGDesktopPane pane;
 
     public void onModuleLoad() {
         if (false) {
@@ -20,7 +19,7 @@ public class ShowGwtFrameSample implements EntryPoint {
     }
 
     private void testPane() {
-        pane = new GDesktopPane();
+        pane = new DefaultGDesktopPane();
         GInternalFrame gif = new GwtInternalFrame("ssss");
         gif.setContent(new Button("a button"));
         pane.addFrame(gif);

@@ -16,7 +16,6 @@
 package org.gwm.client;
 
 import org.gwm.client.event.GInternalFrameListener;
-import org.gwm.client.impl.GDesktopPane;
 
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
