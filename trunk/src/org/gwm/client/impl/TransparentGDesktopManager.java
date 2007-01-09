@@ -10,8 +10,9 @@ import org.gwm.client.event.GInternalFrameEvent;
  * @author Marcelo Emanoel
  * @since 22/12/2006
  */
-public class TransparentGDesktopManager extends DefaultGDesktopManager {
+public class TransparentGDesktopManager extends DefaultGDesktopPane {
 
+/*
 	public TransparentGDesktopManager(GDesktopPane desktopPane) {
 		super(desktopPane);
 	}
@@ -21,4 +22,5 @@ public class TransparentGDesktopManager extends DefaultGDesktopManager {
 	
 	public void iconify(GInternalFrame internalFrame) {
 	}
+*/
 }
