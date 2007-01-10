@@ -35,7 +35,7 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
 
     private DockPanel layout;
 
-    private MinimizedButtonBar buttonBar;
+    private IconBar buttonBar;
     private HorizontalPanel iconBar;
 
     private int uniqueId = 0;
@@ -60,10 +60,10 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     }
 
     private void initialize() {
-        // setDesktopManager(new DefaultGDesktopManager(this));
         centerWidget = new HTML();
         layout = new DockPanel();
-        buttonBar = new MinimizedButtonBar(this);
+        // buttonBar = new MinimizedButtonBar(this);
+        buttonBar = new IconBar (this);
         iconBar = new HorizontalPanel ();
         this.initWidget(layout);
         this.frames = new ArrayList();
@@ -124,7 +124,10 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     }
 
     public void deIconify (GInternalFrame theWindow) {
+System.out.println ("restore "+theWindow);
         theWindow.setVisible (true);
+theWindow.show(true);
+        theWindow.refresh();
     }
 
     /**
@@ -156,7 +159,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     /*
      * (non-Javadoc)
      * 
-     * @see org.gwm.client.GDesktopManager#getAllGInternalFrames()
      */
     public List getAllFrames() {
         return frames;
@@ -172,7 +174,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     /*
      * (non-Javadoc)
      * 
-     * @see org.gwm.client.GDesktopManager#getSelectedFrame()
      */
     public GInternalFrame getSelectedFrame() {
         return selectedFrame;
@@ -181,7 +182,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     /*
      * (non-Javadoc)
      * 
-     * @see org.gwm.client.GDesktopManager#setDragMode(int)
      */
     public void setDragMode(int dragMode) {
         this.dragStyle = dragMode;
@@ -190,12 +190,10 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     /*
      * (non-Javadoc)
      * 
-     * @see org.gwm.client.GDesktopManager#setSelectedGInternalFrame(org.gwm.client.GInternalFrame)
      */
     public void setSelectedGInternalFrame(GInternalFrame newSelectedFrame) {
         this.selectedFrame = newSelectedFrame;
         this.selectedFrame.setVisible (true);
-        // desktopManager.setSelectedGInternalFrame(newSelectedFrame);
     }
 
     public void onWindowResized(int width, int height) {

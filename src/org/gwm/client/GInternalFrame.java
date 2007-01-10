@@ -428,4 +428,6 @@ public interface GInternalFrame {
 
     public int getId();
 
+    public void refresh ();
+
 }

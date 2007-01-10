@@ -33,16 +33,11 @@ public interface GDesktopPane {
     public List getAllFrames();
 	
 
-	/**
-	 * Sets the currently active JInternalFrame in this JDesktopPane.
-	 */
-	public void setSelectedGInternalFrame(GInternalFrame newSelectedFrame);
-	
-	/**
-	 * Restore the minimized window to its original state.
-	 * @param minimizedWindow
-	 */
-	public void deIconify(GInternalFrame minimizedWindow);
+    /**
+     * Restore the minimized window to its original state.
+     * @param minimizedWindow
+     */
+    public void deIconify(GInternalFrame minimizedWindow);
 	
     /**
      * Brings current window in front of all others.
