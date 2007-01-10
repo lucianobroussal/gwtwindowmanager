@@ -150,12 +150,20 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.minHeight = 40;
     }
 
+    public void refresh () {
+show();
+      buildGui();
+    }
+
     void buildGui() {
+System.out.println ("BUILDGUI");
         this.panel = new FlexTable();
+/*
         if (minimized) {
             showIcon();
             return;
         }
+*/
         if (this.width < 0) {
             this.width = DEFAULT_WIDTH;
         }
@@ -198,6 +206,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         panel.setCellSpacing(0);
         setStyleName("gwt-DialogBox");
         super.setWidget(panel);
+System.out.println ("zet widget");
     }
 
     public void setParentDesktop (GDesktopPane pane) {
@@ -264,7 +273,7 @@ System.out.println ("Frame minimize");
         desktopPane.iconify(this);
         this.minimized = true;
         //buildGui();
-        fireFrameIconified();
+        // fireFrameIconified();
     }
 
     public void maximize() {
