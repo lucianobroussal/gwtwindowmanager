@@ -131,7 +131,7 @@ public class MinimizedButtonBar extends Composite {
 	public void adjustSize() {
 		DeferredCommand.add(new Command() {
 			public void execute() {
-				String width = getOwner().getOffsetWidth()+"px";
+				String width = "400px";
 				String height = "20px";
 				
 				setSize(width, height);
@@ -166,7 +166,7 @@ public class MinimizedButtonBar extends Composite {
 		});
 	}
 	private int getWidth(){
-		return getOwner().getOffsetWidth();
+		return -1;
 	}
 	private Button makeButton(String caption) {
 		Button button = new Button(caption);

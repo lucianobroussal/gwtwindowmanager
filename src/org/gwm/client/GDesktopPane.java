@@ -9,9 +9,8 @@ public interface GDesktopPane {
      * Adds a new GInternalFrame to this GDesktopPane and select it if its the 
      * first one.
      * @param internalFrame The GInternalFrame to be added.
-     * @return a unique identifier for this frame
      */
-    public int addFrame(GInternalFrame internalFrame);
+    public void addFrame(GInternalFrame internalFrame);
 	
     /**
      * Closes all GInternalFrames contained in this GDesktopPane.
@@ -19,19 +18,15 @@ public interface GDesktopPane {
     public void closeAllFrames();
 
     /**
-     * Permits to retrieve a GInternalFrame by its id.
-     * Returns null if there is no GInternalFrame with this id.
-     * @param id
-     *            The id of the window
-     * @return GInternalFrame 
-     */
-    public GInternalFrame getFrame(int id);
-
-    /**
      * Returns all GInternalFrames currently displayed in the desktop.
      */
     public List getAllFrames();
 	
+    /**
+     * Minimize a determinated window.
+     * @param internalFrame
+     */
+    public void iconify(GInternalFrame internalFrame);
 
     /**
      * Restore the minimized window to its original state.
@@ -53,14 +48,6 @@ public interface GDesktopPane {
      * Maximize a determinated window.
      * @param internalFrame
      */
-	public void maximize(GInternalFrame internalFrame);
+    public void maximize(GInternalFrame internalFrame);
 	
-	/**
-	 * Minimize a determinated window.
-	 * @param internalFrame
-	 */
-	public void iconify(GInternalFrame internalFrame);
-
-    public int getOffsetWidth();
-
 }

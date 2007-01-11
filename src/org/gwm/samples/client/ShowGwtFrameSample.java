@@ -10,6 +10,7 @@ import org.gwm.client.impl.GDialog.Option;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 
 
@@ -35,10 +36,17 @@ public class ShowGwtFrameSample implements EntryPoint {
 
     private void testPane() {
         pane = new DefaultGDesktopPane();
-        GInternalFrame gif = new GwtInternalFrame("ssss");
-        gif.setContent(new Button("a button"));
+        GInternalFrame gif = new GwtInternalFrame("Getting started");
+        gif.setUrl ("http://www.gwtwindowmanager.org/site/gettingstarted.html");
         pane.addFrame(gif);
         gif.setVisible(true);
+
+        GInternalFrame gif2 = new GwtInternalFrame("LodgON");
+        gif2.setUrl ("http://www.lodgon.com");
+        gif2.setSize (400,300);
+        pane.addFrame(gif2);
+        gif2.setVisible(true);
+
         RootPanel root = RootPanel.get("pane");
         root.add (pane);
 

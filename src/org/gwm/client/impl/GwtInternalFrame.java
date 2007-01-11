@@ -60,6 +60,8 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     private FocusPanel mainPanel;
 
     private Widget myContent;
+    private String url; 
+    private String previousUrl;
 
     private int dragStartX, dragStartY;
 
@@ -133,9 +135,9 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.caption
                 .setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         topBar = new TopBar(this);
-        this.mainPanel = new FocusPanel();
-        this.mainPanel.setWidget(myContent);
-        this.mainPanel.addClickListener(this);
+        // this.mainPanel = new FocusPanel();
+        // this.mainPanel.setWidget(myContent);
+        // this.mainPanel.addClickListener(this);
         imgTopLeft = new Label();
         imgTopLeft.addStyleName(this.currentStyle + "_nw");
         imgTopRight = new Label();
@@ -151,19 +153,12 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void refresh () {
-show();
+      show();
       buildGui();
     }
 
     void buildGui() {
-System.out.println ("BUILDGUI");
         this.panel = new FlexTable();
-/*
-        if (minimized) {
-            showIcon();
-            return;
-        }
-*/
         if (this.width < 0) {
             this.width = DEFAULT_WIDTH;
         }
@@ -177,6 +172,12 @@ System.out.println ("BUILDGUI");
         panel.setWidget(0, 2, imgTopRight);
         panel.setWidget(2, 0, imgBotLeft);
         panel.setWidget(2, 2, imgBotRight);
+        if (url != null) {
+            String urlCode = "<iframe src=\"" + url + "\" height=\""
+                + this.height + "\" width=\"" + this.width
+                + "\" frameborder=\"0\"/>";
+            myContent = new HTML(urlCode);
+        }
         panel.setWidget(1, 1, myContent);
         panel.getCellFormatter().setStyleName(1, 1, currentStyle + "_content");
         panel.setHTML(1, 0, "&nbsp;");
@@ -206,31 +207,10 @@ System.out.println ("BUILDGUI");
         panel.setCellSpacing(0);
         setStyleName("gwt-DialogBox");
         super.setWidget(panel);
-System.out.println ("zet widget");
     }
 
     public void setParentDesktop (GDesktopPane pane) {
         this.desktopPane = pane;
-    }
-
-    private void showIcon() {
-        Label l = new Label(title);
-        Label i = new Label("");
-        l.addMouseListener(topBar);
-        i.addClickListener(new ClickListener() {
-            public void onClick(Widget sender) {
-                GwtInternalFrame.this.minimized = false;
-                buildGui();
-            }
-        });
-        i.addStyleName("icon_button");
-        l.addStyleName("icon_title");
-        panel.setWidget(0, 0, i);
-        panel.setWidget(0, 1, l);
-        panel.setBorderWidth(0);
-        panel.setCellPadding(0);
-        panel.setCellSpacing(0);
-        super.setWidget(panel);
     }
 
     public int getId() {
@@ -260,11 +240,13 @@ System.out.println ("zet widget");
 
     public void setContent(Widget widget) {
         myContent = widget;
+        this.url = null;
         buildGui();
     }
 
     public void setContent(String content) {
         myContent = new HTML(content);
+        this.url = null;
         buildGui();
     }
 
@@ -288,14 +270,18 @@ System.out.println ("Frame minimize");
             this.maximized = true;
             buildGui();
         } else {
-            this.width = previousWidth;
-            this.height = previousHeight;
-            this.maximized =  false;
-            buildGui();
-            setLocation(this.previousTop, this.previousLeft);
+            restore();
         }
-        // getParentDesktop().getDesktopManager().maximize(this);
         fireFrameMaximized();
+    }
+
+    public void restore () {
+        this.width = previousWidth;
+        this.height = previousHeight;
+        this.maximized =  false;
+        this.minimized =  false;
+        setLocation(this.previousTop, this.previousLeft);
+        buildGui();
     }
 
     public void toFront() {
@@ -322,7 +308,10 @@ System.out.println ("Frame minimize");
     }
 
     public void setSize(int width, int height) {
-        panel.setSize(width + "px", height + "px");
+        this.width = width;
+        this.height = height;
+        // panel.setSize(width + "px", height + "px");
+        buildGui();
     }
 
     public void setWidth(int width) {
@@ -395,9 +384,11 @@ System.out.println ("Frame minimize");
     }
 
     public void setUrl(String url) {
-        myContent = new HTML("<iframe src=\"" + url + "\" height=\""
-                + DEFAULT_HEIGHT + "\" width=\"" + DEFAULT_WIDTH
-                + "\" frameborder=\"0\"/>");
+        this.url = url;
+        String urlCode = "<iframe src=\"" + url + "\" height=\""
+                + getOffsetHeight() + "\" width=\"" + getOffsetWidth()
+                + "\" frameborder=\"0\"/>";
+        myContent = new HTML(urlCode);
         buildGui();
     }
 
@@ -428,16 +419,15 @@ System.out.println ("Frame minimize");
         Element target = DOM.eventGetTarget(event);
         int type = DOM.eventGetType(event);
         if (type == Event.ONCLICK) {
-            Element myself = DOM.getParent(myContent.getElement());
-            if (myself.equals(target)) {
-                this.hide();
-                this.show();
-            }
+            // Element myself = DOM.getParent(myContent.getElement());
+            this.hide();
+            this.show();
             return;
         }
     }
 
     public void onClick(Widget sender) {
+System.out.println ("CLICKED");
         this.hide();
         this.show();
     }
@@ -640,8 +630,16 @@ System.out.println ("Frame minimize");
         return closable;
     }
 
+    public void startResizing () {
+        this.previousUrl = url;
+        this.url = null;
+        this.myContent = new HTML("");
+        buildGui();
+    }
 
-
-    
+    public void stopResizing () {
+        this.url = this.previousUrl;
+        buildGui();
+    }
 
 }
