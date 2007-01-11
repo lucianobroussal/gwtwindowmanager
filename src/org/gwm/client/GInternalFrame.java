@@ -127,11 +127,6 @@ public interface GInternalFrame {
      */
     public boolean isMaximized();
 
-    /**
-     * The window will be destroy by clicking on close button instead of being
-     * hidden.
-     */
-    public void setOperationOnClose(int operation);
 
     /**
      * Sets window top-left position.
@@ -367,14 +362,6 @@ public interface GInternalFrame {
     public void setMaximizable(boolean maximizable);
     
     
-    public void setMaximum(boolean flag);
-    
-    public void setMinimum(boolean flag);
-    
-    public void setIconified(boolean flag);
-    
-    public void setClosed(boolean flag);
-
     /**
      * Returns the window maximizable state.
      * 
@@ -425,8 +412,6 @@ public interface GInternalFrame {
     public boolean isVisible();
 
     public Element getElement();
-
-    public int getId();
 
     public void refresh ();
 
