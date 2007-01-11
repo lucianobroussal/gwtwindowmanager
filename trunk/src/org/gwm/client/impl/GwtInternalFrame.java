@@ -218,7 +218,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
       this.id = v;
     }
 
-    public void setStyle(String v) {
+    public void setTheme(String v) {
         this.currentStyle = v;
         buildGui();
     }
@@ -574,33 +574,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     public GDesktopPane getParentDesktop() {
         return desktopPane;
-    }
-
-    public void setClosed(boolean flag) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    
-
-    public void setMaximum(boolean flag) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void setMinimum(boolean flag) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void setOperationOnClose(int operation) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void setTheme(String theme) {
-        setStyle(theme);
-        
     }
 
     public boolean isVisible() {
