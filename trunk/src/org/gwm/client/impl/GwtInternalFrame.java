@@ -274,7 +274,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.height = previousHeight;
         this.maximized =  false;
         this.minimized =  false;
-        setLocation(this.previousTop, this.previousLeft);
+        setLocation(this.previousLeft, this.previousTop);
         buildGui();
     }
 
@@ -297,8 +297,8 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     public void setOperationOnClose() {
     }
 
-    public void setLocation(int top, int left) {
-        setPopupPosition(top, left);
+    public void setLocation(int left, int top) {
+        setPopupPosition(left, top);
     }
 
     public void setSize(int width, int height) {
@@ -421,7 +421,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void onClick(Widget sender) {
-System.out.println ("CLICKED");
         this.hide();
         this.show();
     }
@@ -635,7 +634,6 @@ System.out.println ("CLICKED");
     }
 
     public void stopResizing () {
-System.out.println ("stop resizing, url was "+url+" and becomes "+previousUrl);
         this.url = this.previousUrl;
         buildGui();
     }
