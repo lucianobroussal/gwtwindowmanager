@@ -23,8 +23,6 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     private IconBar buttonBar;
     private HorizontalPanel iconBar;
 
-    private int uniqueId = 0;
-
     private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
         public void internalFrameIconified(GInternalFrameEvent evt) {
             minimize(evt.getGInternalFrame());
@@ -32,7 +30,6 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     };
 
     private List frames;
-    private HashMap frameMap;
 
     public DefaultGDesktopPane() {
         initialize();
@@ -45,7 +42,6 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
         buttonBar = new IconBar (this);
         iconBar = new HorizontalPanel ();
         this.frames = new ArrayList();
-        this.frameMap = new HashMap();
     }
 
     private void setupUI() {
@@ -110,15 +106,12 @@ theWindow.show(true);
      * 
      * @param internalFrame
      */
-    public int addFrame(GInternalFrame internalFrame) {
-        uniqueId ++;
+    public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setParentDesktop (this);
-        int spos = (frames.size() + 1) * 10;
+        int spos = (frames.size() + 1) * 30;
         internalFrame.setLocation (spos, spos);
         internalFrame.addInternalFrameListener(adapter);
         frames.add (internalFrame);
-        frameMap.put (new Integer (uniqueId), internalFrame);
-        return uniqueId;
     }
 
     /**
@@ -128,7 +121,6 @@ theWindow.show(true);
         for (int i = 0; i < frames.size(); i++) {
             ((GInternalFrame) frames.get(i)).dispose();
         }
-        this.frameMap = new HashMap();
     }
 
     /*

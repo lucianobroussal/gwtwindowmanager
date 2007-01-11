@@ -57,6 +57,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
     DOM.setCapture(label.getElement());
     resizeStartX = x;
     resizeStartY = y;
+    parent.startResizing(); //call this and allow the frame to remove iframes
   }
 
   public void onBrowserEvent (Event e) {
@@ -67,6 +68,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
   public void onMouseUp(Widget sender, int x, int y) {
     resizing = false;
     DOM.releaseCapture (label.getElement());
+    parent.stopResizing(); //call this and allow the frame to remove iframes
   }
 
   public void onMouseEnter(Widget sender) {
