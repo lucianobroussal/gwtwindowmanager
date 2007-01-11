@@ -20,11 +20,11 @@ public class ShowGwtFrameSample implements EntryPoint {
     public void onModuleLoad() {
 
         // if (true) {
-        // testWindow();
+         // testWindow();
         // return;
         // }
-        // testPane();
-        testGDialog();
+         testPane();
+        // testGDialog();
         // testWindow();
 //        if (false) {
 //            //testWindow();

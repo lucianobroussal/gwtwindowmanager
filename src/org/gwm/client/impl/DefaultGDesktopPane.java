@@ -17,24 +17,9 @@ import com.google.gwt.user.client.ui.*;
  * @author Marcelo Emanoel
  * @since 18/12/2006
  */
-public class DefaultGDesktopPane extends Composite implements WindowResizeListener, GDesktopPane {
-
-    /**
-     * Indicates that the entire contents of the item being dragged should
-     * appear inside the desktop pane.
-     */
-    public static final int LIVE_DRAG_MODE = 0;
-
-    /**
-     * Indicates that an outline only of the item being dragged should appear
-     * inside the desktop pane.
-     */
-    public static final int OUTLINE_DRAG_MODE = 1;
+public class DefaultGDesktopPane extends DockPanel implements WindowResizeListener, GDesktopPane {
 
     private HTML centerWidget;
-
-    private DockPanel layout;
-
     private IconBar buttonBar;
     private HorizontalPanel iconBar;
 
@@ -45,10 +30,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
             minimize(evt.getGInternalFrame());
         }
     };
-
-    private int dragStyle;
-
-    private GInternalFrame selectedFrame;
 
     private List frames;
     private HashMap frameMap;
@@ -61,27 +42,21 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
 
     private void initialize() {
         centerWidget = new HTML();
-        layout = new DockPanel();
-        // buttonBar = new MinimizedButtonBar(this);
         buttonBar = new IconBar (this);
         iconBar = new HorizontalPanel ();
-        this.initWidget(layout);
         this.frames = new ArrayList();
         this.frameMap = new HashMap();
     }
 
     private void setupUI() {
-        this.setSize("100%", "100%");
-        layout.setSize("100%", "100%");
+        setSize("100%", "90%");
+        add(centerWidget, DockPanel.CENTER);
 
-        layout.add(centerWidget, DockPanel.CENTER);
-        layout.setSize("100%", "100%");
-
-        layout.add(buttonBar, DockPanel.SOUTH);
-        layout.setCellHeight(buttonBar, "30px");
+        add(buttonBar, DockPanel.SOUTH);
+        setCellHeight(buttonBar, "30px");
 
         
-        layout.setStyleName("org-gwm-GDesktopPane");
+        setStyleName("org-gwm-GDesktopPane");
     }
 
     private void setupListeners() {
@@ -157,43 +132,11 @@ theWindow.show(true);
     }
 
     /*
-     * (non-Javadoc)
+     * Returns a list of all frames maintained by this desktop
      * 
      */
     public List getAllFrames() {
         return frames;
-    }
-
-    /**
-     * Gets the current "dragging style" used by the desktop pane.
-     */
-    public int getDragMode() {
-        return this.dragStyle;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     */
-    public GInternalFrame getSelectedFrame() {
-        return selectedFrame;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     */
-    public void setDragMode(int dragMode) {
-        this.dragStyle = dragMode;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     */
-    public void setSelectedGInternalFrame(GInternalFrame newSelectedFrame) {
-        this.selectedFrame = newSelectedFrame;
-        this.selectedFrame.setVisible (true);
     }
 
     public void onWindowResized(int width, int height) {
