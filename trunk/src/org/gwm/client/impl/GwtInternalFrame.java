@@ -135,9 +135,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.caption
                 .setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         topBar = new TopBar(this);
-        // this.mainPanel = new FocusPanel();
-        // this.mainPanel.setWidget(myContent);
-        // this.mainPanel.addClickListener(this);
         imgTopLeft = new Label();
         imgTopLeft.addStyleName(this.currentStyle + "_nw");
         imgTopRight = new Label();
@@ -158,6 +155,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     void buildGui() {
+System.out.println ("buildGui, url = "+url);
         this.panel = new FlexTable();
         if (this.width < 0) {
             this.width = DEFAULT_WIDTH;
@@ -174,7 +172,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         panel.setWidget(2, 2, imgBotRight);
         if (url != null) {
             String urlCode = "<iframe src=\"" + url + "\" height=\""
-                + this.height + "\" width=\"" + this.width
+                + (this.height -60) + "\" width=\"" + (this.width - 40)
                 + "\" frameborder=\"0\"/>";
             myContent = new HTML(urlCode);
         }
@@ -239,12 +237,14 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void setContent(Widget widget) {
+System.out.println ("set content called");
         myContent = widget;
         this.url = null;
         buildGui();
     }
 
     public void setContent(String content) {
+System.out.println ("set content called");
         myContent = new HTML(content);
         this.url = null;
         buildGui();
@@ -631,13 +631,17 @@ System.out.println ("CLICKED");
     }
 
     public void startResizing () {
-        this.previousUrl = url;
+        if (url != null) {
+          this.previousUrl = url;
+        }
         this.url = null;
         this.myContent = new HTML("");
-        buildGui();
+        panel.setWidget(1, 1, myContent);
+        // buildGui();
     }
 
     public void stopResizing () {
+System.out.println ("stop resizing, url was "+url+" and becomes "+previousUrl);
         this.url = this.previousUrl;
         buildGui();
     }
