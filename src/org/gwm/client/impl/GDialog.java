@@ -30,13 +30,6 @@ public class GDialog {
 
     public static final int PLAIN_MESSAGE = 5;
 
-    // public static final int YES_OPTION = 6;
-    //
-    // public static final int NO_OPTION = 7;
-    //
-    // public static final int CANCEL_OPTION = 8;
-    //
-    // public static final int OK_OPTION = 9;
     public static final int YES_NO_OPTION = 5;
 
     public static final int YES_NO_CANCEL_OPTION = 6;
