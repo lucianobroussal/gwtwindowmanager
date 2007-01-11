@@ -155,7 +155,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     void buildGui() {
-System.out.println ("buildGui, url = "+url);
         this.panel = new FlexTable();
         if (this.width < 0) {
             this.width = DEFAULT_WIDTH;
@@ -237,25 +236,20 @@ System.out.println ("buildGui, url = "+url);
     }
 
     public void setContent(Widget widget) {
-System.out.println ("set content called");
         myContent = widget;
         this.url = null;
         buildGui();
     }
 
     public void setContent(String content) {
-System.out.println ("set content called");
         myContent = new HTML(content);
         this.url = null;
         buildGui();
     }
 
     public void minimize() {
-System.out.println ("Frame minimize");
         desktopPane.iconify(this);
         this.minimized = true;
-        //buildGui();
-        // fireFrameIconified();
     }
 
     public void maximize() {

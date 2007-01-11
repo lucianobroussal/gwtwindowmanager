@@ -24,6 +24,10 @@
   height: 19px;
 }
 
+.button {
+  cursor: default;
+}
+
 .icon_title {
   border: 1px;
   border-style:dashed;

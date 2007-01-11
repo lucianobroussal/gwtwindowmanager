@@ -56,14 +56,17 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     imgClose = new Image();
     imgClose.setUrl ("themes/"+this.currentStyle+"/close.gif");
     imgClose.addStyleName ("float");
+    imgClose.addStyleName ("button");
     imgClose.addClickListener (this);
     imgMinimize = new Image();
     imgMinimize.setUrl ("themes/"+this.currentStyle+"/minimize.gif");
     imgMinimize.addStyleName ("float");
+    imgMinimize.addStyleName ("button");
     imgMinimize.addClickListener (this);
     imgMaximize = new Image();
     imgMaximize.setUrl ("themes/"+this.currentStyle+"/maximize.gif");
     imgMaximize.addStyleName ("float");
+    imgMaximize.addStyleName ("button");
     imgMaximize.addClickListener (this);
     add (caption);
     add (imgMinimize);
@@ -73,7 +76,6 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
   }
 
   public void onClick (Widget w) {
-System.out.println ("Clicked on "+w);
     if (w.equals (imgClose)) {
       parent.hide();
     }
