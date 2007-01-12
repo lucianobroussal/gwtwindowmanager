@@ -21,7 +21,6 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
 
     private HTML centerWidget;
     private IconBar buttonBar;
-    private HorizontalPanel iconBar;
 
     private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
         public void internalFrameIconified(GInternalFrameEvent evt) {
@@ -40,7 +39,6 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     private void initialize() {
         centerWidget = new HTML();
         buttonBar = new IconBar (this);
-        iconBar = new HorizontalPanel ();
         this.frames = new ArrayList();
     }
 
@@ -70,33 +68,17 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     }
 
     public void maximize (GInternalFrame theWindow) {
-        theWindow.maximize();
+        //TODO Auto-generated method stub
     }
 
-    public void toFront(GInternalFrame internalFrame) {
-        // I hope it works :)
-        DOM.setIntStyleAttribute(internalFrame.getElement(), "zIndex",
-                Integer.MAX_VALUE);
-        // TODO What should I put here?
-    }
-
-    public void toBack(GInternalFrame internalFrame) {
-        DOM.setIntStyleAttribute(internalFrame.getElement(), "zIndex",
-                Integer.MIN_VALUE);
-    }
-
-
-    
+        
     public void iconify(GInternalFrame theWindow) {
-        theWindow.hide();
+        theWindow.setVisible(false);
         buttonBar.addWindow(theWindow);
-        // Button theButton = makeAButtonFromAWindow(theWindow);
-        // minimizedWindows.add(theButton);
     }
 
     public void deIconify (GInternalFrame theWindow) {
         theWindow.setVisible (true);
-        theWindow.refresh();
     }
 
     /**
@@ -117,7 +99,7 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
      */
     public void closeAllFrames() {
         for (int i = 0; i < frames.size(); i++) {
-            ((GInternalFrame) frames.get(i)).dispose();
+            ((GInternalFrame) frames.get(i)).close();
         }
     }
 
@@ -133,9 +115,20 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
         buttonBar.adjustSize();
     }
 
-    public GInternalFrame getFrame(int id) {
+
+    public GInternalFrame getSelectedFrame() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public void removeFrame(GInternalFrame internalFrame) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void setSelectedFrame(GInternalFrame newSelectedFrame) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

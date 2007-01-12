@@ -54,8 +54,8 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     }
 
     private void buildGui() {
-        this.currentStyle = parent.getStyle();
-        this.title = parent.getTitle();
+        this.currentStyle = parent.getTheme();
+        this.title = parent.getCaption();
         addStyleName("topBar");
         caption = new Label(title);
         caption.addStyleName("caption");

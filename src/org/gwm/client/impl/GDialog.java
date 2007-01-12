@@ -168,7 +168,7 @@ public class GDialog {
         if(overlayLayer == null){
             overlayLayer = new GlassPanel();
         }
-        //overlayLayer.show();
+        overlayLayer.show();
         currentDialog.setVisible(true);
         adjustDialogSizeToContent(parent , currentDialog);
     }
@@ -217,7 +217,7 @@ public class GDialog {
         
         currentDialog.setTheme(theme);
         if (title != null) {
-            currentDialog.setTitle(title);
+            currentDialog.setCaption(title);
         }
         
     }
@@ -337,7 +337,7 @@ public class GDialog {
                             }
                             overlayLayer.hide();
                             //TODO with Johan for release process
-                            currentDialog.dispose();
+                            currentDialog.close();
                             currentDialog = null;
                         }
                     });
