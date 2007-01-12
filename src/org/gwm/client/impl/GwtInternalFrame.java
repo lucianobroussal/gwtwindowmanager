@@ -48,7 +48,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     private static GInternalFrame topFrame;
 
-    public static int layerOfTheTopWindow;
+    private static int layerOfTheTopWindow;
 
     private int id;
 
