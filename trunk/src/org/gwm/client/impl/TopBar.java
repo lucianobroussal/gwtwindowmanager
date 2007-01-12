@@ -84,13 +84,23 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
     public void onClick(Widget w) {
         if (w.equals(imgClose)) {
-            parent.hide();
+            parent.close();
         }
         if (w.equals(imgMaximize)) {
-            parent.maximize();
+            if (parent.isMaximized()) {
+                parent.restore();
+            }
+            else {
+                parent.maximize();
+            }
         }
         if (w.equals(imgMinimize)) {
-            parent.minimize();
+            if (parent.isMinimized()) {
+                parent.restore();
+            }
+            else {
+                parent.minimize();
+            }
         }
     }
 
