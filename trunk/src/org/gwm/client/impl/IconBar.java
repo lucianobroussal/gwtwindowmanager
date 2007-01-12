@@ -16,7 +16,7 @@ public class IconBar extends HorizontalPanel {
     }
 
     public void addWindow (GInternalFrame frame) {
-        Button button = new Button (frame.getTitle(), new ClickListener() {
+        Button button = new Button (frame.getCaption(), new ClickListener() {
             public void onClick(Widget sender) {
                 GInternalFrame myFrame = (GInternalFrame)buttonFrame.get (sender);
                 buttonFrame.remove (sender);

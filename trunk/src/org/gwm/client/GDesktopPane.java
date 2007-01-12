@@ -11,6 +11,13 @@ public interface GDesktopPane {
      * @param internalFrame The GInternalFrame to be added.
      */
     public void addFrame(GInternalFrame internalFrame);
+    
+    /**
+     * Remove a GInternalFrame from this GDesktopPane and select it if its the 
+     * first one.
+     * @param internalFrame The GInternalFrame to be removed.
+     */
+    public void removeFrame(GInternalFrame internalFrame);
 	
     /**
      * Closes all GInternalFrames contained in this GDesktopPane.
@@ -34,20 +41,11 @@ public interface GDesktopPane {
      */
     public void deIconify(GInternalFrame minimizedWindow);
 	
-    /**
-     * Brings current window in front of all others.
-     */
-    public void toFront(GInternalFrame internalFrame);
-
-    /**
-     * Brings current window behind of all others.
-     */
-    public void toBack(GInternalFrame internalFrame);
     
     /**
-     * Maximize a determinated window.
-     * @param internalFrame
+     * Sets the currently active JInternalFrame in this JDesktopPane.
      */
-    public void maximize(GInternalFrame internalFrame);
-	
+    public void setSelectedFrame(GInternalFrame newSelectedFrame);
+    
+    public GInternalFrame getSelectedFrame();
 }

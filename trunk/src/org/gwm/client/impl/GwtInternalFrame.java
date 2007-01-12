@@ -28,9 +28,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -60,19 +58,11 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     private Label caption;
 
-    private FocusPanel mainPanel;
-
     private Widget myContent;
 
     private String url;
 
     private String previousUrl;
-
-    private int dragStartX, dragStartY;
-
-    private int resizeStartX, resizeStartY;
-
-    private boolean dragging;
 
     private boolean visible;
 
@@ -90,13 +80,11 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     private int height = -1;
 
-    private String currentStyle;
+    private String currentTheme;
 
     private boolean closable, maximizable, minimizable, draggable, resizable;
 
     private boolean maximized, minimized;
-
-    private boolean resizing;
 
     Label imgTopLeft;
 
@@ -119,7 +107,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     List listeners;
 
     public GwtInternalFrame(String title) {
-        this.currentStyle = DEFAULT_STYLE;
+        this.currentTheme = DEFAULT_STYLE;
         this.title = title;
         this.myContent = new HTML("MY CONTENT");
         this.closable = true;
@@ -135,30 +123,25 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         listeners = new ArrayList();
         resizeImage = new ResizeImage(this);
         this.caption = new Label(title);
-        this.caption.addStyleName(currentStyle + "_title");
+        this.caption.addStyleName(currentTheme + "_title");
         this.caption
                 .setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         topBar = new TopBar(this);
         imgTopLeft = new Label();
-        imgTopLeft.addStyleName(this.currentStyle + "_nw");
+        imgTopLeft.addStyleName(this.currentTheme + "_nw");
         imgTopRight = new Label();
-        imgTopRight.addStyleName(this.currentStyle + "_ne");
+        imgTopRight.addStyleName(this.currentTheme + "_ne");
         imgBotLeft = new Label();
-        imgBotLeft.addStyleName(this.currentStyle + "_sw");
+        imgBotLeft.addStyleName(this.currentTheme + "_sw");
         imgBotRight = new Label();
-        imgBotRight.addStyleName(this.currentStyle + "_se");
+        imgBotRight.addStyleName(this.currentTheme + "_se");
         this.maxWidth = Window.getClientWidth();
         this.maxHeight = Window.getClientHeight();
         this.minWidth = 240;
         this.minHeight = 40;
     }
 
-    public void refresh() {
-        show();
-        buildGui();
-    }
-
-    void buildGui() {
+    protected void buildGui() {
         this.panel = new FlexTable();
         if (this.width < 0) {
             this.width = DEFAULT_WIDTH;
@@ -169,7 +152,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.panel.setSize(this.width + "px", this.height + "px");
         panel.setWidget(0, 0, imgTopLeft);
         panel.setWidget(0, 1, topBar);
-        panel.getCellFormatter().setStyleName(0, 1, currentStyle + "_n");
+        panel.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         panel.setWidget(0, 2, imgTopRight);
         panel.setWidget(2, 0, imgBotLeft);
         panel.setWidget(2, 2, imgBotRight);
@@ -180,22 +163,22 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
             myContent = new HTML(urlCode);
         }
         panel.setWidget(1, 1, myContent);
-        panel.getCellFormatter().setStyleName(1, 1, currentStyle + "_content");
+        panel.getCellFormatter().setStyleName(1, 1, currentTheme + "_content");
         panel.setHTML(1, 0, "&nbsp;");
-        panel.getCellFormatter().setStyleName(1, 0, currentStyle + "_w");
+        panel.getCellFormatter().setStyleName(1, 0, currentTheme + "_w");
         panel.setHTML(1, 2, "&nbsp;");
-        panel.getCellFormatter().setStyleName(1, 2, currentStyle + "_e");
+        panel.getCellFormatter().setStyleName(1, 2, currentTheme + "_e");
 
         panel.setHTML(2, 0, "&nbsp;");
-        panel.getCellFormatter().setStyleName(2, 0, currentStyle + "_sw");
+        panel.getCellFormatter().setStyleName(2, 0, currentTheme + "_sw");
 
         panel.setHTML(2, 1, "&nbsp;");
-        panel.getCellFormatter().setStyleName(2, 1, currentStyle + "_s");
+        panel.getCellFormatter().setStyleName(2, 1, currentTheme + "_s");
 
         if (resizable) {
             panel.setWidget(2, 2, resizeImage);
         } else {
-            panel.getCellFormatter().setStyleName(2, 2, currentStyle + "_se");
+            panel.getCellFormatter().setStyleName(2, 2, currentTheme + "_se");
             panel.setHTML(2, 2, "&nbsp;");
         }
         panel.getCellFormatter().setHeight(1, 1, "100%");
@@ -222,13 +205,13 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.id = v;
     }
 
-    public void setTheme(String v) {
-        this.currentStyle = v;
+    public void setTheme(String theme) {
+        this.currentTheme = theme;
         buildGui();
     }
 
-    public String getStyle() {
-        return this.currentStyle;
+    public String getTheme() {
+        return this.currentTheme;
     }
 
     public void setContent(Widget widget) {
@@ -244,26 +227,20 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void minimize() {
-        desktopPane.iconify(this);
+        // TODO verify the desktop exists
+        if (desktopPane != null)
+            desktopPane.iconify(this);
+        else {
+            getContent().setVisible(false);
+        }
         this.minimized = true;
     }
-
+    
     public void maximize() {
-        if (!this.maximized) {
-            this.previousTop = getPopupTop();
-            this.previousLeft = getPopupLeft();
-            this.setPopupPosition(0, 0);
-            this.previousWidth = getWidth();
-            this.previousHeight = getHeight();
-            this.width = maxWidth;
-            this.height = maxHeight;
-            this.maximized = true;
-            buildGui();
-        } else {
-            restore();
-        }
-        fireFrameMaximized();
+        System.out.println("maximize()");
     }
+
+
 
     public void restore() {
         this.width = previousWidth;
@@ -271,14 +248,15 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.maximized = false;
         this.minimized = false;
         setLocation(this.previousLeft, this.previousTop);
+        if(!getContent().isVisible()){
+            getContent().setVisible(true);
+        }
         buildGui();
     }
 
-    public void toFront() {
-    }
-
-    public void dispose() {
-        // TODO to check with Johan !!!
+    public void close() {
+        // TODO to check with Johan !!! how avoiding this window will be showed again ?
+        //how releasing resources ?
         setVisible(false);
     }
 
@@ -288,9 +266,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     public boolean isMaximized() {
         return this.maximized;
-    }
-
-    public void setOperationOnClose() {
     }
 
     public void setLocation(int left, int top) {
@@ -353,23 +328,13 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         setPopupPosition(getPopupTop(), left);
     }
 
-    public void updateWidth() {
-    }
-
-    public void updateHeight() {
-    }
-
-    public void setTitle(String title) {
+    public void setCaption(String title) {
         this.title = title;
         this.topBar.setCaption(title);
     }
 
-    public String getTitle() {
-        return this.caption.getText();
-    }
-
     public String getCaption() {
-        return "title: " + this.title;
+        return this.caption.getText();
     }
 
     public void setUrl(String url) {
@@ -411,7 +376,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         }
     }
 
-
     public boolean onEventPreview(Event evt) {
         super.onEventPreview(evt);
         return true;
@@ -423,23 +387,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     public void removeGFrameListener(GInternalFrameListener listener) {
         listeners.remove(listener);
-    }
-
-    public void setIconified(boolean v) {
-        if (isMaximizable()) {
-            if (v) {
-                if (minimized)
-                    return;
-                desktopPane.iconify(this);
-
-            } else {
-                if (!minimized)
-                    return;
-                desktopPane.deIconify(this);
-            }
-            minimized = v;
-        }
-
     }
 
     public void setMaximized(boolean v) {
@@ -541,20 +488,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         return myContent;
     }
 
-    // public void setContent (Widget c) {
-    // }
-
     public void addInternalFrameListener(GInternalFrameListener l) {
     }
 
     public void removeInternalFrameListener(GInternalFrameListener l) {
-    }
-
-    public boolean isModal() {
-        return false;
-    }
-
-    public void setModal(boolean v) {
     }
 
     public GDesktopPane getParentDesktop() {
@@ -598,7 +535,9 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     public void show() {
         super.show();
-        DOM.setIntStyleAttribute(getElement() , "zIndex" , ++layerOfTheTopWindow);
+        DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
     }
+
+
 }

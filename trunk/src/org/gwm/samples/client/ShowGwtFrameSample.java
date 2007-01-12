@@ -1,13 +1,16 @@
 package org.gwm.samples.client;
 
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.GDialog;
 import org.gwm.client.impl.GwtInternalFrame;
+import org.gwm.client.impl.GDialog.Option;
 
 import asquare.gwt.tk.client.ui.GlassPanel;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -22,8 +25,8 @@ public class ShowGwtFrameSample implements EntryPoint {
     public void onModuleLoad() {
 
         
-//        testGDialog();
-        testPane();
+        testGDialog();
+ //       testPane();
     }
 
     private void testPane() {
@@ -59,16 +62,16 @@ public class ShowGwtFrameSample implements EntryPoint {
         button.addClickListener(new ClickListener(){
 
             public void onClick(Widget sender) {
-//                GDialog.showInputDialog(null, "message", "title", "deux", new Object[]{"un", "deux" , "trois" , "quatre"}, GDialog.QUESTION_MESSAGE , null, new GDialogChoiceListener(){
-//
-//                    public void onChoice(Option option, Object inputValue) {
-//                        if(GDialog.OK_OPTION == option){
-//                                Window.alert((inputValue != null ? inputValue.toString(): "N/A"));
-//                        }
-//                    }
-//                    
-//                });   
-                GDialog.showConfirmDialog(null, "coucou", "titre a la noeud " ,GDialog.YES_NO_OPTION , GDialog.QUESTION_MESSAGE , null);
+                GDialog.showInputDialog(null, "message", "title", "deux", new Object[]{"un", "deux" , "trois" , "quatre"}, GDialog.QUESTION_MESSAGE , null, new GDialogChoiceListener(){
+
+                    public void onChoice(Option option, Object inputValue) {
+                        if(GDialog.OK_OPTION == option){
+                                Window.alert((inputValue != null ? inputValue.toString(): "N/A"));
+                        }
+                    }
+                    
+                });   
+ //               GDialog.showConfirmDialog(null, "coucou", "titre a la noeud " ,GDialog.YES_NO_OPTION , GDialog.QUESTION_MESSAGE , null);
             }
             
         });

@@ -76,13 +76,7 @@ public interface GInternalFrame {
     /**
      * Window destructor.
      */
-    public void dispose();
-
-    /**
-     * Hides the window without destoying it
-     * 
-     */
-    public void hide();
+    public void close();
 
     /**
      * Provides the window minimized status.
@@ -90,6 +84,9 @@ public interface GInternalFrame {
      * @return Returns true if the window is minimized
      */
     public boolean isMinimized();
+    
+    
+    public void maximize();
 
     /**
      * Provides the window maximized status.
@@ -97,6 +94,10 @@ public interface GInternalFrame {
      * @return Returns true if the window is maximized
      */
     public boolean isMaximized();
+    
+    public void minimize();
+    
+    public void restore();
 
 
     /**
@@ -254,31 +255,19 @@ public interface GInternalFrame {
     public int getLeft();
 
     /**
-     * Recomputes window width, useful when you change window content and do not
-     * want scrolling.
-     */
-    public void updateWidth();
-
-    /**
-     * Recomputes window height, useful when you change window content and do
-     * not want scrolling.
-     */
-    public void updateHeight();
-
-    /**
      * Sets window title.
      * 
-     * @param title
+     * @param caption
      *            Window title
      */
-    public void setTitle(String title);
+    public void setCaption(String caption);
 
     /**
      * Gets window title.
      * 
      * @return title Window title
      */
-    public String getTitle();
+    public String getCaption();
 
     /**
      * Sets the URL of window content.
@@ -375,15 +364,8 @@ public interface GInternalFrame {
      */
     public void removeInternalFrameListener(GInternalFrameListener listener);
 
-    public void maximize();
-
-
-    public String getCaption();
-
     public boolean isVisible();
 
-    public Element getElement();
 
-    public void refresh ();
 
 }
