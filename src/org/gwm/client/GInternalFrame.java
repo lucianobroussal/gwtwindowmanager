@@ -33,15 +33,6 @@ public interface GInternalFrame {
     /**
      * Permits to change the property style on a window.
      * 
-     * @param style
-     * @deprecated
-     * @see
-     */
-    public void setStyle(String style);
-
-    /**
-     * Permits to change the property style on a window.
-     * 
      * @param theme
      */
     public void setTheme(String theme);
@@ -49,29 +40,9 @@ public interface GInternalFrame {
     /**
      * Shows window at its current position.
      * 
-     * @param modal
-     *            if true the screen is disabled
-     * @deprecated
-     * @see org.gwm.client.impl.GDialog
-     */
-    public void show(boolean modal);
-
-    /**
-     * Shows window at its current position.
-     * 
      */
     public void setVisible(boolean isVisible);
 
-    /**
-     * Shows window in page's center.
-     * 
-     * @param modal
-     *            if true the screen is disabled
-     * @deprecated
-     * @see org.gwm.client.impl.GDialog
-     * 
-     */
-    public void showCenter(boolean modal);
 
     /**
      * Sets window content using an existing Widget.

@@ -2,6 +2,8 @@
   <inherits name='com.google.gwt.user.User'/>
   <inherits name='org.gwm.GwtWindowManager'/>
   <inherits name='org.gwtwidgets.WidgetLibrary'/>
+  <inherits name='asquare.gwt.tk.GlassPanel'/>
+  <inherits name='asquare.gwt.tk.Tk'/>
   <entry-point class='org.gwm.samples.client.ShowGwtFrameSample'/>
 </module>
 

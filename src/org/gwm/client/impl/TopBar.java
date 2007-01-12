@@ -28,119 +28,134 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
-  private Label caption;
-  private String currentStyle;
-  private String title;
-  private GwtInternalFrame parent;
-  private Image imgClose;
-  private Image imgMaximize;
-  private Image imgMinimize;
-  private int dragStartX, dragStartY;
-  private boolean dragging;
+    private Label caption;
 
+    private String currentStyle;
 
-  public TopBar (GwtInternalFrame parent) {
-    super ();
-    this.parent = parent;
-    buildGui();
-    sinkEvents (Event.MOUSEEVENTS);
-  }
+    private String title;
 
-  private void buildGui() {
-    this.currentStyle = parent.getStyle();
-    this.title = parent.getTitle();
-    addStyleName ("topBar");
-    caption = new Label (title);
-    caption.addStyleName ("caption");
-    caption.addMouseListener (this);
-    imgClose = new Image();
-    imgClose.setUrl ("themes/"+this.currentStyle+"/close.gif");
-    imgClose.addStyleName ("float");
-    imgClose.addStyleName ("button");
-    imgClose.addClickListener (this);
-    imgMinimize = new Image();
-    imgMinimize.setUrl ("themes/"+this.currentStyle+"/minimize.gif");
-    imgMinimize.addStyleName ("float");
-    imgMinimize.addStyleName ("button");
-    imgMinimize.addClickListener (this);
-    imgMaximize = new Image();
-    imgMaximize.setUrl ("themes/"+this.currentStyle+"/maximize.gif");
-    imgMaximize.addStyleName ("float");
-    imgMaximize.addStyleName ("button");
-    imgMaximize.addClickListener (this);
-    add (caption);
-    add (imgMinimize);
-    add (imgMaximize);
-    add (imgClose);
-    System.out.println ("width = "+this.getOffsetWidth());
-  }
+    private GwtInternalFrame parent;
 
-  public void onClick (Widget w) {
-    if (w.equals (imgClose)) {
-      parent.hide();
+    private Image imgClose;
+
+    private Image imgMaximize;
+
+    private Image imgMinimize;
+
+    private int dragStartX, dragStartY;
+
+    private boolean dragging;
+
+    public TopBar(GwtInternalFrame parent) {
+        super();
+        this.parent = parent;
+        buildGui();
+        sinkEvents(Event.MOUSEEVENTS);
     }
-    if (w.equals (imgMaximize)) {
-      parent.maximize();
+
+    private void buildGui() {
+        this.currentStyle = parent.getStyle();
+        this.title = parent.getTitle();
+        addStyleName("topBar");
+        caption = new Label(title);
+        caption.addStyleName("caption");
+        caption.addMouseListener(this);
+        imgClose = new Image();
+        imgClose.setUrl("themes/" + this.currentStyle + "/close.gif");
+        imgClose.addStyleName("float");
+        imgClose.addStyleName("button");
+        imgClose.addClickListener(this);
+        imgMinimize = new Image();
+        imgMinimize.setUrl("themes/" + this.currentStyle + "/minimize.gif");
+        imgMinimize.addStyleName("float");
+        imgMinimize.addStyleName("button");
+        imgMinimize.addClickListener(this);
+        imgMaximize = new Image();
+        imgMaximize.setUrl("themes/" + this.currentStyle + "/maximize.gif");
+        imgMaximize.addStyleName("float");
+        imgMaximize.addStyleName("button");
+        imgMaximize.addClickListener(this);
+        add(caption);
+        add(imgMinimize);
+        add(imgMaximize);
+        add(imgClose);
+        System.out.println("width = " + this.getOffsetWidth());
     }
-    if (w.equals (imgMinimize)) {
-      parent.minimize();
+
+    public void onClick(Widget w) {
+        if (w.equals(imgClose)) {
+            parent.hide();
+        }
+        if (w.equals(imgMaximize)) {
+            parent.maximize();
+        }
+        if (w.equals(imgMinimize)) {
+            parent.minimize();
+        }
     }
-  }
 
-  public void onBrowserEvent (Event e) {
-    int type = DOM.eventGetType (e);
-    Element em = caption.getElement();
-    int x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
-    int y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
-    if (type == Event.ONMOUSEDOWN) {
-      onMouseDown (this, x, y);
+    public void onBrowserEvent(Event e) {
+        
+        int type = DOM.eventGetType(e);
+        if (type != Event.ONMOUSEMOVE || (type == Event.ONMOUSEMOVE && dragging))  {
+            Element em = caption.getElement();
+            int x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
+            int y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
+
+            if (type == Event.ONMOUSEMOVE) {
+                onMouseMove(this, x, y);
+                super.onBrowserEvent(e);
+                return;
+            }
+            if (type == Event.ONMOUSEDOWN) {
+                onMouseDown(this, x, y);
+                super.onBrowserEvent(e);
+                return;
+            }
+            if (type == Event.ONMOUSEUP) {
+                onMouseUp(this, x, y);
+                super.onBrowserEvent(e);
+                return;
+            }
+        }
+
     }
-    if (type == Event.ONMOUSEMOVE) {
-      onMouseMove (this, x, y);
+
+    public void onMouseDown(Widget sender, int x, int y) {
+        dragging = true;
+        DOM.setCapture(sender.getElement());
+        dragStartX = x;
+        dragStartY = y;
     }
-    if (type == Event.ONMOUSEUP) {
-      onMouseUp (this, x, y);
+
+    public void onMouseEnter(Widget sender) {
     }
-    super.onBrowserEvent (e);
-  }
 
-  public void onMouseDown(Widget sender, int x, int y) {
-    dragging = true;
-    DOM.setCapture(sender.getElement());
-    dragStartX = x;
-    dragStartY = y;
-  }
-
-  public void onMouseEnter(Widget sender) {
-  }
-
-  public void onMouseLeave(Widget sender) {
-  }
-
-  public void onMouseMove(Widget sender, int x, int y) {
-    if (dragging) {
-      int absX = x + sender.getAbsoluteLeft();
-      int absY = y + sender.getAbsoluteTop();
-      parent.setPopupPosition(absX - dragStartX, absY - dragStartY);
+    public void onMouseLeave(Widget sender) {
     }
-  }
 
-  public void onMouseUp(Widget sender, int x, int y) {
-    dragging = false;
-    DOM.releaseCapture(sender.getElement());
-  }
-  
-  public void setCaption(String caption){
-      this.caption.setText(caption);
-  }
+    public void onMouseMove(Widget sender, int x, int y) {
+        if (dragging) {
+            int absX = x + sender.getAbsoluteLeft();
+            int absY = y + sender.getAbsoluteTop();
+            parent.setPopupPosition(absX - dragStartX, absY - dragStartY);
+        }
+    }
 
-public void updateTopBar() {
-    imgMaximize.setVisible(parent.isMaximizable());
-    imgMinimize.setVisible(parent.isMinimizable());
-    imgClose.setVisible(parent.isCloseable());
-    
-}
+    public void onMouseUp(Widget sender, int x, int y) {
+        dragging = false;
+        DOM.releaseCapture(sender.getElement());
+    }
 
+    public void setCaption(String caption) {
+        this.caption.setText(caption);
+    }
 
+    public void updateTopBar() {
+        imgMaximize.setVisible(parent.isMaximizable());
+        imgMinimize.setVisible(parent.isMinimizable());
+        imgClose.setVisible(parent.isCloseable());
+
+    }
 
 }
