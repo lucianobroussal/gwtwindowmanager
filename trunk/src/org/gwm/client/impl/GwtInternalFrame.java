@@ -242,7 +242,19 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void maximize() {
-        System.out.println("maximize()");
+       if (!this.maximized) {
+            this.previousTop = getPopupTop();
+            this.previousLeft = getPopupLeft();
+            this.setPopupPosition(0, 0);
+            this.previousWidth = getWidth();
+            this.previousHeight = getHeight();
+            this.width = maxWidth;
+            this.height = maxHeight;
+            this.maximized = true;
+            buildGui();
+        } else {
+            restore();
+        }
     }
 
     public void restore() {
