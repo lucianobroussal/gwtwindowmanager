@@ -28,6 +28,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -105,6 +106,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     private GDesktopPane desktopPane;
 
     List listeners;
+
+    public GwtInternalFrame() {
+        this("");
+    }
 
     public GwtInternalFrame(String title) {
         this.currentTheme = DEFAULT_STYLE;
@@ -235,12 +240,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         }
         this.minimized = true;
     }
-    
+
     public void maximize() {
         System.out.println("maximize()");
     }
-
-
 
     public void restore() {
         this.width = previousWidth;
@@ -248,15 +251,16 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.maximized = false;
         this.minimized = false;
         setLocation(this.previousLeft, this.previousTop);
-        if(!getContent().isVisible()){
+        if (!getContent().isVisible()) {
             getContent().setVisible(true);
         }
         buildGui();
     }
 
     public void close() {
-        // TODO to check with Johan !!! how avoiding this window will be showed again ?
-        //how releasing resources ?
+        // TODO to check with Johan !!! how avoiding this window will be showed
+        // again ?
+        // how releasing resources ?
         setVisible(false);
     }
 
@@ -538,6 +542,5 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
     }
-
 
 }
