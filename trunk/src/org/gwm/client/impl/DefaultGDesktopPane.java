@@ -96,7 +96,6 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
 
     public void deIconify (GInternalFrame theWindow) {
         theWindow.setVisible (true);
-        theWindow.show(true);
         theWindow.refresh();
     }
 

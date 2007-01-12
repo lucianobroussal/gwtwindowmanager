@@ -25,7 +25,6 @@ import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Window;
@@ -45,7 +44,11 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Johan Vos
  */
 public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
-        EventListener, ClickListener {
+        EventListener {
+
+    private static GInternalFrame topFrame;
+
+    public static int layerOfTheTopWindow;
 
     private int id;
 
@@ -60,7 +63,9 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     private FocusPanel mainPanel;
 
     private Widget myContent;
-    private String url; 
+
+    private String url;
+
     private String previousUrl;
 
     private int dragStartX, dragStartY;
@@ -68,7 +73,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     private int resizeStartX, resizeStartY;
 
     private boolean dragging;
-    
+
     private boolean visible;
 
     private static final int DEFAULT_WIDTH = 200;
@@ -110,9 +115,8 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     private FlexTable panel = new FlexTable();
 
     private GDesktopPane desktopPane;
-    
-    List listeners;
 
+    List listeners;
 
     public GwtInternalFrame(String title) {
         this.currentStyle = DEFAULT_STYLE;
@@ -149,9 +153,9 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         this.minHeight = 40;
     }
 
-    public void refresh () {
-      show();
-      buildGui();
+    public void refresh() {
+        show();
+        buildGui();
     }
 
     void buildGui() {
@@ -171,8 +175,8 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         panel.setWidget(2, 2, imgBotRight);
         if (url != null) {
             String urlCode = "<iframe src=\"" + url + "\" height=\""
-                + (this.height -60) + "\" width=\"" + (this.width - 40)
-                + "\" frameborder=\"0\"/>";
+                    + (this.height - 60) + "\" width=\"" + (this.width - 40)
+                    + "\" frameborder=\"0\"/>";
             myContent = new HTML(urlCode);
         }
         panel.setWidget(1, 1, myContent);
@@ -206,7 +210,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         super.setWidget(panel);
     }
 
-    public void setParentDesktop (GDesktopPane pane) {
+    public void setParentDesktop(GDesktopPane pane) {
         this.desktopPane = pane;
     }
 
@@ -214,8 +218,8 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         return this.id;
     }
 
-    public void setId (int v) {
-      this.id = v;
+    public void setId(int v) {
+        this.id = v;
     }
 
     public void setTheme(String v) {
@@ -225,14 +229,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     public String getStyle() {
         return this.currentStyle;
-    }
-
-    public void show(boolean modal) {
-        super.show();
-    }
-
-    public void showCenter(boolean modal) {
-        super.show();
     }
 
     public void setContent(Widget widget) {
@@ -269,11 +265,11 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         fireFrameMaximized();
     }
 
-    public void restore () {
+    public void restore() {
         this.width = previousWidth;
         this.height = previousHeight;
-        this.maximized =  false;
-        this.minimized =  false;
+        this.maximized = false;
+        this.minimized = false;
         setLocation(this.previousLeft, this.previousTop);
         buildGui();
     }
@@ -282,7 +278,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void dispose() {
-        //TODO to check with Johan !!!
+        // TODO to check with Johan !!!
         setVisible(false);
     }
 
@@ -304,7 +300,6 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
-        // panel.setSize(width + "px", height + "px");
         buildGui();
     }
 
@@ -403,131 +398,121 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         topBar.updateTopBar();
     }
 
-    
-
     public void setDraggable(boolean draggable) {
         this.draggable = draggable;
     }
 
     public void onBrowserEvent(Event event) {
-        Element target = DOM.eventGetTarget(event);
         int type = DOM.eventGetType(event);
-        if (type == Event.ONCLICK) {
-            // Element myself = DOM.getParent(myContent.getElement());
-            this.hide();
-            this.show();
-            return;
+        if (type == Event.ONMOUSEDOWN) {
+            if (topFrame != this) {
+                show();
+            }
         }
     }
 
-    public void onClick(Widget sender) {
-        this.hide();
-        this.show();
-    }
 
     public boolean onEventPreview(Event evt) {
         super.onEventPreview(evt);
         return true;
     }
 
-    public void addGFrameListener(GInternalFrameListener listener){
+    public void addGFrameListener(GInternalFrameListener listener) {
         listeners.add(listener);
     }
-    
-    public void removeGFrameListener(GInternalFrameListener listener){
+
+    public void removeGFrameListener(GInternalFrameListener listener) {
         listeners.remove(listener);
     }
-    
 
     public void setIconified(boolean v) {
-        if(isMaximizable()){
-            if(v){
-                if(minimized)
+        if (isMaximizable()) {
+            if (v) {
+                if (minimized)
                     return;
                 desktopPane.iconify(this);
-                
-            }else{
-                if(!minimized)
+
+            } else {
+                if (!minimized)
                     return;
                 desktopPane.deIconify(this);
             }
-        minimized = v;
+            minimized = v;
         }
-        
+
     }
 
     public void setMaximized(boolean v) {
     }
 
-    // """"""""""""""
-    
     /**
      * Fires the event of the activation of this frame to its listeners.
      */
     private void fireFrameActivated() {
-        for(int i=0; i < listeners.size(); i++){
-            GInternalFrameListener listener = (GInternalFrameListener) listeners.get(i);
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
             listener.frameActivated(new GInternalFrameEvent(this));
         }
     }
-    
+
     /**
      * Fires the event of the resizing of this frame to its listeners.
      */
-    private void fireFrameResized(){
-        for(int i=0; i < listeners.size(); i++){
-            GInternalFrameListener listener = (GInternalFrameListener) listeners.get(i);
+    private void fireFrameResized() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
             listener.frameResized(new GInternalFrameEvent(this));
         }
     }
-    
-    
-    
+
     /**
      * Fires the closed event of this frame to its listeners.
      */
-    private void fireFrameClosed(){
-        for(int i=0; i < listeners.size(); i++){
-            GInternalFrameListener listener = (GInternalFrameListener) listeners.get(i);
+    private void fireFrameClosed() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
             listener.frameClosed(new GInternalFrameEvent(this));
         }
     }
-    
-    
-    
+
     /**
      * Fires the frameMaximized event of this frame to its listeners.
      */
-    public void fireFrameMaximized(){
-        for(int i=0; i < listeners.size(); i++){
-            GInternalFrameListener listener = (GInternalFrameListener) listeners.get(i);
+    public void fireFrameMaximized() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
             listener.frameMaximized(new GInternalFrameEvent(this));
         }
     }
-    
-    
+
     /**
      * Fires the frameMinimized event of this frame to its listeners.
      */
-    public void fireFrameIconified(){
-        for(int i=0; i < listeners.size(); i++){
-            GInternalFrameListener listener = (GInternalFrameListener) listeners.get(i);
+    public void fireFrameIconified() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
             listener.frameIconified(new GInternalFrameEvent(this));
         }
     }
-    
+
     /**
      * Fires the frameMoved event of this frame to its listeners.
      */
-    private void fireFrameMoved(){
-        for(int i=0; i < listeners.size(); i++){
-            GInternalFrameListener listener = (GInternalFrameListener) listeners.get(i);
+    private void fireFrameMoved() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
             listener.frameIconified(new GInternalFrameEvent(this));
-        } 
+        }
     }
-    
+
     // """""""""""""""""""""
-    
+
     public boolean isMaximizable() {
         return maximizable;
     }
@@ -581,12 +566,12 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void setVisible(boolean visible) {
-        if(this.visible == visible)
+        if (this.visible == visible)
             return;
-        if(visible){
+        if (visible) {
             this.minimized = false;
             show();
-        }else{
+        } else {
             hide();
         }
         this.visible = visible;
@@ -596,9 +581,9 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         return closable;
     }
 
-    public void startResizing () {
+    public void startResizing() {
         if (url != null) {
-          this.previousUrl = url;
+            this.previousUrl = url;
         }
         this.url = null;
         this.myContent = new HTML("");
@@ -606,9 +591,14 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         // buildGui();
     }
 
-    public void stopResizing () {
+    public void stopResizing() {
         this.url = this.previousUrl;
         buildGui();
     }
 
+    public void show() {
+        super.show();
+        DOM.setIntStyleAttribute(getElement() , "zIndex" , ++layerOfTheTopWindow);
+        topFrame = this;
+    }
 }
