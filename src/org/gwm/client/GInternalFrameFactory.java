@@ -16,7 +16,7 @@
 
 package org.gwm.client;
 
-import org.gwm.client.impl.DefaultFramesManager;
+import com.google.gwt.core.client.GWT;
 
 /**
  * Provides an implementation of the FramesManager. Typically the first class,
@@ -25,17 +25,18 @@ import org.gwm.client.impl.DefaultFramesManager;
  * 
  * @author luciano broussal
  * 
- * Type FramesManagerFactory, created on 27 nov. 06 at 18:11:31
- * @deprecated
+ * Type GInternalFrameFactory, created on 27 nov. 06 at 18:11:31
  */
-public class FramesManagerFactory {
+public class GInternalFrameFactory {
 
     /**
      * Generates a new FramesManager for your application.
      * 
      * @return a FramesManager instance.
      */
-    public FramesManager createFramesManager() {
-        return new DefaultFramesManager();
+    public GInternalFrame newGInternalFrame(String caption , Class frameClassImpl) {
+        GInternalFrame newFrame = (GInternalFrame)GWT.create(frameClassImpl);
+        newFrame.setCaption(caption);
+        return newFrame;
     }
 }
