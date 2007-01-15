@@ -46,6 +46,8 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
     private boolean dragging;
 
+    private boolean draggable;
+
     public TopBar(GwtInternalFrame parent) {
         super();
         this.parent = parent;
@@ -89,53 +91,54 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
         if (w.equals(imgMaximize)) {
             if (parent.isMaximized()) {
                 parent.restore();
-            }
-            else {
+            } else {
                 parent.maximize();
             }
         }
         if (w.equals(imgMinimize)) {
             if (parent.isMinimized()) {
                 parent.restore();
-            }
-            else {
+            } else {
                 parent.minimize();
             }
         }
     }
 
     public void onBrowserEvent(Event e) {
-        
-        int type = DOM.eventGetType(e);
-        if (type != Event.ONMOUSEMOVE || (type == Event.ONMOUSEMOVE && dragging))  {
-            Element em = caption.getElement();
-            int x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
-            int y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
+        if (draggable) {
+            int type = DOM.eventGetType(e);
+            if (type != Event.ONMOUSEMOVE
+                    || (type == Event.ONMOUSEMOVE && dragging)) {
+                Element em = caption.getElement();
+                int x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
+                int y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
 
-            if (type == Event.ONMOUSEMOVE) {
-                onMouseMove(this, x, y);
-                super.onBrowserEvent(e);
-                return;
-            }
-            if (type == Event.ONMOUSEDOWN) {
-                onMouseDown(this, x, y);
-                super.onBrowserEvent(e);
-                return;
-            }
-            if (type == Event.ONMOUSEUP) {
-                onMouseUp(this, x, y);
-                super.onBrowserEvent(e);
-                return;
+                if (type == Event.ONMOUSEMOVE) {
+                    onMouseMove(this, x, y);
+                    super.onBrowserEvent(e);
+                    return;
+                }
+                if (type == Event.ONMOUSEDOWN) {
+                    onMouseDown(this, x, y);
+                    super.onBrowserEvent(e);
+                    return;
+                }
+                if (type == Event.ONMOUSEUP) {
+                    onMouseUp(this, x, y);
+                    super.onBrowserEvent(e);
+                    return;
+                }
             }
         }
-
     }
 
     public void onMouseDown(Widget sender, int x, int y) {
-        dragging = true;
-        DOM.setCapture(sender.getElement());
-        dragStartX = x;
-        dragStartY = y;
+        if (draggable) {
+            dragging = true;
+            DOM.setCapture(sender.getElement());
+            dragStartX = x;
+            dragStartY = y;
+        }
     }
 
     public void onMouseEnter(Widget sender) {
@@ -145,10 +148,12 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     }
 
     public void onMouseMove(Widget sender, int x, int y) {
-        if (dragging) {
-            int absX = x + sender.getAbsoluteLeft();
-            int absY = y + sender.getAbsoluteTop();
-            parent.setPopupPosition(absX - dragStartX, absY - dragStartY);
+        if (draggable) {
+            if (dragging) {
+                int absX = x + sender.getAbsoluteLeft();
+                int absY = y + sender.getAbsoluteTop();
+                parent.setPopupPosition(absX - dragStartX, absY - dragStartY);
+            }
         }
     }
 
@@ -166,6 +171,54 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
         imgMinimize.setVisible(parent.isMinimizable());
         imgClose.setVisible(parent.isCloseable());
 
+    }
+
+    public void setCaption(Label caption) {
+        this.caption = caption;
+    }
+
+    public void setCurrentStyle(String currentStyle) {
+        this.currentStyle = currentStyle;
+    }
+
+    public void setDraggable(boolean draggable) {
+        this.draggable = draggable;
+    }
+
+    public void setDragging(boolean dragging) {
+        this.dragging = dragging;
+    }
+
+    public void setDragStartX(int dragStartX) {
+        this.dragStartX = dragStartX;
+    }
+
+    public void setDragStartY(int dragStartY) {
+        this.dragStartY = dragStartY;
+    }
+
+    public void setImgClose(Image imgClose) {
+        this.imgClose = imgClose;
+    }
+
+    public void setImgMaximize(Image imgMaximize) {
+        this.imgMaximize = imgMaximize;
+    }
+
+    public void setImgMinimize(Image imgMinimize) {
+        this.imgMinimize = imgMinimize;
+    }
+
+    public void setParent(GwtInternalFrame parent) {
+        this.parent = parent;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isDraggable() {
+        return draggable;
     }
 
 }

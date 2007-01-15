@@ -7,7 +7,6 @@ import org.gwtwidgets.client.ui.PNGImage;
 
 import asquare.gwt.tk.client.ui.GlassPanel;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -23,7 +22,7 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class GDialog {
+public class GDialog extends GwtInternalFrame {
 
     public static final int ERROR_MESSAGE = 1;
 
@@ -55,6 +54,30 @@ public class GDialog {
 
     private static Object selectedValue;
 
+    private UIObject parentContainer;
+
+    private Image icon;
+
+    private Object initialValue;
+
+    private Object inputValue;
+
+    private Object message;
+
+    private int messageType;
+
+    private Option[] options;
+
+    private int optionType;
+
+    private Object[] selectionValues;
+
+    private Object value;
+
+    public static void setDialogTheme(String theme) {
+        GDialog.theme = theme;
+    }
+
     public static final Option OK_OPTION = new Option("Ok");
 
     public static final Option YES_OPTION = new Option("Yes");
@@ -63,75 +86,80 @@ public class GDialog {
 
     public static final Option CANCEL_OPTION = new Option("Cancel");
 
-    public static void setTheme(String theme) {
-        GDialog.theme = theme;
+    public GDialog(UIObject parent, String title) {
+        super(title);
+        this.parentContainer = parent;
     }
 
     public static Object getSelectedValue() {
         return selectedValue;
     }
 
-    public static void showConfirmDialog(UIObject parent , Object message,
+    public static void showConfirmDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
         showMessage(parent, message, null, QUESTION_MESSAGE,
                 getOptions(YES_NO_CANCEL_OPTION), null, choiceListener);
     }
 
-    public static void showConfirmDialog(UIObject parent,Object message, String title,
-            int optionType, GDialogChoiceListener choiceListener) {
-        showMessage(parent, message, title, QUESTION_MESSAGE, getOptions(optionType),
-                null, choiceListener);
+    public static void showConfirmDialog(UIObject parent, Object message,
+            String title, int optionType, GDialogChoiceListener choiceListener) {
+        showMessage(parent, message, title, QUESTION_MESSAGE,
+                getOptions(optionType), null, choiceListener);
     }
 
-    public static void showConfirmDialog(UIObject parent,Object message, String title,
-            int optionType, int messageType,
+    public static void showConfirmDialog(UIObject parent, Object message,
+            String title, int optionType, int messageType,
             GDialogChoiceListener choiceListener) {
-        showMessage(parent, message, title, messageType, getOptions(optionType), null,
-                choiceListener);
+        showMessage(parent, message, title, messageType,
+                getOptions(optionType), null, choiceListener);
     }
 
-    public static void showConfirmDialog(UIObject parent,Object message, String title,
-            int optionType, int messageType, String imagePath,
+    public static void showConfirmDialog(UIObject parent, Object message,
+            String title, int optionType, int messageType, String imagePath,
             GDialogChoiceListener choiceListener) {
-        showMessage(parent, message, title, messageType, getOptions(optionType),
-                imagePath, choiceListener);
+        showMessage(parent, message, title, messageType,
+                getOptions(optionType), imagePath, choiceListener);
     }
 
-    public static void showInputDialog(UIObject parent,Object message,
+    public static void showInputDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, null, QUESTION_MESSAGE,
                 getOptions(OK_CANCEL_OPTION), null, null, null, choiceListener);
     }
 
-    public static void showInputDialog(UIObject parent,Object message, String title , Object initialValue,
+    public static void showInputDialog(UIObject parent, Object message,
+            String title, Object initialValue,
             GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, title, QUESTION_MESSAGE,
-                getOptions(OK_CANCEL_OPTION), null, initialValue,null,
+                getOptions(OK_CANCEL_OPTION), null, initialValue, null,
                 choiceListener);
     }
 
-    public static void showInputDialog(UIObject parent,Object message, String title , Object initialValue, int messageType,
+    public static void showInputDialog(UIObject parent, Object message,
+            String title, Object initialValue, int messageType,
             GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, title, messageType,
-                getOptions(OK_CANCEL_OPTION), null, initialValue,null,
-                choiceListener);
-    }
-    
-    public static void showInputDialog(UIObject parent,Object message, String title , Object initialValue, int messageType,
-            String imagePath, GDialogChoiceListener choiceListener) {
-        showInputDialog(parent, message, title, messageType,
-                getOptions(OK_CANCEL_OPTION), imagePath, initialValue,null,
-                choiceListener);
-    }
-    
-    public static void showInputDialog(UIObject parent,Object message, String title , Object initialValue, Object[] selectionValues , int messageType,
-            String imagePath, GDialogChoiceListener choiceListener) {
-        showInputDialog(parent, message, title, messageType,
-                getOptions(OK_CANCEL_OPTION), imagePath, initialValue, selectionValues,
+                getOptions(OK_CANCEL_OPTION), null, initialValue, null,
                 choiceListener);
     }
 
-    
+    public static void showInputDialog(UIObject parent, Object message,
+            String title, Object initialValue, int messageType,
+            String imagePath, GDialogChoiceListener choiceListener) {
+        showInputDialog(parent, message, title, messageType,
+                getOptions(OK_CANCEL_OPTION), imagePath, initialValue, null,
+                choiceListener);
+    }
+
+    public static void showInputDialog(UIObject parent, Object message,
+            String title, Object initialValue, Object[] selectionValues,
+            int messageType, String imagePath,
+            GDialogChoiceListener choiceListener) {
+        showInputDialog(parent, message, title, messageType,
+                getOptions(OK_CANCEL_OPTION), imagePath, initialValue,
+                selectionValues, choiceListener);
+    }
+
     private static Option[] getOptions(int optionType) {
         if (optionType == YES_NO_OPTION) {
             return new Option[] { OK_OPTION, NO_OPTION };
@@ -145,35 +173,38 @@ public class GDialog {
 
     }
 
-    public static void showMessage(UIObject parent,Object message) {
-        showMessage(parent,message, null, INFORMATION_MESSAGE, null, null, null);
+    public static void showMessage(UIObject parent, Object message) {
+        showMessage(parent, message, null, INFORMATION_MESSAGE, null, null,
+                null);
     }
 
-    public static void showMessage(UIObject parent,Object message, String title, int messageType) {
-        showMessage(parent , message, title, messageType, null, null, null);
+    public static void showMessage(UIObject parent, Object message,
+            String title, int messageType) {
+        showMessage(parent, message, title, messageType, null, null, null);
     }
 
-    public static void showMessage(UIObject parent,Object message, String title,
-            int messageType, Option[] options, String imagePath,
+    public static void showMessage(UIObject parent, Object message,
+            String title, int messageType, Option[] options, String imagePath,
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
         currentDialog.setContent(new DialogPane(message, options, icon,
                 choiceListener));
         computeSizeAndDisplay(parent);
-        
+
     }
 
     private static void computeSizeAndDisplay(UIObject parent) {
-        if(overlayLayer == null){
+        if (overlayLayer == null) {
             overlayLayer = new GlassPanel();
         }
         overlayLayer.show();
         currentDialog.setVisible(true);
-        adjustDialogSizeToContent(parent , currentDialog);
+        adjustDialogSizeToContent(parent, currentDialog);
     }
 
-    private static void adjustDialogSizeToContent(UIObject parent,GInternalFrame internalFrame) {
+    private static void adjustDialogSizeToContent(UIObject parent,
+            GInternalFrame internalFrame) {
         Widget content = internalFrame.getContent();
         int height = content.getOffsetHeight();
         currentDialog.setHeight(height);
@@ -181,26 +212,29 @@ public class GDialog {
         currentDialog.setWidth(width);
         int left = 0;
         int top = 0;
-        if(parent != null){
-            left = parent.getAbsoluteLeft() + (parent.getOffsetWidth() - width )/2;
-            top = parent.getAbsoluteTop() + (parent.getOffsetHeight() - height )/2;
-        }else{
+        if (parent != null) {
+            left = parent.getAbsoluteLeft() + (parent.getOffsetWidth() - width)
+                    / 2;
+            top = parent.getAbsoluteTop() + (parent.getOffsetHeight() - height)
+                    / 2;
+        } else {
             left = (Window.getClientWidth() - width) / 2;
             top = (Window.getClientHeight() - height) / 2;
         }
-        left = left >0 ? left:0;
-        top = top >0 ? top:0;
+        left = left > 0 ? left : 0;
+        top = top > 0 ? top : 0;
         currentDialog.setLocation(left, top);
-        
+
     }
 
-    public static void showInputDialog(UIObject parent,Object message, String title,
-            int messageType, Option[] options, String imagePath,
-            Object initialValue, Object[] selectionValues ,GDialogChoiceListener choiceListener) {
+    public static void showInputDialog(UIObject parent, Object message,
+            String title, int messageType, Option[] options, String imagePath,
+            Object initialValue, Object[] selectionValues,
+            GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
         currentDialog.setContent(new InputDialogPane(message, options, icon,
-                initialValue,selectionValues, choiceListener));
+                initialValue, selectionValues, choiceListener));
         computeSizeAndDisplay(parent);
     }
 
@@ -209,21 +243,20 @@ public class GDialog {
             throw new IllegalStateException("A Dialog is already opened!");
         }
         currentDialog = new GwtInternalFrame("");
-        
+
         currentDialog.setClosable(false);
         currentDialog.setMinimizable(false);
         currentDialog.setMaximizable(false);
-        
-        
+
         currentDialog.setTheme(theme);
         if (title != null) {
             currentDialog.setCaption(title);
         }
-        
+
     }
 
     private static Image getIcon(int messageType, String imagePath) {
-        Image icon = new PNGImage(getImagePath(messageType, imagePath), 32,32);
+        Image icon = new PNGImage(getImagePath(messageType, imagePath), 32, 32);
         return icon;
 
     }
@@ -250,28 +283,32 @@ public class GDialog {
 
     static class InputDialogPane extends DialogPane {
         private TextBox textBoxInput;
+
         private ListBox selectionValuesInput;
 
         Object initialValue;
+
         Object selectionValues;
-        
 
         public InputDialogPane(Object message, Option[] options, Image icon,
-                Object initialValue, Object[] selectionValues, GDialogChoiceListener choiceListener) {
+                Object initialValue, Object[] selectionValues,
+                GDialogChoiceListener choiceListener) {
             super(message, options, icon, choiceListener);
-            if(selectionValues != null){
+            if (selectionValues != null) {
                 selectionValuesInput = new ListBox();
                 for (int i = 0; i < selectionValues.length; i++) {
                     selectionValuesInput.addItem(selectionValues[i].toString());
-                    if(selectionValues[i].equals(initialValue)){
+                    if (selectionValues[i].equals(initialValue)) {
                         selectionValuesInput.setSelectedIndex(i);
                     }
                 }
                 centerContentPanel.add(selectionValuesInput);
-            }else if(initialValue != null){
+            } else {
                 textBoxInput = new TextBox();
-                textBoxInput.setText(initialValue.toString());
-                this.initialValue = initialValue;
+                if (initialValue != null) {
+                    textBoxInput.setText(initialValue.toString());
+                    this.initialValue = initialValue;
+                }
                 centerContentPanel.add(textBoxInput);
             }
         }
@@ -281,8 +318,9 @@ public class GDialog {
         }
 
         public String getInputValue() {
-            if(selectionValuesInput!=null){
-                return selectionValuesInput.getItemText(selectionValuesInput.getSelectedIndex());
+            if (selectionValuesInput != null) {
+                return selectionValuesInput.getItemText(selectionValuesInput
+                        .getSelectedIndex());
             }
             return textBoxInput.getText();
         }
@@ -313,7 +351,7 @@ public class GDialog {
                 layout.add(icon, DockPanel.WEST);
             }
             if (options == null) {
-                options = new Option[] {OK_OPTION};
+                options = new Option[] { OK_OPTION };
             }
             if (options != null) {
 
@@ -336,7 +374,7 @@ public class GDialog {
                                 choiceListener.onChoice(option, inputValue);
                             }
                             overlayLayer.hide();
-                            //TODO with Johan for release process
+                            // TODO with Johan for release process
                             currentDialog.close();
                             currentDialog = null;
                         }
@@ -365,6 +403,19 @@ public class GDialog {
         public String getLabel() {
             return label;
         }
+        
+//        public boolean equals(Object value){
+//            if(value == null || this != value){
+//                return false;
+//            }
+//            if(!((Option)value).getLabel().equals(label)){
+//                return false;
+//            }
+//            return true;
+//        }
+        public String toString(){
+            return label;
+        }
     }
 
     public static class OkOption extends Option {
@@ -389,6 +440,90 @@ public class GDialog {
         public CancelOption() {
             super("Cancel");
         }
+    }
+
+    public Image getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Image icon) {
+        this.icon = icon;
+    }
+
+    public Object getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(Object initialValue) {
+        this.initialValue = initialValue;
+    }
+
+    public Object getInputValue() {
+        return inputValue;
+    }
+
+    public void setInputValue(Object inputValue) {
+        this.inputValue = inputValue;
+    }
+
+    public Object getMessage() {
+        return message;
+    }
+
+    public void setMessage(Object message) {
+        this.message = message;
+    }
+
+    public int getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
+    }
+
+    public Option[] getOptions() {
+        return options;
+    }
+
+    public void setOptions(Option[] options) {
+        this.options = options;
+    }
+
+    public int getOptionType() {
+        return optionType;
+    }
+
+    public void setOptionType(int optionType) {
+        this.optionType = optionType;
+    }
+
+    public UIObject getParentContainer() {
+        return parentContainer;
+    }
+
+    public void setParentContainer(UIObject parent) {
+        this.parentContainer = parent;
+    }
+
+    public Object[] getSelectionValues() {
+        return selectionValues;
+    }
+
+    public void setSelectionValues(Object[] selectionValues) {
+        this.selectionValues = selectionValues;
+    }
+
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
+    public static void setSelectedValue(Object selectedValue) {
+        GDialog.selectedValue = selectedValue;
     }
 
 }

@@ -118,7 +118,7 @@ public class ShowGwtFrameSample implements EntryPoint {
         //DOM.setCapture(button1.getElement());
         
 //        RootPanel.get().add(button1);
-        GDialog.setTheme("theme1");
+        GDialog.setDialogTheme("theme1");
          
     }
 
