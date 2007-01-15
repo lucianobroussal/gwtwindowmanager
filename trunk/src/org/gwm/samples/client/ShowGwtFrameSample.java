@@ -11,6 +11,7 @@ import asquare.gwt.tk.client.ui.GlassPanel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -24,7 +25,7 @@ public class ShowGwtFrameSample implements EntryPoint {
 
         
         testGDialog();
- //       testPane();
+   //     testPane();
     }
 
     private void testPane() {
@@ -56,6 +57,10 @@ public class ShowGwtFrameSample implements EntryPoint {
     }
 
     private void testGDialog() {
+        DialogBox box = new DialogBox();
+        box.setTitle("jkxjzkjkzjckx");
+        box.setHTML("kjxdjzckxjvckvjvkc");
+        box.show();
         
         GInternalFrame frame = new GInternalFrameFactory().newGInternalFrame("NEW TEST !!!", GwtInternalFrame.class);
         frame.setVisible(true);
