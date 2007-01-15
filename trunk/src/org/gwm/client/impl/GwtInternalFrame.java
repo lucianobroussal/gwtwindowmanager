@@ -268,6 +268,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     public boolean isMinimized() {
         return this.minimized;
     }
+    
+    public boolean isDraggable(){
+        return topBar.isDraggable();
+    }
 
     public boolean isMaximized() {
         return this.maximized;
@@ -369,7 +373,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void setDraggable(boolean draggable) {
-        this.draggable = draggable;
+        topBar.setDraggable(draggable);
     }
 
     public void onBrowserEvent(Event event) {
@@ -528,14 +532,14 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
             this.previousUrl = url;
         }
         this.url = null;
-        this.myContent = new HTML("");
-        panel.setWidget(1, 1, myContent);
+        //his.myContent = new HTML("kkkk");
+        //panel.setWidget(1, 1, myContent);
         // buildGui();
     }
 
     public void stopResizing() {
         this.url = this.previousUrl;
-        buildGui();
+        //buildGui();
     }
 
     public void show() {

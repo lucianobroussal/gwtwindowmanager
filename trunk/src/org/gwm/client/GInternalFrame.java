@@ -323,6 +323,12 @@ public interface GInternalFrame {
     
     
     /**
+     * Returns the window draggable state.
+     * 
+     * @return
+     */
+    public boolean isDraggable();
+    /**
      * Returns the window maximizable state.
      * 
      * @return
