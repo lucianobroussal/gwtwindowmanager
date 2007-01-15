@@ -50,7 +50,7 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
         setCellHeight(buttonBar, "30px");
 
         
-        setStyleName("org-gwm-GDesktopPane");
+        setStyleName("gwm-GDesktopPane");
     }
 
     private void setupListeners() {
