@@ -165,13 +165,14 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
             int nb = newTop + parent.getOffsetHeight();
             int pr = pl + pane.getOffsetWidth();
             int pb = pt + pane.getOffsetHeight();
-            if ((newLeft > pl) && (newTop > pt) && (nr < pr) && (nb < pb)) {
+            // if ((newLeft > pl) && (newTop > pt) && (nr < pr) && (nb < pb)) {
                 parent.setPopupPosition(newLeft, newTop);
-            }
+            // }
         }
     }
 
     public void onMouseUp(Widget sender, int x, int y) {
+System.out.println ("MOUSEUP");
         dragging = false;
         DOM.releaseCapture(sender.getElement());
     }
