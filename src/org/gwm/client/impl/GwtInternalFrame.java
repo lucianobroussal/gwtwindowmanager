@@ -532,14 +532,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
             this.previousUrl = url;
         }
         this.url = null;
-        //his.myContent = new HTML("kkkk");
-        //panel.setWidget(1, 1, myContent);
-        // buildGui();
     }
 
     public void stopResizing() {
         this.url = this.previousUrl;
-        //buildGui();
     }
 
     public void show() {
