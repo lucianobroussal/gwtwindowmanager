@@ -21,6 +21,8 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
 
     private HTML centerWidget;
     private IconBar buttonBar;
+    private int myTop;
+    private int myLeft;
 
     private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
         public void internalFrameIconified(GInternalFrameEvent evt) {
@@ -48,9 +50,10 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
 
         add(buttonBar, DockPanel.SOUTH);
         setCellHeight(buttonBar, "30px");
-
         
         setStyleName("gwm-GDesktopPane");
+        this.myTop = getAbsoluteTop();
+        this.myLeft = getAbsoluteLeft();
     }
 
     private void setupListeners() {
@@ -89,7 +92,7 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setParentDesktop (this);
         int spos = (frames.size() + 1) * 30;
-        internalFrame.setLocation (spos, spos);
+        internalFrame.setLocation (getAbsoluteLeft() + spos, getAbsoluteTop() + spos);
         internalFrame.addInternalFrameListener(adapter);
         frames.add (internalFrame);
     }
