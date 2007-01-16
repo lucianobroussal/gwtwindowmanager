@@ -24,25 +24,16 @@ import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
 
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.EventListener;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * GWT-based implementation of <code>GInternalFrame</code>
  * 
  * @author Johan Vos
  */
-public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
+public class GwtInternalFrame extends PopupPanel implements GInternalFrame, 
         EventListener {
 
     private static GInternalFrame topFrame;
@@ -200,6 +191,13 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
 
     public void setParentDesktop(GDesktopPane pane) {
         this.desktopPane = pane;
+        if (topBar != null) {
+            topBar.setDesktopPane ((DefaultGDesktopPane)(pane));
+        }
+    }
+
+    GDesktopPane getDesktopPane () {
+      return this.desktopPane;
     }
 
     public void setTheme(String theme) {
@@ -530,12 +528,15 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     public void startResizing() {
         if (url != null) {
             this.previousUrl = url;
+            this.myContent = new Label ("");
+            panel.setWidget (1, 1, myContent);
         }
         this.url = null;
     }
 
     public void stopResizing() {
         this.url = this.previousUrl;
+        buildGui();
     }
 
     public void show() {

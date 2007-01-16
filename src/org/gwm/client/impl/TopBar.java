@@ -48,11 +48,18 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
     private boolean draggable;
 
+    private DefaultGDesktopPane pane;
+
     public TopBar(GwtInternalFrame parent) {
         super();
         this.parent = parent;
+        this.draggable = true;
         buildGui();
         sinkEvents(Event.MOUSEEVENTS);
+    }
+
+    void setDesktopPane (DefaultGDesktopPane pane) {
+        this.pane = (pane);
     }
 
     private void buildGui() {
@@ -81,7 +88,6 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
         add(imgMinimize);
         add(imgMaximize);
         add(imgClose);
-        System.out.println("width = " + this.getOffsetWidth());
     }
 
     public void onClick(Widget w) {
@@ -115,17 +121,17 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
                 if (type == Event.ONMOUSEMOVE) {
                     onMouseMove(this, x, y);
-                    super.onBrowserEvent(e);
+                    // super.onBrowserEvent(e);
                     return;
                 }
                 if (type == Event.ONMOUSEDOWN) {
                     onMouseDown(this, x, y);
-                    super.onBrowserEvent(e);
+                    // super.onBrowserEvent(e);
                     return;
                 }
                 if (type == Event.ONMOUSEUP) {
                     onMouseUp(this, x, y);
-                    super.onBrowserEvent(e);
+                    // super.onBrowserEvent(e);
                     return;
                 }
             }
@@ -151,7 +157,17 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
         if (draggable && dragging) {
             int absX = x + sender.getAbsoluteLeft();
             int absY = y + sender.getAbsoluteTop();
-            parent.setPopupPosition(absX - dragStartX, absY - dragStartY);
+            int newLeft = absX - dragStartX;
+            int newTop = absY - dragStartY;
+            int pl = pane.getAbsoluteLeft();
+            int pt = pane.getAbsoluteTop();
+            int nr = newLeft + parent.getOffsetWidth();
+            int nb = newTop + parent.getOffsetHeight();
+            int pr = pl + pane.getOffsetWidth();
+            int pb = pt + pane.getOffsetHeight();
+            if ((newLeft > pl) && (newTop > pt) && (nr < pr) && (nb < pb)) {
+                parent.setPopupPosition(newLeft, newTop);
+            }
         }
     }
 
