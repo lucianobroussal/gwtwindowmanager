@@ -80,7 +80,7 @@
 
 .resizeCorner {
   cursor: se-resize;
-  background: #fff url(theme1/resize.png) bottom right no-repeat;
+  background:transparent url(theme1/sizer.gif) bottom right no-repeat;
   width: 12px;
   height: 24px;
 }
