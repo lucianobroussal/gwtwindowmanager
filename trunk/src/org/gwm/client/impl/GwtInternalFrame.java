@@ -24,17 +24,28 @@ import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
 
-import com.google.gwt.user.client.*;
-import com.google.gwt.user.client.rpc.IsSerializable;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.EventPreview;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * GWT-based implementation of <code>GInternalFrame</code>
  * 
  * @author Johan Vos
  */
-public class GwtInternalFrame extends PopupPanel implements GInternalFrame, 
-        EventListener {
+public class GwtInternalFrame extends SimplePanel implements GInternalFrame, 
+        EventListener , EventPreview{
 
     private static GInternalFrame topFrame;
 
@@ -192,7 +203,7 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     public void setParentDesktop(GDesktopPane pane) {
         this.desktopPane = pane;
         if (topBar != null) {
-            topBar.setDesktopPane ((DefaultGDesktopPane)(pane));
+            topBar.setDesktopPane((DefaultGDesktopPane)pane);
         }
     }
 
@@ -232,9 +243,9 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void maximize() {
-        this.previousTop = getPopupTop();
-        this.previousLeft = getPopupLeft();
-        this.setPopupPosition(0, 0);
+        this.previousTop = getAbsoluteTop();
+        this.previousLeft = getAbsoluteLeft();
+        this.setLocation(0, 0);
         this.previousWidth = getWidth();
         this.previousHeight = getHeight();
         this.width = maxWidth;
@@ -276,7 +287,14 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void setLocation(int left, int top) {
-        setPopupPosition(left, top);
+        if(desktopPane != null)
+        ((DefaultGDesktopPane)desktopPane).setWidgetPosition(this, left, top);
+        else{
+            Element elem = getElement();
+            DOM.setStyleAttribute(elem, "left", left + "px");
+            DOM.setStyleAttribute(elem, "top", top + "px");
+        }
+          
     }
 
     public void setSize(int width, int height) {
@@ -328,11 +346,11 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void setTop(int top) {
-        setPopupPosition(top, getPopupLeft());
+        setLocation(top, getAbsoluteLeft());
     }
 
     public void setLeft(int left) {
-        setPopupPosition(getPopupTop(), left);
+        setLocation(getAbsoluteTop(), left);
     }
 
     public void setCaption(String title) {
@@ -515,8 +533,10 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
         if (visible) {
             this.minimized = false;
             show();
+            DOM.addEventPreview(this);
         } else {
-            hide();
+            super.setVisible(false);
+            DOM.removeEventPreview(this);
         }
         this.visible = visible;
     }
@@ -540,7 +560,11 @@ public class GwtInternalFrame extends PopupPanel implements GInternalFrame,
     }
 
     public void show() {
-        super.show();
+        if(desktopPane == null){
+           DOM.setStyleAttribute(getElement(), "position", "relative");
+           RootPanel.get().add(this);
+        }
+        super.setVisible(true);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
     }
