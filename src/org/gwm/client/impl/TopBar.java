@@ -59,7 +59,7 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     }
 
     void setDesktopPane (DefaultGDesktopPane pane) {
-        this.pane = (pane);
+        this.pane = pane;
     }
 
     private void buildGui() {
@@ -116,8 +116,21 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
             if (type != Event.ONMOUSEMOVE
                     || (type == Event.ONMOUSEMOVE && dragging)) {
                 Element em = caption.getElement();
-                int x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
-                int y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
+                System.out.println("DOM.eventGetClientX(e) " + DOM.eventGetClientX(e));
+                System.out.println("DOM.eventGetClientY(e) " + DOM.eventGetClientY(e));
+                System.out.println("DOM.getAbsoluteLeft(e) " + DOM.getAbsoluteLeft(em));
+                System.out.println("DOM.getAbsoluteTop(e) " + DOM.getAbsoluteLeft(em));
+                int x =0;
+                int y = 0;
+                if(pane!=null){
+                x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
+                y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
+                }else{
+                    x = DOM.eventGetClientX(e) - parent.getAbsoluteLeft();
+                    y = DOM.eventGetClientY(e) - parent.getAbsoluteTop();
+                }
+              //  int x = DOM.eventGetClientX(e);
+              // int y = DOM.eventGetClientY(e);
 
                 if (type == Event.ONMOUSEMOVE) {
                     onMouseMove(this, x, y);
@@ -154,20 +167,16 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     }
 
     public void onMouseMove(Widget sender, int x, int y) {
+        System.out.println("X : " + x + " Y : " + y);
         if (draggable && dragging) {
-            int absX = x + sender.getAbsoluteLeft();
-            int absY = y + sender.getAbsoluteTop();
+            int absX = x + sender.getParent().getAbsoluteLeft();
+            int absY = y + sender.getParent().getAbsoluteTop();
+            System.out.println("absX : "+ absX + " / absY : " + absY);
             int newLeft = absX - dragStartX;
             int newTop = absY - dragStartY;
-            int pl = pane.getAbsoluteLeft();
-            int pt = pane.getAbsoluteTop();
-            int nr = newLeft + parent.getOffsetWidth();
-            int nb = newTop + parent.getOffsetHeight();
-            int pr = pl + pane.getOffsetWidth();
-            int pb = pt + pane.getOffsetHeight();
-            // if ((newLeft > pl) && (newTop > pt) && (nr < pr) && (nb < pb)) {
-                parent.setPopupPosition(newLeft, newTop);
-            // }
+            System.out.println("dragStartX : "+ dragStartX + " / dragStartY : " + dragStartY);
+            System.out.println("newLeft : "+ newLeft + " / newTop : " + newTop);
+            parent.setLocation(newLeft, newTop);
         }
     }
 

@@ -17,12 +17,11 @@ import com.google.gwt.user.client.ui.*;
  * @author Marcelo Emanoel
  * @since 18/12/2006
  */
-public class DefaultGDesktopPane extends DockPanel implements WindowResizeListener, GDesktopPane {
+public class DefaultGDesktopPane extends Composite implements WindowResizeListener, GDesktopPane {
 
-    private HTML centerWidget;
+    private AbsolutePanel frameContainer;
+    private DockPanel desktopWidget;
     private IconBar buttonBar;
-    private int myTop;
-    private int myLeft;
 
     private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
         public void internalFrameIconified(GInternalFrameEvent evt) {
@@ -39,21 +38,22 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     }
 
     private void initialize() {
-        centerWidget = new HTML();
-        buttonBar = new IconBar (this);
         this.frames = new ArrayList();
     }
 
     private void setupUI() {
-        setSize("100%", "90%");
-        add(centerWidget, DockPanel.CENTER);
+        desktopWidget = new DockPanel();
+        frameContainer = new AbsolutePanel();
+        buttonBar = new IconBar (this);
+        desktopWidget.add(frameContainer, DockPanel.CENTER);
+        frameContainer.setStyleName("gwm-GDesktopPane-FrameContainer");
 
-        add(buttonBar, DockPanel.SOUTH);
-        setCellHeight(buttonBar, "30px");
+        desktopWidget.add(buttonBar, DockPanel.SOUTH);
+        desktopWidget.setCellHeight(buttonBar, "30px");
         
+        initWidget(desktopWidget);
         setStyleName("gwm-GDesktopPane");
-        this.myTop = getAbsoluteTop();
-        this.myLeft = getAbsoluteLeft();
+        
     }
 
     private void setupListeners() {
@@ -92,7 +92,7 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setParentDesktop (this);
         int spos = (frames.size() + 1) * 30;
-        internalFrame.setLocation (getAbsoluteLeft() + spos, getAbsoluteTop() + spos);
+        frameContainer.add((GwtInternalFrame)internalFrame, frameContainer.getAbsoluteLeft() + spos, getAbsoluteTop() + spos);
         internalFrame.addInternalFrameListener(adapter);
         frames.add (internalFrame);
     }
@@ -132,6 +132,10 @@ public class DefaultGDesktopPane extends DockPanel implements WindowResizeListen
     public void setSelectedFrame(GInternalFrame newSelectedFrame) {
         // TODO Auto-generated method stub
         
+    }
+    
+    public void setWidgetPosition(GwtInternalFrame frame, int left, int top){
+        frameContainer.setWidgetPosition(frame, left, top);
     }
 
 }

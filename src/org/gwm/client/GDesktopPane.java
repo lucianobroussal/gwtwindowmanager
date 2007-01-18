@@ -48,4 +48,6 @@ public interface GDesktopPane {
     public void setSelectedFrame(GInternalFrame newSelectedFrame);
     
     public GInternalFrame getSelectedFrame();
+
+     
 }
