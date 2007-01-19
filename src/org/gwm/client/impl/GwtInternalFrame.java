@@ -44,8 +44,8 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Johan Vos
  */
-public class GwtInternalFrame extends SimplePanel implements GInternalFrame, 
-        EventListener , EventPreview{
+public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
+        EventListener, EventPreview {
 
     private static GInternalFrame topFrame;
 
@@ -106,6 +106,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private GDesktopPane desktopPane;
 
     private List listeners;
+
+    private int left;
+
+    private int top;
 
     public GwtInternalFrame() {
         this("");
@@ -203,12 +207,12 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     public void setParentDesktop(GDesktopPane pane) {
         this.desktopPane = pane;
         if (topBar != null) {
-            topBar.setDesktopPane((DefaultGDesktopPane)pane);
+            topBar.setDesktopPane((DefaultGDesktopPane) pane);
         }
     }
 
-    GDesktopPane getDesktopPane () {
-      return this.desktopPane;
+    GDesktopPane getDesktopPane() {
+        return this.desktopPane;
     }
 
     public void setTheme(String theme) {
@@ -216,7 +220,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         buildGui();
     }
 
-    protected String getTheme () {
+    protected String getTheme() {
         return this.currentTheme;
     }
 
@@ -277,8 +281,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     public boolean isMinimized() {
         return this.minimized;
     }
-    
-    public boolean isDraggable(){
+
+    public boolean isDraggable() {
         return topBar.isDraggable();
     }
 
@@ -287,14 +291,16 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void setLocation(int left, int top) {
-        if(desktopPane != null)
-        ((DefaultGDesktopPane)desktopPane).setWidgetPosition(this, left, top);
-        else{
+        if (desktopPane != null)
+            ((DefaultGDesktopPane) desktopPane).setWidgetPosition(this, left,
+                    top);
+        else {
             Element elem = getElement();
             DOM.setStyleAttribute(elem, "left", left + "px");
             DOM.setStyleAttribute(elem, "top", top + "px");
         }
-          
+        this.left = left;
+        this.top = top;
     }
 
     public void setSize(int width, int height) {
@@ -346,11 +352,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void setTop(int top) {
-        setLocation(top, getAbsoluteLeft());
+        setLocation(top, left);
     }
 
     public void setLeft(int left) {
-        setLocation(getAbsoluteTop(), left);
+        setLocation(top, left);
     }
 
     public void setCaption(String title) {
@@ -494,11 +500,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public int getLeft() {
-        return 0;
+        return left;
     }
 
     public int getTop() {
-        return 0;
+        return top;
     }
 
     public int getMaximumWidth() {
@@ -548,8 +554,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     public void startResizing() {
         if (url != null) {
             this.previousUrl = url;
-            this.myContent = new Label ("");
-            panel.setWidget (1, 1, myContent);
+            this.myContent = new Label("");
+            panel.setWidget(1, 1, myContent);
         }
         this.url = null;
     }
@@ -560,9 +566,9 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void show() {
-        if(desktopPane == null){
-           DOM.setStyleAttribute(getElement(), "position", "relative");
-           RootPanel.get().add(this);
+        if (desktopPane == null) {
+            DOM.setStyleAttribute(getElement(), "position", "absolute");
+            RootPanel.get().add(this);
         }
         super.setVisible(true);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);

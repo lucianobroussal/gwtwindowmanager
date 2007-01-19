@@ -116,21 +116,21 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
             if (type != Event.ONMOUSEMOVE
                     || (type == Event.ONMOUSEMOVE && dragging)) {
                 Element em = caption.getElement();
-                System.out.println("DOM.eventGetClientX(e) " + DOM.eventGetClientX(e));
-                System.out.println("DOM.eventGetClientY(e) " + DOM.eventGetClientY(e));
-                System.out.println("DOM.getAbsoluteLeft(e) " + DOM.getAbsoluteLeft(em));
-                System.out.println("DOM.getAbsoluteTop(e) " + DOM.getAbsoluteLeft(em));
-                int x =0;
-                int y = 0;
-                if(pane!=null){
-                x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
-                y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
-                }else{
-                    x = DOM.eventGetClientX(e) - parent.getAbsoluteLeft();
-                    y = DOM.eventGetClientY(e) - parent.getAbsoluteTop();
-                }
-              //  int x = DOM.eventGetClientX(e);
-              // int y = DOM.eventGetClientY(e);
+//                System.out.println("DOM.eventGetClientX(e) " + DOM.eventGetClientX(e));
+//                System.out.println("DOM.eventGetClientY(e) " + DOM.eventGetClientY(e));
+//                System.out.println("DOM.getAbsoluteLeft(e) " + DOM.getAbsoluteLeft(em));
+//                System.out.println("DOM.getAbsoluteTop(e) " + DOM.getAbsoluteLeft(em));
+//                int x =0;
+//                int y = 0;
+//                if(pane!=null){
+//                x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
+//                y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
+//                }else{
+//                    x = DOM.eventGetClientX(e) - parent.getAbsoluteLeft();
+//                    y = DOM.eventGetClientY(e) - parent.getAbsoluteTop();
+//                }
+                int x = DOM.eventGetClientX(e);
+               int y = DOM.eventGetClientY(e);
 
                 if (type == Event.ONMOUSEMOVE) {
                     onMouseMove(this, x, y);
@@ -152,7 +152,7 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     }
 
     public void onMouseDown(Widget sender, int x, int y) {
-        if (draggable) {
+        if (draggable && this == sender) {
             dragging = true;
             DOM.setCapture(sender.getElement());
             dragStartX = x;
@@ -171,9 +171,11 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
         if (draggable && dragging) {
             int absX = x + sender.getParent().getAbsoluteLeft();
             int absY = y + sender.getParent().getAbsoluteTop();
-            System.out.println("absX : "+ absX + " / absY : " + absY);
-            int newLeft = absX - dragStartX;
-            int newTop = absY - dragStartY;
+            System.out.println("parent.getLeft() : "+ parent.getLeft() + " / parent.getTop() : " + parent.getTop());
+            int newLeft = x - dragStartX + parent.getLeft();
+            int newTop = y - dragStartY + parent.getTop();
+            dragStartX =x;
+            dragStartY =y;
             System.out.println("dragStartX : "+ dragStartX + " / dragStartY : " + dragStartY);
             System.out.println("newLeft : "+ newLeft + " / newTop : " + newTop);
             parent.setLocation(newLeft, newTop);

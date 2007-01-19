@@ -6,7 +6,6 @@ import org.gwm.client.GInternalFrameFactory;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.GDialog;
 import org.gwm.client.impl.GwtInternalFrame;
-import org.gwm.client.impl.TestDefaultGDesktopPane;
 
 import asquare.gwt.tk.client.ui.GlassPanel;
 
@@ -15,9 +14,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.client.ui.Button;
 
 
 public class ShowGwtFrameSample implements EntryPoint {
@@ -60,6 +57,7 @@ public class ShowGwtFrameSample implements EntryPoint {
         gif2.setSize (300,200);
         pane.addFrame(gif2);
         gif2.setVisible(true);
+        gif2.setLocation(0, 0);
         Button button = new Button("Test free Frame :)");
         button.addClickListener(new ClickListener(){
 
@@ -67,8 +65,14 @@ public class ShowGwtFrameSample implements EntryPoint {
                 GInternalFrame gif = new GwtInternalFrame("http://www.google.com");
                 gif.setUrl ("http://www.google.com");
                 gif.setSize(300, 200);
-                gif.setLocation(200, 200);
+                gif.setLocation(0, 0);
                 gif.setVisible(true);
+                
+//                PopupPanel p = new PopupPanel();
+//                p.setWidget(new Label("hjdhj"));
+//                p.setPopupPosition(0, 0);
+//                DOM.setStyleAttribute(p.getElement(), "border", "1px solid red");
+//                p.show();
             }
             
         });
