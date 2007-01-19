@@ -92,7 +92,8 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setParentDesktop (this);
         int spos = (frames.size() + 1) * 30;
-        frameContainer.add((GwtInternalFrame)internalFrame, frameContainer.getAbsoluteLeft() + spos, getAbsoluteTop() + spos);
+        frameContainer.add((GwtInternalFrame)internalFrame, frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
+        internalFrame.setLocation(frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
         internalFrame.addInternalFrameListener(adapter);
         frames.add (internalFrame);
     }
