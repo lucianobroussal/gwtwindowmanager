@@ -30,7 +30,7 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
     private Label caption;
 
-    private String currentStyle;
+    private String currentTheme;
 
     private String title;
 
@@ -63,24 +63,24 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     }
 
     private void buildGui() {
-        this.currentStyle = parent.getTheme();
+        this.currentTheme = parent.getTheme();
         this.title = parent.getCaption();
         addStyleName("topBar");
         caption = new Label(title);
         caption.addStyleName("caption");
         caption.addMouseListener(this);
         imgClose = new Image();
-        imgClose.setUrl("themes/" + this.currentStyle + "/close.gif");
+        imgClose.setUrl("themes/" + this.currentTheme + "/close.gif");
         imgClose.addStyleName("float");
         imgClose.addStyleName("button");
         imgClose.addClickListener(this);
         imgMinimize = new Image();
-        imgMinimize.setUrl("themes/" + this.currentStyle + "/minimize.gif");
+        imgMinimize.setUrl("themes/" + this.currentTheme + "/minimize.gif");
         imgMinimize.addStyleName("float");
         imgMinimize.addStyleName("button");
         imgMinimize.addClickListener(this);
         imgMaximize = new Image();
-        imgMaximize.setUrl("themes/" + this.currentStyle + "/maximize.gif");
+        imgMaximize.setUrl("themes/" + this.currentTheme + "/maximize.gif");
         imgMaximize.addStyleName("float");
         imgMaximize.addStyleName("button");
         imgMaximize.addClickListener(this);
@@ -203,9 +203,6 @@ System.out.println ("MOUSEUP");
         this.caption = caption;
     }
 
-    public void setCurrentStyle(String currentStyle) {
-        this.currentStyle = currentStyle;
-    }
 
     public void setDraggable(boolean draggable) {
         this.draggable = draggable;
@@ -246,5 +243,12 @@ System.out.println ("MOUSEUP");
     public boolean isDraggable() {
         return draggable;
     }
+
+	public void setTheme(String theme) {
+		currentTheme = theme;
+		imgClose.setUrl("themes/" + this.currentTheme + "/close.gif");
+		imgMinimize.setUrl("themes/" + this.currentTheme + "/minnimize.gif");
+		imgMaximize.setUrl("themes/" + this.currentTheme + "/maximize.gif");
+	}
 
 }
