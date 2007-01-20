@@ -78,7 +78,7 @@
 	cursor:se-resize;	
 }
 
-.resizeCorner {
+.theme1_resizeCorner {
   cursor: se-resize;
   background:transparent url(theme1/sizer.gif) bottom right no-repeat;
   width: 12px;
