@@ -217,10 +217,17 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     public void setTheme(String theme) {
         this.currentTheme = theme;
-        buildGui();
+        //buildGui();
+        applyTheme();
     }
 
-    protected String getTheme() {
+    private void applyTheme() {
+		topBar.setTheme(currentTheme);
+		resizeImage.setTheme(currentTheme);
+		
+	}
+
+	protected String getTheme() {
         return this.currentTheme;
     }
 

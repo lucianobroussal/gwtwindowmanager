@@ -46,7 +46,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
   private void buildGui() {
     this.currentStyle = parent.getTheme();
     label = new Label("");
-    label.addStyleName ("resizeCorner");
+    label.setStyleName (currentStyle + "_resizeCorner");
     label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
     label.addMouseListener (this);
     add (label);
@@ -93,5 +93,10 @@ public class ResizeImage extends FlowPanel implements MouseListener {
   public boolean onEventPreview (Event evt) {
     return true;
   }
+
+public void setTheme(String currentTheme) {
+	label.setStyleName(currentTheme + "_resizeCorner");
+	
+}
 
 }
