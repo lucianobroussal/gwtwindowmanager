@@ -25,11 +25,8 @@ public interface GInternalFrameListener {
 
     public void frameIconified(GInternalFrameEvent evt);
 
+    public void frameDeiconified(GInternalFrameEvent evt);
+
     public void frameMoved(GInternalFrameEvent evt);
 
-    public void frameActivated(GInternalFrameEvent evt);
-
-    public void frameDeactivated(GInternalFrameEvent evt);
-
-    public void frameHidden(GInternalFrameEvent evt);
 }
