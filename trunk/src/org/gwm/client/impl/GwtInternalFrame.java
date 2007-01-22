@@ -31,6 +31,7 @@ import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.EventPreview;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -111,6 +112,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     private int top;
 
+    private Frame frame;
+
     public GwtInternalFrame() {
         this("");
     }
@@ -125,7 +128,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.resizable = true;
         initializeFrame();
         buildGui();
-        setTheme("theme1");
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS);
     }
 
@@ -159,33 +161,24 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.panel.setSize(this.width + "px", this.height + "px");
         panel.setWidget(0, 0, imgTopLeft);
         panel.setWidget(0, 1, topBar);
-        //panel.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
+        panel.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         panel.setWidget(0, 2, imgTopRight);
         panel.setWidget(2, 0, imgBotLeft);
         panel.setWidget(2, 2, imgBotRight);
         if (url != null) {
-            String urlCode = "<iframe src=\"" + url + "\" height=\""
-                    + (this.height - 60) + "\" width=\"" + (this.width - 40)
-                    + "\" frameborder=\"0\"/>";
-            myContent = new HTML(urlCode);
+            setUrl(url);
         }
         panel.setWidget(1, 1, myContent);
-        panel.getCellFormatter().setStyleName(1, 1, currentTheme + "_content");
         panel.setHTML(1, 0, "&nbsp;");
-        panel.getCellFormatter().setStyleName(1, 0, currentTheme + "_w");
         panel.setHTML(1, 2, "&nbsp;");
-        panel.getCellFormatter().setStyleName(1, 2, currentTheme + "_e");
 
         panel.setHTML(2, 0, "&nbsp;");
-        panel.getCellFormatter().setStyleName(2, 0, currentTheme + "_sw");
 
         panel.setHTML(2, 1, "&nbsp;");
-        panel.getCellFormatter().setStyleName(2, 1, currentTheme + "_s");
 
         if (resizable) {
             panel.setWidget(2, 2, resizeImage);
         } else {
-            panel.getCellFormatter().setStyleName(2, 2, currentTheme + "_se");
             panel.setHTML(2, 2, "&nbsp;");
         }
         panel.getCellFormatter().setHeight(1, 1, "100%");
@@ -198,6 +191,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         panel.setCellSpacing(0);
         setStyleName("gwt-DialogBox");
         super.setWidget(panel);
+        setTheme(currentTheme);
     }
 
     public void setParentDesktop(GDesktopPane pane) {
@@ -213,7 +207,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     public void setTheme(String theme) {
         this.currentTheme = theme;
-        // buildGui();
+        //buildGui();
         applyTheme();
     }
 
@@ -225,6 +219,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         imgTopRight.addStyleName(this.currentTheme + "_ne");
         imgBotLeft.addStyleName(this.currentTheme + "_sw");
         imgBotRight.addStyleName(this.currentTheme + "_se");
+        panel.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         panel.getCellFormatter().setStyleName(1, 1, currentTheme + "_content");
         panel.getCellFormatter().setStyleName(1, 0, currentTheme + "_w");
         panel.getCellFormatter().setStyleName(1, 2, currentTheme + "_e");
@@ -235,6 +230,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         } else {
             panel.getCellFormatter().setStyleName(2, 2, currentTheme + "_se");
         }
+       
 
     }
 
@@ -324,12 +320,12 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
-        buildGui();
+        panel.setSize(width +"px", height +"px");
+        fireFrameResized();
     }
 
     public void setWidth(int width) {
-        this.width = width;
-        panel.setWidth(width + "px");
+        setSize(width, height);
     }
 
     public int getWidth() {
@@ -337,8 +333,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void setHeight(int height) {
-        this.height = height;
-        panel.setHeight(height + "px");
+        setSize(width, height);
     }
 
     public int getHeight() {
@@ -388,11 +383,20 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     public void setUrl(String url) {
         this.url = url;
-        String urlCode = "<iframe src=\"" + url + "\" height=\""
-                + getOffsetHeight() + "\" width=\"" + getOffsetWidth()
-                + "\" frameborder=\"0\"/>";
-        myContent = new HTML(urlCode);
-        buildGui();
+        myContent = getFrame();
+        ((Frame)myContent).setUrl(url);
+        panel.setWidget(1, 1, myContent);
+    }
+    
+    private Frame getFrame(){
+        if(frame == null){
+            frame = new Frame(url);
+            frame.setWidth("100%");
+            frame.setHeight("100%");
+            DOM.setStyleAttribute(frame.getElement(), "border", "none");
+        }
+        return frame;
+        
     }
 
     public void setResizable(boolean resizable) {
