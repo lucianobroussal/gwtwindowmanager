@@ -16,6 +16,8 @@
 
 package org.gwm.client;
 
+import org.gwm.client.impl.GwtInternalFrame;
+
 import com.google.gwt.core.client.GWT;
 
 /**
@@ -35,7 +37,7 @@ public class GInternalFrameFactory {
      * @return a FramesManager instance.
      */
     public GInternalFrame newGInternalFrame(String caption , Class frameClassImpl) {
-        GInternalFrame newFrame = (GInternalFrame)GWT.create(frameClassImpl);
+        GInternalFrame newFrame = (GInternalFrame)GWT.create(GwtInternalFrame.class);
         newFrame.setCaption(caption);
         return newFrame;
     }

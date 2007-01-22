@@ -13,6 +13,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -53,7 +54,8 @@ public class ShowGwtFrameSample implements EntryPoint {
         
 
         GInternalFrame gif2 = new GwtInternalFrame("LodgON");
-        gif2.setUrl ("http://www.lodgon.com");
+        //gif2.setUrl ("http://www.lodgon.com");
+        gif2.setContent(new Label("GWT content"));
         gif2.setSize (300,200);
         pane.addFrame(gif2);
         gif2.setVisible(true);
