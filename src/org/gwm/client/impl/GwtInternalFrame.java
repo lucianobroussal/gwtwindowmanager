@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Johan Vos
  */
 public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
-        EventListener {
+        EventListener, EventPreview {
 
     private static GInternalFrame topFrame;
 
@@ -77,9 +77,9 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     private int minWidth, minHeight;
 
-    private int width;
+    private int width = -1;
 
-    private int height;
+    private int height = -1;
 
     private String currentTheme;
 
@@ -142,7 +142,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         imgBotRight = new Label();
         this.maxWidth = Window.getClientWidth();
         this.maxHeight = Window.getClientHeight();
-        this.minWidth = 200;
+        this.minWidth = 240;
         this.minHeight = 40;
         this.width = DEFAULT_WIDTH;
         this.height = DEFAULT_HEIGHT;
@@ -159,7 +159,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.panel.setSize(this.width + "px", this.height + "px");
         panel.setWidget(0, 0, imgTopLeft);
         panel.setWidget(0, 1, topBar);
-        panel.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
+        //panel.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         panel.setWidget(0, 2, imgTopRight);
         panel.setWidget(2, 0, imgBotLeft);
         panel.setWidget(2, 2, imgBotRight);
@@ -262,7 +262,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
             getContent().setVisible(false);
         }
         this.minimized = true;
-        fireFrameIconified();
     }
 
     public void maximize() {
@@ -275,7 +274,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.height = maxHeight;
         this.maximized = true;
         buildGui();
-        fireFrameMaximized();
     }
 
     public void restore() {
@@ -327,11 +325,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.width = width;
         this.height = height;
         buildGui();
-        fireFrameResized();
     }
 
     public void setWidth(int width) {
-        setSize(width ,height);
+        this.width = width;
+        panel.setWidth(width + "px");
     }
 
     public int getWidth() {
@@ -339,7 +337,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void setHeight(int height) {
-        setSize(width ,height);
+        this.height = height;
+        panel.setHeight(height + "px");
     }
 
     public int getHeight() {
@@ -426,10 +425,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         }
     }
 
-//    public boolean onEventPreview(Event evt) {
-//        // super.onEventPreview(evt); We don't take this into account
-//        return true;
-//    }
+    public boolean onEventPreview(Event evt) {
+        // super.onEventPreview(evt); We don't take this into account
+        return true;
+    }
 
     public void addGFrameListener(GInternalFrameListener listener) {
         listeners.add(listener);
@@ -439,12 +438,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         listeners.remove(listener);
     }
 
-    public void setMaximized(boolean maximized) {
-        if(maximized && this.maximized == false){
-            maximize();
-        }else if(!maximized && this.minimized == false){
-            minimize();
-        }
+    public void setMaximized(boolean v) {
     }
 
     
@@ -496,7 +490,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     /**
      * Fires the frameMoved event of this frame to its listeners.
      */
-    public  void fireFrameMoved() {
+    private void fireFrameMoved() {
         for (int i = 0; i < listeners.size(); i++) {
             GInternalFrameListener listener = (GInternalFrameListener) listeners
                     .get(i);
@@ -554,10 +548,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         if (visible) {
             this.minimized = false;
             show();
-            //DOM.addEventPreview(this);
+            DOM.addEventPreview(this);
         } else {
             super.setVisible(false);
-            //DOM.removeEventPreview(this);
+            DOM.removeEventPreview(this);
         }
         this.visible = visible;
     }
