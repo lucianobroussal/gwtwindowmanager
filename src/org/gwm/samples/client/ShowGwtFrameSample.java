@@ -49,15 +49,18 @@ public class ShowGwtFrameSample implements EntryPoint {
         RootPanel root = RootPanel.get("pane");
         //to be done after adding windows!!!! if not JVM crash TO BE FIX
         root.add((Widget)pane);
-        pane.addFrame(gif);
-        gif.setVisible(true);
+        //gif.setTheme("nuncio");
+        //pane.addFrame(gif);
+        //gif.setVisible(true);
         
 
-        GInternalFrame gif2 = new GwtInternalFrame("LodgON");
+        GInternalFrame gif2 = new GwtInternalFrame("44333333333333");
         //gif2.setUrl ("http://www.lodgon.com");
-        gif2.setContent(new Label("GWT content"));
-        gif2.setSize (300,200);
+        //gif2.setContent(new Label("Croco"));
+        gif2.setSize(500,200);
         pane.addFrame(gif2);
+        //gif2.setResizable(false);
+        gif2.setTheme("nuncio");
         gif2.setVisible(true);
         gif2.setLocation(0, 0);
         Button button = new Button("Test free Frame :)");
@@ -68,7 +71,9 @@ public class ShowGwtFrameSample implements EntryPoint {
                 gif.setUrl ("http://www.google.com");
                 gif.setSize(300, 200);
                 gif.setLocation(0, 0);
+                gif.setTheme("mac_os_x");
                 gif.setVisible(true);
+                
                 
 //                PopupPanel p = new PopupPanel();
 //                p.setWidget(new Label("hjdhj"));
@@ -140,7 +145,7 @@ public class ShowGwtFrameSample implements EntryPoint {
 //        b.setPopupPosition(300,300);
 //        b.show();
         GwtInternalFrame frame1 = new GwtInternalFrame("back");
-        frame1.setTheme("theme1");
+        frame1.setTheme("alphacube");
         frame1.setContent(button1);
         frame1.show();
 //

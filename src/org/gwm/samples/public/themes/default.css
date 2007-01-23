@@ -14,8 +14,19 @@
 	opacity: 0;
 }
 
+.default_caption{
+	width:100%;
+	color:blue;
+	font-size:10px;
+	overflow:hidden;
+}
+
+.default_topBar {
+  width: 100%;
+}
+
 .default_nw {
-	width: 5px;
+	width: 9px;
 	height: 23px;
 	background: transparent url(default/top_left.gif) no-repeat 0 0;		
 }
@@ -28,23 +39,24 @@
 .default_ne {
 	width: 9px;
 	height: 23px;
-	background: transparent url(default/top_right.gif) no-repeat 0 0;		
+	background: transparent url(default/top_right.gif) no-repeat top right;		
 }
 
 .default_e {
-	width: 2px;
-	background: transparent url(default/center_right.gif) repeat-y 0 0;	
+	width: 10px;
+	background: transparent url(default/center_right.gif) repeat-y top right;	
 }
 
 .default_w {
 	width: 2px;
-	background: transparent url(default/center_left.gif) repeat-y 0 0;		
+	background: transparent url(default/center_right.gif) repeat-y 0 0;		
 }
 
 .default_sw {
 	width: 9px;
 	height: 19px;
 	background: transparent url(default/bottom_left.gif) no-repeat 0 0;			
+
 }
 
 .default_s {
@@ -68,6 +80,7 @@
 .default_close {
 	width: 14px;
 	height: 14px;
+	margin-left:4px;
 	background: transparent url(default/close.gif) no-repeat 0 0;			
 	cursor:pointer;
 }
@@ -75,6 +88,7 @@
 .default_minimize {
 	width: 14px;
 	height: 15px;
+	margin-left:4px;
 	background: transparent url(default/minimize.gif) no-repeat 0 0;			
 	cursor:pointer;
 }
@@ -82,6 +96,7 @@
 .default_maximize {
 	width: 14px;
 	height: 15px;
+	margin-left:4px;	
 	background: transparent url(default/maximize.gif) no-repeat 0 0;			
 	cursor:pointer;
 }

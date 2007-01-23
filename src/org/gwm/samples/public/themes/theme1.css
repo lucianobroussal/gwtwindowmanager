@@ -1,16 +1,15 @@
-.float {
+.theme1_caption{
+	width:100%;
+	color:blue;
+	font-size:10px;
+
 }
 
-.caption {
-  float: right;
-  text-align:center;
-}
-
-.topBar {
+.theme1_topBar {
   width: 100%;
-  float: right;
   cursor: move;
 }
+
 
 .theme1_nw {
   width: 16px;
@@ -78,12 +77,7 @@
 	cursor:se-resize;	
 }
 
-.theme1_resizeCorner {
-  cursor: se-resize;
-  background:transparent url(theme1/sizer.gif) bottom right no-repeat;
-  width: 12px;
-  height: 24px;
-}
+
 
 
 .theme1_close {
