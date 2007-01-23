@@ -171,7 +171,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         topRow.setWidget(0, 0, imgTopLeft);
         topRow.setWidget(0, 1, topBar);
         topRow.setWidget(0, 2, imgTopRight);
-        bottomRow.setHTML(0, 0,  "&nbsp;");
+        bottomRow.setWidget(0, 0,  imgBotLeft);
         bottomRow.setHTML(0, 1, "&nbsp;");
         bottomRow.setHTML(0, 2,  "&nbsp;");
         if (url != null) {
@@ -240,14 +240,17 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.caption.setStyleName(currentTheme + "_title");
         imgTopLeft.setStyleName(this.currentTheme + "_nw");
         imgTopRight.setStyleName(this.currentTheme + "_ne");
-        //imgBotLeft.setStyleName(this.currentTheme + "_sw");
+        imgBotLeft.setStyleName(this.currentTheme + "_sw");
         //imgBotRight.setStyleName(this.currentTheme + "_se");
         topRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         centerRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_content");
         centerRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_w");
         centerRow.getCellFormatter().setStyleName(0, 2, currentTheme + "_e");
-        bottomRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_sw");
+        //bottomRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_sw");
         bottomRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_s");
+        topRow.getCellFormatter().setVerticalAlignment(0,0 , HasVerticalAlignment.ALIGN_BOTTOM);
+        topRow.getCellFormatter().setVerticalAlignment(0,2 , HasVerticalAlignment.ALIGN_BOTTOM);
+        bottomRow.getCellFormatter().setVerticalAlignment(0,0 , HasVerticalAlignment.ALIGN_TOP);
         bottomRow.getCellFormatter().setVerticalAlignment(0,2 , HasVerticalAlignment.ALIGN_TOP);
         if (resizable) {
             resizeImage.setTheme(currentTheme);

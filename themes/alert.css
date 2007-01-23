@@ -1,3 +1,5 @@
+
+
 .overlay_alert {
 	background-color: #85BBEF;
 	filter:alpha(opacity=60);
@@ -19,12 +21,13 @@
 .alert_ne {
 	width: 5px;
 	height: 5px;
-	background: transparent url(alert/top_right.gif) no-repeat bottom left			
+	background: transparent url(alert/top_right.gif) no-repeat bottom right;			
 }
 
 .alert_e {
 	width: 5px;
-	background: transparent url(alert/right.gif) repeat-y 0 0;			
+	height:5px;
+	background: transparent url(alert/right.gif) repeat-y top right;			
 }
 
 .alert_w {
