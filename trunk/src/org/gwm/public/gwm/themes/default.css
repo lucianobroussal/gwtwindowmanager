@@ -49,14 +49,12 @@
 
 .default_w {
 	width: 2px;
-	background: transparent url(default/center_right.gif) repeat-y 0 0;		
+	background: transparent url(default/center_left.gif) repeat-y 0 0;		
 }
-
 .default_sw {
 	width: 9px;
 	height: 19px;
 	background: transparent url(default/bottom_left.gif) no-repeat 0 0;			
-
 }
 
 .default_s {
