@@ -95,7 +95,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
   }
 
 public void setTheme(String currentTheme) {
-	label.setStyleName(currentTheme + "_resizeCorner");
+	label.setStyleName(currentTheme + "_sizer");
 	
 }
 

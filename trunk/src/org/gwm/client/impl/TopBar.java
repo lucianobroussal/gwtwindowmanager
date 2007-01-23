@@ -20,13 +20,14 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListener;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TopBar extends FlowPanel implements ClickListener, MouseListener {
+public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     private Label caption;
 
@@ -36,11 +37,11 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
     private GwtInternalFrame parent;
 
-    private Image imgClose;
+    private Label closeArea;
 
-    private Image imgMaximize;
+    private Label maximizeArea;
 
-    private Image imgMinimize;
+    private Label minimizeArea;
 
     private int dragStartX, dragStartY;
 
@@ -50,12 +51,14 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
 
     private DefaultGDesktopPane pane;
 
+
     public TopBar(GwtInternalFrame parent) {
         super();
         this.parent = parent;
         this.draggable = true;
         buildGui();
         sinkEvents(Event.MOUSEEVENTS);
+        
     }
 
     void setDesktopPane (DefaultGDesktopPane pane) {
@@ -65,43 +68,37 @@ public class TopBar extends FlowPanel implements ClickListener, MouseListener {
     private void buildGui() {
         this.currentTheme = parent.getTheme();
         this.title = parent.getCaption();
-        addStyleName("topBar");
         caption = new Label(title);
-        caption.addStyleName("caption");
         caption.addMouseListener(this);
-        imgClose = new Image();
-        imgClose.setUrl("themes/" + this.currentTheme + "/close.gif");
-        imgClose.addStyleName("float");
-        imgClose.addStyleName("button");
-        imgClose.addClickListener(this);
-        imgMinimize = new Image();
-        imgMinimize.setUrl("themes/" + this.currentTheme + "/minimize.gif");
-        imgMinimize.addStyleName("float");
-        imgMinimize.addStyleName("button");
-        imgMinimize.addClickListener(this);
-        imgMaximize = new Image();
-        imgMaximize.setUrl("themes/" + this.currentTheme + "/maximize.gif");
-        imgMaximize.addStyleName("float");
-        imgMaximize.addStyleName("button");
-        imgMaximize.addClickListener(this);
-        add(caption);
-        add(imgMinimize);
-        add(imgMaximize);
-        add(imgClose);
+        closeArea = new Label();
+        closeArea.addClickListener(this);
+        minimizeArea = new Label();
+        minimizeArea.addClickListener(this);
+        maximizeArea = new Label();
+        maximizeArea.addClickListener(this);
+        setWidget(0,0,caption);
+        getCellFormatter().setWidth(0,0, "100%");
+        setWidget(0,1,minimizeArea);
+        setWidget(0,2,maximizeArea);
+        setWidget(0,3,closeArea);
+        setTheme(currentTheme);
+        setCellPadding(0);
+        setCellSpacing(0);
+        setStyleName("topBar");
     }
 
     public void onClick(Widget w) {
-        if (w.equals(imgClose)) {
+        if (w.equals(closeArea)) {
             parent.close();
         }
-        if (w.equals(imgMaximize)) {
+        if (w.equals(maximizeArea)) {
             if (parent.isMaximized()) {
                 parent.restore();
             } else {
                 parent.maximize();
             }
         }
-        if (w.equals(imgMinimize)) {
+        if (w.equals(minimizeArea)) {
             if (parent.isMinimized()) {
                 parent.restore();
             } else {
@@ -193,9 +190,9 @@ System.out.println ("MOUSEUP");
     }
 
     public void updateTopBar() {
-        imgMaximize.setVisible(parent.isMaximizable());
-        imgMinimize.setVisible(parent.isMinimizable());
-        imgClose.setVisible(parent.isCloseable());
+        maximizeArea.setVisible(parent.isMaximizable());
+        minimizeArea.setVisible(parent.isMinimizable());
+        closeArea.setVisible(parent.isCloseable());
 
     }
 
@@ -220,17 +217,7 @@ System.out.println ("MOUSEUP");
         this.dragStartY = dragStartY;
     }
 
-    public void setImgClose(Image imgClose) {
-        this.imgClose = imgClose;
-    }
 
-    public void setImgMaximize(Image imgMaximize) {
-        this.imgMaximize = imgMaximize;
-    }
-
-    public void setImgMinimize(Image imgMinimize) {
-        this.imgMinimize = imgMinimize;
-    }
 
     public void setParent(GwtInternalFrame parent) {
         this.parent = parent;
@@ -246,9 +233,11 @@ System.out.println ("MOUSEUP");
 
     public void setTheme(String theme) {
         currentTheme = theme;
-        imgClose.setUrl("themes/" + this.currentTheme + "/close.gif");
-        imgMinimize.setUrl("themes/" + this.currentTheme + "/minimize.gif");
-        imgMaximize.setUrl("themes/" + this.currentTheme + "/maximize.gif");
+        caption.setStyleName(currentTheme+ "_caption");
+        closeArea.setStyleName(this.currentTheme + "_close");
+        minimizeArea.setStyleName(this.currentTheme + "_minimize");
+        maximizeArea.setStyleName(this.currentTheme + "_maximize");
+        setStyleName(this.currentTheme + "_topBar");
     }
 
 }
