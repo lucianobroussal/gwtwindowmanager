@@ -195,26 +195,22 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         ui.setWidget(1,0 , centerRow);
         ui.setWidget(2,0 , bottomRow);
         super.setWidget(ui);
-        //ui.setBorderWidth(2);
         setTheme(currentTheme);
         
         topRow.setCellPadding(0);
         topRow.setCellSpacing(0);
         topRow.setHeight("100%");
         topRow.getCellFormatter().setWidth(0,1, "100%");
-//        DOM.setStyleAttribute(topRow.getElement(), "border", "1px solid orange");
         centerRow.setCellPadding(0);
         centerRow.setCellSpacing(0);
         centerRow.setWidth("100%");
         centerRow.setHeight("100%");
         centerRow.getCellFormatter().setWidth(0,1, "100%");
-//        DOM.setStyleAttribute(centerRow.getElement(), "border", "1px solid green");
         
         bottomRow.setCellPadding(0);
         bottomRow.setCellSpacing(0);
         bottomRow.setWidth("100%");
         bottomRow.getCellFormatter().setWidth(0,1, "100%");
-//        DOM.setStyleAttribute(bottomRow.getElement(), "border", "1px solid red");
     }
 
     public void setParentDesktop(GDesktopPane pane) {
@@ -241,12 +237,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         imgTopLeft.setStyleName(this.currentTheme + "_nw");
         imgTopRight.setStyleName(this.currentTheme + "_ne");
         imgBotLeft.setStyleName(this.currentTheme + "_sw");
-        //imgBotRight.setStyleName(this.currentTheme + "_se");
         topRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         centerRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_content");
         centerRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_w");
         centerRow.getCellFormatter().setStyleName(0, 2, currentTheme + "_e");
-        //bottomRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_sw");
         bottomRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_s");
         topRow.getCellFormatter().setVerticalAlignment(0,0 , HasVerticalAlignment.ALIGN_BOTTOM);
         topRow.getCellFormatter().setVerticalAlignment(0,2 , HasVerticalAlignment.ALIGN_BOTTOM);
