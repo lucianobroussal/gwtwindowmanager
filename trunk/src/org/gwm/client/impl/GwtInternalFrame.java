@@ -237,11 +237,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private void applyTheme() {
         topBar.setTheme(currentTheme);
         resizeImage.setTheme(currentTheme);
-        this.caption.addStyleName(currentTheme + "_title");
-        imgTopLeft.addStyleName(this.currentTheme + "_nw");
-        imgTopRight.addStyleName(this.currentTheme + "_ne");
-        imgBotLeft.addStyleName(this.currentTheme + "_sw");
-        imgBotRight.addStyleName(this.currentTheme + "_se");
+        this.caption.setStyleName(currentTheme + "_title");
+        imgTopLeft.setStyleName(this.currentTheme + "_nw");
+        imgTopRight.setStyleName(this.currentTheme + "_ne");
+        imgBotLeft.setStyleName(this.currentTheme + "_sw");
+        imgBotRight.setStyleName(this.currentTheme + "_se");
         topRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         centerRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_content");
         centerRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_w");
