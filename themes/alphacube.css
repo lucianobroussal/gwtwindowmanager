@@ -1,8 +1,9 @@
 
+
 .overlay_alphacube {
 	background-color: #85BBEF;
 	filter:alpha(opacity=60);
-	-moz-opacity: 0.6;
+	-moz-opacity: 	0.6;
 	opacity: 0.6;
 }
 
@@ -41,7 +42,8 @@
 }
 
 .alphacube_e {
-  background: transparent url(alphacube/frame-right.gif) repeat-y top left;			
+  background: transparent url(alphacube/frame-right.gif) repeat-y top right;			
+  background-color:red;
   width:7px;	  
 }
 
@@ -57,7 +59,10 @@
 }
 
 .alphacube_se, .alphacube_sizer  {
-  background: transparent url(alphacube/bottom-right-c.gif) no-repeat 0 0;			
+  position:relative;
+  top:0px;
+  left:0px;	
+  background: transparent url(alphacube/bottom-right-c.gif) no-repeat top left;			
   width:7px;
   height:7px;
 }

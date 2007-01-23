@@ -1,3 +1,5 @@
+
+
 .overlay_darkX {
 	background-color: #85BBEF;
 	filter:alpha(opacity=60);
@@ -35,8 +37,9 @@
 }
 
 .darkX_e {
-  background: transparent url(darkX/frame-right-focused.png) repeat-y top left;			
-  width:4px;	  
+  background: transparent url(darkX/frame-right-focused.png) repeat-y 0 0;			
+  width:3px;	  
+  background-color:1px solid red;
 }
 
 .darkX_sw {
