@@ -5,6 +5,7 @@ import java.util.*;
 import com.google.gwt.user.client.ui.*;
 import org.gwm.client.*;
 import org.gwm.client.event.*;
+import org.gwm.client.impl.*;
 
 public class DebugWindow extends GwtInternalFrame implements GInternalFrameListener {
 
