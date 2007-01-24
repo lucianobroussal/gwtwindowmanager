@@ -26,9 +26,15 @@ public class DebugWindow extends GwtInternalFrame implements GInternalFrameListe
                 clearPanel();
             }
         });
+        this.clearLog.addStyleName (getTheme()+"_clearlog");
 System.out.println("Adding panel");
+        this.dock.addStyleName (getTheme()+"_debugwindow");
         this.dock.add (clearLog, DockPanel.NORTH);
         this.dock.add (panel, DockPanel.CENTER);
+        this.dock.setHorizontalAlignment (dock.ALIGN_CENTER);
+        this.dock.setVerticalAlignment (dock.ALIGN_TOP);
+        this.dock.setCellHorizontalAlignment (clearLog, HasHorizontalAlignment.ALIGN_CENTER);
+        this.dock.setCellVerticalAlignment (clearLog, HasVerticalAlignment.ALIGN_TOP);
         setContent (this.dock);
         registerListeners();
     }
@@ -82,7 +88,8 @@ System.out.println("Adding panel");
     private void addEvent (GInternalFrameEvent evt, String action) {
         final GInternalFrame myFrame = evt.getGInternalFrame();
         String title = myFrame.getCaption();
-        Label l = new Label (action+title);
+        Label l = new Label (action+" "+title);
+        l.addStyleName (getTheme()+"_debug");
         l.addClickListener (new ClickListener () {
             public void onClick (Widget sender) {
                 // myFrame.toFront();

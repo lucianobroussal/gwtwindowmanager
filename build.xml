@@ -68,7 +68,7 @@
 
   <target name="compile" depends="prepare">
     <javac destdir="${class.dir}" debug="true" srcdir="${source.dir}"
-      classpath="${ext.dir}/gwt-user.jar:${ext.dir}/gwt-dev-linux.jar:${ext.dir}/junit.jar:${ext.dir}/gwt-widgets-0.1.1.jar"
+      classpath="${ext.dir}/gwt-user.jar:${ext.dir}/gwt-dev-linux.jar:${ext.dir}/junit.jar:${ext.dir}/gwt-widgets-0.1.1.jar:${ext.dir}/gwttk-0.2.0.jar"
       includes="com/**/*,org/**"/>
   </target>
 
