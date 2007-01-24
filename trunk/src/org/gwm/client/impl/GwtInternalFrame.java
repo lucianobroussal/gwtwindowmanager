@@ -278,6 +278,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
             getContent().setVisible(false);
         }
         this.minimized = true;
+        fireFrameMinimized();
     }
 
     public void maximize() {
@@ -290,6 +291,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.height = maxHeight;
         this.maximized = true;
         buildGui();
+        fireFrameMaximized();
     }
 
     public void restore() {
@@ -461,14 +463,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         return true;
     }
 
-    public void addGFrameListener(GInternalFrameListener listener) {
-        listeners.add(listener);
-    }
-
-    public void removeGFrameListener(GInternalFrameListener listener) {
-        listeners.remove(listener);
-    }
-
     public void setMaximized(boolean v) {
     }
 
@@ -502,6 +496,17 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
             GInternalFrameListener listener = (GInternalFrameListener) listeners
                     .get(i);
             listener.frameMaximized(new GInternalFrameEvent(this));
+        }
+    }
+
+    /**
+     * Fires the frameMinimized event of this frame to its listeners.
+     */
+    public void fireFrameMinimized() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
+            listener.frameMinimized(new GInternalFrameEvent(this));
         }
     }
 
@@ -558,9 +563,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void addInternalFrameListener(GInternalFrameListener l) {
+        listeners.add(l);
     }
 
     public void removeInternalFrameListener(GInternalFrameListener l) {
+        listeners.remove(l);
     }
 
     public GDesktopPane getParentDesktop() {

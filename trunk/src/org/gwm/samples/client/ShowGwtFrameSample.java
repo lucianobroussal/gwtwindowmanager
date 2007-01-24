@@ -3,6 +3,7 @@ package org.gwm.samples.client;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.GInternalFrameFactory;
+import org.gwm.client.impl.DebugWindow;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.GDialog;
 import org.gwm.client.impl.GwtInternalFrame;
@@ -46,7 +47,6 @@ public class ShowGwtFrameSample implements EntryPoint {
         pane.addFrame(gif);
         gif.setSize(300, 200);
         gif.setVisible(true);
-
         gif2 = new GwtInternalFrame("GWT");
         gif2.setUrl("http://www.lodgon.com");
         gif2.setContent(new Label("GWT LABEL Content"));
@@ -55,6 +55,11 @@ public class ShowGwtFrameSample implements EntryPoint {
         gif2.setTheme("default");
         gif2.setVisible(true);
         gif2.setLocation(400, 100);
+
+        GInternalFrame debug = new DebugWindow (pane);
+        debug.setSize (300,300);
+        debug.setVisible (true);
+        pane.addFrame (debug);
         Button button = new Button("Test free Frame :)");
         button.addClickListener(new ClickListener() {
 
