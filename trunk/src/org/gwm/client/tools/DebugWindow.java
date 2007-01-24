@@ -26,8 +26,9 @@ public class DebugWindow extends GwtInternalFrame implements GInternalFrameListe
                 clearPanel();
             }
         });
+System.out.println("Adding panel");
+        this.dock.add (clearLog, DockPanel.NORTH);
         this.dock.add (panel, DockPanel.CENTER);
-        this.dock.add (clearLog, DockPanel.SOUTH);
         setContent (this.dock);
         registerListeners();
     }
@@ -70,7 +71,7 @@ public class DebugWindow extends GwtInternalFrame implements GInternalFrameListe
         addEvent (evt, "Iconified");
     }
 
-    public void frameDeiconified(GInternalFrameEvent evt) {
+    public void frameRestored(GInternalFrameEvent evt) {
         addEvent (evt, "DeIconified");
     }
 
