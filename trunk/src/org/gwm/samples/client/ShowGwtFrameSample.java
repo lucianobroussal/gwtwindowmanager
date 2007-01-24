@@ -43,7 +43,6 @@ public class ShowGwtFrameSample implements EntryPoint {
         RootPanel root = RootPanel.get("pane");
         // to be done after adding windows!!!! if not JVM crash TO BE FIX
         root.add((Widget) pane);
-        gif.setTheme("default");
         pane.addFrame(gif);
         gif.setSize(300, 200);
         gif.setVisible(true);
@@ -52,7 +51,6 @@ public class ShowGwtFrameSample implements EntryPoint {
         gif2.setContent(new Label("GWT LABEL Content"));
         gif2.setSize(300, 200);
         pane.addFrame(gif2);
-        gif2.setTheme("default");
         gif2.setVisible(true);
         gif2.setLocation(400, 100);
 
