@@ -3,7 +3,7 @@ package org.gwm.samples.client;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.GInternalFrameFactory;
-import org.gwm.client.impl.DebugWindow;
+import org.gwm.client.tools.DebugWindow;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.GDialog;
 import org.gwm.client.impl.GwtInternalFrame;
