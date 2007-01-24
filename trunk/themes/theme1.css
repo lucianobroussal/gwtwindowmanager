@@ -131,9 +131,25 @@
 	background:#979BA1;
 }
 
+.theme1_debugwindow {
+	width:90%;
+        height:90%;
+}
+
+
 .theme1_debug {
+	background:#770236;
+        border: 1px solid;
 	color: #DDD;
 	font-family: Tahoma, Arial, sans-serif;
 	font-size: 10px;
+}
+
+
+.theme1_clearlog {
+	color: #DDD;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background:#474BA1;
 }
 
