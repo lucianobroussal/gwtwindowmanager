@@ -49,6 +49,8 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     private boolean draggable;
 
+    private boolean moving;
+
     private DefaultGDesktopPane pane;
 
 
@@ -108,7 +110,6 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     }
 
     public void onBrowserEvent(Event e) {
-System.out.println ("OBE");
         if (draggable) {
             int type = DOM.eventGetType(e);
             if (type != Event.ONMOUSEMOVE
@@ -159,12 +160,19 @@ System.out.println ("OBE");
             int newTop = y - dragStartY + parent.getTop();
             dragStartX =x;
             dragStartY =y;
+            moving = true;
             parent.setLocation(newLeft, newTop);
         }
     }
 
     public void onMouseUp(Widget sender, int x, int y) {
-        dragging = false;
+        if (dragging) {
+            dragging = false;
+            if (moving) {
+                moving = false;
+                parent.fireFrameMoved();
+            }
+        }
         DOM.releaseCapture(sender.getElement());
     }
 
@@ -189,6 +197,7 @@ System.out.println ("OBE");
     }
 
     public void setDragging(boolean dragging) {
+System.out.println ("set dragging to "+dragging);
         this.dragging = dragging;
     }
 

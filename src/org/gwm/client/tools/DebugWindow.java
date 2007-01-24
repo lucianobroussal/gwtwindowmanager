@@ -72,7 +72,7 @@ System.out.println("Adding panel");
     }
 
     public void frameRestored(GInternalFrameEvent evt) {
-        addEvent (evt, "DeIconified");
+        addEvent (evt, "Restored");
     }
 
     public void frameMoved(GInternalFrameEvent evt) {
