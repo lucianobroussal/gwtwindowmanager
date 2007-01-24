@@ -108,6 +108,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     }
 
     public void onBrowserEvent(Event e) {
+System.out.println ("OBE");
         if (draggable) {
             int type = DOM.eventGetType(e);
             if (type != Event.ONMOUSEMOVE
