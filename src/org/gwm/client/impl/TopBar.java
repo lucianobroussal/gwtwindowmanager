@@ -113,19 +113,6 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
             if (type != Event.ONMOUSEMOVE
                     || (type == Event.ONMOUSEMOVE && dragging)) {
                 Element em = caption.getElement();
-//                System.out.println("DOM.eventGetClientX(e) " + DOM.eventGetClientX(e));
-//                System.out.println("DOM.eventGetClientY(e) " + DOM.eventGetClientY(e));
-//                System.out.println("DOM.getAbsoluteLeft(e) " + DOM.getAbsoluteLeft(em));
-//                System.out.println("DOM.getAbsoluteTop(e) " + DOM.getAbsoluteLeft(em));
-//                int x =0;
-//                int y = 0;
-//                if(pane!=null){
-//                x = DOM.eventGetClientX(e) - DOM.getAbsoluteLeft(em);
-//                y = DOM.eventGetClientY(e) - DOM.getAbsoluteTop(em);
-//                }else{
-//                    x = DOM.eventGetClientX(e) - parent.getAbsoluteLeft();
-//                    y = DOM.eventGetClientY(e) - parent.getAbsoluteTop();
-//                }
                 int x = DOM.eventGetClientX(e);
                int y = DOM.eventGetClientY(e);
 
@@ -164,23 +151,18 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     }
 
     public void onMouseMove(Widget sender, int x, int y) {
-        System.out.println("X : " + x + " Y : " + y);
         if (draggable && dragging) {
             int absX = x + sender.getParent().getAbsoluteLeft();
             int absY = y + sender.getParent().getAbsoluteTop();
-            System.out.println("parent.getLeft() : "+ parent.getLeft() + " / parent.getTop() : " + parent.getTop());
             int newLeft = x - dragStartX + parent.getLeft();
             int newTop = y - dragStartY + parent.getTop();
             dragStartX =x;
             dragStartY =y;
-            System.out.println("dragStartX : "+ dragStartX + " / dragStartY : " + dragStartY);
-            System.out.println("newLeft : "+ newLeft + " / newTop : " + newTop);
             parent.setLocation(newLeft, newTop);
         }
     }
 
     public void onMouseUp(Widget sender, int x, int y) {
-System.out.println ("MOUSEUP");
         dragging = false;
         DOM.releaseCapture(sender.getElement());
     }
