@@ -304,6 +304,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
             getContent().setVisible(true);
         }
         buildGui();
+        fireFrameRestored();
     }
 
     public void close() {
@@ -343,7 +344,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.width = width;
         this.height = height;
         ui.setSize(width + "px", height + "px");
-        fireFrameResized();
+        // fireFrameResized();
     }
 
     public void setWidth(int width) {
@@ -469,11 +470,22 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     /**
      * Fires the event of the resizing of this frame to its listeners.
      */
-    private void fireFrameResized() {
+    void fireFrameResized() {
         for (int i = 0; i < listeners.size(); i++) {
             GInternalFrameListener listener = (GInternalFrameListener) listeners
                     .get(i);
             listener.frameResized(new GInternalFrameEvent(this));
+        }
+    }
+
+    /**
+     * Fires the event of the moving of this frame to its listeners.
+     */
+    void fireFrameMoved() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
+            listener.frameMoved(new GInternalFrameEvent(this));
         }
     }
 
@@ -522,17 +534,15 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     /**
-     * Fires the frameMoved event of this frame to its listeners.
+     * Fires the frameRestored event of this frame to its listeners.
      */
-    private void fireFrameMoved() {
+    public void fireFrameRestored() {
         for (int i = 0; i < listeners.size(); i++) {
             GInternalFrameListener listener = (GInternalFrameListener) listeners
                     .get(i);
-            listener.frameIconified(new GInternalFrameEvent(this));
+            listener.frameRestored(new GInternalFrameEvent(this));
         }
     }
-
-    // """""""""""""""""""""
 
     public boolean isMaximizable() {
         return maximizable;
@@ -608,6 +618,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     public void stopResizing() {
         this.url = this.previousUrl;
         buildGui();
+        fireFrameResized();
     }
 
     public void show() {
