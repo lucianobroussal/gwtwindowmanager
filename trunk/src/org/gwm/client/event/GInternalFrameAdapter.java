@@ -22,7 +22,7 @@ public class GInternalFrameAdapter implements GInternalFrameListener {
     public void frameDeactivated(GInternalFrameEvent evt) {
     }
 
-    public void frameDeiconified(GInternalFrameEvent evt) {
+    public void frameRestored(GInternalFrameEvent evt) {
     }
 
     public void frameIconified(GInternalFrameEvent evt) {
