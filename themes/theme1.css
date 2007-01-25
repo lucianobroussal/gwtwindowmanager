@@ -1,3 +1,10 @@
+.overlay_theme1{
+	background-color: #666666;
+	filter:alpha(opacity=60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
 .theme1_caption{
 	width:100%;
 	color:blue;
@@ -67,7 +74,8 @@
 .theme1_se {
 	width: 12px;
 	height: 24px;
-	background: transparent url(theme1/bottom_right.gif) no-repeat 0 0;			
+	background: transparent url(theme1/bottom_right.gif) no-repeat top right;	
+		border:1px solid green;		
 }
 
 .theme1_sizer {
@@ -129,27 +137,5 @@
 	font-family: Tahoma, Arial, sans-serif;
 	font-size: 10px;
 	background:#979BA1;
-}
-
-.theme1_debugwindow {
-	width:90%;
-        height:90%;
-}
-
-
-.theme1_debug {
-	background:#770236;
-        border: 1px solid;
-	color: #DDD;
-	font-family: Tahoma, Arial, sans-serif;
-	font-size: 10px;
-}
-
-
-.theme1_clearlog {
-	color: #DDD;
-	font-family: Tahoma, Arial, sans-serif;
-	font-size: 10px;
-	background:#474BA1;
 }
 

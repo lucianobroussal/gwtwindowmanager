@@ -38,6 +38,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -629,6 +630,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         super.setVisible(true);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
+    }
+
+    public static int getLayerOfTheTopWindow() {
+        return layerOfTheTopWindow;
     }
 
 }

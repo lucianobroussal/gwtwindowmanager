@@ -1,6 +1,8 @@
 
 
 .overlay_alphacube {
+	width:500px;
+	height:500px;
 	background-color: #85BBEF;
 	filter:alpha(opacity=60);
 	-moz-opacity: 	0.6;
@@ -59,10 +61,7 @@
 }
 
 .alphacube_se, .alphacube_sizer  {
-  position:relative;
-  top:0px;
-  left:0px;	
-  background: transparent url(alphacube/bottom-right-c.gif) no-repeat top left;			
+  background: transparent url(alphacube/bottom-right-c.gif) no-repeat top right;			
   width:7px;
   height:7px;
 }

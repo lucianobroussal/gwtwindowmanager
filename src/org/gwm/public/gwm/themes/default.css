@@ -1,18 +1,13 @@
 
 
-.overlay_dialog {
+.overlay_default{
 	background-color: #666666;
 	filter:alpha(opacity=60);
 	-moz-opacity: 0.6;
 	opacity: 0.6;
 }
 
-.overlay___invisible__ {
-  background-color: #666666;
-	filter:alpha(opacity=0);
-	-moz-opacity: 0;
-	opacity: 0;
-}
+
 
 .default_caption{
 	width:100%;
@@ -65,7 +60,7 @@
 .default_se {
 	width: 9px;
 	height: 19px;
-	background: transparent url(default/bottom_right.gif) no-repeat 0 0;			
+	background: transparent url(default/bottom_right.gif) no-repeat  top right;			
 }
 
 .default_sizer {

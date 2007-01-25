@@ -23,7 +23,7 @@ public class GDialogSample implements EntryPoint {
          menuBlock.setClosable(false);
          menuBlock.setMinimizable(false);
          menuBlock.setMaximizable(false);
-         menuBlock.setTheme("theme1");
+         menuBlock.setTheme("default");
          menuBlock.setContent(menuLayout);
          
          
@@ -40,7 +40,7 @@ public class GDialogSample implements EntryPoint {
         button.addClickListener(new ClickListener(){
 
             public void onClick(Widget sender) {
-                GDialog.setDialogTheme("theme1");
+                GDialog.setDialogTheme("darkX");
                 GDialog.showConfirmDialog(null, "Have you pets?" ,null);
             }
             
@@ -55,7 +55,7 @@ public class GDialogSample implements EntryPoint {
         button.addClickListener(new ClickListener(){
 
             public void onClick(Widget sender) {
-                GDialog.setDialogTheme("theme1");
+                GDialog.setDialogTheme("darkX");
                 GDialog.showMessage(null, "Simple Message display");
             }
             
