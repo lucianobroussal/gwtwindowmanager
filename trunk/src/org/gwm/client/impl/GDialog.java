@@ -5,18 +5,18 @@ import org.gwm.client.GWmConstants;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwtwidgets.client.ui.PNGImage;
 
-import asquare.gwt.tk.client.ui.GlassPanel;
-
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -52,7 +52,6 @@ public class GDialog {
 
     private static GlassPanel overlayLayer;
 
-
     public static final Option OK_OPTION = new Option("Ok");
 
     public static final Option YES_OPTION = new Option("Yes");
@@ -60,28 +59,29 @@ public class GDialog {
     public static final Option NO_OPTION = new Option("No");
 
     public static final Option CANCEL_OPTION = new Option("Cancel");
-    
+
     public Object selectedValue;
-    
+
     public Option selectedOption;
 
     public Object getSelectedValue() {
         return selectedValue;
     }
+
     public Object getSelectedOption() {
         return selectedOption;
     }
-    
+
     private GInternalFrame ui;
-    
-    private GInternalFrame getUI(){
+
+    private GInternalFrame getUI() {
         return ui;
     }
 
     private GDialog() {
         ui = new GwtInternalFrame("");
     }
-    
+
     public static void showConfirmDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
         showMessage(parent, message, null, QUESTION_MESSAGE,
@@ -185,7 +185,7 @@ public class GDialog {
         if (overlayLayer == null) {
             overlayLayer = new GlassPanel();
         }
-        //overlayLayer.show();
+        overlayLayer.show();
         currentDialog.ui.setVisible(true);
         adjustDialogSizeToContent(parent, currentDialog.ui);
     }
@@ -220,8 +220,9 @@ public class GDialog {
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
-        currentDialog.getUI().setContent(new InputDialogPane(message, options, icon,
-                initialValue, selectionValues, choiceListener));
+        currentDialog.getUI().setContent(
+                new InputDialogPane(message, options, icon, initialValue,
+                        selectionValues, choiceListener));
         computeSizeAndDisplay(parent);
     }
 
@@ -230,14 +231,12 @@ public class GDialog {
             throw new IllegalStateException("A Dialog is already opened!");
         }
         currentDialog = new GDialog();
-        
-        
 
         currentDialog.ui.setClosable(false);
         currentDialog.ui.setMinimizable(false);
         currentDialog.ui.setMaximizable(false);
         currentDialog.ui.setDraggable(false);
-        currentDialog.ui.setResizable(false);
+        currentDialog.ui.setResizable(true  );
 
         currentDialog.ui.setTheme(theme);
         if (title != null) {
@@ -364,11 +363,10 @@ public class GDialog {
                                 }
                                 currentDialog.selectedOption = option;
                                 currentDialog.selectedValue = inputValue;
-                                
+
                                 choiceListener.onChoice(currentDialog);
                             }
                             overlayLayer.hide();
-                            // TODO with Johan for release process
                             currentDialog.ui.close();
                             currentDialog = null;
                         }
@@ -398,15 +396,6 @@ public class GDialog {
             return label;
         }
 
-        // public boolean equals(Object value){
-        // if(value == null || this != value){
-        // return false;
-        // }
-        // if(!((Option)value).getLabel().equals(label)){
-        // return false;
-        // }
-        // return true;
-        // }
         public String toString() {
             return label;
         }
@@ -438,6 +427,34 @@ public class GDialog {
 
     public static void setDialogTheme(String theme) {
         GDialog.theme = theme;
+
+    }
+
+    private static class GlassPanel extends ComplexPanel {
+        public GlassPanel() {
+            setElement(DOM.createDiv());
+        }
+
+        public void show() {
+            DOM.setStyleAttribute(getElement(), "position", "absolute");
+            DOM.setStyleAttribute(getElement(), "left", "0px");
+            DOM.setStyleAttribute(getElement(), "top", "0px");
+            DOM.setStyleAttribute(getElement(), "width", "100%");
+            DOM.setStyleAttribute(getElement(), "height", "100%");
+            Window.enableScrolling(false);
+            
+            setStyleName("overlay_" + theme);
+            
+            DOM.setIntStyleAttribute(getElement(), "zIndex", GwtInternalFrame
+                    .getLayerOfTheTopWindow()+1);
+            
+            RootPanel.get().add(this);
+            setVisible(true);
+        }
+
+        public void hide() {
+            RootPanel.get().remove(this);
+        }
 
     }
 

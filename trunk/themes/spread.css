@@ -55,7 +55,7 @@
 }
 
 .spread_se, .spread_sizer {
-  background: transparent url(spread/bottom-right-c.gif) no-repeat 0 0;			
+  background: transparent url(spread/bottom-right-c.gif) no-repeat top right;			
   width:7px;
   height:7px;
 }
