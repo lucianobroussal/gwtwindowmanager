@@ -9,16 +9,15 @@ import org.gwm.client.impl.*;
 
 public class DebugWindow extends GwtInternalFrame implements GInternalFrameListener {
 
-    private GDesktopPane pane;
     private List frames;
     private DockPanel dock;
     private VerticalPanel panel;
     private Button clearLog;
+    private static DebugWindow instance;
 
-    public DebugWindow (GDesktopPane pane) {
+    public DebugWindow () {
         super ("Debug");
-        this.pane = pane;
-        this.frames = pane.getAllFrames();
+        this.frames = GwtInternalFrame.getAllFrames();
         this.dock = new DockPanel();
         this.panel = new VerticalPanel();
         this.clearLog = new Button ("Clear window", new ClickListener () {
@@ -27,7 +26,6 @@ public class DebugWindow extends GwtInternalFrame implements GInternalFrameListe
             }
         });
         this.clearLog.addStyleName (getTheme()+"_clearlog");
-System.out.println("Adding panel");
         this.dock.addStyleName (getTheme()+"_debugwindow");
         this.dock.add (clearLog, DockPanel.NORTH);
         this.dock.add (panel, DockPanel.CENTER);
@@ -37,6 +35,21 @@ System.out.println("Adding panel");
         this.dock.setCellVerticalAlignment (clearLog, HasVerticalAlignment.ALIGN_TOP);
         setContent (this.dock);
         registerListeners();
+        instance = this;
+    }
+
+    public static void addFrame(GwtInternalFrame f) { // should change in pull/push/listener
+        if (instance != null) {
+            instance.frames.add (f);
+            f.addInternalFrameListener (instance);
+        }
+    }
+
+    public static void removeFrame(GwtInternalFrame f) { // should change in pull/push/listener
+        if (instance != null) {
+            instance.frames.remove (f);
+            f.removeInternalFrameListener (instance);
+        }
     }
 
     private void clearPanel () {
