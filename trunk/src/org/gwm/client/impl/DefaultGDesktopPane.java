@@ -82,6 +82,7 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
 
     public void deIconify (GInternalFrame theWindow) {
         theWindow.setVisible (true);
+        ((GwtInternalFrame)theWindow).fireFrameRestored();
     }
 
     /**
