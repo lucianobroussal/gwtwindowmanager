@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.tools.DebugWindow;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
 
@@ -120,7 +121,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private FlexTable centerRow;
     private FlexTable bottomRow;
     
-    
+    private static List allFrames = new ArrayList();
 
     public GwtInternalFrame() {
         this("");
@@ -137,6 +138,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         initializeFrame();
         buildGui();
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS);
+        allFrames.add (this);
+        DebugWindow.addFrame(this);
     }
 
     private void initializeFrame() {
@@ -314,6 +317,12 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         // how releasing resources ?
         setVisible(false);
         removeFromParent();
+        allFrames.remove(this);
+        DebugWindow.removeFrame (this);
+    }
+
+    public static List getAllFrames() {
+      return allFrames;
     }
 
     public boolean isMinimized() {
@@ -634,6 +643,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     public static int getLayerOfTheTopWindow() {
         return layerOfTheTopWindow;
+    }
+
+    public String toString() {
+        return this.title;
     }
 
 }

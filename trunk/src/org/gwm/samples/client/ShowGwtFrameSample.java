@@ -54,7 +54,7 @@ public class ShowGwtFrameSample implements EntryPoint {
         gif2.setVisible(true);
         gif2.setLocation(400, 100);
 
-        GInternalFrame debug = new DebugWindow (pane);
+        GInternalFrame debug = new DebugWindow ();
         debug.setSize (300,300);
         debug.setVisible (true);
         pane.addFrame (debug);
