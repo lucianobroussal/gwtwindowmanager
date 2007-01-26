@@ -17,7 +17,7 @@ public class DebugWindow extends GwtInternalFrame implements GInternalFrameListe
 
     public DebugWindow () {
         super ("Debug");
-        this.frames = GwtInternalFrame.getAllFrames();
+        this.frames = DesktopManager.getAllFrames();
         this.dock = new DockPanel();
         this.panel = new VerticalPanel();
         this.clearLog = new Button ("Clear window", new ClickListener () {
@@ -38,18 +38,18 @@ public class DebugWindow extends GwtInternalFrame implements GInternalFrameListe
         instance = this;
     }
 
-    public static void addFrame(GwtInternalFrame f) { // should change in pull/push/listener
-        if (instance != null) {
-            instance.frames.add (f);
-            f.addInternalFrameListener (instance);
-        }
+    public static DebugWindow getInstance() {
+        return instance;
     }
 
-    public static void removeFrame(GwtInternalFrame f) { // should change in pull/push/listener
-        if (instance != null) {
-            instance.frames.remove (f);
-            f.removeInternalFrameListener (instance);
-        }
+    public void addFrame(GInternalFrame f) { // should change in pull/push/listener
+        frames.add (f);
+        f.addInternalFrameListener (instance);
+    }
+
+    public void removeFrame(GInternalFrame f) { // should change in pull/push/listener
+        frames.remove (f);
+        f.removeInternalFrameListener (instance);
     }
 
     private void clearPanel () {
