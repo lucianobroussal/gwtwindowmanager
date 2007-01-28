@@ -1,4 +1,4 @@
-package org.gwm.client;
+package org.gwm.client.util;
 
 public interface GWmConstants {
  public static final String DEFAULT_THEME = "theme1";

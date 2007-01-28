@@ -38,7 +38,7 @@ public class ShowGwtFrameSample implements EntryPoint {
 
         GDesktopPane pane = new DefaultGDesktopPane();
         GInternalFrame gif = new GwtInternalFrame("LODGON");
-        gif.setUrl("http://www.lodgon.com");
+        gif.setUrl("http://www.google.com");
 
         RootPanel root = RootPanel.get("pane");
         // to be done after adding windows!!!! if not JVM crash TO BE FIX
@@ -47,7 +47,7 @@ public class ShowGwtFrameSample implements EntryPoint {
         gif.setSize(300, 200);
         gif.setVisible(true);
         gif2 = new GwtInternalFrame("GWT");
-        gif2.setUrl("http://www.lodgon.com");
+        gif2.setUrl("http://www.google.com");
         gif2.setContent(new Label("GWT LABEL Content"));
         gif2.setSize(300, 200);
         pane.addFrame(gif2);
