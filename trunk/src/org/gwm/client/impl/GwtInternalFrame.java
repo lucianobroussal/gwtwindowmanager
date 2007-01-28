@@ -410,6 +410,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.url = url;
         myContent = getFrame();
         ((Frame) myContent).setUrl(url);
+        DOM.setAttribute(myContent.getElement(), "overflow", "hidden");
         centerRow.setWidget(0, 1, myContent);
     }
 

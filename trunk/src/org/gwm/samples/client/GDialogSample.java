@@ -40,7 +40,7 @@ public class GDialogSample implements EntryPoint {
         button.addClickListener(new ClickListener(){
 
             public void onClick(Widget sender) {
-                GDialog.setDialogTheme("darkX");
+                GDialog.setDialogTheme("spread");
                 GDialog.showConfirmDialog(null, "Have you pets?" ,null);
             }
             
@@ -55,7 +55,7 @@ public class GDialogSample implements EntryPoint {
         button.addClickListener(new ClickListener(){
 
             public void onClick(Widget sender) {
-                GDialog.setDialogTheme("darkX");
+                GDialog.setDialogTheme("alphacube");
                 GDialog.showMessage(null, "Simple Message display");
             }
             

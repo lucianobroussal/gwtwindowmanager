@@ -1,8 +1,8 @@
 package org.gwm.client.impl;
 
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.GWmConstants;
 import org.gwm.client.event.GDialogChoiceListener;
+import org.gwm.client.util.GWmConstants;
 import org.gwtwidgets.client.ui.PNGImage;
 
 import com.google.gwt.user.client.DOM;
