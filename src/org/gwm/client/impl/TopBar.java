@@ -161,7 +161,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
             dragStartX =x;
             dragStartY =y;
             moving = true;
-            parent.setLocation(newLeft, newTop);
+            parent.setLocation(newTop, newLeft);
         }
     }
 

@@ -210,7 +210,7 @@ public class GDialog {
         }
         left = left > 0 ? left : 0;
         top = top > 0 ? top : 0;
-        currentDialog.ui.setLocation(left, top);
+        currentDialog.ui.setLocation(top, left);
 
     }
 
