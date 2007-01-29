@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.tools.DebugWindow;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
 
@@ -39,7 +38,6 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -59,8 +57,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private TopBar topBar;
 
     private ResizeImage resizeImage;
-
-    private Label caption;
 
     private Widget myContent;
 
@@ -146,9 +142,9 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         bottomRow = new FlexTable();
         listeners = new ArrayList();
         resizeImage = new ResizeImage(this);
-        this.caption = new Label(title);
-        this.caption
-                .setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+//        this.caption = new Label(title);
+//        this.caption
+//                .setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         topBar = new TopBar(this);
         imgTopLeft = new Label();
         imgTopRight = new Label();
@@ -212,6 +208,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         bottomRow.setCellSpacing(0);
         bottomRow.setWidth("100%");
         bottomRow.getCellFormatter().setWidth(0,1, "100%");
+        
     }
 
     public void setParentDesktop(GDesktopPane pane) {
@@ -234,7 +231,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private void applyTheme() {
         topBar.setTheme(currentTheme);
         resizeImage.setTheme(currentTheme);
-        this.caption.setStyleName(currentTheme + "_title");
+        //this.caption.setStyleName(currentTheme + "_title");
         imgTopLeft.setStyleName(this.currentTheme + "_nw");
         imgTopRight.setStyleName(this.currentTheme + "_ne");
         imgBotLeft.setStyleName(this.currentTheme + "_sw");
@@ -329,7 +326,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         return this.maximized;
     }
 
-    public void setLocation(int left, int top) {
+    public void setLocation(int top, int left) {
         if (desktopPane != null)
             ((DefaultGDesktopPane) desktopPane).setWidgetPosition(this, left,
                     top);
@@ -403,7 +400,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public String getCaption() {
-        return this.caption.getText();
+        return this.title;
     }
 
     public void setUrl(String url) {
