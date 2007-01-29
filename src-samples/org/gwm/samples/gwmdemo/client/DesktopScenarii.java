@@ -37,9 +37,9 @@ public class DesktopScenarii extends AbstractScenarii {
         window.setTheme("default");
         window.setUrl(url);
         desktop.addFrame(window);
-        //window.minimize();
-        //window.setVisible(true);
-        //window.setVisible(false);
+        window.minimize();
+        window.setVisible(true);
+        window.setVisible(false);
         
     }
 
