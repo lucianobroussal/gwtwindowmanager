@@ -273,7 +273,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         if (desktopPane != null)
             desktopPane.iconify(this);
         else {
-            getContent().setVisible(false);
+            topBar.setIconified();
+            // getContent().setVisible(false);
         }
         this.minimized = true;
         fireFrameMinimized();
@@ -596,6 +597,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
             show();
             DOM.addEventPreview(this);
         } else {
+System.out.println ("SET VISIBLE FALSE!!!!!!!!!");
             super.setVisible(false);
             DOM.removeEventPreview(this);
         }

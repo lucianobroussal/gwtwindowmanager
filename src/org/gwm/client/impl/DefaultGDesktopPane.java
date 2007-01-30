@@ -44,6 +44,10 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     private void setupUI() {
         desktopWidget = new DockPanel();
         frameContainer = new AbsolutePanel();
+        int tw = Window.getClientWidth();
+        int th = Window.getClientHeight()-50;
+        frameContainer.setWidth(tw+"px");
+        frameContainer.setHeight(th+"px");
         buttonBar = new IconBar (this);
         desktopWidget.add(frameContainer, DockPanel.CENTER);
         frameContainer.setStyleName("gwm-GDesktopPane-FrameContainer");

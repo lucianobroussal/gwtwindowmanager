@@ -180,6 +180,16 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         this.caption.setText(caption);
     }
 
+    public void setIconified () {
+        clear();
+        setWidget (0, 0, new Label (title));
+    }
+
+    public void setRestored () {
+        clear();
+        buildGui();
+    }
+
     public void updateTopBar() {
         maximizeArea.setVisible(parent.isMaximizable());
         minimizeArea.setVisible(parent.isMinimizable());
