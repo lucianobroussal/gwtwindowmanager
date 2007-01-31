@@ -158,4 +158,12 @@
 	background: #FFF url('alert/progress.gif') no-repeat center center
 }
 
+.alphacube_topBar_icon {
+        background:#C7CBD1;
+        padding: 5px;
+        border: 1px dashed;
+}
+
+
+
 
