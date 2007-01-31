@@ -81,6 +81,7 @@
 </target>
 
 	
+	
 <target name="compile-desk">
 <java classname="com.google.gwt.dev.GWTCompiler" fork="yes" failonerror="true">
 	<classpath>
@@ -99,6 +100,8 @@
 <replace token="var Anb=$doc.createElement('iframe');" value="var Anb=$doc.createElement('iframe');Anb.src='javascript:false';" dir="www" includes="**/*.cache.html" />
 </target>	
 
+	
+	
 <target name="compile-demo">
 <java classname="com.google.gwt.dev.GWTCompiler" fork="yes" failonerror="true">
 	<classpath>
@@ -115,6 +118,11 @@
 </java>
 <replace token="var Anb=$doc.createElement('iframe');" value="var Anb=$doc.createElement('iframe');Anb.src='javascript:false';" dir="www" includes="**/*.cache.html" />
 </target>
+
+<target name="deploy_demo">
+		<copydir dest="../gwmsite/src/com/gwtwindowmanager/test/public/site/demo" src="www/org.gwm.samples.gwmdemo.GwmDemo"></copydir>
+	</target>
+	
 
 <target name="compile-themes">
 <java classname="com.google.gwt.dev.GWTCompiler" fork="yes" failonerror="true">

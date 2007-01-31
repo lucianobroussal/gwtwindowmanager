@@ -92,33 +92,21 @@
 	width: 19px;
 	height: 19px;
 	background: transparent url(theme1/close.gif) no-repeat 0 0;			
-	position:absolute;
-	top:10px;
-	right:0px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 .theme1_minimize {
 	width: 19px;
 	height: 19px;
 	background: transparent url(theme1/minimize.gif) no-repeat 0 0;			
-	position:absolute;
-	top:10px;
-	right:20px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 .theme1_maximize {
 	width: 19px;
 	height: 19px;
 	background: transparent url(theme1/maximize.gif) no-repeat 0 0;			
-	position:absolute;
-	top:10px;
-	right:40px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 
@@ -139,25 +127,17 @@
 	background:#979BA1;
 }
 
-.theme1_debugwindow {
-        width:90%;
-        height:90%;
+.theme1_topBar_icon {
+    background:#979BA1;
+    color:blue;
+    padding: 5px;
+    border: 1px dashed;
 }
 
-
-.theme1_debug {
-        background:#770236;
-        border: 1px solid;
-        color: #DDD;
-        font-family: Tahoma, Arial, sans-serif;
-        font-size: 10px;
-}
-
-
-.theme1_clearlog {
-        color: #DDD;
-        font-family: Tahoma, Arial, sans-serif;
-        font-size: 10px;
-        background:#474BA1;
+.theme1_topBar_restore {
+	width: 23px;
+	height: 23px;
+	background: transparent url(theme1/maximize.gif) no-repeat 0 0;			
+	cursor:pointer;
 }
 

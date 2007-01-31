@@ -104,7 +104,7 @@ public class ThemesScenarii extends AbstractScenarii {
 		FlexTable themesTable = new FlexTable();
 
 		themesTable.setHTML(0, 1, "<p>Default</p>");
-		themesTable.setWidget(0, 0, buildLinkTheme(null));
+		themesTable.setWidget(0, 0, buildLinkTheme("default"));
 
 
 		themesTable
