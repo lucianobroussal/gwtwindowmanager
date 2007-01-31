@@ -164,6 +164,14 @@
         border: 1px dashed;
 }
 
+.alphacube_topBar_restore {
+	width: 23px;
+	height: 23px;
+	background: transparent url(alphacube/button-min-focus.gif) no-repeat 0 0;			
+	cursor:pointer;
+	z-index:1000;
+}
+
 
 
 
