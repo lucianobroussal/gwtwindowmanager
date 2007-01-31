@@ -70,6 +70,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     private void buildGui() {
         this.currentTheme = parent.getTheme();
         this.title = parent.getCaption();
+System.out.println ("title in gui = "+title);
         caption = new Label(title);
         caption.addMouseListener(this);
         closeArea = new Label();
@@ -177,6 +178,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     }
 
     public void setCaption(String caption) {
+        this.title = caption;
         this.caption.setText(caption);
     }
 
