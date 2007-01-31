@@ -182,13 +182,20 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     public void setIconified () {
         clear();
-        setWidget (0, 0, new Label (title));
-        setStyleName("topBar");
+        Label l = new Label (title);
+        l.addStyleName(parent.getTheme()+"_topBar_icon");
+        l.addClickListener (new ClickListener() {
+          public void onClick (Widget sender) {
+            setRestored();
+          }
+        });
+        setWidget (0, 0, l);
     }
 
     public void setRestored () {
         clear();
         buildGui();
+        parent.restore();
     }
 
     public void updateTopBar() {

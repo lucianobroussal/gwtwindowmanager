@@ -278,9 +278,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         if (desktopPane != null)
             desktopPane.iconify(this);
         else {
+            this.previousTop = getAbsoluteTop();
+            this.previousLeft = getAbsoluteLeft();
             topBar.setIconified();
             this.freeminimized = true;
-buildGui();
+            buildGui();
         }
         this.minimized = true;
         fireFrameMinimized();
@@ -304,6 +306,7 @@ buildGui();
         this.height = previousHeight;
         this.maximized = false;
         this.minimized = false;
+        this.freeminimized = false;
         setLocation(this.previousLeft, this.previousTop);
         if (!getContent().isVisible()) {
             getContent().setVisible(true);
