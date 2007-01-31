@@ -14,6 +14,7 @@
 
 .spread_topBar {
   width: 100%;
+  cursor:move;
 }
 
 .spread_nw {
@@ -68,33 +69,21 @@
 	width: 23px;
 	height: 23px;
 	background: transparent url(spread/button-close-focus.gif) no-repeat 0 0;			
-	position:absolute;
-	top:0px;
-	right:11px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 .spread_minimize {
 	width: 23px;
 	height: 23px;
 	background: transparent url(spread/button-min-focus.gif) no-repeat 0 0;			
-	position:absolute;
-	top:0px;
-	right:55px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 .spread_maximize {
 	width: 23px;
 	height: 23px;
 	background: transparent url(spread/button-max-focus.gif) no-repeat 0 0;			
-	position:absolute;
-	top:0px;
-	right:33px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 .spread_title {
@@ -114,5 +103,18 @@
 	font-family: Tahoma, Arial, sans-serif;
 	font-size: 10px;
 	background:#A9EA00;
+}
+
+.spread_topBar_icon {
+    background:#A9EA00;
+    padding: 5px;
+    border: 1px dashed;
+}
+
+.spread_topBar_restore {
+	width: 23px;
+	height: 23px;
+	background: transparent url(spread/button-max-focus.gif) no-repeat 0 0;			
+	cursor:pointer;
 }
 

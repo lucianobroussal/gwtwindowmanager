@@ -15,6 +15,7 @@
 
 .darkX_topBar {
   width: 100%;
+  cursor:move;
 }
 
 .darkX_nw {
@@ -119,4 +120,17 @@
 	background-color: transparent;
 	background-image: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX/close.png", sizingMethod="crop");
+}
+
+.darkX_topBar_icon {
+    background:#5E5148;
+    padding: 5px;
+    border: 1px dashed;
+}
+
+.darkX_topBar_restore {
+	width: 23px;
+	height: 23px;
+	background: transparent url(darkX/maximize.png) no-repeat 0 0;			
+	cursor:pointer;
 }

@@ -18,6 +18,7 @@
 
 .alphacube_topBar {
   width: 100%;
+  cursor:move;
 }
 
 
@@ -74,32 +75,20 @@
 	width: 23px;
 	height: 23px;
 	background: transparent url(alphacube/button-close-focus.gif) no-repeat 0 0;			
-	position:absolute;
-	top:0px;
-	right:11px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 .alphacube_minimize {
 	width: 23px;
 	height: 23px;
 	background: transparent url(alphacube/button-min-focus.gif) no-repeat 0 0;			
-	position:absolute;
-	top:0px;
-	right:55px;
 	cursor:pointer;
-	z-index:1000;
 }
 
 .alphacube_maximize {
 	width: 23px;
 	height: 23px;
 	background: transparent url(alphacube/button-max-focus.gif) no-repeat 0 0;			
-	position:absolute;
-	top:0px;
-	right:33px;
-	cursor:pointer;
 	z-index:1000;
 }
 
@@ -167,9 +156,8 @@
 .alphacube_topBar_restore {
 	width: 23px;
 	height: 23px;
-	background: transparent url(alphacube/button-min-focus.gif) no-repeat 0 0;			
+	background: transparent url(alphacube/button-max-focus.gif) no-repeat 0 0;			
 	cursor:pointer;
-	z-index:1000;
 }
 
 

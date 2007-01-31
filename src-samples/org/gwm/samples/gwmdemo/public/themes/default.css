@@ -18,6 +18,7 @@
 
 .default_topBar {
   width: 100%;
+  cursor:move;
 }
 
 .default_nw {
@@ -141,4 +142,18 @@
 
 .dialog .title_window {
   -moz-user-select:none;
+}
+
+
+.default_topBar_icon {
+    background:#FFFFFF;
+    padding: 5px;
+    border: 1px dashed;
+}
+
+.default_topBar_restore {
+	width: 23px;
+	height: 23px;
+	background: transparent url(default/maximize.gif) no-repeat 0 0;			
+	cursor:pointer;
 }
