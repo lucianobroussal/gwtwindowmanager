@@ -116,6 +116,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private FlexTable topRow;
     private FlexTable centerRow;
     private FlexTable bottomRow;
+    private boolean freeminimized;
     
     public GwtInternalFrame() {
         this("");
@@ -158,6 +159,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     private void buildGui() {
         this.ui = new FlexTable();
+        if (freeminimized) {
+            this.ui.setWidget (0, 0, topBar);
+            super.setWidget(ui);
+            return;
+        }
         if (this.width < this.minWidth) {
             this.width = this.minWidth;
         }
@@ -269,12 +275,12 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void minimize() {
-        // TODO verify the desktop exists
         if (desktopPane != null)
             desktopPane.iconify(this);
         else {
             topBar.setIconified();
-            // getContent().setVisible(false);
+            this.freeminimized = true;
+buildGui();
         }
         this.minimized = true;
         fireFrameMinimized();
@@ -597,7 +603,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
             show();
             DOM.addEventPreview(this);
         } else {
-System.out.println ("SET VISIBLE FALSE!!!!!!!!!");
             super.setVisible(false);
             DOM.removeEventPreview(this);
         }
