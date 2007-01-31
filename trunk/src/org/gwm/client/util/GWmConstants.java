@@ -1,5 +1,5 @@
 package org.gwm.client.util;
 
 public interface GWmConstants {
- public static final String DEFAULT_THEME = "theme1";
+ public static final String DEFAULT_THEME = "alphacube";
 }
