@@ -186,12 +186,15 @@ System.out.println ("title in gui = "+title);
         clear();
         Label l = new Label (title);
         l.addStyleName(parent.getTheme()+"_topBar_icon");
-        l.addClickListener (new ClickListener() {
+        Label restoreButton = new Label("");
+        restoreButton.setStyleName(this.currentTheme + "_topBar_restore");
+        restoreButton.addClickListener (new ClickListener() {
           public void onClick (Widget sender) {
             setRestored();
           }
         });
         setWidget (0, 0, l);
+        setWidget (0, 1, restoreButton);
     }
 
     public void setRestored () {
