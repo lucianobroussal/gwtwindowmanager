@@ -4,7 +4,7 @@ import com.google.gwt.user.client.ui.*;
 import org.gwm.client.*;
 import java.util.*;
 
-public class IconBar extends HorizontalPanel {
+public class IconBar extends FlowPanel {
 
     GDesktopPane parent;
     Map buttonFrame;
