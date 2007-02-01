@@ -27,7 +27,7 @@ public class EventScenarii extends AbstractScenarii {
         
         
         DebugWindow debugWindow = new DebugWindow();
-        GwmUtilities.diplayAtScreenCenter(debugWindow);
+        debugWindow.setLocation(window.getTop(),window.getLeft() +  window.getWidth());
         debugWindow.setVisible(true);
         window.addInternalFrameListener(debugWindow);
         
