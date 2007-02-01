@@ -16,7 +16,7 @@ public class DebugWindow extends GwtInternalFrame implements GInternalFrameListe
     private static DebugWindow instance;
 
     public DebugWindow () {
-        super ("Debug");
+        super("Debug");
         this.frames = DesktopManager.getAllFrames();
         this.dock = new DockPanel();
         this.panel = new VerticalPanel();
