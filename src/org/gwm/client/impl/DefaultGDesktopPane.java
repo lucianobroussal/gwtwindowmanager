@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.*;
 public class DefaultGDesktopPane extends Composite implements WindowResizeListener, GDesktopPane {
 
     private AbsolutePanel frameContainer;
-    private DockPanel desktopWidget;
+    private FlexTable desktopWidget;
     private IconBar buttonBar;
 
     private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
@@ -42,18 +42,22 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     }
 
     private void setupUI() {
-        desktopWidget = new DockPanel();
+        desktopWidget = new FlexTable();
+        desktopWidget.setBorderWidth(0);
+        desktopWidget.setCellPadding(0);
+        desktopWidget.setCellSpacing(0);
         frameContainer = new AbsolutePanel();
-        int tw = Window.getClientWidth();
-        int th = Window.getClientHeight()-50;
-        frameContainer.setWidth(tw+"px");
-        frameContainer.setHeight(th+"px");
+        //int tw = Window.getClientWidth();
+        //int th = Window.getClientHeight()-50;
+        frameContainer.setWidth("100%");
+        frameContainer.setHeight("100%");
         buttonBar = new IconBar (this);
-        desktopWidget.add(frameContainer, DockPanel.CENTER);
+        desktopWidget.getFlexCellFormatter().setHeight(0,0,"100%");
+        desktopWidget.setWidget(0,0,frameContainer);
         frameContainer.setStyleName("gwm-GDesktopPane-FrameContainer");
 
-        desktopWidget.add(buttonBar, DockPanel.SOUTH);
-        desktopWidget.setCellHeight(buttonBar, "30px");
+        desktopWidget.setWidget(1,0,buttonBar);
+        desktopWidget.getFlexCellFormatter().setStyleName(1,0,"gwm-GDesktopPane-TaskBar");
         
         initWidget(desktopWidget);
         setStyleName("gwm-GDesktopPane");

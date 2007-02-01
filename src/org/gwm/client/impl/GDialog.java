@@ -149,9 +149,9 @@ public class GDialog {
 
     private static Option[] getOptions(int optionType) {
         if (optionType == YES_NO_OPTION) {
-            return new Option[] { OK_OPTION, NO_OPTION };
+            return new Option[] { YES_OPTION, NO_OPTION };
         } else if (optionType == YES_NO_CANCEL_OPTION) {
-            return new Option[] { OK_OPTION, NO_OPTION, CANCEL_OPTION };
+            return new Option[] { YES_OPTION, NO_OPTION, CANCEL_OPTION };
 
         } else if (optionType == OK_CANCEL_OPTION) {
             return new Option[] { OK_OPTION, CANCEL_OPTION };
