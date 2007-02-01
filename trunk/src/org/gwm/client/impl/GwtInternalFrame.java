@@ -182,6 +182,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         }
         centerRow.setHTML(0, 0, "&nbsp;");
         centerRow.setWidget(0, 1, myContent);
+        centerRow.getFlexCellFormatter().setHorizontalAlignment(0,1, HasHorizontalAlignment.ALIGN_CENTER);
         centerRow.setHTML(0, 2, "&nbsp;");
 
         setResizable(resizable);
@@ -321,7 +322,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         // TODO to check with Johan !!! how avoiding this window will be showed
         // again ?
         // how releasing resources ?
-        fireFrameClosed();
         setVisible(false);
         removeFromParent();
         DesktopManager.removeFrame (this);
@@ -340,7 +340,6 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void setLocation(int top, int left) {
-System.out.println ("SL called: "+top+", "+left);
         if (desktopPane != null)
             ((DefaultGDesktopPane) desktopPane).setWidgetPosition(this, left,
                     top);

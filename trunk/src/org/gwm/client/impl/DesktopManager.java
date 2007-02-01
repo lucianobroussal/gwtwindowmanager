@@ -11,18 +11,10 @@ public class DesktopManager {
 
     static void addFrame (GInternalFrame f) {
         frames.add (f);
-        DebugWindow d = DebugWindow.getInstance();
-        if (d != null) {
-            d.addFrame (f);
-        }
     }
 
     static void removeFrame (GInternalFrame f) {
         frames.remove (f);
-        DebugWindow d = DebugWindow.getInstance();
-        if (d != null) {
-            d.removeFrame (f);
-        }
     }
 
     public static List getAllFrames () {
