@@ -121,4 +121,8 @@
 	background: #FFF url('alert/progress.gif') no-repeat center center
 }
 
+.alert_topBar_iconButton {
+    float: left;
+}
+
 

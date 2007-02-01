@@ -162,5 +162,10 @@
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/nuncio/minimize.png", sizingMethod="crop");
 }
 
+.nuncio_topBar_iconButton {
+    float: left;
+}
+
+
 
 
