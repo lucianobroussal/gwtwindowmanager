@@ -134,3 +134,8 @@
 	background: transparent url(darkX/maximize.png) no-repeat 0 0;			
 	cursor:pointer;
 }
+
+.darkX_topBar_iconButton {
+    float: left;
+}
+

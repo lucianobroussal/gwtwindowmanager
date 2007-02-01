@@ -159,3 +159,8 @@
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/mac_os_x/BR_Main.png", sizingMethod="crop");
 }
 
+.mac_os_x_topBar_iconButton {
+    float: left;
+}
+
+
