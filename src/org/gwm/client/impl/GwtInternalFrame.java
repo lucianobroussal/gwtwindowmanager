@@ -322,6 +322,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         // TODO to check with Johan !!! how avoiding this window will be showed
         // again ?
         // how releasing resources ?
+        fireFrameClosed();
         setVisible(false);
         removeFromParent();
         DesktopManager.removeFrame (this);
