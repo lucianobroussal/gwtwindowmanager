@@ -142,3 +142,8 @@
 .dialog .title_window {
   -moz-user-select:none;
 }
+
+.default_topBar_iconButton {
+    float: left;
+}
+
