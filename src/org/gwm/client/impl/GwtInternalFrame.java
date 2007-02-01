@@ -280,6 +280,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         else {
             this.previousTop = getAbsoluteTop();
             this.previousLeft = getAbsoluteLeft();
+            this.previousWidth = getWidth();
+            this.previousHeight = getHeight();
             topBar.setIconified();
             this.freeminimized = true;
             buildGui();
@@ -307,7 +309,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         this.maximized = false;
         this.minimized = false;
         this.freeminimized = false;
-        setLocation(this.previousLeft, this.previousTop);
+        setLocation(this.previousTop, this.previousLeft);
         if (!getContent().isVisible()) {
             getContent().setVisible(true);
         }
