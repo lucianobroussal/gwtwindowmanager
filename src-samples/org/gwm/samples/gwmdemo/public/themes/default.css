@@ -157,3 +157,7 @@
 	background: transparent url(default/maximize.gif) no-repeat 0 0;			
 	cursor:pointer;
 }
+
+.default_topBar_iconButton {
+    float: left;
+}
