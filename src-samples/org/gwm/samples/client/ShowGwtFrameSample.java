@@ -61,16 +61,16 @@ public class ShowGwtFrameSample implements EntryPoint {
         gif2.setVisible(true);
         gif2.setLocation(400, 100);
 
-        GInternalFrame debug = new DebugWindow (framesManager).getUI();
-        debug.setSize (300,300);
-        debug.setVisible (true);
-        pane.addFrame (debug);
+        GInternalFrame debug = new DebugWindow(framesManager).getUI();
+        debug.setSize(300, 300);
+        debug.setVisible(true);
+        pane.addFrame(debug);
         Button button = new Button("Test free Frame :)");
         button.addClickListener(new ClickListener() {
 
             public void onClick(Widget sender) {
-                GInternalFrame gif = framesManager.newFrame(
-                        "http://www.google.com");
+                GInternalFrame gif = framesManager
+                        .newFrame("http://www.google.com");
                 gif.setUrl("http://www.google.com");
                 gif.setSize(300, 200);
                 gif.setLocation(200, 200);

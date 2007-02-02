@@ -23,13 +23,13 @@ import com.google.gwt.user.client.ui.Hyperlink;
 
 public class ErrorDialogScenarii extends AbstractScenarii {
 
-
     public ErrorDialogScenarii(FramesManager framesManager) {
         super(framesManager);
     }
 
     public void runScenarii() {
-        GDialog.showMessage(null, "Houston we have a problem!", "Error", GDialog.ERROR_MESSAGE);
+        GDialog.showMessage(null, "Houston we have a problem!", "Error",
+                GDialog.ERROR_MESSAGE);
     }
 
     protected Hyperlink createLink() {
@@ -37,7 +37,5 @@ public class ErrorDialogScenarii extends AbstractScenarii {
                 "error_dialog");
         return desktopDemoLink;
     }
-
-   
 
 }

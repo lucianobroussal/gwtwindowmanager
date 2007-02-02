@@ -23,13 +23,13 @@ import com.google.gwt.user.client.ui.Hyperlink;
 
 public class WarningDialogScenarii extends AbstractScenarii {
 
-
     public WarningDialogScenarii(FramesManager framesManager) {
         super(framesManager);
     }
 
     public void runScenarii() {
-        GDialog.showMessage(null, "Don't forget your umbrella!. It's raining", "Warning", GDialog.WARNING_MESSAGE);
+        GDialog.showMessage(null, "Don't forget your umbrella!. It's raining",
+                "Warning", GDialog.WARNING_MESSAGE);
     }
 
     protected Hyperlink createLink() {
@@ -37,7 +37,5 @@ public class WarningDialogScenarii extends AbstractScenarii {
                 "warning_dialog");
         return desktopDemoLink;
     }
-
-   
 
 }

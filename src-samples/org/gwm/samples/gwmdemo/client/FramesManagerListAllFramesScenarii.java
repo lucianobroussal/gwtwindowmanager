@@ -27,9 +27,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class FramesManagerListAllFramesScenarii extends AbstractScenarii {
 
-    
-    
-
     public FramesManagerListAllFramesScenarii(FramesManager framesManager) {
         super(framesManager);
 
@@ -41,13 +38,11 @@ public class FramesManagerListAllFramesScenarii extends AbstractScenarii {
         for (int i = 0; i < windows.length; i++) {
             Label label = getCorrespondingFrameOpenedEvent(windows[i], i);
             vPanel.add(label);
-            
-            
 
         }
         vPanel.setSpacing(2);
         GInternalFrame listWindow = framesManager.newFrame("Windows list ...");
-        
+
         GwmUtilities.displayAtParentCenter(listWindow);
         listWindow.setContent(vPanel);
 
@@ -79,5 +74,4 @@ public class FramesManagerListAllFramesScenarii extends AbstractScenarii {
         return color;
     }
 
-  
 }

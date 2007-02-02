@@ -31,89 +31,93 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-
 public class GwmDemo implements EntryPoint {
 
     private GDesktopPane desktop;
+
     private GInternalFrame menuFrame;
-    private FramesManager  framesManager ;
-    
+
+    private FramesManager framesManager;
+
     public void onModuleLoad() {
         framesManager = new FramesManagerFactory().createFramesManager();
         buildUI();
-        menuFrame.setSize(150,300);
+        menuFrame.setSize(150, 300);
         Window.enableScrolling(false);
     }
 
     private void buildUI() {
         desktop = new DefaultGDesktopPane();
         buildMenu();
-        RootPanel.get().add((Widget)desktop);
+        RootPanel.get().add((Widget) desktop);
     }
 
     private void buildMenu() {
-       menuFrame = framesManager.newFrame("Samples");
-       menuFrame.setTheme("alphacube");
-       menuFrame.setClosable(false);
-       menuFrame.setMinimizable(false);
-       menuFrame.setResizable(false);
-       desktop.addFrame(menuFrame);
-       menuFrame.setVisible(true);
-       menuFrame.setLocation(5,5); 
-       VerticalPanel menuLayout = new VerticalPanel();
-       menuLayout.setStyleName("gwmdemo-Menu");
-       menuLayout.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
-       menuLayout.add(buildMenu("Frames"));
-       menuLayout.add(buildMenuItem(new SimpleWindowWithURLScenarii(framesManager)));
-       menuLayout.add(buildMenuItem(new SimpleWindowWithTextScenarii(framesManager)));
-       menuLayout.add(buildMenuItem(new SimpleWindowWithWidgetScenarii(framesManager)));
-       menuLayout.add(buildMenu("Frame Listener"));
-       menuLayout.add(buildMenuItem(new EventScenarii(framesManager)));
-       menuLayout.add(buildMenu("Frames Manager"));
-       menuLayout.add(buildMenuItem(new FramesManagerListAllFramesScenarii(framesManager)));
-       menuLayout.add(buildMenu("Themes"));
-       menuLayout.add(buildMenuItem(new ThemesScenarii(framesManager)));
-       menuLayout.add(buildMenu("Desktop"));
-       menuLayout.add(buildMenuItem(new DesktopScenarii(framesManager , desktop)));
-       menuLayout.add(buildMenu("Dialog"));
-       menuLayout.add(buildMenuItem(new InputDialogScenarii(framesManager)));
-       menuLayout.add(buildMenuItem(new WarningDialogScenarii(framesManager)));
-       menuLayout.add(buildMenuItem(new ErrorDialogScenarii(framesManager)));
-       menuLayout.add(buildMenuItem(new ConfirmDialogScenarii(framesManager)));
-       menuLayout.add(buildMenu("Tools"));
-       menuLayout.add(buildMenuItem(new WindowEditorScenarii(framesManager)));
+        menuFrame = framesManager.newFrame("Samples");
+        menuFrame.setTheme("alphacube");
+        menuFrame.setClosable(false);
+        menuFrame.setMinimizable(false);
+        menuFrame.setResizable(false);
+        desktop.addFrame(menuFrame);
+        menuFrame.setVisible(true);
+        menuFrame.setLocation(5, 5);
+        VerticalPanel menuLayout = new VerticalPanel();
+        menuLayout.setStyleName("gwmdemo-Menu");
+        menuLayout.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
+        menuLayout.add(buildMenu("Frames"));
+        menuLayout.add(buildMenuItem(new SimpleWindowWithURLScenarii(
+                framesManager)));
+        menuLayout.add(buildMenuItem(new SimpleWindowWithTextScenarii(
+                framesManager)));
+        menuLayout.add(buildMenuItem(new SimpleWindowWithWidgetScenarii(
+                framesManager)));
+        menuLayout.add(buildMenu("Frame Listener"));
+        menuLayout.add(buildMenuItem(new EventScenarii(framesManager)));
+        menuLayout.add(buildMenu("Frames Manager"));
+        menuLayout.add(buildMenuItem(new FramesManagerListAllFramesScenarii(
+                framesManager)));
+        menuLayout.add(buildMenu("Themes"));
+        menuLayout.add(buildMenuItem(new ThemesScenarii(framesManager)));
+        menuLayout.add(buildMenu("Desktop"));
+        menuLayout
+                .add(buildMenuItem(new DesktopScenarii(framesManager, desktop)));
+        menuLayout.add(buildMenu("Dialog"));
+        menuLayout.add(buildMenuItem(new InputDialogScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new WarningDialogScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new ErrorDialogScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new ConfirmDialogScenarii(framesManager)));
+        menuLayout.add(buildMenu("Tools"));
+        menuLayout.add(buildMenuItem(new WindowEditorScenarii(framesManager)));
 
-       menuFrame.setContent(menuLayout);
+        menuFrame.setContent(menuLayout);
     }
 
-    private Widget buildMenu(String name){
+    private Widget buildMenu(String name) {
         HorizontalPanel menuLayout = new HorizontalPanel();
         menuLayout.setSpacing(3);
         menuLayout.add(new Label(name));
         menuLayout.setStyleName("gwmdemo-MenuSection");
         return menuLayout;
     }
-    
-    private Widget buildMenuItem(Scenarii scenarii){
+
+    private Widget buildMenuItem(Scenarii scenarii) {
         HorizontalPanel menuItemLayout = new HorizontalPanel();
         menuItemLayout.setSpacing(2);
         menuItemLayout.add(scenarii.getLink());
         menuItemLayout.setStyleName("gwmdemo-MenuItem");
         return menuItemLayout;
     }
-   
-    
-//    
-//    Hyperlink windowEditorLink = new Hyperlink("WindowEditor",
-//    "windoweditor");
-//windowEditorLink.addClickListener(new ClickListener() {
-//
-//public void onClick(Widget sender) {
-//    displayWindowEditor();
-//
-//}
-//
-//});
-    
-    
+
+    //    
+    // Hyperlink windowEditorLink = new Hyperlink("WindowEditor",
+    // "windoweditor");
+    // windowEditorLink.addClickListener(new ClickListener() {
+    //
+    // public void onClick(Widget sender) {
+    // displayWindowEditor();
+    //
+    // }
+    //
+    // });
+
 }

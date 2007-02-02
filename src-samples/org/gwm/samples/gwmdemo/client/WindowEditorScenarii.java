@@ -23,16 +23,14 @@ import com.google.gwt.user.client.ui.Hyperlink;
 
 public class WindowEditorScenarii extends AbstractScenarii {
 
-	
-	
-	public WindowEditorScenarii(FramesManager framesManager) {
-		super(framesManager);
+    public WindowEditorScenarii(FramesManager framesManager) {
+        super(framesManager);
 
-	}
- 
-	public void runScenarii() {
+    }
+
+    public void runScenarii() {
         WindowEditor editor = new WindowEditor(null);
-        GInternalFrame editorWindow =framesManager.newFrame("");
+        GInternalFrame editorWindow = framesManager.newFrame("");
         editorWindow.setTheme("alphacube");
         editorWindow.setWidth(280);
         editorWindow.setHeight(460);
@@ -41,17 +39,11 @@ public class WindowEditorScenarii extends AbstractScenarii {
         editorWindow.setLeft(10);
         editorWindow.setContent(editor);
         editorWindow.setVisible(true);
-	}
+    }
 
-	protected Hyperlink createLink() {
-		Hyperlink simpleDemo = new Hyperlink("WindowEditor", "WindowEditor");
-		return simpleDemo;
-	}
-	
-	
-	
-	
-	
-	
-		
+    protected Hyperlink createLink() {
+        Hyperlink simpleDemo = new Hyperlink("WindowEditor", "WindowEditor");
+        return simpleDemo;
+    }
+
 }
