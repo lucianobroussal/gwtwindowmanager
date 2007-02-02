@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.event.GInternalFrameAdapter;
 import org.gwm.client.event.GInternalFrameEvent;
 
 import com.google.gwt.user.client.WindowResizeListener;
@@ -25,12 +24,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     private AbsolutePanel frameContainer;
     private FlexTable desktopWidget;
     private IconBar buttonBar;
-
-    private GInternalFrameAdapter adapter = new GInternalFrameAdapter() {
-        public void internalFrameIconified(GInternalFrameEvent evt) {
-            minimize(evt.getGInternalFrame());
-        }
-    };
 
     private List frames;
 
@@ -106,7 +99,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
         int spos = (frames.size() + 1) * 30;
         frameContainer.add((DefaultGInternalFrame)internalFrame, frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
         internalFrame.setLocation(frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
-        internalFrame.addInternalFrameListener(adapter);
         frames.add (internalFrame);
     }
 
