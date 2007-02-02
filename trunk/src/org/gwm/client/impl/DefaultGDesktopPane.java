@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.event.GInternalFrameEvent;
 
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -79,20 +78,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
 
     private void setupListeners() {
 
-    }
-
-    /**
-     * Create a button from the window and add it the minimized windows bar.
-     * 
-     * @param theWindow
-     */
-    private void minimize(GInternalFrame theWindow) {
-        buttonBar.addWindow(theWindow);
-
-    }
-
-    public void maximize (GInternalFrame theWindow) {
-        //TODO Auto-generated method stub
     }
 
         

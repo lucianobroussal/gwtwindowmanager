@@ -25,36 +25,33 @@ import com.google.gwt.user.client.ui.Hyperlink;
 
 public class EventScenarii extends AbstractScenarii {
 
-	public EventScenarii(FramesManager framesManager) {
-		super(framesManager);
+    public EventScenarii(FramesManager framesManager) {
+        super(framesManager);
 
-	}
+    }
 
-	public void runScenarii() {
-		GInternalFrame window = framesManager.newFrame("Play with me ");
-		window.setWidth(530);
-		window.setHeight(250);
-		window.setTheme("alphacube");
-		window.setCaption("Window with an HTML text inside");
+    public void runScenarii() {
+        GInternalFrame window = framesManager.newFrame("Play with me ");
+        window.setWidth(530);
+        window.setHeight(250);
+        window.setTheme("alphacube");
+        window.setCaption("Window with an HTML text inside");
         GwmUtilities.displayAtParentCenter(window);
-		window.setContent("<img src='images/logo-mini.png' >"
-				+ "Play with the win to see the windows events fired!"
-		);
-        
-        
+        window.setContent("<img src='images/logo-mini.png' >"
+                + "Play with the win to see the windows events fired!");
+
         DebugWindow debugWindow = new DebugWindow(framesManager);
         GInternalFrame debugUI = debugWindow.getUI();
-        debugUI.setLocation(window.getTop(),window.getLeft() +  window.getWidth());
+        debugUI.setLocation(window.getTop(), window.getLeft()
+                + window.getWidth());
         debugUI.setVisible(true);
         window.addInternalFrameListener(debugWindow);
-        
 
-	}
+    }
 
-	protected Hyperlink createLink() {
-		Hyperlink simpleDemo = new Hyperlink("Frame events",
-				"frame_events");
-		return simpleDemo;
-	}
+    protected Hyperlink createLink() {
+        Hyperlink simpleDemo = new Hyperlink("Frame events", "frame_events");
+        return simpleDemo;
+    }
 
 }

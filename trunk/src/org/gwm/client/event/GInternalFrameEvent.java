@@ -21,8 +21,6 @@ import org.gwm.client.GInternalFrame;
 
 /**
  * This class is an event object and has a GInternalFrame as the source.
- * @author Marcelo Emanoel
- * @since 14/12/2006
  */
 public class GInternalFrameEvent {
 	private GInternalFrame source;

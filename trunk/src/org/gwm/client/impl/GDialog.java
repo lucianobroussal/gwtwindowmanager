@@ -56,11 +56,11 @@ public class GDialog {
 
     public static final int OK_CANCEL_OPTION = 7;
 
-    private static final String YES_OPTION_LABEL = "Yes";
+    public static final String YES_OPTION_LABEL = "Yes";
 
-    private static final String NO_OPTION_LABEL = "No";
+    public static final String NO_OPTION_LABEL = "No";
 
-    private static final String CANCEL_OPTION_LABEL = "Cancel";
+    public static final String CANCEL_OPTION_LABEL = "Cancel";
 
     private static String theme = GWmConstants.DEFAULT_THEME;
 

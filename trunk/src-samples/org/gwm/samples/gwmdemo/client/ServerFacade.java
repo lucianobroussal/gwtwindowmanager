@@ -21,37 +21,37 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public class ServerFacade {
 
-	private String staticResponseURL;
+    private String staticResponseURL;
 
-	private GwmServiceAsync remoteService;
+    private GwmServiceAsync remoteService;
 
-	private static ServerFacade instance;
+    private static ServerFacade instance;
 
-	private ServerFacade() {
-		staticResponseURL = GWT.getModuleBaseURL();
-		if (staticResponseURL.equals(""))
-			staticResponseURL = "/";
+    private ServerFacade() {
+        staticResponseURL = GWT.getModuleBaseURL();
+        if (staticResponseURL.equals(""))
+            staticResponseURL = "/";
 
-	}
+    }
 
-	public String getBaseUrl() {
-		return staticResponseURL;
-	}
+    public String getBaseUrl() {
+        return staticResponseURL;
+    }
 
-	public GwmServiceAsync getRemoteService() {
-		if (remoteService == null) {
-			remoteService = (GwmServiceAsync) GWT.create(GwmService.class);
-			((ServiceDefTarget) remoteService)
-					.setServiceEntryPoint(staticResponseURL + "gwmsite");
-		}
-		return remoteService;
-	}
+    public GwmServiceAsync getRemoteService() {
+        if (remoteService == null) {
+            remoteService = (GwmServiceAsync) GWT.create(GwmService.class);
+            ((ServiceDefTarget) remoteService)
+                    .setServiceEntryPoint(staticResponseURL + "gwmsite");
+        }
+        return remoteService;
+    }
 
-	public static ServerFacade get() {
-		if (instance == null) {
-			instance = new ServerFacade();
-		}
-		return instance;
-	}
+    public static ServerFacade get() {
+        if (instance == null) {
+            instance = new ServerFacade();
+        }
+        return instance;
+    }
 
 }

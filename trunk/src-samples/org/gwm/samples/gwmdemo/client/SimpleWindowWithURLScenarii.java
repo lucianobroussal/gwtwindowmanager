@@ -24,33 +24,25 @@ import com.google.gwt.user.client.ui.Hyperlink;
 
 public class SimpleWindowWithURLScenarii extends AbstractScenarii {
 
-	
-	
-	public SimpleWindowWithURLScenarii(FramesManager framesManager) {
-		super(framesManager);
+    public SimpleWindowWithURLScenarii(FramesManager framesManager) {
+        super(framesManager);
 
-	}
+    }
 
-	public void runScenarii() {
-		GInternalFrame window = framesManager.newFrame("");
-		window.setWidth(620);
-		window.setHeight(335);
-		window.setTheme("alphacube");
-		window.setCaption("Window with an URL inside");
-		window.setUrl("site/demo/simplescenarii.html");
+    public void runScenarii() {
+        GInternalFrame window = framesManager.newFrame("");
+        window.setWidth(620);
+        window.setHeight(335);
+        window.setTheme("alphacube");
+        window.setCaption("Window with an URL inside");
+        window.setUrl("site/demo/simplescenarii.html");
         GwmUtilities.diplayAtScreenCenter(window);
 
-	}
+    }
 
-	protected Hyperlink createLink() {
-		Hyperlink simpleDemo = new Hyperlink("With URL content", "simple");
-		return simpleDemo;
-	}
-	
-	
-	
-	
-	
-	
-		
+    protected Hyperlink createLink() {
+        Hyperlink simpleDemo = new Hyperlink("With URL content", "simple");
+        return simpleDemo;
+    }
+
 }

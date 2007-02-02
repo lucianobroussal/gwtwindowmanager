@@ -42,8 +42,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * GWT-based implementation of <code>GInternalFrame</code>
- * 
- * @author Johan Vos
  */
 public class DefaultGInternalFrame extends SimplePanel implements
         GInternalFrame, EventListener, EventPreview {

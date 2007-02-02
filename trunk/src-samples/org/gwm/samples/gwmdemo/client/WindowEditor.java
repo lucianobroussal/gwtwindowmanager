@@ -264,7 +264,9 @@ public class WindowEditor extends Composite {
                     try {
                         newWindow.setUrl(inputUrl.getText().trim());
                     } catch (Exception e) {
-                        GDialog.showMessage(null,"Please a enter an internet URL" , "Invalid field value", GDialog.ERROR_MESSAGE);
+                        GDialog.showMessage(null,
+                                "Please a enter an internet URL",
+                                "Invalid field value", GDialog.ERROR_MESSAGE);
                         return;
                     }
                 }
@@ -276,7 +278,12 @@ public class WindowEditor extends Composite {
                                 .getText());
                         newWindow.setMinimumWidth(minimumWidth);
                     } catch (Exception e) {
-                        GDialog.showMessage(null,"Please a enter number for 'mininum width' property" , "Invalid field value", GDialog.ERROR_MESSAGE);
+                        GDialog
+                                .showMessage(
+                                        null,
+                                        "Please a enter number for 'mininum width' property",
+                                        "Invalid field value",
+                                        GDialog.ERROR_MESSAGE);
                         return;
                     }
                 }
@@ -287,7 +294,12 @@ public class WindowEditor extends Composite {
                                 .getText());
                         newWindow.setMaximumWidth(maximumWidth);
                     } catch (Exception e) {
-                        GDialog.showMessage(null,"Please a enter number for 'maximum width' property" , "Invalid field value", GDialog.ERROR_MESSAGE);
+                        GDialog
+                                .showMessage(
+                                        null,
+                                        "Please a enter number for 'maximum width' property",
+                                        "Invalid field value",
+                                        GDialog.ERROR_MESSAGE);
                         return;
                     }
                 }
@@ -299,7 +311,12 @@ public class WindowEditor extends Composite {
                                 .getText());
                         newWindow.setMinimumHeight(minimumHeight);
                     } catch (Exception e) {
-                        GDialog.showMessage(null,"Please a enter number for 'mininum heigth' property" , "Invalid field value", GDialog.ERROR_MESSAGE);
+                        GDialog
+                                .showMessage(
+                                        null,
+                                        "Please a enter number for 'mininum heigth' property",
+                                        "Invalid field value",
+                                        GDialog.ERROR_MESSAGE);
                         return;
                     }
                 }
@@ -311,7 +328,12 @@ public class WindowEditor extends Composite {
                                 .getText());
                         newWindow.setMaximumHeight(maximumHeigth);
                     } catch (Exception e) {
-                        GDialog.showMessage(null,"Please a enter number for 'maximum height' property" , "Invalid field value", GDialog.ERROR_MESSAGE);
+                        GDialog
+                                .showMessage(
+                                        null,
+                                        "Please a enter number for 'maximum height' property",
+                                        "Invalid field value",
+                                        GDialog.ERROR_MESSAGE);
                         return;
                     }
                 }
@@ -322,7 +344,9 @@ public class WindowEditor extends Composite {
                         int top = Integer.parseInt(inputTop.getText());
                         newWindow.setTop(top);
                     } catch (Exception e) {
-                        GDialog.showMessage(null,"Please a enter number for 'top' property", "Invalid field value", GDialog.ERROR_MESSAGE);
+                        GDialog.showMessage(null,
+                                "Please a enter number for 'top' property",
+                                "Invalid field value", GDialog.ERROR_MESSAGE);
                         return;
                     }
                 }
@@ -333,7 +357,9 @@ public class WindowEditor extends Composite {
                         int left = Integer.parseInt(inputLeft.getText());
                         newWindow.setLeft(left);
                     } catch (Exception e) {
-                        GDialog.showMessage(null,"Please a enter number for 'left' property", "Invalid field value", GDialog.ERROR_MESSAGE);
+                        GDialog.showMessage(null,
+                                "Please a enter number for 'left' property",
+                                "Invalid field value", GDialog.ERROR_MESSAGE);
                         return;
                     }
                 }
