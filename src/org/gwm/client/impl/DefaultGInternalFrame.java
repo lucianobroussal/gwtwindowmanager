@@ -131,7 +131,6 @@ public class DefaultGInternalFrame extends SimplePanel implements
         initializeFrame();
         buildGui();
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS);
-        DesktopManager.addFrame(this);
     }
 
     private void initializeFrame() {
@@ -327,7 +326,6 @@ public class DefaultGInternalFrame extends SimplePanel implements
         fireFrameClosed();
         setVisible(false);
         removeFromParent();
-        DesktopManager.removeFrame(this);
     }
 
     public boolean isMinimized() {
