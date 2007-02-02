@@ -1,8 +1,10 @@
 package org.gwm.samples.client;
 
+import org.gwm.client.FramesManager;
+import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GDialogChoiceListener;
+import org.gwm.client.impl.FramesManagerFactory;
 import org.gwm.client.impl.GDialog;
-import org.gwm.client.impl.GwtInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
@@ -14,9 +16,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class GDialogSample implements EntryPoint {
 
     private VerticalPanel menuLayout  = new VerticalPanel();
+    private FramesManager framesManager;
     
     public void onModuleLoad() {
-         GwtInternalFrame menuBlock = new GwtInternalFrame("Menu");
+         framesManager = new FramesManagerFactory().createFramesManager();
+         GInternalFrame menuBlock = framesManager.newFrame("Menu");
          menuBlock.setLocation(10, 100);
          menuBlock.setDraggable(true);
          //menuBlock.setResizable(false);

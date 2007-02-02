@@ -1,9 +1,9 @@
 package org.gwm.client.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.gwm.client.*;
-import org.gwm.client.tools.*;
+import org.gwm.client.GInternalFrame;
 
 public class DesktopManager {
 

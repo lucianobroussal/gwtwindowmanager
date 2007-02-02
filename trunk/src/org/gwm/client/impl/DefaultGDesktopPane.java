@@ -3,15 +3,18 @@
  */
 package org.gwm.client.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameAdapter;
 import org.gwm.client.event.GInternalFrameEvent;
 
-import com.google.gwt.user.client.*;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.WindowResizeListener;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlexTable;
 
 /**
  * @author Marcelo Emanoel
@@ -90,7 +93,7 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
 
     public void deIconify (GInternalFrame theWindow) {
         theWindow.setVisible (true);
-        ((GwtInternalFrame)theWindow).fireFrameRestored();
+        ((DefaultGInternalFrame)theWindow).fireFrameRestored();
     }
 
     /**
@@ -101,7 +104,7 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
     public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setParentDesktop (this);
         int spos = (frames.size() + 1) * 30;
-        frameContainer.add((GwtInternalFrame)internalFrame, frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
+        frameContainer.add((DefaultGInternalFrame)internalFrame, frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
         internalFrame.setLocation(frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
         internalFrame.addInternalFrameListener(adapter);
         frames.add (internalFrame);
@@ -144,7 +147,7 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
         
     }
     
-    public void setWidgetPosition(GwtInternalFrame frame, int left, int top){
+    public void setWidgetPosition(DefaultGInternalFrame frame, int left, int top){
         frameContainer.setWidgetPosition(frame, left, top);
     }
 

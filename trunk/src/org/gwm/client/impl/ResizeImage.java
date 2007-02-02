@@ -29,14 +29,13 @@ public class ResizeImage extends FlowPanel implements MouseListener {
   private int resizeStartX;
   private int resizeStartY;
 
-  private int initialWidth;
-  private int initialHeight;
+
   private boolean resizing;
-  private GwtInternalFrame parent;
+  private DefaultGInternalFrame parent;
   private String currentStyle;
   private Label label;
 
-  public ResizeImage (GwtInternalFrame parent) {
+  public ResizeImage (DefaultGInternalFrame parent) {
     super();
     this.parent = parent;
     buildGui();

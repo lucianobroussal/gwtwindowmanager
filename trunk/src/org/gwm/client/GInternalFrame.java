@@ -30,6 +30,13 @@ import com.google.gwt.user.client.ui.Widget;
 public interface GInternalFrame {
 
     /**
+     * Retrieves the window's id.
+     * 
+     * @return String id.
+     */
+    public String getId();
+    
+    /**
      * Permits to change the property style on a window.
      * 
      * @param theme

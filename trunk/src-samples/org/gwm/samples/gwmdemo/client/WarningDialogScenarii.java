@@ -1,5 +1,6 @@
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.FramesManager;
 import org.gwm.client.impl.GDialog;
 
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -7,8 +8,8 @@ import com.google.gwt.user.client.ui.Hyperlink;
 public class WarningDialogScenarii extends AbstractScenarii {
 
 
-    public WarningDialogScenarii(Object object) {
-        super(object);
+    public WarningDialogScenarii(FramesManager framesManager) {
+        super(framesManager);
     }
 
     public void runScenarii() {

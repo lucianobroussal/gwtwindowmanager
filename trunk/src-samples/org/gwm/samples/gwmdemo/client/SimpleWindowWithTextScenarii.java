@@ -1,20 +1,20 @@
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.FramesManager;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.impl.GwtInternalFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class SimpleWindowWithTextScenarii extends AbstractScenarii {
 
-	public SimpleWindowWithTextScenarii(Object windowManager) {
-		super(windowManager);
+	public SimpleWindowWithTextScenarii(FramesManager framesManager) {
+		super(framesManager);
 
 	}
 
 	public void runScenarii() {
-		GInternalFrame window = new GwtInternalFrame("");
+		GInternalFrame window = framesManager.newFrame("");
 		window.setWidth(530);
 		window.setHeight(250);
 		window.setTheme("alphacube");

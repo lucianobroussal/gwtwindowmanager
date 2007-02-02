@@ -1,9 +1,9 @@
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.FramesManager;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.impl.GDialog;
-import org.gwm.client.impl.GwtInternalFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -11,8 +11,8 @@ import com.google.gwt.user.client.ui.Hyperlink;
 public class InputDialogScenarii extends AbstractScenarii {
 
 
-    public InputDialogScenarii(Object object) {
-        super(object);
+    public InputDialogScenarii(FramesManager framesManager) {
+        super(framesManager);
     }
 
     public void runScenarii() {
@@ -30,7 +30,7 @@ public class InputDialogScenarii extends AbstractScenarii {
             }
             
             private void displayResponse(String response) {
-                GInternalFrame responseWin  = new GwtInternalFrame("Response");
+                GInternalFrame responseWin  = framesManager.newFrame("Response");
                 responseWin.setTheme("alphacube");
                 responseWin.setMinimizable(false);
                 responseWin.setMaximizable(false);
