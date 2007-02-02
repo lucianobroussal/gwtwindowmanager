@@ -1,7 +1,6 @@
 package org.gwm.samples.gwmdemo.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.ui.TextBox;
 
 public interface GwmService extends RemoteService{
 

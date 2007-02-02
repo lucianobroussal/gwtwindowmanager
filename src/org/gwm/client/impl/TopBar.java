@@ -17,12 +17,9 @@
 package org.gwm.client.impl;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListener;
 import com.google.gwt.user.client.ui.Widget;
@@ -35,7 +32,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     private String title;
 
-    private GwtInternalFrame parent;
+    private DefaultGInternalFrame parent;
 
     private Label closeArea;
 
@@ -51,10 +48,8 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     private boolean moving;
 
-    private DefaultGDesktopPane pane;
 
-
-    public TopBar(GwtInternalFrame parent) {
+    TopBar(DefaultGInternalFrame parent) {
         super();
         this.parent = parent;
         this.draggable = true;
@@ -63,14 +58,10 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         
     }
 
-    void setDesktopPane (DefaultGDesktopPane pane) {
-        this.pane = pane;
-    }
 
     private void buildGui() {
         this.currentTheme = parent.getTheme();
         this.title = parent.getCaption();
-System.out.println ("title in gui = "+title);
         caption = new Label(title);
         caption.addMouseListener(this);
         closeArea = new Label();
@@ -115,7 +106,6 @@ System.out.println ("title in gui = "+title);
             int type = DOM.eventGetType(e);
             if (type != Event.ONMOUSEMOVE
                     || (type == Event.ONMOUSEMOVE && dragging)) {
-                Element em = caption.getElement();
                 int x = DOM.eventGetClientX(e);
                int y = DOM.eventGetClientY(e);
 
@@ -155,8 +145,6 @@ System.out.println ("title in gui = "+title);
 
     public void onMouseMove(Widget sender, int x, int y) {
         if (draggable && dragging) {
-            int absX = x + sender.getParent().getAbsoluteLeft();
-            int absY = y + sender.getParent().getAbsoluteTop();
             int newLeft = x - dragStartX + parent.getLeft();
             int newTop = y - dragStartY + parent.getTop();
             dragStartX =x;
@@ -234,7 +222,7 @@ System.out.println ("set dragging to "+dragging);
 
 
 
-    public void setParent(GwtInternalFrame parent) {
+    public void setParent(DefaultGInternalFrame parent) {
         this.parent = parent;
     }
 

@@ -1,9 +1,16 @@
 package org.gwm.client.impl;
 
-import com.google.gwt.user.client.*;
-import com.google.gwt.user.client.ui.*;
-import org.gwm.client.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.gwm.client.GDesktopPane;
+import org.gwm.client.GInternalFrame;
+
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 
 public class IconBar extends FlowPanel {
 
@@ -19,7 +26,7 @@ public class IconBar extends FlowPanel {
     }
 
     public void addWindow (GInternalFrame gframe) {
-        GwtInternalFrame frame = (GwtInternalFrame)(gframe);
+        DefaultGInternalFrame frame = (DefaultGInternalFrame)(gframe);
         HorizontalPanel icon = new HorizontalPanel();
         icon.addStyleName (frame.getTheme()+"_topBar_iconButton");
         Label label = new Label (frame.getCaption());

@@ -1,11 +1,9 @@
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.FramesManager;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.GDialog;
-import org.gwm.client.impl.GwtInternalFrame;
-import org.gwm.client.util.GwmUtilities;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -26,7 +24,7 @@ public class WindowEditor extends Composite {
 
     private Button createWindow;
 
-    private Object windowManager;
+    private FramesManager framesManager;
 
     private TextBox inputTitle;
 
@@ -62,8 +60,8 @@ public class WindowEditor extends Composite {
 
     private ListBox inputShowEffect;
 
-    public WindowEditor(Object windowManager) {
-        this.windowManager = windowManager;
+    public WindowEditor(FramesManager framesManager) {
+        this.framesManager = framesManager;
         initUI();
         initListeners();
         initWidget(ui);
@@ -210,7 +208,7 @@ public class WindowEditor extends Composite {
         createWindow.addClickListener(new ClickListener() {
 
             public void onClick(Widget sender) {
-                GInternalFrame newWindow = new GwtInternalFrame("");
+                GInternalFrame newWindow = framesManager.newFrame("");
 
                 newWindow.setTheme(style.getValue(style.getSelectedIndex()));
                 try {

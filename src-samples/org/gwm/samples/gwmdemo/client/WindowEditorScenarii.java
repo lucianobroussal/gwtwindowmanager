@@ -1,7 +1,7 @@
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.FramesManager;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.impl.GwtInternalFrame;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
@@ -9,14 +9,14 @@ public class WindowEditorScenarii extends AbstractScenarii {
 
 	
 	
-	public WindowEditorScenarii(Object windowManager) {
-		super(windowManager);
+	public WindowEditorScenarii(FramesManager framesManager) {
+		super(framesManager);
 
 	}
  
 	public void runScenarii() {
         WindowEditor editor = new WindowEditor(null);
-        GInternalFrame editorWindow =new GwtInternalFrame("");
+        GInternalFrame editorWindow =framesManager.newFrame("");
         editorWindow.setTheme("alphacube");
         editorWindow.setWidth(280);
         editorWindow.setHeight(460);

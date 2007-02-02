@@ -1,34 +1,36 @@
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.FramesManager;
+
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractScenarii implements Scenarii {
-	
-	protected Object framesManager;
 
-	public AbstractScenarii(Object windowManager){
-		//this.framesManager = windowManager;
-	}
+    protected FramesManager framesManager;
 
-	public Hyperlink getLink() {
-		Hyperlink hyperlink = createLink();
-		hyperlink.addClickListener(new ClickListener(){
+    public AbstractScenarii(FramesManager windowManager) {
+        this.framesManager = windowManager;
+    }
 
-			public void onClick(Widget sender) {
-				runScenarii();
-				
-			}
-			
-		});
-		return hyperlink;
-	}
+    public Hyperlink getLink() {
+        Hyperlink hyperlink = createLink();
+        hyperlink.addClickListener(new ClickListener() {
 
-	public void runScenarii() {
+            public void onClick(Widget sender) {
+                runScenarii();
 
-	}
-	
-	protected abstract Hyperlink createLink();
+            }
+
+        });
+        return hyperlink;
+    }
+
+    public void runScenarii() {
+
+    }
+
+    protected abstract Hyperlink createLink();
 
 }

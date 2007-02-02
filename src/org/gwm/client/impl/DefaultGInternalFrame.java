@@ -45,8 +45,8 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Johan Vos
  */
-public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
-        EventListener, EventPreview {
+public class DefaultGInternalFrame extends SimplePanel implements
+        GInternalFrame, EventListener, EventPreview {
 
     private static GInternalFrame topFrame;
 
@@ -82,7 +82,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     private String currentTheme;
 
-    private boolean closable, maximizable, minimizable, draggable, resizable;
+    private boolean closable, maximizable, minimizable, resizable;
 
     private boolean maximized, minimized;
 
@@ -92,14 +92,11 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
 
     private Label imgBotLeft;
 
-    private Label imgBotRight;
+    private int previousWidth;
 
-    private int previousWidth, restoreWidth;
-
-    private int previousHeight, restoreHeight;
+    private int previousHeight;
 
     private int previousTop, previousLeft;
-
 
     private GDesktopPane desktopPane;
 
@@ -110,21 +107,22 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private int top;
 
     private Frame frame;
-    
-    private FlexTable ui;
-    
-    private FlexTable topRow;
-    private FlexTable centerRow;
-    private FlexTable bottomRow;
-    private boolean freeminimized;
-    
-    public GwtInternalFrame() {
-        this("");
-    }
 
-    public GwtInternalFrame(String title) {
+    private FlexTable ui;
+
+    private FlexTable topRow;
+
+    private FlexTable centerRow;
+
+    private FlexTable bottomRow;
+
+    private boolean freeminimized;
+
+    private String id;
+
+    DefaultGInternalFrame(String id) {
         this.currentTheme = DEFAULT_STYLE;
-        this.title = title;
+        this.id = id;
         this.myContent = new HTML("");
         this.closable = true;
         this.minimizable = true;
@@ -133,7 +131,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         initializeFrame();
         buildGui();
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS);
-        DesktopManager.addFrame (this);
+        DesktopManager.addFrame(this);
     }
 
     private void initializeFrame() {
@@ -143,14 +141,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         bottomRow = new FlexTable();
         listeners = new ArrayList();
         resizeImage = new ResizeImage(this);
-//        this.caption = new Label(title);
-//        this.caption
-//                .setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         topBar = new TopBar(this);
         imgTopLeft = new Label();
         imgTopRight = new Label();
         imgBotLeft = new Label();
-        imgBotRight = new Label();
         this.maxWidth = Window.getClientWidth();
         this.maxHeight = Window.getClientHeight();
         this.width = DEFAULT_WIDTH;
@@ -160,7 +154,7 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private void buildGui() {
         this.ui = new FlexTable();
         if (freeminimized) {
-            this.ui.setWidget (0, 0, topBar);
+            this.ui.setWidget(0, 0, topBar);
             super.setWidget(ui);
             return;
         }
@@ -174,15 +168,16 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         topRow.setWidget(0, 0, imgTopLeft);
         topRow.setWidget(0, 1, topBar);
         topRow.setWidget(0, 2, imgTopRight);
-        bottomRow.setWidget(0, 0,  imgBotLeft);
+        bottomRow.setWidget(0, 0, imgBotLeft);
         bottomRow.setHTML(0, 1, "&nbsp;");
-        bottomRow.setHTML(0, 2,  "&nbsp;");
+        bottomRow.setHTML(0, 2, "&nbsp;");
         if (url != null) {
             setUrl(url);
         }
         centerRow.setHTML(0, 0, "&nbsp;");
         centerRow.setWidget(0, 1, myContent);
-        centerRow.getFlexCellFormatter().setHorizontalAlignment(0,1, HasHorizontalAlignment.ALIGN_CENTER);
+        centerRow.getFlexCellFormatter().setHorizontalAlignment(0, 1,
+                HasHorizontalAlignment.ALIGN_CENTER);
         centerRow.setHTML(0, 2, "&nbsp;");
 
         setResizable(resizable);
@@ -195,34 +190,38 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
         ui.setBorderWidth(0);
         ui.setCellPadding(0);
         ui.setCellSpacing(0);
-        ui.setWidget(0,0,topRow);
-        ui.setWidget(1,0 , centerRow);
-        ui.setWidget(2,0 , bottomRow);
+        ui.setWidget(0, 0, topRow);
+        ui.setWidget(1, 0, centerRow);
+        ui.setWidget(2, 0, bottomRow);
         super.setWidget(ui);
         setTheme(currentTheme);
-        
+
         topRow.setCellPadding(0);
         topRow.setCellSpacing(0);
         topRow.setHeight("100%");
-        topRow.getCellFormatter().setWidth(0,1, "100%");
+        topRow.getCellFormatter().setWidth(0, 1, "100%");
         centerRow.setCellPadding(0);
         centerRow.setCellSpacing(0);
         centerRow.setWidth("100%");
         centerRow.setHeight("100%");
-        centerRow.getCellFormatter().setWidth(0,1, "100%");
-        
+        centerRow.getCellFormatter().setWidth(0, 1, "100%");
+
         bottomRow.setCellPadding(0);
         bottomRow.setCellSpacing(0);
         bottomRow.setWidth("100%");
-        bottomRow.getCellFormatter().setWidth(0,1, "100%");
-        
+        bottomRow.getCellFormatter().setWidth(0, 1, "100%");
+
     }
 
     public void setParentDesktop(GDesktopPane pane) {
         this.desktopPane = pane;
-        if (topBar != null) {
-            topBar.setDesktopPane((DefaultGDesktopPane) pane);
-        }
+        // if (topBar != null) {
+        // topBar.setDesktopPane((DefaultGDesktopPane) pane);
+        // }
+    }
+
+    public String getId() {
+        return id;
     }
 
     GDesktopPane getDesktopPane() {
@@ -238,23 +237,29 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     private void applyTheme() {
         topBar.setTheme(currentTheme);
         resizeImage.setTheme(currentTheme);
-        //this.caption.setStyleName(currentTheme + "_title");
+        // this.caption.setStyleName(currentTheme + "_title");
         imgTopLeft.setStyleName(this.currentTheme + "_nw");
         imgTopRight.setStyleName(this.currentTheme + "_ne");
         imgBotLeft.setStyleName(this.currentTheme + "_sw");
         topRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
-        centerRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_content");
+        centerRow.getCellFormatter().setStyleName(0, 1,
+                currentTheme + "_content");
         centerRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_w");
         centerRow.getCellFormatter().setStyleName(0, 2, currentTheme + "_e");
         bottomRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_s");
-        topRow.getCellFormatter().setVerticalAlignment(0,0 , HasVerticalAlignment.ALIGN_BOTTOM);
-        topRow.getCellFormatter().setVerticalAlignment(0,2 , HasVerticalAlignment.ALIGN_BOTTOM);
-        bottomRow.getCellFormatter().setVerticalAlignment(0,0 , HasVerticalAlignment.ALIGN_TOP);
-        bottomRow.getCellFormatter().setVerticalAlignment(0,2 , HasVerticalAlignment.ALIGN_TOP);
+        topRow.getCellFormatter().setVerticalAlignment(0, 0,
+                HasVerticalAlignment.ALIGN_BOTTOM);
+        topRow.getCellFormatter().setVerticalAlignment(0, 2,
+                HasVerticalAlignment.ALIGN_BOTTOM);
+        bottomRow.getCellFormatter().setVerticalAlignment(0, 0,
+                HasVerticalAlignment.ALIGN_TOP);
+        bottomRow.getCellFormatter().setVerticalAlignment(0, 2,
+                HasVerticalAlignment.ALIGN_TOP);
         if (resizable) {
             resizeImage.setTheme(currentTheme);
         } else {
-            bottomRow.getCellFormatter().setStyleName(0, 2, currentTheme + "_se");
+            bottomRow.getCellFormatter().setStyleName(0, 2,
+                    currentTheme + "_se");
         }
 
     }
@@ -319,13 +324,10 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
     }
 
     public void close() {
-        // TODO to check with Johan !!! how avoiding this window will be showed
-        // again ?
-        // how releasing resources ?
         fireFrameClosed();
         setVisible(false);
         removeFromParent();
-        DesktopManager.removeFrame (this);
+        DesktopManager.removeFrame(this);
     }
 
     public boolean isMinimized() {
@@ -443,7 +445,8 @@ public class GwtInternalFrame extends SimplePanel implements GInternalFrame,
             resizeImage.setTheme(currentTheme);
         } else {
             bottomRow.setHTML(0, 2, "&nbsp;");
-            bottomRow.getCellFormatter().setStyleName(0, 2, currentTheme + "_se");
+            bottomRow.getCellFormatter().setStyleName(0, 2,
+                    currentTheme + "_se");
         }
     }
 

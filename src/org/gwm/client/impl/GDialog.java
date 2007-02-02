@@ -79,7 +79,7 @@ public class GDialog {
     }
 
     private GDialog() {
-        ui = new GwtInternalFrame("");
+        ui = new DefaultGInternalFrame("");
     }
 
     public static void showConfirmDialog(UIObject parent, Object message,
@@ -445,7 +445,7 @@ public class GDialog {
             
             setStyleName("overlay_" + theme);
             
-            DOM.setIntStyleAttribute(getElement(), "zIndex", GwtInternalFrame
+            DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGInternalFrame
                     .getLayerOfTheTopWindow()+1);
             
             RootPanel.get().add(this);

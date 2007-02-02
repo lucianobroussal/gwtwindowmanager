@@ -1,9 +1,9 @@
 package org.gwm.client.tools;
 
+import org.gwm.client.FramesManager;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
-import org.gwm.client.impl.GwtInternalFrame;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DebugWindow extends GwtInternalFrame implements
+public class DebugWindow  implements
         GInternalFrameListener {
 
     private DockPanel dock;
@@ -22,10 +22,12 @@ public class DebugWindow extends GwtInternalFrame implements
     private VerticalPanel panel;
 
     private Button clearLog;
+    
+    private  GInternalFrame frame;
 
 
-    public DebugWindow() {
-        super("Debug");
+    public DebugWindow(FramesManager  framesManager) {
+        frame  = framesManager.newFrame("Debug Window");
         this.dock = new DockPanel();
         this.panel = new VerticalPanel();
         this.clearLog = new Button("Clear window", new ClickListener() {
@@ -43,7 +45,7 @@ public class DebugWindow extends GwtInternalFrame implements
                 HasHorizontalAlignment.ALIGN_CENTER);
         this.dock.setCellVerticalAlignment(clearLog,
                 HasVerticalAlignment.ALIGN_TOP);
-        setContent(this.dock);
+        frame.setContent(this.dock);
     }
 
 
@@ -97,5 +99,10 @@ public class DebugWindow extends GwtInternalFrame implements
         });
         this.panel.add(l);
     }
+    
+    public GInternalFrame getUI(){
+        return frame;
+    }
 
+    
 }

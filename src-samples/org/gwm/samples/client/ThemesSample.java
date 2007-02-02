@@ -1,6 +1,8 @@
 package org.gwm.samples.client;
 
-import org.gwm.client.impl.GwtInternalFrame;
+import org.gwm.client.FramesManager;
+import org.gwm.client.GInternalFrame;
+import org.gwm.client.impl.FramesManagerFactory;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
@@ -15,10 +17,12 @@ public class ThemesSample implements EntryPoint {
 
     private ListBox listBox;
 
-    private GwtInternalFrame frame;
+    private GInternalFrame frame;
+
+    protected FramesManager framesManager;
 
     public void onModuleLoad() {
-
+        framesManager = new FramesManagerFactory().createFramesManager();
         testThemes();
     }
 
@@ -50,8 +54,8 @@ public class ThemesSample implements EntryPoint {
                 if (!listBox.isEnabled()) {
                     listBox.setEnabled(true);
                 }
-                frame = new GwtInternalFrame("http://www.google.com");
-                //frame.setUrl("http://www.google.com");
+                frame = framesManager.newFrame("http://www.google.com");
+                // frame.setUrl("http://www.google.com");
                 frame.setContent(new Label("http://www.google.com"));
                 frame.setSize(300, 200);
                 frame.setLocation(200, 200);
