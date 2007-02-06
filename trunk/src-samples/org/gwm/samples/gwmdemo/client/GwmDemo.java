@@ -78,6 +78,7 @@ public class GwmDemo implements EntryPoint {
                 framesManager)));
         menuLayout.add(buildMenu("Themes"));
         menuLayout.add(buildMenuItem(new ThemesScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new ChangingThemeInLiveScenarii(framesManager)));
         menuLayout.add(buildMenu("Desktop"));
         menuLayout
                 .add(buildMenuItem(new DesktopScenarii(framesManager, desktop)));

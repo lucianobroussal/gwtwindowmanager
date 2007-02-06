@@ -16,17 +16,14 @@
 
 package org.gwm.client;
 
-
 /**
  * FramesManager provides methods to create, access, delete GInternalFrames from
  * your application.
  * 
- * @author luciano broussal
- * 
  * Type FramesManager, created on 27 nov. 06 at 16:18:58
  * 
  */
-public interface FramesManager{
+public interface FramesManager {
 
     /**
      * Creates a new instance of GInternalFrame.
@@ -35,7 +32,6 @@ public interface FramesManager{
      */
     public abstract GInternalFrame newFrame(String title);
 
-    
     /**
      * Permits to retrieve a GInternalFrame by its id.
      * 

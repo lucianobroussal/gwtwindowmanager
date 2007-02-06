@@ -91,7 +91,6 @@
 		<pathelement location="${GWT-REPO}/gwt-windows-1.3.1/gwt-dev-windows.jar" />
 		<pathelement location="${GWT-REPO}/gwt-windows-1.3.1/gwt-user.jar" />
 		<pathelement location="${GWT-REPO}/gwt-widgets-0.1.3/gwt-widgets-0.1.3.jar" />
-		<pathelement location="${GWT-REPO}/gwt-tk/gwttk-0.2.0.jar" />
 	</classpath>
 	<arg value="-out" />
 	<arg file="www" />
@@ -133,7 +132,6 @@
 		<pathelement location="${GWT-REPO}/gwt-windows-1.3.1/gwt-dev-windows.jar" />
 		<pathelement location="${GWT-REPO}/gwt-windows-1.3.1/gwt-user.jar" />
 		<pathelement location="${GWT-REPO}/gwt-widgets-0.1.3/gwt-widgets-0.1.3.jar" />
-		<pathelement location="${GWT-REPO}/gwt-tk/gwttk-0.2.0.jar" />
 	</classpath>
 	<arg value="-out" />
 	<arg file="www" />
