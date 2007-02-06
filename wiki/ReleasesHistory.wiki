@@ -13,9 +13,13 @@ the browser window, or they can create a Desktop that manages the Frames.
  * Free frames and desktop-managed frames
  * Dialog and Input frames
  * added behaviour capabilities
+ * event-catching and debug window
  * bug-fixes
  * added samples with source code
 
+Behaviour capabilities:
+ * frames can be dragged and resized
+ * a frame caption has 3 buttons: minimize/restore, maximize/restore, close
 
 =Release 0.1b=
 (2006-12-10)
