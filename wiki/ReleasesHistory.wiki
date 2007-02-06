@@ -1,6 +1,6 @@
 #labels Phase-Support
 =Release 0.5=
-(2007-02-06) 
+(2007-02-06)
 The 0.5 release provides the foundation for further enhancements.
 Developers can create Free Frames that float everywhere around inside
 the browser window, or they can create a Desktop that manages the Frames.
