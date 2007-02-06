@@ -37,15 +37,13 @@ public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
     }
 
     public void runScenarii() {
-        GInternalFrame window = framesManager.newFrame("");
+        GInternalFrame window = framesManager.newFrame("Simple window with widget");
         window.setWidth(380);
         window.setHeight(440);
         window.setLocation(65, 10);
         window.setTheme("alphacube");
-        window.setCaption("Simple window with widget");
-        window.setVisible(true);
         window.setContent(buildContentWidget());
-
+        window.setVisible(true);
     }
 
     private Widget buildContentWidget() {
@@ -90,13 +88,12 @@ public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
     }
 
     protected void showSourceCode() {
-        GInternalFrame window = framesManager.newFrame("");
+        GInternalFrame window = framesManager.newFrame("Source code of window with GWT widget inside");
         window.setWidth(800);
         window.setHeight(440);
         window.setLocation(65, 440);
         window.setTheme("alphacube");
-        window.setCaption("Source code of window with GWT widget inside");
-        window.setUrl("site/demo/simplewithwidgetscenarii.html");
+        window.setUrl("simplewithwidgetscenarii.html");
         window.setVisible(true);
 
     }

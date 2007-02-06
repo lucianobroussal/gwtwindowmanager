@@ -1,6 +1,6 @@
 <link href="style/html-content.css" rel="stylesheet" type="text/css" />
 
-<img src="../../images/logo-mini.png" >
+<img src="images/logo-mini.png" >
 <h2>Simple Window</h2>
 
 <p>
@@ -13,13 +13,12 @@
 <xmp class=sample>
 FramesManager framesManager = new FramesManagerFactory().createFramesManager();
 ...
-GInternalFrame frame = framesManager.newFrame();
-frame.setWidth(600);
-frame.setHeight(312);
-frame.setStyle("alphacube");
-frame.setTitle("Window with an URL inside");
-frame.setUrl("site/demo/simplescenarii.html");
-frame.showCenter(false);
+GInternalFrame window = framesManager.newFrame("Window with an URL inside");
+window.setWidth(620);
+window.setHeight(335);
+window.setTheme("alphacube");
+window.setUrl("simplescenarii.html");
+GwmUtilities.diplayAtScreenCenter(window);
 </xmp>
 </td>
 </tr>
