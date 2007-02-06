@@ -1,4 +1,4 @@
-#labels Phase-Implementation
+#labels Phase-Requirements
 =Release 0.5=
 (2007-02-06)
 
