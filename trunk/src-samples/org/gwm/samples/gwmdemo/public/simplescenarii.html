@@ -1,0 +1,26 @@
+<link href="style/html-content.css" rel="stylesheet" type="text/css" />
+
+<img src="../../images/logo-mini.png" >
+<h2>Simple Window</h2>
+
+<p>
+	This sample opens a simple window with an URL inside.
+</p>
+
+<table width="100%">
+<tr>
+<td align="center">
+<xmp class=sample>
+FramesManager framesManager = new FramesManagerFactory().createFramesManager();
+...
+GInternalFrame frame = framesManager.newFrame();
+frame.setWidth(600);
+frame.setHeight(312);
+frame.setStyle("alphacube");
+frame.setTitle("Window with an URL inside");
+frame.setUrl("site/demo/simplescenarii.html");
+frame.showCenter(false);
+</xmp>
+</td>
+</tr>
+</table>		
