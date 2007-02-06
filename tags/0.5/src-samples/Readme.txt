@@ -1,1 +1,0 @@
-To play the demo you need to copy the themes directory inside the org/gwm/samples/gwmdemo/public directory.
