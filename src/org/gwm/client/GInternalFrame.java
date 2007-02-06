@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
+ * Copyright (c) 2007 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,10 +20,7 @@ import org.gwm.client.event.GInternalFrameListener;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Provides methods to interact with a frame.
- * 
- * Type GInternalFrame, created on 28 nov. 06 at 16:35:31
- * 
+ * Provides the behavior handles to interact with a frame.
  */
 public interface GInternalFrame {
 
@@ -52,12 +49,9 @@ public interface GInternalFrame {
      * 
      * @param widget
      *            the content to show into the window
-     * @throws IllegalStateException
-     *             if it is called before a call of one showXXX(...) method.
      * @see <a
      *      href="http://code.google.com/webtoolkit/documentation/com.google.gwt.user.client.ui.Widget.html">GWT
      *      Widget</a>
-     * 
      */
     public void setContent(Widget theContent);
 
@@ -82,13 +76,65 @@ public interface GInternalFrame {
     public void close();
 
     /**
+     * Sets if the window is resizable.
+     * 
+     * @param resizable
+     */
+    public void setResizable(boolean resizable);
+
+    /**
+     * Sets if the window is closable.
+     * 
+     * @param closable
+     */
+    public void setClosable(boolean closable);
+
+    /**
+     * Sets the window's minimizable state.
+     * 
+     * @param minimizable
+     */
+    public void setMinimizable(boolean minimizable);
+
+    /**
+     * Returns the window minimizable state.
+     */
+    public boolean isMinimizable();
+
+    /**
+     * Sets the window's maximizable state.
+     * 
+     * @param maximizable
+     */
+    public void setMaximizable(boolean maximizable);
+
+    /**
+     * Returns the window draggable state.
+     * 
+     * @return
+     */
+    public boolean isDraggable();
+
+    /**
+     * Returns the window maximizable state.
+     * 
+     * @return
+     */
+    public boolean isMaximizable();
+
+    /**
+     * Sets if the window is draggable.
+     * 
+     * @param draggable
+     */
+    public void setDraggable(boolean draggable);
+
+    /**
      * Provides the window minimized status.
      * 
      * @return Returns true if the window is minimized
      */
     public boolean isMinimized();
-
-    public void maximize();
 
     /**
      * Provides the window maximized status.
@@ -97,8 +143,20 @@ public interface GInternalFrame {
      */
     public boolean isMaximized();
 
+    /**
+     * Maximize the frame size.
+     */
+    public void maximize();
+
+    /**
+     * Minimize the frame size.
+     */
     public void minimize();
 
+    /**
+     * Restore the previous state of the frame after a minimize or maximize
+     * action.
+     */
     public void restore();
 
     /**
@@ -130,21 +188,19 @@ public interface GInternalFrame {
     public void setWidth(int width);
 
     /**
-     * Sets window height.
-     * 
-     * @param height
-     *            Height in pixels
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
-     */
-    public void setHeight(int height);
-
-    /**
      * Returns the window's width.
      * 
      * @return
      */
     public int getWidth();
+
+    /**
+     * Sets window height.
+     * 
+     * @param height
+     *            Height in pixels
+     */
+    public void setHeight(int height);
 
     /**
      * Returns the window's height.
@@ -158,8 +214,6 @@ public interface GInternalFrame {
      * 
      * @param minWidth
      *            minWidth in pixels
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
      */
     public void setMinimumWidth(int minWidth);
 
@@ -168,8 +222,6 @@ public interface GInternalFrame {
      * 
      * @param minHeight
      *            minHeight in pixels
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
      */
     public void setMinimumHeight(int minHeight);
 
@@ -178,8 +230,6 @@ public interface GInternalFrame {
      * 
      * @param maxWidth
      *            maxWidth in pixels
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximumWidth(int maxWidth);
 
@@ -188,8 +238,6 @@ public interface GInternalFrame {
      * 
      * @param maxHeight
      *            maxHeight in pixels
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximumHeight(int maxHeight);
 
@@ -226,8 +274,6 @@ public interface GInternalFrame {
      * 
      * @param top
      *            top in pixels
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
      */
     public void setTop(int top);
 
@@ -243,8 +289,6 @@ public interface GInternalFrame {
      * 
      * @param left
      *            left in pixels
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
      */
     public void setLeft(int left);
 
@@ -276,74 +320,8 @@ public interface GInternalFrame {
      * @param url
      *            to display.
      * 
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
      */
     public void setUrl(String url);
-
-    /**
-     * Sets if the window is resizable.
-     * 
-     * @param resizable
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
-     */
-    public void setResizable(boolean resizable);
-
-    /**
-     * Sets if the window is closable.
-     * 
-     * @param closable
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
-     */
-    public void setClosable(boolean closable);
-
-    /**
-     * Sets the window's minimizable state.
-     * 
-     * @param minimizable
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
-     */
-    public void setMinimizable(boolean minimizable);
-
-    /**
-     * Returns the window minimizable state.
-     */
-    public boolean isMinimizable();
-
-    /**
-     * Sets the window's maximizable state.
-     * 
-     * @param maximizable
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
-     */
-    public void setMaximizable(boolean maximizable);
-
-    /**
-     * Returns the window draggable state.
-     * 
-     * @return
-     */
-    public boolean isDraggable();
-
-    /**
-     * Returns the window maximizable state.
-     * 
-     * @return
-     */
-    public boolean isMaximizable();
-
-    /**
-     * Sets if the window is draggable.
-     * 
-     * @param draggable
-     * @throws IllegalStateException
-     *             if it is called after a call of one showXXX(...) method
-     */
-    public void setDraggable(boolean draggable);
 
     /**
      * Returns the GDesktopPane who owns this GInternalFrame
@@ -370,7 +348,5 @@ public interface GInternalFrame {
      * @param listener
      */
     public void removeInternalFrameListener(GInternalFrameListener listener);
-
-    public boolean isVisible();
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
+ * Copyright (c) 2007 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -212,9 +212,6 @@ public class DefaultGInternalFrame extends SimplePanel implements
 
     public void setParentDesktop(GDesktopPane pane) {
         this.desktopPane = pane;
-        // if (topBar != null) {
-        // topBar.setDesktopPane((DefaultGDesktopPane) pane);
-        // }
     }
 
     public String getId() {
@@ -227,14 +224,12 @@ public class DefaultGInternalFrame extends SimplePanel implements
 
     public void setTheme(String theme) {
         this.currentTheme = theme;
-        // buildGui();
         applyTheme();
     }
 
     private void applyTheme() {
         topBar.setTheme(currentTheme);
         resizeImage.setTheme(currentTheme);
-        // this.caption.setStyleName(currentTheme + "_title");
         imgTopLeft.setStyleName(this.currentTheme + "_nw");
         imgTopRight.setStyleName(this.currentTheme + "_ne");
         imgBotLeft.setStyleName(this.currentTheme + "_sw");
@@ -355,7 +350,6 @@ public class DefaultGInternalFrame extends SimplePanel implements
         this.width = width;
         this.height = height;
         ui.setSize(width + "px", height + "px");
-        // fireFrameResized();
     }
 
     public void setWidth(int width) {
@@ -473,7 +467,6 @@ public class DefaultGInternalFrame extends SimplePanel implements
     }
 
     public boolean onEventPreview(Event evt) {
-        // super.onEventPreview(evt); We don't take this into account
         return true;
     }
 
@@ -574,11 +567,11 @@ public class DefaultGInternalFrame extends SimplePanel implements
     }
 
     public int getMaximumWidth() {
-        return 0;
+        return this.maxWidth;
     }
 
     public int getMaximumHeight() {
-        return 0;
+        return this.maxHeight;
     }
 
     public Widget getContent() {

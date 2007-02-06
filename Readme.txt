@@ -5,11 +5,13 @@ Compilation
 
 To have gwtwindowmanager compiling sucessfully
 define in eclipse project properties the GWT_HOME classpath entry variable.
+define in eclipse project properties the GWT_EXT classpath entry variable.
 GWT_HOME is the root dir of your GWT binaries installation.
+GWT_EXT is the root dir of your Third GWT binaries installation.
 
 Building binary jar
 -------------------
-
+Rename the build-template.properties by build.properties and set up the paths variables.
 Open the ant build.xml file with the Ant view and run the package task.
 
 Javadoc
@@ -19,5 +21,5 @@ Open the ant build.xml file with the Ant view and hit the javadoc task.
 
 
 ------------------------------------------------------------------------
-Copyright (c) 2006 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
+Copyright (c) 2007 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
    

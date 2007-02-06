@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
+ * Copyright (c) 2007 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,6 +18,11 @@ package org.gwm.client;
 
 import java.util.List;
 
+/**
+ * A container used to create a multiple-document interface or a virtual
+ * desktop. You create <code>GInternalFrame</code> objects and add them to the
+ * <code>GDesktopPane</code>.
+ */
 public interface GDesktopPane {
 
     /**
@@ -28,15 +33,6 @@ public interface GDesktopPane {
      *            The GInternalFrame to be added.
      */
     public void addFrame(GInternalFrame internalFrame);
-
-    /**
-     * Remove a GInternalFrame from this GDesktopPane and select it if its the
-     * first one.
-     * 
-     * @param internalFrame
-     *            The GInternalFrame to be removed.
-     */
-    public void removeFrame(GInternalFrame internalFrame);
 
     /**
      * Closes all GInternalFrames contained in this GDesktopPane.
@@ -61,12 +57,5 @@ public interface GDesktopPane {
      * @param minimizedWindow
      */
     public void deIconify(GInternalFrame minimizedWindow);
-
-    /**
-     * Sets the currently active JInternalFrame in this JDesktopPane.
-     */
-    public void setSelectedFrame(GInternalFrame newSelectedFrame);
-
-    public GInternalFrame getSelectedFrame();
 
 }
