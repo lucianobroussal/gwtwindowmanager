@@ -6,7 +6,7 @@ The 0.5 release provides the foundation for further enhancements.
 Developers can create Free Frames that float everywhere around inside
 the browser window, or they can create a Desktop that manages the Frames.
 
-==Major changes==
+===Major changes===
  * GWT-implementation of the GInternalFrame (no external js-libraries)
  * Free frames and desktop-managed frames
  * Dialog and Input frames
