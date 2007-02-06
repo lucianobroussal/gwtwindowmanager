@@ -30,14 +30,12 @@ public class SimpleWindowWithURLScenarii extends AbstractScenarii {
     }
 
     public void runScenarii() {
-        GInternalFrame window = framesManager.newFrame("");
+        GInternalFrame window = framesManager.newFrame("Window with an URL inside");
         window.setWidth(620);
         window.setHeight(335);
         window.setTheme("alphacube");
-        window.setCaption("Window with an URL inside");
-        window.setUrl("site/demo/simplescenarii.html");
+        window.setUrl("simplescenarii.html");
         GwmUtilities.diplayAtScreenCenter(window);
-
     }
 
     protected Hyperlink createLink() {

@@ -19,7 +19,7 @@ private Widget buildContentWidget() {
 			window.setHeight(500);
 			window.setStyle("darkX");
 			window.setTitle("Loop over diffents sizes of a Label Source code");
-			window.setUrl("site/demo/simplewithwidgetscenarii.html");
+			window.setUrl("simplewithwidgetscenarii.html");
 			window.showCenter();
 		}
 	});
@@ -45,14 +45,13 @@ private Widget buildContentWidget() {
 }
 FramesManager framesManager = new FramesManagerFactory().createFramesManager();
 ...
-GInternalFrame frame = framesManager.newFrame();
-frame.setWidth(380);
-frame.setHeight(440);
-frame.setLocation(65, 10);
-frame.setStyle("alphacube");
-frame.setTitle("Simple window with widget");
-frame.show(false);
-frame.setContent(buildContentWidget());
+GInternalFrame window = framesManager.newFrame("Simple window with widget");
+window.setWidth(380);
+window.setHeight(440);
+window.setLocation(65, 10);
+window.setTheme("alphacube");
+window.setContent(buildContentWidget());
+window.setVisible(true);
 ...
 </xmp>
 </td>

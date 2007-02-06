@@ -65,7 +65,7 @@ public class ThemesScenarii extends AbstractScenarii {
                     window.setTheme(theme);
                 window.setCaption("Window with theme : "
                         + (theme != null ? theme : "dialog"));
-                window.setUrl("site/demo/themecontent.html");
+                window.setUrl("themecontent.html");
                 GwmUtilities.displayAtParentCenter(window);
 
             }
@@ -107,7 +107,7 @@ public class ThemesScenarii extends AbstractScenarii {
                 window.setLocation(65, 560);
                 window.setTheme("alphacube");
                 window.setCaption("Theme template CSS file");
-                window.setUrl("site/demo/theme_template.html");
+                window.setUrl("theme_template.html");
                 window.setVisible(true);
 
             }
