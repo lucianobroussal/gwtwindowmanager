@@ -13,30 +13,30 @@
 }
 
 .theme1_topBar {
-  width: 100%;
-  cursor: move;
+  	width: 100%;
+  	cursor: move;
 }
 
 
 .theme1_nw {
-  width: 16px;
-  height: 36px;
-  background: transparent url(theme1/top_left.gif) no-repeat 0 0;		
+  	width: 16px;
+  	height: 36px;
+  	background: transparent url(theme1/top_left.gif) no-repeat 0 0;		
 }
 
 .icon_button {
-  background: transparent url(theme1/minimize.gif) no-repeat 0 0;
-  width: 19px;
-  height: 19px;
+  	background: transparent url(theme1/minimize.gif) no-repeat 0 0;
+  	width: 19px;
+  	height: 19px;
 }
 
 .button {
-  cursor: default;
+  	cursor: default;
 }
 
 .icon_title {
-  border: 1px;
-  border-style:dashed;
+  	border: 1px;
+  	border-style:dashed;
 }
 
 .theme1_n {

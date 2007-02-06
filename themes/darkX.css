@@ -14,48 +14,48 @@
 }
 
 .darkX_topBar {
-  width: 100%;
-  cursor:move;
+   	width: 100%;
+   	cursor:move;
 }
 
 .darkX_nw {
-  background: transparent url(darkX/titlebar-left-focused.png) no-repeat 0 0;			
-  width:4px;
-  height:21px;
+   	background: transparent url(darkX/titlebar-left-focused.png) no-repeat 0 0;			
+   	width:4px;
+   	height:21px;
 }
 .darkX_n {
-  background: transparent url(darkX/titlebar-mid-focused.png) repeat-x 0 0;			
-  height:21px;
+   	background: transparent url(darkX/titlebar-mid-focused.png) repeat-x 0 0;			
+   	height:21px;
 }
 .darkX_ne {
-  background: transparent url(darkX/titlebar-right-focused.png) no-repeat 0 0;			
-  width:3px;	  
-  height:21px;
+   	background: transparent url(darkX/titlebar-right-focused.png) no-repeat 0 0;			
+   	width:3px;	  
+   	height:21px;
 }
 .darkX_w {
-  background: transparent url(darkX/frame-left-focused.png) repeat-y top left;			
-  width:3px;
+	background: transparent url(darkX/frame-left-focused.png) repeat-y top left;			
+   	width:3px;
 }
 
 .darkX_e {
-  background: transparent url(darkX/frame-right-focused.png) repeat-y 0 0;			
-  width:3px;	  
-  background-color:1px solid red;
+  	background: transparent url(darkX/frame-right-focused.png) repeat-y 0 0;			
+  	width:3px;	  
+  	background-color:1px solid red;
 }
 
 .darkX_sw {
-  background: transparent url(darkX/frame-bottom-left-focused.png) no-repeat 0 0;			
-  width:3px;
-  height:3px;
+  	background: transparent url(darkX/frame-bottom-left-focused.png) no-repeat 0 0;			
+  	width:3px;
+  	height:3px;
 }
 .darkX_s {
-  background: transparent url(darkX/frame-bottom-mid-focused.png) repeat-x 0 0;			
-  height:3px;
+  	background: transparent url(darkX/frame-bottom-mid-focused.png) repeat-x 0 0;			
+  	height:3px;
 }
 .darkX_se, .darkX_sizer {
-  background: transparent url(darkX/frame-bottom-right-focused.png) no-repeat 0 0;			
-  width:3px;
-  height:3px;
+  	background: transparent url(darkX/frame-bottom-right-focused.png) no-repeat 0 0;			
+  	width:3px;
+  	height:3px;
 }
 
 .darkX_sizer {
