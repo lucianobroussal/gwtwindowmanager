@@ -17,10 +17,10 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.FramesManager;
+import org.gwm.client.FramesManagerFactory;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
-import org.gwm.client.impl.FramesManagerFactory;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
