@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
+ * Copyright (c) 2007 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 
 /**
  * 
@@ -31,14 +30,13 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 
-/**
- * @author Marcelo Emanoel
- * @since 18/12/2006
- */
-public class DefaultGDesktopPane extends Composite implements WindowResizeListener, GDesktopPane {
+public class DefaultGDesktopPane extends Composite implements
+        WindowResizeListener, GDesktopPane {
 
     private AbsolutePanel frameContainer;
+
     private FlexTable desktopWidget;
+
     private IconBar buttonBar;
 
     private List frames;
@@ -59,36 +57,36 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
         desktopWidget.setCellPadding(0);
         desktopWidget.setCellSpacing(0);
         frameContainer = new AbsolutePanel();
-        //int tw = Window.getClientWidth();
-        //int th = Window.getClientHeight()-50;
+        // int tw = Window.getClientWidth();
+        // int th = Window.getClientHeight()-50;
         frameContainer.setWidth("100%");
         frameContainer.setHeight("100%");
-        buttonBar = new IconBar (this);
-        desktopWidget.getFlexCellFormatter().setHeight(0,0,"100%");
-        desktopWidget.setWidget(0,0,frameContainer);
+        buttonBar = new IconBar(this);
+        desktopWidget.getFlexCellFormatter().setHeight(0, 0, "100%");
+        desktopWidget.setWidget(0, 0, frameContainer);
         frameContainer.setStyleName("gwm-GDesktopPane-FrameContainer");
 
-        desktopWidget.setWidget(1,0,buttonBar);
-        desktopWidget.getFlexCellFormatter().setStyleName(1,0,"gwm-GDesktopPane-TaskBar");
-        
+        desktopWidget.setWidget(1, 0, buttonBar);
+        desktopWidget.getFlexCellFormatter().setStyleName(1, 0,
+                "gwm-GDesktopPane-TaskBar");
+
         initWidget(desktopWidget);
         setStyleName("gwm-GDesktopPane");
-        
+
     }
 
     private void setupListeners() {
 
     }
 
-        
     public void iconify(GInternalFrame theWindow) {
         theWindow.setVisible(false);
         buttonBar.addWindow(theWindow);
     }
 
-    public void deIconify (GInternalFrame theWindow) {
-        theWindow.setVisible (true);
-        ((DefaultGInternalFrame)theWindow).fireFrameRestored();
+    public void deIconify(GInternalFrame theWindow) {
+        theWindow.setVisible(true);
+        ((DefaultGInternalFrame) theWindow).fireFrameRestored();
     }
 
     /**
@@ -97,11 +95,15 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
      * @param internalFrame
      */
     public void addFrame(GInternalFrame internalFrame) {
-        internalFrame.setParentDesktop (this);
+        internalFrame.setParentDesktop(this);
         int spos = (frames.size() + 1) * 30;
-        frameContainer.add((DefaultGInternalFrame)internalFrame, frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
-        internalFrame.setLocation(frameContainer.getAbsoluteLeft() + spos, frameContainer.getAbsoluteTop() + spos);
-        frames.add (internalFrame);
+        frameContainer.add((DefaultGInternalFrame) internalFrame,
+                frameContainer.getAbsoluteLeft() + spos, frameContainer
+                        .getAbsoluteTop()
+                        + spos);
+        internalFrame.setLocation(frameContainer.getAbsoluteLeft() + spos,
+                frameContainer.getAbsoluteTop() + spos);
+        frames.add(internalFrame);
     }
 
     /**
@@ -113,10 +115,6 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
         }
     }
 
-    /*
-     * Returns a list of all frames maintained by this desktop
-     * 
-     */
     public List getAllFrames() {
         return frames;
     }
@@ -125,23 +123,7 @@ public class DefaultGDesktopPane extends Composite implements WindowResizeListen
         buttonBar.adjustSize();
     }
 
-
-    public GInternalFrame getSelectedFrame() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public void removeFrame(GInternalFrame internalFrame) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void setSelectedFrame(GInternalFrame newSelectedFrame) {
-        // TODO Auto-generated method stub
-        
-    }
-    
-    public void setWidgetPosition(DefaultGInternalFrame frame, int left, int top){
+    public void setWidgetPosition(DefaultGInternalFrame frame, int left, int top) {
         frameContainer.setWidgetPosition(frame, left, top);
     }
 

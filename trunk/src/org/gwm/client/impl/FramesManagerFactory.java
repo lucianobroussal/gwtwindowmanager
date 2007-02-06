@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
+ * Copyright (c) 2007 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,9 +21,6 @@ import org.gwm.client.FramesManager;
 /**
  * Provides an implementation of the FramesManager. Typically the first class,
  * you have to instanciate.
- * 
- * Type FramesManagerFactory, created on 27 nov. 06 at 18:11:31
- * 
  */
 public class FramesManagerFactory {
 
