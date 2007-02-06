@@ -51,9 +51,7 @@
 </javadoc>
 </target>
 
-<target name="prepare">
-<mkdir dir="${class.dir}" />
-</target>
+
 
 <target name="clean">
 <delete dir="${class.dir}" />
