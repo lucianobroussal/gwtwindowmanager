@@ -22,8 +22,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Provides methods to interact with a frame.
  * 
- * @author luciano broussal
- * 
  * Type GInternalFrame, created on 28 nov. 06 at 16:35:31
  * 
  */
@@ -35,7 +33,7 @@ public interface GInternalFrame {
      * @return String id.
      */
     public String getId();
-    
+
     /**
      * Permits to change the property style on a window.
      * 
@@ -48,7 +46,6 @@ public interface GInternalFrame {
      * 
      */
     public void setVisible(boolean isVisible);
-
 
     /**
      * Sets window content using an existing Widget.
@@ -90,8 +87,7 @@ public interface GInternalFrame {
      * @return Returns true if the window is minimized
      */
     public boolean isMinimized();
-    
-    
+
     public void maximize();
 
     /**
@@ -100,11 +96,10 @@ public interface GInternalFrame {
      * @return Returns true if the window is maximized
      */
     public boolean isMaximized();
-    
-    public void minimize();
-    
-    public void restore();
 
+    public void minimize();
+
+    public void restore();
 
     /**
      * Sets window top-left position.
@@ -326,14 +321,14 @@ public interface GInternalFrame {
      *             if it is called after a call of one showXXX(...) method
      */
     public void setMaximizable(boolean maximizable);
-    
-    
+
     /**
      * Returns the window draggable state.
      * 
      * @return
      */
     public boolean isDraggable();
+
     /**
      * Returns the window maximizable state.
      * 
@@ -360,7 +355,7 @@ public interface GInternalFrame {
     /**
      * Sets the GDesktopPane who owns this GInternalFrame
      */
-    public void setParentDesktop (GDesktopPane desktopPane);
+    public void setParentDesktop(GDesktopPane desktopPane);
 
     /**
      * Adds a new GInternalFrameListener to this GInternalFrame.
@@ -377,7 +372,5 @@ public interface GInternalFrame {
     public void removeInternalFrameListener(GInternalFrameListener listener);
 
     public boolean isVisible();
-
-
 
 }

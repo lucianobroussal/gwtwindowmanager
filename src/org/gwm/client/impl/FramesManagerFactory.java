@@ -22,9 +22,6 @@ import org.gwm.client.FramesManager;
  * Provides an implementation of the FramesManager. Typically the first class,
  * you have to instanciate.
  * 
- * 
- * @author luciano broussal
- * 
  * Type FramesManagerFactory, created on 27 nov. 06 at 18:11:31
  * 
  */

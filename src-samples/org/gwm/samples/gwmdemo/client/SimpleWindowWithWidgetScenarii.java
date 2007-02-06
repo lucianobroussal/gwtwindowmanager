@@ -31,76 +31,74 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
 
-	public SimpleWindowWithWidgetScenarii(FramesManager framesManager) {
-		super(framesManager);
+    public SimpleWindowWithWidgetScenarii(FramesManager framesManager) {
+        super(framesManager);
 
-	}
+    }
 
-	public void runScenarii() {
-		GInternalFrame window = framesManager.newFrame("");
-		window.setWidth(380);
-		window.setHeight(440);
-		window.setLocation(65, 10);
-		window.setTheme("alphacube");
-		window.setCaption("Simple window with widget");
-		window.setVisible(true);
-		window.setContent(buildContentWidget());
+    public void runScenarii() {
+        GInternalFrame window = framesManager.newFrame("");
+        window.setWidth(380);
+        window.setHeight(440);
+        window.setLocation(65, 10);
+        window.setTheme("alphacube");
+        window.setCaption("Simple window with widget");
+        window.setVisible(true);
+        window.setContent(buildContentWidget());
 
-	}
+    }
 
-	private Widget buildContentWidget() {
-		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.add(new Image("images/logo-mini.png"));
-		Hyperlink showSrcLink = new Hyperlink("Show source", "show_source");
-		showSrcLink.addClickListener(new ClickListener() {
+    private Widget buildContentWidget() {
+        VerticalPanel verticalPanel = new VerticalPanel();
+        verticalPanel.add(new Image("images/logo-mini.png"));
+        Hyperlink showSrcLink = new Hyperlink("Show source", "show_source");
+        showSrcLink.addClickListener(new ClickListener() {
 
-			public void onClick(Widget sender) {
-				showSourceCode();
+            public void onClick(Widget sender) {
+                showSourceCode();
 
-			}
-		});
-		verticalPanel.add(showSrcLink);
-		verticalPanel.add(new HTML("<h2>Simple window with HTML inside</h2>"));
-		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
-		for (int i = 1; i <= 18; i++) {
-			HorizontalPanel panel = new HorizontalPanel();
-			Image ligne = new Image("images/bar" +  (i%3+1)+ ".jpg");
-			ligne.setWidth(i * 15 + "px");
-			ligne.setHeight(18+"px");
-			Image ligne1 = new Image("images/bar" +  ((i+1)%3+1)+ ".jpg");
-			ligne1.setWidth((270 -(i * 15)) + "px");
-			ligne1.setHeight(18+"px");
-			panel.add(ligne);
-			Label label = new Label(i * 15 + "px");
-			label.setWidth(35+"px");
-			label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-			panel.add(label);
-			
-			panel.add(ligne1);
-			verticalPanel.add(panel);
-		}
-		return verticalPanel;
+            }
+        });
+        verticalPanel.add(showSrcLink);
+        verticalPanel.add(new HTML("<h2>Simple window with HTML inside</h2>"));
+        verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+        for (int i = 1; i <= 18; i++) {
+            HorizontalPanel panel = new HorizontalPanel();
+            Image ligne = new Image("images/bar" + (i % 3 + 1) + ".jpg");
+            ligne.setWidth(i * 15 + "px");
+            ligne.setHeight(18 + "px");
+            Image ligne1 = new Image("images/bar" + ((i + 1) % 3 + 1) + ".jpg");
+            ligne1.setWidth((270 - (i * 15)) + "px");
+            ligne1.setHeight(18 + "px");
+            panel.add(ligne);
+            Label label = new Label(i * 15 + "px");
+            label.setWidth(35 + "px");
+            label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+            panel.add(label);
 
-	}
+            panel.add(ligne1);
+            verticalPanel.add(panel);
+        }
+        return verticalPanel;
 
-	protected Hyperlink createLink() {
-		Hyperlink simpleDemo = new Hyperlink(
-				"With Widget", "simple");
-		return simpleDemo;
+    }
 
-	}
-	protected void showSourceCode() {
-		GInternalFrame window = framesManager.newFrame("");
-		window.setWidth(800);
-		window.setHeight(440);
-		window.setLocation(65, 440);
-		window.setTheme("alphacube");
-		window.setCaption("Source code of window with GWT widget inside");
-		window.setUrl("site/demo/simplewithwidgetscenarii.html");
-		window.setVisible(true);
-		
-	}
-	
+    protected Hyperlink createLink() {
+        Hyperlink simpleDemo = new Hyperlink("With Widget", "simple");
+        return simpleDemo;
 
+    }
+
+    protected void showSourceCode() {
+        GInternalFrame window = framesManager.newFrame("");
+        window.setWidth(800);
+        window.setHeight(440);
+        window.setLocation(65, 440);
+        window.setTheme("alphacube");
+        window.setCaption("Source code of window with GWT widget inside");
+        window.setUrl("site/demo/simplewithwidgetscenarii.html");
+        window.setVisible(true);
+
+    }
 
 }
