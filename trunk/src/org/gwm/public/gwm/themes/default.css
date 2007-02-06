@@ -147,3 +147,20 @@
     float: left;
 }
 
+.default_topBar_icon {
+	background:#C7CBD1;
+	padding: 5px;
+	border: 1px dashed;
+}
+
+.default_topBar_restore {
+	width: 23px;
+	height: 23px;
+	background: transparent url(default/maximize.gif) no-repeat 0 0;			
+	cursor:pointer;
+}
+
+.default_topBar_iconButton {
+    float: left;
+}
+
