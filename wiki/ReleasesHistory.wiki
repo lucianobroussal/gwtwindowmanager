@@ -1,11 +1,18 @@
-#summary The releases history.
 #labels Phase-Support
+Release 0.5
 
-= Introduction =
+Major changes:
+* GWT-implementation of the GInternalFrame (no external js-libraries)
+* Free frames and desktop-managed frames
+* Dialog and Input frames
+* added behaviour capabilities
+* bug-fixes
+* added samples with source code
 
-The releases history
+The 0.5 release provides the foundation for further enhancements.
+Developers can create Free Frames that float everywhere around inside
+the browser window, or they can create a Desktop that manages the Frames.
 
-
-= Details =
-
-
+The look and feel of the Frames is defined by themes. The 0.5 release
+comes with a number of themes, and users can create their own themes by
+creating a css file and some images.
