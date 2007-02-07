@@ -247,18 +247,6 @@ public class WindowEditor extends Composite {
                     return;
                 }
 
-                /*
-                 * String showEffect = inputShowEffect.getValue(inputShowEffect
-                 * .getSelectedIndex()); if (!showEffect.equals("")) {
-                 * propertiesOptions.add(new WindowOption("showEffect",
-                 * showEffect)); }
-                 * 
-                 * String hideEffect = inputHideEffect.getValue(inputHideEffect
-                 * .getSelectedIndex()); if (!hideEffect.equals("")) {
-                 * propertiesOptions.add(new WindowOption("hideEffect",
-                 * hideEffect)); }
-                 */
-
                 if (!inputUrl.getText().equals("")) {
 
                     try {
