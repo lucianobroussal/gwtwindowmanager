@@ -56,7 +56,7 @@ public class GwmDemo implements EntryPoint {
         menuFrame = framesManager.newFrame("Samples");
         menuFrame.setTheme("alphacube");
         menuFrame.setClosable(false);
-        menuFrame.setMinimizable(false);
+        menuFrame.setMaximizable(false);
         menuFrame.setResizable(false);
         desktop.addFrame(menuFrame);
         menuFrame.setVisible(true);
