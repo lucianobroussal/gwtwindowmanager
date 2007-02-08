@@ -46,7 +46,7 @@
 			<classpath location="${GWT_HOME}/gwt-user.jar" />
 			<link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
 			<bottom>
-			<![CDATA[<i>Copyright &#169; 2008 <a href="http://www.gwtwindowmanager.org">gwtwindowmanager.org</a>.</i> <b style='color:blue'>Version 0.5</b>]]>
+			<![CDATA[<i>Copyright &#169; 2008 <a href="http://www.gwtwindowmanager.org">gwtwindowmanager.org</a>.</i> <b style='color:blue'>Version 0.5.2</b>]]>
         	</bottom>
 </javadoc>
 </target>
