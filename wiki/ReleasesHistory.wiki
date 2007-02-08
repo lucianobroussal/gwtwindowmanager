@@ -3,8 +3,10 @@
 
 =Release 0.5.2=
 (2007-02-07)
+===Major changes===
+N/A
+===Bug fixing===
 
-Fixes : 
  * issue 16 : the frame does not refresh the URL content after resizing action.
  * issue 17 : the setMaximizable(), setCloseable() fixed.
  * The wineditor in the demo creates the customized frame.
