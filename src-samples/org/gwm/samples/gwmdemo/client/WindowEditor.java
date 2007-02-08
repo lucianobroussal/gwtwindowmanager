@@ -88,9 +88,8 @@ public class WindowEditor extends Composite {
         ui = new VerticalPanel();
 
         // style combobox
-        style.addItem("mac_os_x", "mac_os_x");
+        style.addItem("default", "default");
         style.addItem("theme1", "theme1");
-        style.addItem("nuncio", "nuncio");
         style.addItem("alphacube", "alphacube");
         style.addItem("spread", "spread");
         style.addItem("darkX", "darkX");

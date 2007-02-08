@@ -442,10 +442,12 @@ public class DefaultGInternalFrame extends SimplePanel implements
 
     public void setClosable(boolean closable) {
         this.closable = closable;
+        topBar.updateTopBar();
     }
 
     public void setMinimizable(boolean minimizable) {
         this.minimizable = minimizable;
+        topBar.updateTopBar();
     }
 
     public void setMaximizable(boolean maximizable) {
