@@ -60,7 +60,7 @@ public class DefaultGInternalFrame extends SimplePanel implements
 
     private String url;
 
-    private String previousUrl;
+    private Widget savedContentDuringDraging;
 
     private boolean visible;
 
@@ -616,7 +616,7 @@ public class DefaultGInternalFrame extends SimplePanel implements
 
     public void startResizing() {
         if (url != null) {
-            this.previousUrl = url;
+            savedContentDuringDraging = this.myContent;
             this.myContent = new Label("");
             centerRow.setWidget(0, 1, myContent);
         }
@@ -624,7 +624,8 @@ public class DefaultGInternalFrame extends SimplePanel implements
     }
 
     public void stopResizing() {
-        this.url = this.previousUrl;
+        this.myContent = savedContentDuringDraging;
+        centerRow.setWidget(0, 1, myContent);
         buildGui();
         fireFrameResized();
     }
