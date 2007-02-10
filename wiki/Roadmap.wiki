@@ -1,8 +1,6 @@
 #summary The Road map of the GWm
 #labels Phase-Design
 
-= Introduction =
 
-Here you will find the Road map of the GWm
-
+==0.6 Road Map
 
