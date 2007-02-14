@@ -507,7 +507,17 @@ public class DefaultGInternalFrame extends SimplePanel implements
             listener.frameClosed(new GInternalFrameEvent(this));
         }
     }
-
+    
+    /**
+     * Fires the frameMaximized event of this frame to its listeners.
+     */
+    private void fireFrameOpened() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GInternalFrameListener listener = (GInternalFrameListener) listeners
+                    .get(i);
+            listener.frameOpened(new GInternalFrameEvent(this));
+        }
+    }
     /**
      * Fires the frameMaximized event of this frame to its listeners.
      */
@@ -638,6 +648,7 @@ public class DefaultGInternalFrame extends SimplePanel implements
         super.setVisible(true);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
+        fireFrameOpened();
     }
 
     public static int getLayerOfTheTopWindow() {
