@@ -2,7 +2,7 @@
 #labels Phase-Design
 
 
-= Gwm Version 0.1 Development Plan=
+= Gwm Version 1.0 Development Plan=
 
  == New Features ==
  * GDockableDesktopPane component (eclipse like) + DnD functionality
@@ -12,6 +12,5 @@
  * User widget content in GDialog
  * Launch task bar
  * pluggable task bar 
-
 
 
