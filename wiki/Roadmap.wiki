@@ -1,7 +1,7 @@
 #summary The Road map of the GWm
 #labels Phase-Design
 
-The Gwm goal is defenetly to offer a web desktop.
+==The Gwm goal is definitely to offer a web desktop.==
 
 = Gwm Version 1.0 Development Plan=
 
@@ -13,4 +13,3 @@ The Gwm goal is defenetly to offer a web desktop.
  * User widget content in GDialog
  * Launch task bar
  * pluggable task bar 
-
