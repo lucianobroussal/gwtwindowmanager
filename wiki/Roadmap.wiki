@@ -1,16 +1,16 @@
 #summary The Road map of the GWm
 #labels Phase-Design
 
+The Gwm goal is defenetly to offer a web desktop.
 
 = Gwm Version 1.0 Development Plan=
 
  == New Features ==
  * GDockableDesktopPane component (eclipse like) + DnD functionality
 
- ==Features ==
+ == Improvements ==
  * Adding virtual desktop functionality to the GDesktopPane
  * User widget content in GDialog
  * Launch task bar
  * pluggable task bar 
-
 
