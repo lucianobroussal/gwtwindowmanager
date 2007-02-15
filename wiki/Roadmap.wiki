@@ -4,5 +4,14 @@
 
 = Gwm Version 0.1 Development Plan=
 
-* 
+ == New Features ==
+ * GDockableDesktopPane component (eclipse like) + DnD functionality
+
+ ==Features ==
+ * Adding virtual desktop functionality to the GDesktopPane
+ * User widget content in GDialog
+ * Launch task bar
+ * pluggable task bar 
+
+
 
