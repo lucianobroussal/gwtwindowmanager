@@ -13,3 +13,7 @@
  * User widget content in GDialog
  * Launch task bar
  * pluggable task bar 
+
+ == Fixes ==
+
+ * Close all the tracker issues. theses actions will offer to the users intermediate release s to the users. 
