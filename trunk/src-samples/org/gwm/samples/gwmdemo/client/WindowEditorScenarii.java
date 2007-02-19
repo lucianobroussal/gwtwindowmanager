@@ -16,21 +16,21 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
+import org.gwm.client.impl.DefaultGFrame;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class WindowEditorScenarii extends AbstractScenarii {
 
-    public WindowEditorScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public WindowEditorScenarii() {
+        super();
 
     }
 
     public void runScenarii() {
-        WindowEditor editor = new WindowEditor(framesManager);
-        GInternalFrame editorWindow = framesManager.newFrame("");
+        WindowEditor editor = new WindowEditor();
+        GFrame editorWindow = new DefaultGFrame("");
         editorWindow.setTheme("alphacube");
         editorWindow.setWidth(280);
         editorWindow.setHeight(460);

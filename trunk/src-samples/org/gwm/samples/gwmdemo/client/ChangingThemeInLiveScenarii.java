@@ -16,8 +16,8 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
+import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -30,11 +30,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class ChangingThemeInLiveScenarii extends AbstractScenarii {
     
     
-    private GInternalFrame window;
+    private GFrame window;
     private ListBox themesList;
 
-    public ChangingThemeInLiveScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public ChangingThemeInLiveScenarii() {
+        super();
 
     }
 
@@ -59,7 +59,7 @@ public class ChangingThemeInLiveScenarii extends AbstractScenarii {
         });
 
         
-        window = framesManager.newFrame("");
+        window = new DefaultGFrame("");
         window.setWidth(200);
         window.setHeight(100);
         window.setTheme("default");

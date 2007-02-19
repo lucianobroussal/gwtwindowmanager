@@ -16,10 +16,10 @@
 
 package org.gwm.client.tools;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
 import org.gwm.client.event.GInternalFrameEvent;
 import org.gwm.client.event.GInternalFrameListener;
+import org.gwm.client.impl.DefaultGFrame;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -39,11 +39,11 @@ public class DebugWindow  implements
 
     private Button clearLog;
     
-    private  GInternalFrame frame;
+    private  GFrame frame;
 
 
-    public DebugWindow(FramesManager  framesManager) {
-        frame  = framesManager.newFrame("Debug Window");
+    public DebugWindow() {
+        frame  = new DefaultGFrame("Debug Window");
         this.dock = new DockPanel();
         this.panel = new VerticalPanel();
         this.clearLog = new Button("Clear window", new ClickListener() {
@@ -104,7 +104,7 @@ public class DebugWindow  implements
     }
 
     private void addEvent(GInternalFrameEvent evt, String action) {
-        final GInternalFrame myFrame = evt.getGInternalFrame();
+        final GFrame myFrame = evt.getGInternalFrame();
         String title = myFrame.getCaption();
         Label l = new Label(action + " " + title);
         l.addStyleName("gwm-DebugEvent");
@@ -116,7 +116,7 @@ public class DebugWindow  implements
         this.panel.add(l);
     }
     
-    public GInternalFrame getUI(){
+    public GFrame getUI(){
         return frame;
     }
 

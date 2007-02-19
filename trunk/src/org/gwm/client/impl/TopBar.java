@@ -32,7 +32,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     private String title;
 
-    private DefaultGInternalFrame parent;
+    private DefaultGFrame parent;
 
     private Label closeArea;
 
@@ -49,7 +49,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     private boolean moving;
 
 
-    TopBar(DefaultGInternalFrame parent) {
+    TopBar(DefaultGFrame parent) {
         super();
         this.parent = parent;
         this.draggable = true;
@@ -222,7 +222,7 @@ System.out.println ("set dragging to "+dragging);
 
 
 
-    public void setParent(DefaultGInternalFrame parent) {
+    public void setParent(DefaultGFrame parent) {
         this.parent = parent;
     }
 

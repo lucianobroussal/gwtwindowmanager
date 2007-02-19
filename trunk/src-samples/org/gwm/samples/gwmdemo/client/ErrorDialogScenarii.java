@@ -16,20 +16,19 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.impl.GDialog;
+import org.gwm.client.impl.DefaultGDialog;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class ErrorDialogScenarii extends AbstractScenarii {
 
-    public ErrorDialogScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public ErrorDialogScenarii() {
+        super();
     }
 
     public void runScenarii() {
-        GDialog.showMessage(null, "Houston we have a problem!", "Error",
-                GDialog.ERROR_MESSAGE);
+        DefaultGDialog.showMessage(null, "Houston we have a problem!", "Error",
+                DefaultGDialog.ERROR_MESSAGE);
     }
 
     protected Hyperlink createLink() {

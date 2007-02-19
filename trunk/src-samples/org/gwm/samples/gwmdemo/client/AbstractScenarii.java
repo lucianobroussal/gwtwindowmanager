@@ -16,7 +16,6 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -24,10 +23,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractScenarii implements Scenarii {
 
-    protected FramesManager framesManager;
+   
 
-    public AbstractScenarii(FramesManager windowManager) {
-        this.framesManager = windowManager;
+    public AbstractScenarii() {
     }
 
     public Hyperlink getLink() {

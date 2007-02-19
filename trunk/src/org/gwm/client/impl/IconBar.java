@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -41,8 +41,8 @@ public class IconBar extends FlowPanel {
         this.buttonIcon = new HashMap();
     }
 
-    public void addWindow (GInternalFrame gframe) {
-        DefaultGInternalFrame frame = (DefaultGInternalFrame)(gframe);
+    public void addWindow (GFrame gframe) {
+        DefaultGFrame frame = (DefaultGFrame)(gframe);
         HorizontalPanel icon = new HorizontalPanel();
         icon.addStyleName (frame.getTheme()+"_topBar_iconButton");
         Label label = new Label (frame.getCaption());
@@ -56,7 +56,7 @@ public class IconBar extends FlowPanel {
         this.add (icon);
         restoreButton.addClickListener (new ClickListener() {
             public void onClick (Widget sender) {
-                GInternalFrame myFrame = (GInternalFrame)buttonFrame.get (sender);
+                GFrame myFrame = (GFrame)buttonFrame.get (sender);
                 buttonFrame.remove (sender);
                 HorizontalPanel hpicon = (HorizontalPanel)buttonIcon.get (sender);
                 remove (hpicon);

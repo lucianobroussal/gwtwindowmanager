@@ -16,8 +16,8 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
+import org.gwm.client.impl.DefaultGFrame;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
@@ -31,13 +31,13 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
 
-    public SimpleWindowWithWidgetScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public SimpleWindowWithWidgetScenarii() {
+        super();
 
     }
 
     public void runScenarii() {
-        GInternalFrame window = framesManager.newFrame("Simple window with widget");
+        GFrame window = new DefaultGFrame("Simple window with widget");
         window.setWidth(380);
         window.setHeight(440);
         window.setLocation(65, 10);
@@ -88,7 +88,7 @@ public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
     }
 
     protected void showSourceCode() {
-        GInternalFrame window = framesManager.newFrame("Source code of window with GWT widget inside");
+        GFrame window = new DefaultGFrame("Source code of window with GWT widget inside");
         window.setWidth(800);
         window.setHeight(440);
         window.setLocation(65, 440);

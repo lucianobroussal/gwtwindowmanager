@@ -16,7 +16,8 @@
 
 package org.gwm.client.impl;
 
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GDialog;
+import org.gwm.client.GFrame;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.util.GWmConstants;
 import org.gwtwidgets.client.ui.PNGImage;
@@ -38,7 +39,18 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class GDialog {
+public class DefaultGDialog extends DefaultGFrame implements GDialog{
+
+    
+    public DefaultGDialog() {
+        super();
+    }
+    
+    public DefaultGDialog(String caption) {
+        super(caption);
+    }
+
+   
 
     public static final int ERROR_MESSAGE = 1;
 
@@ -64,7 +76,7 @@ public class GDialog {
 
     private static String theme = GWmConstants.DEFAULT_THEME;
 
-    private static GDialog currentDialog;
+    private static DefaultGDialog currentDialog;
 
     private static GlassPanel overlayLayer;
 
@@ -80,6 +92,8 @@ public class GDialog {
 
     public Option selectedOption;
 
+    private static UIObject parent;
+
     public Object getSelectedValue() {
         return selectedValue;
     }
@@ -88,15 +102,6 @@ public class GDialog {
         return selectedOption;
     }
 
-    private GInternalFrame ui;
-
-    private GInternalFrame getUI() {
-        return ui;
-    }
-
-    private GDialog() {
-        ui = new DefaultGInternalFrame("");
-    }
 
     public static void showConfirmDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
@@ -186,33 +191,46 @@ public class GDialog {
         showMessage(parent, message, title, messageType, null, null, null);
     }
 
-    public static void showMessage(UIObject parent, Object message,
+    public static void showMessage(UIObject parentFrame, Object message,
             String title, int messageType, Option[] options, String imagePath,
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
-        currentDialog.ui.setContent(new DialogPane(message, options, icon,
+        currentDialog.setContent(new DialogPane(message, options, icon,
                 choiceListener));
-        computeSizeAndDisplay(parent);
+        parent = parentFrame;
+        computeSizeAndDisplay();
 
     }
 
-    private static void computeSizeAndDisplay(UIObject parent) {
+    private static void computeSizeAndDisplay() {
         if (overlayLayer == null) {
             overlayLayer = new GlassPanel();
         }
         overlayLayer.show();
-        currentDialog.ui.setVisible(true);
-        adjustDialogSizeToContent(parent, currentDialog.ui);
+        currentDialog.setVisible(true);
+        adjustDialogSizeToContent(parent, currentDialog);
     }
 
+    public void setParent(UIObject parent){
+        this.parent = parent;
+    }
+    
+    public void show() {
+        if (overlayLayer == null) {
+            overlayLayer = new GlassPanel();
+        }
+        super.setVisible(true);
+    }
+    
+    
     private static void adjustDialogSizeToContent(UIObject parent,
-            GInternalFrame internalFrame) {
+            GFrame internalFrame) {
         Widget content = internalFrame.getContent();
         int height = content.getOffsetHeight();
-        currentDialog.ui.setHeight(height);
+        currentDialog.setHeight(height);
         int width = content.getOffsetWidth();
-        currentDialog.ui.setWidth(width);
+        currentDialog.setWidth(width);
         int left = 0;
         int top = 0;
         if (parent != null) {
@@ -226,37 +244,38 @@ public class GDialog {
         }
         left = left > 0 ? left : 0;
         top = top > 0 ? top : 0;
-        currentDialog.ui.setLocation(top, left);
+        currentDialog.setLocation(top, left);
 
     }
 
-    public static void showInputDialog(UIObject parent, Object message,
+    public static void showInputDialog(UIObject parentFrame, Object message,
             String title, int messageType, Option[] options, String imagePath,
             Object initialValue, Object[] selectionValues,
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
-        currentDialog.getUI().setContent(
+        currentDialog.setContent(
                 new InputDialogPane(message, options, icon, initialValue,
                         selectionValues, choiceListener));
-        computeSizeAndDisplay(parent);
+        parent  = parentFrame;
+        computeSizeAndDisplay();
     }
 
     private static void setDefaultDialogProperties(String title, int messageType) {
         if (currentDialog != null) {
             throw new IllegalStateException("A Dialog is already opened!");
         }
-        currentDialog = new GDialog();
+        currentDialog = new DefaultGDialog();
 
-        currentDialog.ui.setClosable(false);
-        currentDialog.ui.setMinimizable(false);
-        currentDialog.ui.setMaximizable(false);
-        currentDialog.ui.setDraggable(false);
-        currentDialog.ui.setResizable(true  );
+        currentDialog.setClosable(false);
+        currentDialog.setMinimizable(false);
+        currentDialog.setMaximizable(false);
+        currentDialog.setDraggable(false);
+        currentDialog.setResizable(true  );
 
-        currentDialog.ui.setTheme(theme);
+        currentDialog.setTheme(theme);
         if (title != null) {
-            currentDialog.ui.setCaption(title);
+            currentDialog.setCaption(title);
         }
 
     }
@@ -383,7 +402,7 @@ public class GDialog {
                                 choiceListener.onChoice(currentDialog);
                             }
                             overlayLayer.hide();
-                            currentDialog.ui.close();
+                            currentDialog.close();
                             currentDialog = null;
                         }
                     });
@@ -442,7 +461,7 @@ public class GDialog {
     }
 
     public static void setDialogTheme(String theme) {
-        GDialog.theme = theme;
+        DefaultGDialog.theme = theme;
 
     }
 
@@ -461,7 +480,7 @@ public class GDialog {
             
             setStyleName("overlay_" + theme);
             
-            DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGInternalFrame
+            DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame
                     .getLayerOfTheTopWindow()+1);
             
             RootPanel.get().add(this);
@@ -472,6 +491,10 @@ public class GDialog {
             RootPanel.get().remove(this);
         }
 
+    }
+    
+    public static DefaultGDialog getGDialog(){
+        return currentDialog;
     }
 
 }

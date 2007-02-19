@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 
 import com.google.gwt.user.client.WindowResizeListener;
@@ -79,25 +80,25 @@ public class DefaultGDesktopPane extends Composite implements
 
     }
 
-    public void iconify(GInternalFrame theWindow) {
+    public void iconify(GFrame theWindow) {
         theWindow.setVisible(false);
         buttonBar.addWindow(theWindow);
     }
 
-    public void deIconify(GInternalFrame theWindow) {
+    public void deIconify(GFrame theWindow) {
         theWindow.setVisible(true);
-        ((DefaultGInternalFrame) theWindow).fireFrameRestored();
+        ((DefaultGFrame) theWindow).fireFrameRestored();
     }
 
     /**
-     * Add a GInternalFrame to this GDesktopPane.
+     * Add a GFrame to this GDesktopPane.
      * 
      * @param internalFrame
      */
     public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setParentDesktop(this);
         int spos = (frames.size() + 1) * 30;
-        frameContainer.add((DefaultGInternalFrame) internalFrame,
+        frameContainer.add((DefaultGFrame) internalFrame,
                 frameContainer.getAbsoluteLeft() + spos, frameContainer
                         .getAbsoluteTop()
                         + spos);
@@ -111,7 +112,7 @@ public class DefaultGDesktopPane extends Composite implements
      */
     public void closeAllFrames() {
         for (int i = 0; i < frames.size(); i++) {
-            ((GInternalFrame) frames.get(i)).close();
+            ((GFrame) frames.get(i)).close();
         }
     }
 
@@ -123,7 +124,7 @@ public class DefaultGDesktopPane extends Composite implements
         buttonBar.adjustSize();
     }
 
-    public void setWidgetPosition(DefaultGInternalFrame frame, int left, int top) {
+    public void setWidgetPosition(DefaultGFrame frame, int left, int top) {
         frameContainer.setWidgetPosition(frame, left, top);
     }
 

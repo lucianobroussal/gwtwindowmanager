@@ -16,11 +16,9 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.FramesManagerFactory;
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
+import org.gwm.client.impl.DefaultGInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
@@ -35,12 +33,10 @@ public class GwmDemo implements EntryPoint {
 
     private GDesktopPane desktop;
 
-    private GInternalFrame menuFrame;
+    private DefaultGInternalFrame menuFrame;
 
-    private FramesManager framesManager;
 
     public void onModuleLoad() {
-        framesManager = new FramesManagerFactory().createFramesManager();
         buildUI();
         menuFrame.setSize(150, 300);
         Window.enableScrolling(false);
@@ -53,7 +49,7 @@ public class GwmDemo implements EntryPoint {
     }
 
     private void buildMenu() {
-        menuFrame = framesManager.newFrame("Samples");
+        menuFrame = new DefaultGInternalFrame("Samples");
         menuFrame.setTheme("alphacube");
         menuFrame.setClosable(false);
         menuFrame.setMaximizable(false);
@@ -66,29 +62,29 @@ public class GwmDemo implements EntryPoint {
         menuLayout.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
         menuLayout.add(buildMenu("Frames"));
         menuLayout.add(buildMenuItem(new SimpleWindowWithURLScenarii(
-                framesManager)));
+                )));
         menuLayout.add(buildMenuItem(new SimpleWindowWithTextScenarii(
-                framesManager)));
+                )));
         menuLayout.add(buildMenuItem(new SimpleWindowWithWidgetScenarii(
-                framesManager)));
+                )));
         menuLayout.add(buildMenu("Frame Listener"));
-        menuLayout.add(buildMenuItem(new EventScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new EventScenarii()));
         menuLayout.add(buildMenu("Frames Manager"));
-        menuLayout.add(buildMenuItem(new FramesManagerListAllFramesScenarii(
-                framesManager)));
+
         menuLayout.add(buildMenu("Themes"));
-        menuLayout.add(buildMenuItem(new ThemesScenarii(framesManager)));
-        menuLayout.add(buildMenuItem(new ChangingThemeInLiveScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new ThemesScenarii()));
+        menuLayout.add(buildMenuItem(new ChangingThemeInLiveScenarii()));
         menuLayout.add(buildMenu("Desktop"));
         menuLayout
-                .add(buildMenuItem(new DesktopScenarii(framesManager, desktop)));
+                .add(buildMenuItem(new DesktopScenarii(desktop)));
         menuLayout.add(buildMenu("Dialog"));
-        menuLayout.add(buildMenuItem(new InputDialogScenarii(framesManager)));
-        menuLayout.add(buildMenuItem(new WarningDialogScenarii(framesManager)));
-        menuLayout.add(buildMenuItem(new ErrorDialogScenarii(framesManager)));
-        menuLayout.add(buildMenuItem(new ConfirmDialogScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new InputDialogScenarii()));
+        menuLayout.add(buildMenuItem(new WarningDialogScenarii()));
+        menuLayout.add(buildMenuItem(new ErrorDialogScenarii()));
+        menuLayout.add(buildMenuItem(new ConfirmDialogScenarii()));
+        menuLayout.add(buildMenuItem(new CustomizedDialogScenarii()));
         menuLayout.add(buildMenu("Tools"));
-        menuLayout.add(buildMenuItem(new WindowEditorScenarii(framesManager)));
+        menuLayout.add(buildMenuItem(new WindowEditorScenarii()));
 
         menuFrame.setContent(menuLayout);
     }
