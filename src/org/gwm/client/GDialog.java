@@ -19,7 +19,7 @@ package org.gwm.client;
 /**
  * Provides the behavior handles to interact with a DefaultGDialog.
  */
-public interface GDialog {
+public interface GDialog extends GFrame{
     /**
      * Shows the DefaultGDialog.
      * 
