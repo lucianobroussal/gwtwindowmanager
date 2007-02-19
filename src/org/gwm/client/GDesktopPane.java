@@ -20,17 +20,17 @@ import java.util.List;
 
 /**
  * A container used to create a multiple-document interface or a virtual
- * desktop. You create <code>GInternalFrame</code> objects and add them to the
+ * desktop. You create <code>GFrame</code> objects and add them to the
  * <code>GDesktopPane</code>.
  */
 public interface GDesktopPane {
 
     /**
-     * Adds a new GInternalFrame to this GDesktopPane and select it if its the
+     * Adds a new GFrame to this GDesktopPane and select it if its the
      * first one.
      * 
      * @param internalFrame
-     *            The GInternalFrame to be added.
+     *            The GFrame to be added.
      */
     public void addFrame(GInternalFrame internalFrame);
 
@@ -49,13 +49,13 @@ public interface GDesktopPane {
      * 
      * @param internalFrame
      */
-    public void iconify(GInternalFrame internalFrame);
+    public void iconify(GFrame internalFrame);
 
     /**
      * Restore the minimized window to its original state.
      * 
      * @param minimizedWindow
      */
-    public void deIconify(GInternalFrame minimizedWindow);
+    public void deIconify(GFrame minimizedWindow);
 
 }

@@ -16,20 +16,19 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.impl.GDialog;
+import org.gwm.client.impl.DefaultGDialog;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class WarningDialogScenarii extends AbstractScenarii {
 
-    public WarningDialogScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public WarningDialogScenarii() {
+        super();
     }
 
     public void runScenarii() {
-        GDialog.showMessage(null, "Don't forget your umbrella!. It's raining",
-                "Warning", GDialog.WARNING_MESSAGE);
+        DefaultGDialog.showMessage(null, "Don't forget your umbrella!. It's raining",
+                "Warning", DefaultGDialog.WARNING_MESSAGE);
     }
 
     protected Hyperlink createLink() {

@@ -16,21 +16,21 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
+import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class SimpleWindowWithTextScenarii extends AbstractScenarii {
 
-    public SimpleWindowWithTextScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public SimpleWindowWithTextScenarii() {
+        super();
 
     }
 
     public void runScenarii() {
-        GInternalFrame window = framesManager.newFrame("Window with an HTML text inside");
+        GFrame window = new DefaultGFrame("Window with an HTML text inside");
         window.setWidth(580);
         window.setHeight(400);
         window.setTheme("alphacube");
@@ -45,7 +45,7 @@ public class SimpleWindowWithTextScenarii extends AbstractScenarii {
                         + "<table align=center><tr><td><div class=sample1>"
                         + "FramesManager framesManager = new FramesManagerFactory().createFramesManager();</br>"
                         + "...<br/>"
-                        + "GInternalFrame frame = framesManager.newFrame(\"Window with an HTML text inside\");<br/>"
+                        + "GFrame frame = framesManager.newFrame(\"Window with an HTML text inside\");<br/>"
                         + "frame.setWidth(580);<br/>"
                         + "frame.setHeight(250);<br/>"
                         + "frame.setStyle(\"alphacube\");<br/>"

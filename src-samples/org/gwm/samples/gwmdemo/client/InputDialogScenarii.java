@@ -16,25 +16,25 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
 import org.gwm.client.event.GDialogChoiceListener;
-import org.gwm.client.impl.GDialog;
+import org.gwm.client.impl.DefaultGFrame;
+import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class InputDialogScenarii extends AbstractScenarii {
 
-    public InputDialogScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public InputDialogScenarii() {
+        super();
     }
 
     public void runScenarii() {
-        GDialog.showInputDialog(null, "What is your favorite hobby?",
+        DefaultGDialog.showInputDialog(null, "What is your favorite hobby?",
                 "Asking ...", "", new GDialogChoiceListener() {
-                    public void onChoice(GDialog dialog) {
-                        if (dialog.getSelectedOption() == GDialog.OK_OPTION) {
+                    public void onChoice(DefaultGDialog dialog) {
+                        if (dialog.getSelectedOption() == DefaultGDialog.OK_OPTION) {
                             if (dialog.getSelectedValue() != null
                                     && !((String) dialog.getSelectedValue())
                                             .trim().equals("")) {
@@ -49,8 +49,7 @@ public class InputDialogScenarii extends AbstractScenarii {
                     }
 
                     private void displayResponse(String response) {
-                        GInternalFrame responseWin = framesManager
-                                .newFrame("Response");
+                        GFrame responseWin = new DefaultGFrame("Response");
                         responseWin.setTheme("alphacube");
                         responseWin.setMinimizable(false);
                         responseWin.setMaximizable(false);

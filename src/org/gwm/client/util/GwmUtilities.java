@@ -16,24 +16,24 @@
 
 package org.gwm.client.util;
 
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class GwmUtilities {
 
-    static public void displayAtParentCenter(GInternalFrame frame) {
+    static public void displayAtParentCenter(GFrame frame) {
         if(frame== null)
             throw new IllegalArgumentException("The frame can't be null");
-        if(frame.getParentDesktop()!=null){
-            diplayAtRelativeGivenWidgetCenter(frame , (UIObject)frame.getParentDesktop());
-        }else{
-            diplayAtScreenCenter(frame);
-        }
+//        if(frame.getParentDesktop()!=null){
+//            diplayAtRelativeGivenWidgetCenter(frame , (UIObject)frame.getParentDesktop());
+//        }else{
+//            diplayAtScreenCenter(frame);
+//        }
     }
 
-    static public void diplayAtScreenCenter(GInternalFrame frame) {
+    static public void diplayAtScreenCenter(GFrame frame) {
         if(frame== null)
             throw new IllegalArgumentException("The frame can't be null");
         int frameLeft = (Window.getClientWidth() - frame.getWidth())/2;
@@ -43,7 +43,7 @@ public class GwmUtilities {
         
     }
 
-    static public void diplayAtRelativeGivenWidgetCenter(GInternalFrame frame , UIObject absoluteParent){
+    static public void diplayAtRelativeGivenWidgetCenter(GFrame frame , UIObject absoluteParent){
         if(frame== null || absoluteParent == null )
             throw new IllegalArgumentException("The parameters can't be null");
         int frameLeft =  (frame.getWidth() + absoluteParent.getOffsetWidth()) /2;

@@ -16,20 +16,20 @@
 
 package org.gwm.client.event;
 
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
 
 
 /**
- * This class is an event object and has a GInternalFrame as the source.
+ * This class is an event object and has a GFrame as the source.
  */
 public class GInternalFrameEvent {
-	private GInternalFrame source;
+	private GFrame source;
 	
 	/**
-	 * Build a GInternalFrameEvent from a GInternalFrame as the source.
+	 * Build a GInternalFrameEvent from a GFrame as the source.
 	 * @param source
 	 */
-	public GInternalFrameEvent(GInternalFrame source){
+	public GInternalFrameEvent(GFrame source){
 		this.source = source;
 	}
 	
@@ -37,7 +37,7 @@ public class GInternalFrameEvent {
 	 * Returns the source of the event.
 	 * @return
 	 */
-	public GInternalFrame getGInternalFrame(){
+	public GFrame getGInternalFrame(){
 		return this.source;
 	}
 }

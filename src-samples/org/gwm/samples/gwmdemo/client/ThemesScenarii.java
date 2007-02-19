@@ -16,8 +16,8 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
+import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -28,14 +28,14 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ThemesScenarii extends AbstractScenarii {
 
-    public ThemesScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public ThemesScenarii() {
+        super();
 
     }
 
     public void runScenarii() {
 
-        GInternalFrame window = framesManager.newFrame("");
+        GFrame window = new DefaultGFrame("");
         window.setWidth(480);
         window.setHeight(450);
         window.setLocation(65, 20);
@@ -57,7 +57,7 @@ public class ThemesScenarii extends AbstractScenarii {
         themeLink.addClickListener(new ClickListener() {
 
             public void onClick(Widget sender) {
-                GInternalFrame window = framesManager.newFrame("");
+                GFrame window = new DefaultGFrame("");
                 window.setWidth(400);
                 window.setHeight(150);
                 window.setLocation(200, 640);
@@ -101,7 +101,7 @@ public class ThemesScenarii extends AbstractScenarii {
             }
 
             private void showTemplate() {
-                GInternalFrame window = framesManager.newFrame("");
+                GFrame window = new DefaultGFrame("");
                 window.setWidth(600);
                 window.setHeight(460);
                 window.setLocation(65, 560);

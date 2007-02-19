@@ -16,39 +16,38 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
 import org.gwm.client.event.GDialogChoiceListener;
-import org.gwm.client.impl.GDialog;
+import org.gwm.client.impl.DefaultGFrame;
+import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class ConfirmDialogScenarii extends AbstractScenarii {
 
-    public ConfirmDialogScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public ConfirmDialogScenarii() {
+        super();
     }
 
     public void runScenarii() {
-        GDialog.showConfirmDialog(null, "Do you like holidays?",
-                "Are you an Iron Man ? :)", GDialog.YES_NO_CANCEL_OPTION,
+        DefaultGDialog.showConfirmDialog(null, "Do you like holidays?",
+                "Are you an Iron Man ? :)", DefaultGDialog.YES_NO_CANCEL_OPTION,
                 new GDialogChoiceListener() {
 
-                    public void onChoice(GDialog dialog) {
-                        if (dialog.getSelectedOption() == (GDialog.YES_OPTION)) {
+                    public void onChoice(DefaultGDialog dialog) {
+                        if (dialog.getSelectedOption() == (DefaultGDialog.YES_OPTION)) {
                             displayResponse("Where do you like go for vacation?");
-                        } else if (dialog.getSelectedOption() == (GDialog.NO_OPTION)) {
+                        } else if (dialog.getSelectedOption() == (DefaultGDialog.NO_OPTION)) {
                             displayResponse("You are an iron man.");
-                        } else if (dialog.getSelectedOption() == (GDialog.CANCEL_OPTION)) {
+                        } else if (dialog.getSelectedOption() == (DefaultGDialog.CANCEL_OPTION)) {
                             displayResponse("You didn't give answer :(");
                         }
 
                     }
 
                     private void displayResponse(String response) {
-                        GInternalFrame responseWin = framesManager
-                                .newFrame("Response");
+                        GFrame responseWin = new DefaultGFrame("Response");
                         responseWin.setTheme("alphacube");
                         responseWin.setMinimizable(false);
                         responseWin.setMaximizable(false);

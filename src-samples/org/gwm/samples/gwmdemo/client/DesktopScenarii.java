@@ -16,9 +16,9 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.impl.DefaultGInternalFrame;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
@@ -26,8 +26,8 @@ public class DesktopScenarii extends AbstractScenarii {
 
     private GDesktopPane desktop;
 
-    public DesktopScenarii(FramesManager framesManager, GDesktopPane desktop) {
-        super(framesManager);
+    public DesktopScenarii( GDesktopPane desktop) {
+        super();
         this.desktop = desktop;
     }
 
@@ -44,7 +44,7 @@ public class DesktopScenarii extends AbstractScenarii {
     }
 
     private void buildScreenShotFrame(final String linkCaption, final String url) {
-        GInternalFrame window = framesManager.newFrame(linkCaption);
+        GInternalFrame window = new DefaultGInternalFrame(linkCaption);
         window.setSize(800, 500);
         window.setTheme("default");
         window.setUrl(url);

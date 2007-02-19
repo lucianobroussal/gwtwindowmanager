@@ -16,21 +16,21 @@
 
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.GFrame;
+import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class SimpleWindowWithURLScenarii extends AbstractScenarii {
 
-    public SimpleWindowWithURLScenarii(FramesManager framesManager) {
-        super(framesManager);
+    public SimpleWindowWithURLScenarii() {
+        super();
 
     }
 
     public void runScenarii() {
-        GInternalFrame window = framesManager.newFrame("Window with an URL inside");
+        GFrame window = new DefaultGFrame("Window with an URL inside");
         window.setWidth(620);
         window.setHeight(335);
         window.setTheme("alphacube");
