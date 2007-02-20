@@ -30,7 +30,7 @@ public class CustomizedDialogScenarii extends AbstractScenarii {
     public void runScenarii() {
         DefaultGDialog gdialog = new DefaultGDialog("Customized DefaultGDialog");
         HTML content = new HTML("This a customized GDialog content");
-        gdialog.setContent(content);
+        gdialog.setMessage(content);
         gdialog.setMessageType(GDialog.PLAIN_MESSAGE);
         gdialog.setOptionType(GDialog.OK_OPTION_TYPE);
         gdialog.show();
