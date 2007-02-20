@@ -86,6 +86,8 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private GDialogChoiceListener choiceListener;
 
+    private Object message;
+
     private static UIObject parent;
 
     public Object getSelectedValue() {
@@ -222,7 +224,11 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     private void buildContent() {
-        DialogPane dialogContent = new DialogPane(getContent(),
+        if (message == null) {
+            throw new IllegalStateException(
+                    "Please use the GDialog.setMessage(Object) or verify your message object is not null");
+        }
+        DialogPane dialogContent = new DialogPane(message,
                 getOptions(optionsType), getIcon(QUESTION_MESSAGE,
                         getImagePath(messageType, null)), choiceListener, this);
         this.setContent(dialogContent);
@@ -522,6 +528,20 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     public void setGDialogChoiceListener(GDialogChoiceListener choiceListener) {
         this.choiceListener = choiceListener;
+    }
+
+    public void setMessage(Object message) {
+        this.message = message;
+    }
+
+    public void setContent(String content) {
+        throw new IllegalStateException(
+                "Warning: user the setMessage(Object message) method instead");
+    }
+
+    public void setContent(Widget widget) {
+        throw new IllegalStateException(
+                "Warning: user the setMessage(Object message) method instead");
     }
 
 }
