@@ -16,10 +16,11 @@
 
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.GDialog;
 import org.gwm.client.GFrame;
 import org.gwm.client.event.GDialogChoiceListener;
-import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGDialog;
+import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -32,7 +33,7 @@ public class ConfirmDialogScenarii extends AbstractScenarii {
 
     public void runScenarii() {
         DefaultGDialog.showConfirmDialog(null, "Do you like holidays?",
-                "Are you an Iron Man ? :)", DefaultGDialog.YES_NO_CANCEL_OPTION,
+                "Are you an Iron Man ? :)", GDialog.YES_NO_CANCEL_OPTION_TYPE,
                 new GDialogChoiceListener() {
 
                     public void onChoice(DefaultGDialog dialog) {
