@@ -231,7 +231,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
         DialogPane dialogContent = new DialogPane(message,
                 getOptions(optionsType), getIcon(QUESTION_MESSAGE,
                         getImagePath(messageType, null)), choiceListener, this);
-        this.setContent(dialogContent);
+        super.setContent(dialogContent);
     }
 
     private static void adjustDialogSizeToContent(UIObject parent,
