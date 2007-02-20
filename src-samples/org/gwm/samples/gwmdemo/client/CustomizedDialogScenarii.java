@@ -16,6 +16,7 @@
 
 package org.gwm.samples.gwmdemo.client;
 
+import org.gwm.client.GDialog;
 import org.gwm.client.impl.DefaultGDialog;
 
 import com.google.gwt.user.client.ui.HTML;
@@ -30,6 +31,9 @@ public class CustomizedDialogScenarii extends AbstractScenarii {
         DefaultGDialog gdialog = new DefaultGDialog("Customized DefaultGDialog");
         HTML content = new HTML("croco");
         gdialog.setContent(content);
+        content.setSize("600", "200");
+        gdialog.setMessageType(GDialog.ERROR_MESSAGE);
+        gdialog.setOptionType(GDialog.OK_OPTION_TYPE);
         gdialog.show();
     }
 

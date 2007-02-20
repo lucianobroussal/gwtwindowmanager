@@ -20,6 +20,7 @@ import org.gwm.client.GDialog;
 import org.gwm.client.GFrame;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.util.GWmConstants;
+import org.gwm.client.util.GwmUtilities;
 import org.gwtwidgets.client.ui.PNGImage;
 
 import com.google.gwt.user.client.DOM;
@@ -29,9 +30,10 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -39,34 +41,20 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DefaultGDialog extends DefaultGFrame implements GDialog{
+public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
-    
     public DefaultGDialog() {
         super();
     }
-    
+
     public DefaultGDialog(String caption) {
         super(caption);
+        setTheme(GWmConstants.DEFAULT_THEME);
+        setResizable(false);
+        setMaximizable(false);
+        setMinimizable(false);
+        setClosable(false);
     }
-
-   
-
-    public static final int ERROR_MESSAGE = 1;
-
-    public static final int INFORMATION_MESSAGE = 2;
-
-    public static final int WARNING_MESSAGE = 3;
-
-    public static final int QUESTION_MESSAGE = 4;
-
-    public static final int PLAIN_MESSAGE = 5;
-
-    public static final int YES_NO_OPTION = 5;
-
-    public static final int YES_NO_CANCEL_OPTION = 6;
-
-    public static final int OK_CANCEL_OPTION = 7;
 
     public static final String YES_OPTION_LABEL = "Yes";
 
@@ -92,6 +80,12 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
 
     public Option selectedOption;
 
+    private int messageType = INFORMATION_MESSAGE;
+
+    private int optionsType = OK_OPTION_TYPE;
+
+    private GDialogChoiceListener choiceListener;
+
     private static UIObject parent;
 
     public Object getSelectedValue() {
@@ -102,11 +96,10 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
         return selectedOption;
     }
 
-
     public static void showConfirmDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
         showMessage(parent, message, null, QUESTION_MESSAGE,
-                getOptions(YES_NO_CANCEL_OPTION), null, choiceListener);
+                getOptions(YES_NO_CANCEL_OPTION_TYPE), null, choiceListener);
     }
 
     public static void showConfirmDialog(UIObject parent, Object message,
@@ -132,14 +125,15 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
     public static void showInputDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, null, QUESTION_MESSAGE,
-                getOptions(OK_CANCEL_OPTION), null, null, null, choiceListener);
+                getOptions(OK_CANCEL_OPTION_TYPE), null, null, null,
+                choiceListener);
     }
 
     public static void showInputDialog(UIObject parent, Object message,
             String title, Object initialValue,
             GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, title, QUESTION_MESSAGE,
-                getOptions(OK_CANCEL_OPTION), null, initialValue, null,
+                getOptions(OK_CANCEL_OPTION_TYPE), null, initialValue, null,
                 choiceListener);
     }
 
@@ -147,7 +141,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
             String title, Object initialValue, int messageType,
             GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, title, messageType,
-                getOptions(OK_CANCEL_OPTION), null, initialValue, null,
+                getOptions(OK_CANCEL_OPTION_TYPE), null, initialValue, null,
                 choiceListener);
     }
 
@@ -155,8 +149,8 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
             String title, Object initialValue, int messageType,
             String imagePath, GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, title, messageType,
-                getOptions(OK_CANCEL_OPTION), imagePath, initialValue, null,
-                choiceListener);
+                getOptions(OK_CANCEL_OPTION_TYPE), imagePath, initialValue,
+                null, choiceListener);
     }
 
     public static void showInputDialog(UIObject parent, Object message,
@@ -164,17 +158,19 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
             int messageType, String imagePath,
             GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, title, messageType,
-                getOptions(OK_CANCEL_OPTION), imagePath, initialValue,
+                getOptions(OK_CANCEL_OPTION_TYPE), imagePath, initialValue,
                 selectionValues, choiceListener);
     }
 
     private static Option[] getOptions(int optionType) {
-        if (optionType == YES_NO_OPTION) {
+        if (optionType == OK_OPTION_TYPE) {
+            return new Option[] { OK_OPTION };
+        } else if (optionType == YES_NO_OPTION_TYPE) {
             return new Option[] { YES_OPTION, NO_OPTION };
-        } else if (optionType == YES_NO_CANCEL_OPTION) {
+        } else if (optionType == YES_NO_CANCEL_OPTION_TYPE) {
             return new Option[] { YES_OPTION, NO_OPTION, CANCEL_OPTION };
 
-        } else if (optionType == OK_CANCEL_OPTION) {
+        } else if (optionType == OK_CANCEL_OPTION_TYPE) {
             return new Option[] { OK_OPTION, CANCEL_OPTION };
         }
         throw new IllegalStateException("Invalid value");
@@ -197,7 +193,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
         currentDialog.setContent(new DialogPane(message, options, icon,
-                choiceListener));
+                choiceListener, currentDialog));
         parent = parentFrame;
         computeSizeAndDisplay();
 
@@ -212,18 +208,26 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
         adjustDialogSizeToContent(parent, currentDialog);
     }
 
-    public void setParent(UIObject parent){
+    public void setParent(UIObject parent) {
         this.parent = parent;
     }
-    
+
     public void show() {
         if (overlayLayer == null) {
             overlayLayer = new GlassPanel();
         }
-        super.setVisible(true);
+        buildContent();
+        overlayLayer.show();
+        GwmUtilities.diplayAtScreenCenter(this);
     }
-    
-    
+
+    private void buildContent() {
+        DialogPane dialogContent = new DialogPane(getContent(),
+                getOptions(optionsType), getIcon(QUESTION_MESSAGE,
+                        getImagePath(messageType, null)), choiceListener, this);
+        this.setContent(dialogContent);
+    }
+
     private static void adjustDialogSizeToContent(UIObject parent,
             GFrame internalFrame) {
         Widget content = internalFrame.getContent();
@@ -254,10 +258,9 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
-        currentDialog.setContent(
-                new InputDialogPane(message, options, icon, initialValue,
-                        selectionValues, choiceListener));
-        parent  = parentFrame;
+        currentDialog.setContent(new InputDialogPane(message, options, icon,
+                initialValue, selectionValues, choiceListener));
+        parent = parentFrame;
         computeSizeAndDisplay();
     }
 
@@ -271,7 +274,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
         currentDialog.setMinimizable(false);
         currentDialog.setMaximizable(false);
         currentDialog.setDraggable(false);
-        currentDialog.setResizable(true  );
+        currentDialog.setResizable(true);
 
         currentDialog.setTheme(theme);
         if (title != null) {
@@ -318,7 +321,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
         public InputDialogPane(Object message, Option[] options, Image icon,
                 Object initialValue, Object[] selectionValues,
                 GDialogChoiceListener choiceListener) {
-            super(message, options, icon, choiceListener);
+            super(message, options, icon, choiceListener, currentDialog);
             if (selectionValues != null) {
                 selectionValuesInput = new ListBox();
                 for (int i = 0; i < selectionValues.length; i++) {
@@ -359,9 +362,12 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
 
         protected VerticalPanel centerContentPanel;
 
+        private DefaultGDialog dialog;
+
         public DialogPane(Object message, Option[] options, Image icon,
-                GDialogChoiceListener choiceListener) {
+                GDialogChoiceListener choiceListener, DefaultGDialog dialog) {
             this.choiceListener = choiceListener;
+            this.dialog = dialog;
             buildUI(message, options, icon);
         }
 
@@ -370,7 +376,14 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
             layout.setSpacing(10);
             centerContentPanel = new VerticalPanel();
             if (message != null) {
-                centerContentPanel.add(new Label(message.toString()));
+                if (message instanceof String)
+                    centerContentPanel.add(new HTML(message.toString()));
+                else if (message instanceof Widget)
+                    centerContentPanel.add((Widget) message);
+                else
+                    throw new IllegalArgumentException(
+                            "Error => The content message of the GDialog can be a Text or a Widget");
+
             }
             if (icon != null) {
                 layout.add(icon, DockPanel.WEST);
@@ -402,8 +415,10 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
                                 choiceListener.onChoice(currentDialog);
                             }
                             overlayLayer.hide();
-                            currentDialog.close();
-                            currentDialog = null;
+
+                            dialog.close();
+                            dialog = null;
+
                         }
                     });
                     optionsPanel.add(optionBtn);
@@ -477,12 +492,12 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
             DOM.setStyleAttribute(getElement(), "width", "100%");
             DOM.setStyleAttribute(getElement(), "height", "100%");
             Window.enableScrolling(false);
-            
+
             setStyleName("overlay_" + theme);
-            
+
             DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame
-                    .getLayerOfTheTopWindow()+1);
-            
+                    .getLayerOfTheTopWindow() + 1);
+
             RootPanel.get().add(this);
             setVisible(true);
         }
@@ -492,9 +507,21 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog{
         }
 
     }
-    
-    public static DefaultGDialog getGDialog(){
+
+    public static DefaultGDialog getGDialog() {
         return currentDialog;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
+    }
+
+    public void setOptionType(int optionsType) {
+        this.optionsType = optionsType;
+    }
+
+    public void setGDialogChoiceListener(GDialogChoiceListener choiceListener) {
+        this.choiceListener = choiceListener;
     }
 
 }
