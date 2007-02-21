@@ -52,6 +52,6 @@ public interface GDialog extends GFrame {
 
     public void setGDialogChoiceListener(GDialogChoiceListener choiceListener);
 
-    public void setMessage(Object  message);
+    public void setMessage(Object message);
 
 }

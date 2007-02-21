@@ -17,8 +17,8 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GFrame;
-import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGDialog;
+import org.gwm.client.impl.DefaultGFrame;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;

@@ -24,7 +24,6 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public interface GFrame {
 
-
     /**
      * Permits to change the property style on a window.
      * 
@@ -316,7 +315,6 @@ public interface GFrame {
      * 
      */
     public void setUrl(String url);
-
 
     public void addInternalFrameListener(GFrameListener listener);
 

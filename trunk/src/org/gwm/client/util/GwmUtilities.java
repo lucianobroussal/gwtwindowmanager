@@ -17,6 +17,7 @@
 package org.gwm.client.util;
 
 import org.gwm.client.GFrame;
+import org.gwm.client.GInternalFrame;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.UIObject;
@@ -24,32 +25,36 @@ import com.google.gwt.user.client.ui.UIObject;
 public class GwmUtilities {
 
     static public void displayAtParentCenter(GFrame frame) {
-        if(frame== null)
+        if (frame == null)
             throw new IllegalArgumentException("The frame can't be null");
-//        if(frame.getParentDesktop()!=null){
-//            diplayAtRelativeGivenWidgetCenter(frame , (UIObject)frame.getParentDesktop());
-//        }else{
-//            diplayAtScreenCenter(frame);
-//        }
+        if (frame instanceof GInternalFrame) {
+            GInternalFrame internalFrame = (GInternalFrame) frame;
+            if (internalFrame.getDesktopPane() != null)
+                diplayAtRelativeGivenWidgetCenter(frame,
+                        (UIObject) internalFrame.getDesktopPane());
+        } else {
+            diplayAtScreenCenter(frame);
+        }
     }
 
     static public void diplayAtScreenCenter(GFrame frame) {
-        if(frame== null)
+        if (frame == null)
             throw new IllegalArgumentException("The frame can't be null");
-        int frameLeft = (Window.getClientWidth() - frame.getWidth())/2;
-        int frameTop = (Window.getClientHeight() - frame.getHeight())/2;
+        int frameLeft = (Window.getClientWidth() - frame.getWidth()) / 2;
+        int frameTop = (Window.getClientHeight() - frame.getHeight()) / 2;
         frame.setLocation(frameTop, frameLeft);
         frame.setVisible(true);
-        
+
     }
 
-    static public void diplayAtRelativeGivenWidgetCenter(GFrame frame , UIObject absoluteParent){
-        if(frame== null || absoluteParent == null )
+    static public void diplayAtRelativeGivenWidgetCenter(GFrame frame,
+            UIObject absoluteParent) {
+        if (frame == null || absoluteParent == null)
             throw new IllegalArgumentException("The parameters can't be null");
-        int frameLeft =  (frame.getWidth() + absoluteParent.getOffsetWidth()) /2;
-        int frameTop =  (frame.getHeight() + absoluteParent.getOffsetHeight()) /2;
+        int frameLeft = (frame.getWidth() + absoluteParent.getOffsetWidth()) / 2;
+        int frameTop = (frame.getHeight() + absoluteParent.getOffsetHeight()) / 2;
         frame.setLocation(frameTop, frameLeft);
         frame.setVisible(true);
-        
+
     }
 }

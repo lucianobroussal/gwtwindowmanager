@@ -26,8 +26,8 @@ import java.util.List;
 public interface GDesktopPane {
 
     /**
-     * Adds a new GFrame to this GDesktopPane and select it if its the
-     * first one.
+     * Adds a new GFrame to this GDesktopPane and select it if its the first
+     * one.
      * 
      * @param internalFrame
      *            The GFrame to be added.

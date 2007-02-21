@@ -15,11 +15,10 @@
  */
 package org.gwm.client;
 
-
 /**
  * Provides the behavior handles to interact with a frame.
  */
-public interface GInternalFrame extends GFrame{
+public interface GInternalFrame extends GFrame {
     /**
      * Returns the GDesktopPane who owns this GInternalFrame
      * 
@@ -32,5 +31,4 @@ public interface GInternalFrame extends GFrame{
      */
     public void setDesktopPane(GDesktopPane desktopPane);
 
-   
 }

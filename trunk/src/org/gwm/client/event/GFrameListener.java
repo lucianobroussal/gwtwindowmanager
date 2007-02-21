@@ -19,7 +19,6 @@
  */
 package org.gwm.client.event;
 
-
 /**
  * This is the interface should be implemented for those objects who want to
  * know about the events of a GFrame.
