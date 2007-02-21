@@ -63,53 +63,6 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     }
 
-    private void setMovingGuard() {
-        parent.addFrameListener(new GFrameAdapter() {
-
-            public void frameMoved(GFrameEvent evt) {
-
-                if (evt.getGFrame() instanceof GInternalFrame) {
-                    GInternalFrame internalFrame = (GInternalFrame) evt
-                            .getGFrame();
-                    Widget desktopPane = (Widget) internalFrame
-                            .getDesktopPane();
-                    if (internalFrame.getTop() < desktopPane.getAbsoluteTop()) {
-                        internalFrame.setTop(0);
-                    }
-                    if (internalFrame.getTop() > desktopPane.getOffsetHeight() - 40) {
-                        internalFrame
-                                .setTop(desktopPane.getOffsetHeight() - 100);
-                    }
-                    if (internalFrame.getLeft() + internalFrame.getWidth() < 0) {
-                        internalFrame.setLeft(-internalFrame.getWidth() + 100);
-                    }
-                    if (internalFrame.getLeft() > desktopPane.getOffsetWidth()) {
-                        internalFrame
-                                .setLeft(desktopPane.getOffsetWidth() - 20);
-                    }
-
-                } else {
-                    if (evt.getGFrame().getTop() < 0) {
-                        evt.getGFrame().setTop(0);
-                    }
-                    if (evt.getGFrame().getTop() > Window.getClientHeight()) {
-                        evt.getGFrame().setTop(Window.getClientHeight() - 20);
-                    }
-                    if (evt.getGFrame().getLeft() + evt.getGFrame().getWidth() < 0) {
-                        evt.getGFrame().setLeft(
-                                -evt.getGFrame().getWidth() + 100);
-                    }
-                    if (evt.getGFrame().getLeft() > Window.getClientWidth()) {
-                        evt.getGFrame().setLeft(Window.getClientWidth() - 20);
-                    }
-
-                }
-            }
-
-        });
-
-    }
-
     private void buildGui() {
         this.currentTheme = parent.getTheme();
         this.title = parent.getCaption();
@@ -290,5 +243,51 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         maximizeArea.setStyleName(this.currentTheme + "_maximize");
         setStyleName(this.currentTheme + "_topBar");
     }
+    
+    private void setMovingGuard() {
+        parent.addFrameListener(new GFrameAdapter() {
+
+            public void frameMoved(GFrameEvent evt) {
+
+                if (evt.getGFrame() instanceof GInternalFrame) {
+                    GInternalFrame internalFrame = (GInternalFrame) evt
+                            .getGFrame();
+                    Widget desktopPane = (Widget) internalFrame
+                            .getDesktopPane();
+                    if (internalFrame.getTop() < desktopPane.getAbsoluteTop()) {
+                        internalFrame.setTop(0);
+                    }
+                    if (internalFrame.getTop() > desktopPane.getOffsetHeight() - 40) {
+                        internalFrame
+                                .setTop(desktopPane.getOffsetHeight() - 100);
+                    }
+                    if (internalFrame.getLeft() + internalFrame.getWidth() < 0) {
+                        internalFrame.setLeft(-internalFrame.getWidth() + 100);
+                    }
+                    if (internalFrame.getLeft() > desktopPane.getOffsetWidth()) {
+                        internalFrame
+                                .setLeft(desktopPane.getOffsetWidth() - 20);
+                    }
+
+                } else {
+                    if (evt.getGFrame().getTop() < 0) {
+                        evt.getGFrame().setTop(0);
+                    }
+                    if (evt.getGFrame().getTop() > Window.getClientHeight()) {
+                        evt.getGFrame().setTop(Window.getClientHeight() - 20);
+                    }
+                    if (evt.getGFrame().getLeft() + evt.getGFrame().getWidth() < 0) {
+                        evt.getGFrame().setLeft(
+                                -evt.getGFrame().getWidth() + 100);
+                    }
+                    if (evt.getGFrame().getLeft() > Window.getClientWidth()) {
+                        evt.getGFrame().setLeft(Window.getClientWidth() - 20);
+                    }
+                }
+            }
+
+        });
+    }
+
 
 }
