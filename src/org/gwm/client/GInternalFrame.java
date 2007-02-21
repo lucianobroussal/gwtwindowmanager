@@ -25,12 +25,12 @@ public interface GInternalFrame extends GFrame{
      * 
      * @return
      */
-    public GDesktopPane getParentDesktop();
+    public GDesktopPane getDesktopPane();
 
     /**
      * Sets the GDesktopPane who owns this GInternalFrame
      */
-    public void setParentDesktop(GDesktopPane desktopPane);
+    public void setDesktopPane(GDesktopPane desktopPane);
 
    
 }

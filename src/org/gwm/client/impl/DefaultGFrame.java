@@ -21,8 +21,8 @@ import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrame;
-import org.gwm.client.event.GInternalFrameEvent;
-import org.gwm.client.event.GInternalFrameListener;
+import org.gwm.client.event.GFrameEvent;
+import org.gwm.client.event.GFrameListener;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -43,12 +43,12 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * GWT-based implementation of <code>GFrame</code>
  */
-public class DefaultGFrame extends SimplePanel implements
-        GFrame, EventListener, EventPreview {
+public class DefaultGFrame extends SimplePanel implements GFrame,
+        EventListener, EventPreview {
 
-    private static GFrame topFrame;
+    protected static GFrame topFrame;
 
-    private static int layerOfTheTopWindow;
+    protected static int layerOfTheTopWindow;
 
     private String title;
 
@@ -84,7 +84,7 @@ public class DefaultGFrame extends SimplePanel implements
 
     private boolean closable, maximizable, minimizable, resizable;
 
-    private boolean maximized, minimized;
+    protected boolean maximized, minimized;
 
     private Label imgTopLeft;
 
@@ -98,13 +98,11 @@ public class DefaultGFrame extends SimplePanel implements
 
     private int previousTop, previousLeft;
 
-    private GDesktopPane desktopPane;
-
     private List listeners;
 
-    private int left;
+    protected int left;
 
-    private int top;
+    protected int top;
 
     private Frame frame;
 
@@ -214,8 +212,6 @@ public class DefaultGFrame extends SimplePanel implements
 
     }
 
-    
-
     public void setTheme(String theme) {
         this.currentTheme = theme;
         applyTheme();
@@ -267,17 +263,13 @@ public class DefaultGFrame extends SimplePanel implements
     }
 
     public void minimize() {
-        if (desktopPane != null)
-            desktopPane.iconify(this);
-        else {
-            this.previousTop = getAbsoluteTop();
-            this.previousLeft = getAbsoluteLeft();
-            this.previousWidth = getWidth();
-            this.previousHeight = getHeight();
-            topBar.setIconified();
-            this.freeminimized = true;
-            buildGui();
-        }
+        this.previousTop = getAbsoluteTop();
+        this.previousLeft = getAbsoluteLeft();
+        this.previousWidth = getWidth();
+        this.previousHeight = getHeight();
+        topBar.setIconified();
+        this.freeminimized = true;
+        buildGui();
         this.minimized = true;
         fireFrameMinimized();
     }
@@ -328,14 +320,10 @@ public class DefaultGFrame extends SimplePanel implements
     }
 
     public void setLocation(int top, int left) {
-        if (desktopPane != null)
-            ((DefaultGDesktopPane) desktopPane).setWidgetPosition(this, left,
-                    top);
-        else {
-            Element elem = getElement();
-            DOM.setStyleAttribute(elem, "left", left + "px");
-            DOM.setStyleAttribute(elem, "top", top + "px");
-        }
+
+        Element elem = getElement();
+        DOM.setStyleAttribute(elem, "left", left + "px");
+        DOM.setStyleAttribute(elem, "top", top + "px");
         this.left = left;
         this.top = top;
     }
@@ -474,9 +462,8 @@ public class DefaultGFrame extends SimplePanel implements
      */
     void fireFrameResized() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameResized(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameResized(new GFrameEvent(this));
         }
     }
 
@@ -485,9 +472,8 @@ public class DefaultGFrame extends SimplePanel implements
      */
     void fireFrameMoved() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameMoved(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameMoved(new GFrameEvent(this));
         }
     }
 
@@ -496,30 +482,28 @@ public class DefaultGFrame extends SimplePanel implements
      */
     private void fireFrameClosed() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameClosed(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameClosed(new GFrameEvent(this));
         }
     }
-    
+
     /**
      * Fires the frameMaximized event of this frame to its listeners.
      */
-    private void fireFrameOpened() {
+    protected void fireFrameOpened() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameOpened(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameOpened(new GFrameEvent(this));
         }
     }
+
     /**
      * Fires the frameMaximized event of this frame to its listeners.
      */
     public void fireFrameMaximized() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameMaximized(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameMaximized(new GFrameEvent(this));
         }
     }
 
@@ -528,9 +512,8 @@ public class DefaultGFrame extends SimplePanel implements
      */
     public void fireFrameMinimized() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameMinimized(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameMinimized(new GFrameEvent(this));
         }
     }
 
@@ -539,9 +522,8 @@ public class DefaultGFrame extends SimplePanel implements
      */
     public void fireFrameIconified() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameIconified(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameIconified(new GFrameEvent(this));
         }
     }
 
@@ -550,9 +532,8 @@ public class DefaultGFrame extends SimplePanel implements
      */
     public void fireFrameRestored() {
         for (int i = 0; i < listeners.size(); i++) {
-            GInternalFrameListener listener = (GInternalFrameListener) listeners
-                    .get(i);
-            listener.frameRestored(new GInternalFrameEvent(this));
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.frameRestored(new GFrameEvent(this));
         }
     }
 
@@ -584,16 +565,12 @@ public class DefaultGFrame extends SimplePanel implements
         return myContent;
     }
 
-    public void addInternalFrameListener(GInternalFrameListener l) {
+    public void addInternalFrameListener(GFrameListener l) {
         listeners.add(l);
     }
 
-    public void removeInternalFrameListener(GInternalFrameListener l) {
+    public void removeInternalFrameListener(GFrameListener l) {
         listeners.remove(l);
-    }
-
-    public GDesktopPane getParentDesktop() {
-        return desktopPane;
     }
 
     public boolean isVisible() {
@@ -605,6 +582,7 @@ public class DefaultGFrame extends SimplePanel implements
             return;
         if (visible) {
             this.minimized = false;
+            super.setVisible(true);
             _show();
             DOM.addEventPreview(this);
         } else {
@@ -624,25 +602,38 @@ public class DefaultGFrame extends SimplePanel implements
             this.myContent = new Label("");
             centerRow.setWidget(0, 1, myContent);
         }
-        this.url = null;
+        // this.url = null;
     }
 
     public void stopResizing() {
-        this.myContent = savedContentDuringDraging;
-        centerRow.setWidget(0, 1, myContent);
-        buildGui();
+        if (url != null) {
+            this.myContent = savedContentDuringDraging;
+            centerRow.setWidget(0, 1, myContent);
+            buildGui();
+        }
         fireFrameResized();
     }
 
-    public void _show() {
-        if (desktopPane == null) {
-            DOM.setStyleAttribute(getElement(), "position", "absolute");
-            RootPanel.get().add(this);
-        }
-        super.setVisible(true);
+    // public void _show() {
+    // if (desktopPane == null) {
+    // DOM.setStyleAttribute(getElement(), "position", "absolute");
+    // RootPanel.get().add(this);
+    // }
+    // super.setVisible(true);
+    // DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
+    // topFrame = this;
+    // fireFrameOpened();
+    // }
+
+    protected void _show() {
+        DOM.setStyleAttribute(getElement(), "position", "absolute");
+        RootPanel.get().add(this);
+
+        
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
         fireFrameOpened();
+
     }
 
     public static int getLayerOfTheTopWindow() {
@@ -653,5 +644,4 @@ public class DefaultGFrame extends SimplePanel implements
         return this.title;
     }
 
-  
 }

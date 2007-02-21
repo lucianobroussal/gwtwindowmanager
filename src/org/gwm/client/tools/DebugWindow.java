@@ -17,8 +17,8 @@
 package org.gwm.client.tools;
 
 import org.gwm.client.GFrame;
-import org.gwm.client.event.GInternalFrameEvent;
-import org.gwm.client.event.GInternalFrameListener;
+import org.gwm.client.event.GFrameEvent;
+import org.gwm.client.event.GFrameListener;
 import org.gwm.client.impl.DefaultGFrame;
 
 import com.google.gwt.user.client.ui.Button;
@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class DebugWindow  implements
-        GInternalFrameListener {
+        GFrameListener {
 
     private DockPanel dock;
 
@@ -71,40 +71,40 @@ public class DebugWindow  implements
         this.dock.add(panel, DockPanel.CENTER);
     }
 
-    public void frameResized(GInternalFrameEvent evt) {
+    public void frameResized(GFrameEvent evt) {
         addEvent(evt, "Resized");
     }
 
-    public void frameOpened(GInternalFrameEvent evt) {
+    public void frameOpened(GFrameEvent evt) {
         addEvent(evt, "Opened");
     }
 
-    public void frameClosed(GInternalFrameEvent evt) {
+    public void frameClosed(GFrameEvent evt) {
         addEvent(evt, "Closed");
     }
 
-    public void frameMaximized(GInternalFrameEvent evt) {
+    public void frameMaximized(GFrameEvent evt) {
         addEvent(evt, "Maximize");
     }
 
-    public void frameMinimized(GInternalFrameEvent evt) {
+    public void frameMinimized(GFrameEvent evt) {
         addEvent(evt, "Minimized");
     }
 
-    public void frameIconified(GInternalFrameEvent evt) {
+    public void frameIconified(GFrameEvent evt) {
         addEvent(evt, "Iconified");
     }
 
-    public void frameRestored(GInternalFrameEvent evt) {
+    public void frameRestored(GFrameEvent evt) {
         addEvent(evt, "Restored");
     }
 
-    public void frameMoved(GInternalFrameEvent evt) {
+    public void frameMoved(GFrameEvent evt) {
         addEvent(evt, "Moved");
     }
 
-    private void addEvent(GInternalFrameEvent evt, String action) {
-        final GFrame myFrame = evt.getGInternalFrame();
+    private void addEvent(GFrameEvent evt, String action) {
+        final GFrame myFrame = evt.getGFrame();
         String title = myFrame.getCaption();
         Label l = new Label(action + " " + title);
         l.addStyleName("gwm-DebugEvent");

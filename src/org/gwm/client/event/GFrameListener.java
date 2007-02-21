@@ -14,30 +14,33 @@
  * the License.
  */
 
+/**
+ * 
+ */
 package org.gwm.client.event;
-
-import org.gwm.client.GFrame;
 
 
 /**
- * This class is an event object and has a GFrame as the source.
+ * This is the interface should be implemented for those objects who want to
+ * know about the events of a GFrame.
+ * 
  */
-public class GInternalFrameEvent {
-	private GFrame source;
-	
-	/**
-	 * Build a GInternalFrameEvent from a GFrame as the source.
-	 * @param source
-	 */
-	public GInternalFrameEvent(GFrame source){
-		this.source = source;
-	}
-	
-	/**
-	 * Returns the source of the event.
-	 * @return
-	 */
-	public GFrame getGInternalFrame(){
-		return this.source;
-	}
+public interface GFrameListener {
+
+    public void frameResized(GFrameEvent evt);
+
+    public void frameOpened(GFrameEvent evt);
+
+    public void frameClosed(GFrameEvent evt);
+
+    public void frameMaximized(GFrameEvent evt);
+
+    public void frameMinimized(GFrameEvent evt);
+
+    public void frameIconified(GFrameEvent evt);
+
+    public void frameRestored(GFrameEvent evt);
+
+    public void frameMoved(GFrameEvent evt);
+
 }

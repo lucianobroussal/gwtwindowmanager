@@ -19,10 +19,13 @@ package org.gwm.client.impl;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 
+import com.google.gwt.user.client.DOM;
+
 /**
  * GWT-based implementation of <code>GInternalFrame</code>
  */
-public class DefaultGInternalFrame extends DefaultGFrame  implements GInternalFrame{
+public class DefaultGInternalFrame extends DefaultGFrame implements
+        GInternalFrame {
 
     public DefaultGInternalFrame(String caption) {
         super(caption);
@@ -30,11 +33,44 @@ public class DefaultGInternalFrame extends DefaultGFrame  implements GInternalFr
 
     private GDesktopPane desktopPane;
 
-    public void setParentDesktop(GDesktopPane pane) {
+    public void setDesktopPane(GDesktopPane pane) {
         this.desktopPane = pane;
     }
 
-    GDesktopPane getDesktopPane() {
+    public GDesktopPane getDesktopPane() {
         return this.desktopPane;
     }
+
+    public void minimize() {
+        if (desktopPane != null) {
+            desktopPane.iconify(this);
+            minimized = true;
+            fireFrameMinimized();
+        }
+    }
+
+    public void restore() {
+    }
+
+    public void setLocation(int top, int left) {
+        if (desktopPane != null) {
+            ((DefaultGDesktopPane) desktopPane).setWidgetPosition(this, left,
+                    top);
+            this.top = top;
+            this.left = left;
+        }
+    }
+
+    public GDesktopPane getParentDesktop() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    protected void _show() {
+        DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
+        topFrame = this;
+        fireFrameOpened();
+
+    }
+
 }
