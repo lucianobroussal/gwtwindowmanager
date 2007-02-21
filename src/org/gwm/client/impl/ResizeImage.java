@@ -26,76 +26,80 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ResizeImage extends FlowPanel implements MouseListener {
 
-  private int resizeStartX;
-  private int resizeStartY;
+    private int resizeStartX;
 
+    private int resizeStartY;
 
-  private boolean resizing;
-  private DefaultGFrame parent;
-  private String currentStyle;
-  private Label label;
+    private boolean resizing;
 
-  public ResizeImage (DefaultGFrame parent) {
-    super();
-    this.parent = parent;
-    buildGui();
-    sinkEvents(Event.MOUSEEVENTS);
-  }
+    private DefaultGFrame parent;
 
-  private void buildGui() {
-    this.currentStyle = parent.getTheme();
-    label = new Label("");
-    label.setStyleName (currentStyle + "_sizer");
-    label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-    label.addMouseListener (this);
-    add (label);
-  }
+    private String currentStyle;
 
-  public void onMouseDown(Widget sender, int x, int y) {
-    resizing = true;
-    DOM.setCapture(label.getElement());
-    resizeStartX = x;
-    resizeStartY = y;
-    parent.startResizing(); //call this and allow the frame to remove iframes
-  }
+    private Label label;
 
-  public void onBrowserEvent (Event e) {
-    super.onBrowserEvent (e);
-  }
-
-
-  public void onMouseUp(Widget sender, int x, int y) {
-    resizing = false;
-    DOM.releaseCapture (label.getElement());
-    parent.stopResizing(); //call this and allow the frame to remove iframes
-  }
-
-  public void onMouseEnter(Widget sender) {
-  }
-
-  public void onMouseLeave(Widget sender) {
-  }
-
-  public void onMouseMove(Widget sender, int x, int y) {
-    if (resizing) {
-      int newHeight = parent.getHeight() + y - resizeStartY;
-      int newWidth = parent.getWidth() + x - resizeStartX;
-      if (newWidth > parent.getMinimumWidth()) {
-        parent.setWidth (newWidth);
-      }
-      if (newHeight > parent.getMinimumHeight()) {
-        parent.setHeight (newHeight);
-      }
+    public ResizeImage(DefaultGFrame parent) {
+        super();
+        this.parent = parent;
+        buildGui();
+        sinkEvents(Event.MOUSEEVENTS);
     }
-  }
 
-  public boolean onEventPreview (Event evt) {
-    return true;
-  }
+    private void buildGui() {
+        this.currentStyle = parent.getTheme();
+        label = new Label("");
+        label.setStyleName(currentStyle + "_sizer");
+        label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        label.addMouseListener(this);
+        add(label);
+    }
 
-public void setTheme(String currentTheme) {
-	label.setStyleName(currentTheme + "_sizer");
-	
-}
+    public void onMouseDown(Widget sender, int x, int y) {
+        resizing = true;
+        DOM.setCapture(label.getElement());
+        resizeStartX = x;
+        resizeStartY = y;
+        parent.startResizing(); // call this and allow the frame to remove
+                                // iframes
+    }
+
+    public void onBrowserEvent(Event e) {
+        super.onBrowserEvent(e);
+    }
+
+    public void onMouseUp(Widget sender, int x, int y) {
+        resizing = false;
+        DOM.releaseCapture(label.getElement());
+        parent.stopResizing(); // call this and allow the frame to remove
+                                // iframes
+    }
+
+    public void onMouseEnter(Widget sender) {
+    }
+
+    public void onMouseLeave(Widget sender) {
+    }
+
+    public void onMouseMove(Widget sender, int x, int y) {
+        if (resizing) {
+            int newHeight = parent.getHeight() + y - resizeStartY;
+            int newWidth = parent.getWidth() + x - resizeStartX;
+            if (newWidth > parent.getMinimumWidth()) {
+                parent.setWidth(newWidth);
+            }
+            if (newHeight > parent.getMinimumHeight()) {
+                parent.setHeight(newHeight);
+            }
+        }
+    }
+
+    public boolean onEventPreview(Event evt) {
+        return true;
+    }
+
+    public void setTheme(String currentTheme) {
+        label.setStyleName(currentTheme + "_sizer");
+
+    }
 
 }

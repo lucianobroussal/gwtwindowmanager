@@ -18,26 +18,27 @@ package org.gwm.client.event;
 
 import org.gwm.client.GFrame;
 
-
 /**
  * This class is an event object and has a GFrame as the source.
  */
 public class GFrameEvent {
-	private GFrame source;
-	
-	/**
-	 * Build a GFrameEvent from a GFrame as the source.
-	 * @param source
-	 */
-	public GFrameEvent(GFrame source){
-		this.source = source;
-	}
-	
-	/**
-	 * Returns the source of the event.
-	 * @return
-	 */
-	public GFrame getGFrame(){
-		return this.source;
-	}
+    private GFrame source;
+
+    /**
+     * Build a GFrameEvent from a GFrame as the source.
+     * 
+     * @param source
+     */
+    public GFrameEvent(GFrame source) {
+        this.source = source;
+    }
+
+    /**
+     * Returns the source of the event.
+     * 
+     * @return
+     */
+    public GFrame getGFrame() {
+        return this.source;
+    }
 }

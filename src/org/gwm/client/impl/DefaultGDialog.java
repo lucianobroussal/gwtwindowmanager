@@ -30,7 +30,6 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
@@ -208,10 +207,6 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
         overlayLayer.show();
         currentDialog.setVisible(true);
         adjustDialogSizeToContent(parent, currentDialog);
-    }
-
-    public void setParent(UIObject parent) {
-        this.parent = parent;
     }
 
     public void show() {

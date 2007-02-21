@@ -49,9 +49,6 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         }
     }
 
-    public void restore() {
-    }
-
     public void setLocation(int top, int left) {
         if (desktopPane != null) {
             ((DefaultGDesktopPane) desktopPane).setWidgetPosition(this, left,

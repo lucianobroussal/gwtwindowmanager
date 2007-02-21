@@ -31,42 +31,45 @@ import com.google.gwt.user.client.ui.Widget;
 public class IconBar extends FlowPanel {
 
     GDesktopPane parent;
+
     Map buttonFrame;
+
     Map buttonIcon;
 
-    public IconBar (GDesktopPane parent) {
-        super ();
+    public IconBar(GDesktopPane parent) {
+        super();
         this.parent = parent;
         this.buttonFrame = new HashMap();
         this.buttonIcon = new HashMap();
     }
 
-    public void addWindow (GFrame gframe) {
-        DefaultGFrame frame = (DefaultGFrame)(gframe);
+    public void addWindow(GFrame gframe) {
+        DefaultGFrame frame = (DefaultGFrame) (gframe);
         HorizontalPanel icon = new HorizontalPanel();
-        icon.addStyleName (frame.getTheme()+"_topBar_iconButton");
-        Label label = new Label (frame.getCaption());
-        label.addStyleName (frame.getTheme()+"_topBar_icon");
+        icon.addStyleName(frame.getTheme() + "_topBar_iconButton");
+        Label label = new Label(frame.getCaption());
+        label.addStyleName(frame.getTheme() + "_topBar_icon");
         Label restoreButton = new Label("");
         restoreButton.setStyleName(frame.getTheme() + "_topBar_restore");
-        icon.add (label);
-        icon.add (restoreButton);
-        buttonFrame.put (restoreButton, frame);
-        buttonIcon.put (restoreButton, icon);
-        this.add (icon);
-        restoreButton.addClickListener (new ClickListener() {
-            public void onClick (Widget sender) {
-                GFrame myFrame = (GFrame)buttonFrame.get (sender);
-                buttonFrame.remove (sender);
-                HorizontalPanel hpicon = (HorizontalPanel)buttonIcon.get (sender);
-                remove (hpicon);
+        icon.add(label);
+        icon.add(restoreButton);
+        buttonFrame.put(restoreButton, frame);
+        buttonIcon.put(restoreButton, icon);
+        this.add(icon);
+        restoreButton.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                GFrame myFrame = (GFrame) buttonFrame.get(sender);
+                buttonFrame.remove(sender);
+                HorizontalPanel hpicon = (HorizontalPanel) buttonIcon
+                        .get(sender);
+                remove(hpicon);
                 parent.deIconify(myFrame);
-              
+
             }
         });
     }
 
-    public void adjustSize () {
+    public void adjustSize() {
     }
 
 }

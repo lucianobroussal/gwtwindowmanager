@@ -30,20 +30,18 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DebugWindow  implements
-        GFrameListener {
+public class DebugWindow implements GFrameListener {
 
     private DockPanel dock;
 
     private VerticalPanel panel;
 
     private Button clearLog;
-    
-    private  GFrame frame;
 
+    private GFrame frame;
 
     public DebugWindow() {
-        frame  = new DefaultGFrame("Debug Window");
+        frame = new DefaultGFrame("Debug Window");
         this.dock = new DockPanel();
         this.panel = new VerticalPanel();
         this.clearLog = new Button("Clear window", new ClickListener() {
@@ -63,7 +61,6 @@ public class DebugWindow  implements
                 HasVerticalAlignment.ALIGN_TOP);
         frame.setContent(this.dock);
     }
-
 
     private void clearPanel() {
         this.dock.remove(panel);
@@ -115,10 +112,9 @@ public class DebugWindow  implements
         });
         this.panel.add(l);
     }
-    
-    public GFrame getUI(){
+
+    public GFrame getUI() {
         return frame;
     }
 
-    
 }

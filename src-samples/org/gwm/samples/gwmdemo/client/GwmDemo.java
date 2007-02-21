@@ -17,10 +17,7 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GFrame;
-import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
-import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -28,7 +25,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -39,17 +35,13 @@ public class GwmDemo implements EntryPoint {
 
     private DefaultGInternalFrame menuFrame;
 
-
     public void onModuleLoad() {
         buildUI();
         menuFrame.setSize(150, 300);
         Window.enableScrolling(false);
-        
+
     }
 
-    
-    
-   
     private void buildUI() {
         desktop = new DefaultGDesktopPane();
         buildMenu();
@@ -69,22 +61,16 @@ public class GwmDemo implements EntryPoint {
         menuLayout.setStyleName("gwmdemo-Menu");
         menuLayout.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
         menuLayout.add(buildMenu("Frames"));
-        menuLayout.add(buildMenuItem(new SimpleWindowWithURLScenarii(
-                )));
-        menuLayout.add(buildMenuItem(new SimpleWindowWithTextScenarii(
-                )));
-        menuLayout.add(buildMenuItem(new SimpleWindowWithWidgetScenarii(
-                )));
+        menuLayout.add(buildMenuItem(new SimpleWindowWithURLScenarii()));
+        menuLayout.add(buildMenuItem(new SimpleWindowWithHTMLScenarii()));
+        menuLayout.add(buildMenuItem(new SimpleWindowWithWidgetScenarii()));
         menuLayout.add(buildMenu("Frame Listener"));
         menuLayout.add(buildMenuItem(new EventScenarii()));
-        menuLayout.add(buildMenu("Frames Manager"));
-
         menuLayout.add(buildMenu("Themes"));
         menuLayout.add(buildMenuItem(new ThemesScenarii()));
         menuLayout.add(buildMenuItem(new ChangingThemeInLiveScenarii()));
         menuLayout.add(buildMenu("Desktop"));
-        menuLayout
-                .add(buildMenuItem(new DesktopScenarii(desktop)));
+        menuLayout.add(buildMenuItem(new DesktopScenarii(desktop)));
         menuLayout.add(buildMenu("Dialog"));
         menuLayout.add(buildMenuItem(new InputDialogScenarii()));
         menuLayout.add(buildMenuItem(new WarningDialogScenarii()));
@@ -113,49 +99,4 @@ public class GwmDemo implements EntryPoint {
         return menuItemLayout;
     }
 
-    //    
-    // Hyperlink windowEditorLink = new Hyperlink("WindowEditor",
-    // "windoweditor");
-    // windowEditorLink.addClickListener(new ClickListener() {
-    //
-    // public void onClick(Widget sender) {
-    // displayWindowEditor();
-    //
-    // }
-    //
-    // });
-
-   class FrameDestroyClosedTest {
-        private GInternalFrame frame;
-        private Widget frameParent;
-        private GDesktopPane desktop;
-
-        public FrameDestroyClosedTest(GDesktopPane desktop) {
-             this.desktop = desktop;
-  }
-
-        private void buildUI() {
-            Window.alert("buildUI()");
-            frame = new DefaultGInternalFrame("Test");
-            // ...some more custom frame code...
-            desktop.addFrame(frame);
-        }
-
-        public void show() {
-            //if the frame doesn't exist, we will build a new frame.
-            if (frame == null)
-                buildUI();
-
-            //if the frame has a parent, save it.
-            if (((Widget) frame).getParent() != null)
-                frameParent = ((Widget) frame).getParent();
-            else
-            //orphaned frame ? add it to previous parent.
-                ((Panel) frameParent).add((Widget) frame);
-
-            //show the frame.
-            frame.setVisible(true);
-        }
-  }
-    
 }

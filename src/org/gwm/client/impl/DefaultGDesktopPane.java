@@ -58,8 +58,6 @@ public class DefaultGDesktopPane extends Composite implements
         desktopWidget.setCellPadding(0);
         desktopWidget.setCellSpacing(0);
         frameContainer = new AbsolutePanel();
-        // int tw = Window.getClientWidth();
-        // int th = Window.getClientHeight()-50;
         frameContainer.setWidth("100%");
         frameContainer.setHeight("100%");
         buttonBar = new IconBar(this);
@@ -98,10 +96,9 @@ public class DefaultGDesktopPane extends Composite implements
     public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setDesktopPane(this);
         int spos = (frames.size() + 1) * 30;
-        frameContainer.add((DefaultGFrame) internalFrame,
-                frameContainer.getAbsoluteLeft() + spos, frameContainer
-                        .getAbsoluteTop()
-                        + spos);
+        frameContainer.add((DefaultGFrame) internalFrame, frameContainer
+                .getAbsoluteLeft()
+                + spos, frameContainer.getAbsoluteTop() + spos);
         internalFrame.setLocation(frameContainer.getAbsoluteLeft() + spos,
                 frameContainer.getAbsoluteTop() + spos);
         frames.add(internalFrame);

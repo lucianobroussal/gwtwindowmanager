@@ -19,7 +19,6 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrame;
 import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
@@ -629,7 +628,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
         DOM.setStyleAttribute(getElement(), "position", "absolute");
         RootPanel.get().add(this);
 
-        
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
         fireFrameOpened();
