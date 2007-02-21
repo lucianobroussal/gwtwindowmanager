@@ -17,7 +17,10 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GFrame;
+import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
+import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -25,6 +28,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -40,8 +44,12 @@ public class GwmDemo implements EntryPoint {
         buildUI();
         menuFrame.setSize(150, 300);
         Window.enableScrolling(false);
+        
     }
 
+    
+    
+   
     private void buildUI() {
         desktop = new DefaultGDesktopPane();
         buildMenu();
@@ -117,4 +125,37 @@ public class GwmDemo implements EntryPoint {
     //
     // });
 
+   class FrameDestroyClosedTest {
+        private GInternalFrame frame;
+        private Widget frameParent;
+        private GDesktopPane desktop;
+
+        public FrameDestroyClosedTest(GDesktopPane desktop) {
+             this.desktop = desktop;
+  }
+
+        private void buildUI() {
+            Window.alert("buildUI()");
+            frame = new DefaultGInternalFrame("Test");
+            // ...some more custom frame code...
+            desktop.addFrame(frame);
+        }
+
+        public void show() {
+            //if the frame doesn't exist, we will build a new frame.
+            if (frame == null)
+                buildUI();
+
+            //if the frame has a parent, save it.
+            if (((Widget) frame).getParent() != null)
+                frameParent = ((Widget) frame).getParent();
+            else
+            //orphaned frame ? add it to previous parent.
+                ((Panel) frameParent).add((Widget) frame);
+
+            //show the frame.
+            frame.setVisible(true);
+        }
+  }
+    
 }

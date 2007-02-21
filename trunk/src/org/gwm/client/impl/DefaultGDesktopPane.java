@@ -96,7 +96,7 @@ public class DefaultGDesktopPane extends Composite implements
      * @param internalFrame
      */
     public void addFrame(GInternalFrame internalFrame) {
-        internalFrame.setParentDesktop(this);
+        internalFrame.setDesktopPane(this);
         int spos = (frames.size() + 1) * 30;
         frameContainer.add((DefaultGFrame) internalFrame,
                 frameContainer.getAbsoluteLeft() + spos, frameContainer

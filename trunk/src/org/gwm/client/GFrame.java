@@ -15,7 +15,7 @@
  */
 package org.gwm.client;
 
-import org.gwm.client.event.GInternalFrameListener;
+import org.gwm.client.event.GFrameListener;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -318,13 +318,13 @@ public interface GFrame {
     public void setUrl(String url);
 
 
-    public void addInternalFrameListener(GInternalFrameListener listener);
+    public void addInternalFrameListener(GFrameListener listener);
 
     /**
-     * Remove a GInternalFrameListener from this GFrame.
+     * Remove a GFrameListener from this GFrame.
      * 
      * @param listener
      */
-    public void removeInternalFrameListener(GInternalFrameListener listener);
+    public void removeInternalFrameListener(GFrameListener listener);
 
 }

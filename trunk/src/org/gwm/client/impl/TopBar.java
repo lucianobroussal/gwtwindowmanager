@@ -16,8 +16,13 @@
 
 package org.gwm.client.impl;
 
+import org.gwm.client.GInternalFrame;
+import org.gwm.client.event.GFrameAdapter;
+import org.gwm.client.event.GFrameEvent;
+
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
@@ -48,16 +53,58 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     private boolean moving;
 
-
     TopBar(DefaultGFrame parent) {
         super();
         this.parent = parent;
         this.draggable = true;
         buildGui();
+        setMovingGuard();
         sinkEvents(Event.MOUSEEVENTS);
-        
+
     }
 
+    private void setMovingGuard() {
+        parent.addInternalFrameListener(new GFrameAdapter() {
+
+            public void frameMoved(GFrameEvent evt) {
+
+                if (evt.getGFrame() instanceof GInternalFrame) {
+                    GInternalFrame internalFrame = (GInternalFrame) evt
+                            .getGFrame();
+                    Widget desktopPane = (Widget) internalFrame.getDesktopPane();
+                    if (internalFrame.getTop() < desktopPane.getAbsoluteTop()) {
+                        internalFrame.setTop(0);
+                    }
+                    if (internalFrame.getTop() > desktopPane.getOffsetHeight()-40) {
+                        internalFrame.setTop(desktopPane.getOffsetHeight()-100);
+                    }
+                    if (internalFrame.getLeft() +  internalFrame.getWidth() < 0 ) {
+                        internalFrame.setLeft(-internalFrame.getWidth()+ 100);
+                    }
+                    if (internalFrame.getLeft() > desktopPane.getOffsetWidth()) {
+                        internalFrame.setLeft(desktopPane.getOffsetWidth()-20);
+                    }
+                    
+                } else {
+                    if (evt.getGFrame().getTop() < 0) {
+                        evt.getGFrame().setTop(0);
+                    }
+                    if (evt.getGFrame().getTop() > Window.getClientHeight()) {
+                        evt.getGFrame().setTop(Window.getClientHeight()-20);
+                    }
+                    if (evt.getGFrame().getLeft() + evt.getGFrame().getWidth() < 0) {
+                        evt.getGFrame().setLeft(-evt.getGFrame().getWidth()+ 100);
+                    }
+                    if (evt.getGFrame().getLeft() > Window.getClientWidth()) {
+                        evt.getGFrame().setLeft(Window.getClientWidth()-20);
+                    }
+
+                }
+            }
+
+        });
+
+    }
 
     private void buildGui() {
         this.currentTheme = parent.getTheme();
@@ -70,11 +117,11 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         minimizeArea.addClickListener(this);
         maximizeArea = new Label();
         maximizeArea.addClickListener(this);
-        setWidget(0,0,caption);
-        getCellFormatter().setWidth(0,0, "100%");
-        setWidget(0,1,minimizeArea);
-        setWidget(0,2,maximizeArea);
-        setWidget(0,3,closeArea);
+        setWidget(0, 0, caption);
+        getCellFormatter().setWidth(0, 0, "100%");
+        setWidget(0, 1, minimizeArea);
+        setWidget(0, 2, maximizeArea);
+        setWidget(0, 3, closeArea);
         setTheme(currentTheme);
         setCellPadding(0);
         setCellSpacing(0);
@@ -107,7 +154,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
             if (type != Event.ONMOUSEMOVE
                     || (type == Event.ONMOUSEMOVE && dragging)) {
                 int x = DOM.eventGetClientX(e);
-               int y = DOM.eventGetClientY(e);
+                int y = DOM.eventGetClientY(e);
 
                 if (type == Event.ONMOUSEMOVE) {
                     onMouseMove(this, x, y);
@@ -147,8 +194,8 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         if (draggable && dragging) {
             int newLeft = x - dragStartX + parent.getLeft();
             int newTop = y - dragStartY + parent.getTop();
-            dragStartX =x;
-            dragStartY =y;
+            dragStartX = x;
+            dragStartY = y;
             moving = true;
             parent.setLocation(newTop, newLeft);
         }
@@ -170,22 +217,22 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         this.caption.setText(caption);
     }
 
-    public void setIconified () {
+    public void setIconified() {
         clear();
-        Label l = new Label (title);
-        l.addStyleName(parent.getTheme()+"_topBar_icon");
+        Label l = new Label(title);
+        l.addStyleName(parent.getTheme() + "_topBar_icon");
         Label restoreButton = new Label("");
         restoreButton.setStyleName(this.currentTheme + "_topBar_restore");
-        restoreButton.addClickListener (new ClickListener() {
-          public void onClick (Widget sender) {
-            setRestored();
-          }
+        restoreButton.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                setRestored();
+            }
         });
-        setWidget (0, 0, l);
-        setWidget (0, 1, restoreButton);
+        setWidget(0, 0, l);
+        setWidget(0, 1, restoreButton);
     }
 
-    public void setRestored () {
+    public void setRestored() {
         clear();
         buildGui();
         parent.restore();
@@ -202,13 +249,12 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         this.caption = caption;
     }
 
-
     public void setDraggable(boolean draggable) {
         this.draggable = draggable;
     }
 
     public void setDragging(boolean dragging) {
-System.out.println ("set dragging to "+dragging);
+        System.out.println("set dragging to " + dragging);
         this.dragging = dragging;
     }
 
@@ -219,8 +265,6 @@ System.out.println ("set dragging to "+dragging);
     public void setDragStartY(int dragStartY) {
         this.dragStartY = dragStartY;
     }
-
-
 
     public void setParent(DefaultGFrame parent) {
         this.parent = parent;
@@ -236,7 +280,7 @@ System.out.println ("set dragging to "+dragging);
 
     public void setTheme(String theme) {
         currentTheme = theme;
-        caption.setStyleName(currentTheme+ "_caption");
+        caption.setStyleName(currentTheme + "_caption");
         closeArea.setStyleName(this.currentTheme + "_close");
         minimizeArea.setStyleName(this.currentTheme + "_minimize");
         maximizeArea.setStyleName(this.currentTheme + "_maximize");
