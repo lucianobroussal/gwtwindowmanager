@@ -316,13 +316,19 @@ public interface GFrame {
      */
     public void setUrl(String url);
 
-    public void addInternalFrameListener(GFrameListener listener);
+    
+    /**
+     * Add a GFrameListener from this GFrame.
+     * 
+     * @param listener
+     */
+    public void addFrameListener(GFrameListener listener);
 
     /**
      * Remove a GFrameListener from this GFrame.
      * 
      * @param listener
      */
-    public void removeInternalFrameListener(GFrameListener listener);
+    public void removeGFrameListener(GFrameListener listener);
 
 }

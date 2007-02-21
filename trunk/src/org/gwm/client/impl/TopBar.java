@@ -64,7 +64,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     }
 
     private void setMovingGuard() {
-        parent.addInternalFrameListener(new GFrameAdapter() {
+        parent.addFrameListener(new GFrameAdapter() {
 
             public void frameMoved(GFrameEvent evt) {
 

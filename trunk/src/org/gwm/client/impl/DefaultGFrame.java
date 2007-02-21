@@ -564,11 +564,11 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
         return myContent;
     }
 
-    public void addInternalFrameListener(GFrameListener l) {
+    public void addFrameListener(GFrameListener l) {
         listeners.add(l);
     }
 
-    public void removeInternalFrameListener(GFrameListener l) {
+    public void removeGFrameListener(GFrameListener l) {
         listeners.remove(l);
     }
 
