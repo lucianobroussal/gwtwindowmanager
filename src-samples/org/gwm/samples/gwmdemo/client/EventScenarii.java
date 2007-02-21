@@ -45,7 +45,7 @@ public class EventScenarii extends AbstractScenarii {
         debugUI.setLocation(window.getTop(), window.getLeft()
                 + window.getWidth());
         debugUI.setVisible(true);
-        window.addInternalFrameListener(debugWindow);
+        window.addFrameListener(debugWindow);
 
     }
 
