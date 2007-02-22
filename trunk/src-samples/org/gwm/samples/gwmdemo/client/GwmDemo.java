@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 gwtwindowmanager.org (http://www.gwtwindowmanager.org)
+ * Copyright (c) 2006-2007 Luciano Broussal, Johan Vos, Andy Scholz, Marcelo Emanoel  (http://www.gwtwindowmanager.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,8 +22,11 @@ import org.gwm.client.impl.DefaultGInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -35,11 +38,29 @@ public class GwmDemo implements EntryPoint {
 
     private DefaultGInternalFrame menuFrame;
 
-    public void onModuleLoad() {
-        buildUI();
-        menuFrame.setSize(150, 300);
-        Window.enableScrolling(false);
+    public void onModuleLoad(){
+        RootPanel.get().add(new HTML("<div style='position:relative; font-size:150px; font-family:arial;color:#E6E6E6; line-height: 40px;'>&bull;</div>"));
+        test();
+        return ;
+//        buildUI();
+//        menuFrame.setSize(150, 300);
+//        Window.enableScrolling(false);
 
+    }
+
+    private void test() {
+        Hyperlink btn = new Hyperlink("click" , "clk");
+        btn.addClickListener(new ClickListener(){
+
+            public void onClick(Widget arg0) {
+               Window.open("http://www.google.com", "", "");
+                
+            }
+            
+        });
+        
+        RootPanel.get().add(btn);
+        
     }
 
     private void buildUI() {
