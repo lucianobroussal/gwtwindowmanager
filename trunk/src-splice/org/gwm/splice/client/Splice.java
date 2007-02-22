@@ -73,7 +73,7 @@ public class Splice implements EntryPoint {
 		 * 
 		 * typically this will be something like http:/localhost/joomla/_clicksplice
 		 */
-		svc.setHostedModeTargetBaseUrl("http://bpir.wingnut.com/_clicksplice");
+		svc.setHostedModeTargetBaseUrl("http:/localhost/joomla/_clicksplice");
 
 		svc.setController("user");
 		svc.setScriptDir("controllers");
