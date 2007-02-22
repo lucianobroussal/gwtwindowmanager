@@ -62,9 +62,32 @@ public class Splice implements EntryPoint {
 //			return;
 //		}
 
-		init_stuff();
+		final Button button = new Button("Launch UserResultList");
 
-		final Button button = new Button("Click me");
+		final GenericDataService svc = new GenericDataService("generic");
+
+		/*********************************************************
+		 * Make sure you set this to point to your remote app server correctly.
+		 * *Note this has nothing to do with GWT - it's your PHP/Ruby etc server.
+		 * This is the url used by the proxy servlet to forwared remote service requests.
+		 * 
+		 * typically this will be something like http:/localhost/joomla/_clicksplice
+		 */
+		svc.setHostedModeTargetBaseUrl("http://bpir.wingnut.com/_clicksplice");
+
+		svc.setController("user");
+		svc.setScriptDir("controllers");
+		svc.setScriptExtension(".php");
+		
+		button.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				new UserResultListWindow("This is a list of your Joomla Users", svc);
+			}
+		});
+		
+		RootPanel.get().add(button);
+
+		init_stuff();
 
 		DesktopManager dt = DesktopManager.getInstance();
 
@@ -73,12 +96,6 @@ public class Splice implements EntryPoint {
 		dt.setLeftMargin(10);
 		dt.setRightMargin(10);
 		final IconManager im = dt.getIconManager();
-
-		button.addClickListener(new ClickListener() {
-			public void onClick(Widget sender) {
-				im.arrangeIcons(IconManager.ARRANGE_TOP, IconManager.SORT_ASC);
-			}
-		});
 
 //		HorizontalPanel hp = new HorizontalPanel();
 //		hp.setHeight("32px");
@@ -95,21 +112,6 @@ public class Splice implements EntryPoint {
 		im.addIcon(new UrlLaunchIcon("Linux Today", "http://linuxtoday.com"));
 		im.addIcon(new UrlLaunchIcon("BPIR Home", "http://www.bpir.com"));
 
-
-		GenericDataService svc = new GenericDataService("generic");
-
-		svc.setController("user");
-		svc.setScriptDir("controllers");
-		svc.setScriptExtension(".php");
-		
-		/*********************************************************
-		 * Make sure you set this to point to your remote app server correctly.
-		 * *Note this has nothing to do with GWT - its your PHP/Ruby etc server.
-		 * This is the url used by the proxy servlet to forwared remote service requests.
-		 */
-		svc.setHostedModeTargetBaseUrl("http://bpir.wingnut.com/_clicksplice");
-
-		UserResultListWindow usrw = new UserResultListWindow("Users", svc);
 
 	}
 
