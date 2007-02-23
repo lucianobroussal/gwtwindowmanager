@@ -63,13 +63,15 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private static String theme = GWmConstants.DEFAULT_THEME;
 
-    private static DefaultGDialog currentDialog;
+    private static DefaultGDialog internalDialog;
 
     private static GlassPanel overlayLayer;
 
-   
+    private Object initialValue;
 
     private Object selectedValue;
+
+    private Object[] selectionValues;
 
     private Option selectedOption;
 
@@ -81,7 +83,11 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private Object message;
 
-    private static UIObject parent;
+    private Option[] options;
+
+    private UIObject parent;
+
+    private Image icon;
 
     public Object getSelectedValue() {
         return selectedValue;
@@ -186,50 +192,65 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
             String title, int messageType, Option[] options, String imagePath,
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
-        Image icon = getIcon(messageType, imagePath);
-        currentDialog.setMessage(new DialogPane(message, options, icon,
-                choiceListener, currentDialog));
-        parent = parentFrame;
-        computeSizeAndDisplay();
+        internalDialog.setParent(parentFrame);
+        internalDialog.setMessage(message);
+        internalDialog.setMessageType(messageType);
+        internalDialog.setOptions(options);
+        internalDialog.setIcon(getIcon(messageType, imagePath));
+        internalDialog.setGDialogChoiceListener(choiceListener);
+        
+        internalDialog._show(false);
 
     }
 
-    private static void computeSizeAndDisplay() {
+    private void setParent(UIObject parent) {
+        this.parent = parent;
+
+    }
+
+
+
+    public void show(){
+        _show(false);
+    }
+    
+    private void _show(boolean isInputDialog) {
         if (overlayLayer == null) {
             overlayLayer = new GlassPanel();
         }
+        buildContent(isInputDialog);
         overlayLayer.show();
-        currentDialog.setVisible(true);
-        adjustDialogSizeToContent(parent, currentDialog);
+        getCurrentGDialog().setVisible(true);
+        adjustDialogSizeToContent(parent , getCurrentGDialog());
     }
 
-    public void show() {
-        if (overlayLayer == null) {
-            overlayLayer = new GlassPanel();
-        }
-        buildContent();
-        overlayLayer.show();
-        GwmUtilities.diplayAtScreenCenter(this);
+    private DefaultGDialog getCurrentGDialog() {
+        return internalDialog !=null ? internalDialog : this;
     }
 
-    private void buildContent() {
+    private void buildContent(boolean isInputDialog) {
         if (message == null) {
             throw new IllegalStateException(
                     "Please use the GDialog.setMessage(Object) or verify your message object is not null");
         }
-        DialogPane dialogContent = new DialogPane(message,
-                getOptions(optionsType), getIcon(QUESTION_MESSAGE,
-                        getImagePath(messageType, null)), choiceListener, this);
-        super.setContent(dialogContent);
+        Widget content = null;
+        DefaultGDialog dialog = getCurrentGDialog();
+        if (!isInputDialog) {
+            content = new DialogPane(message, options, icon,
+                    choiceListener, dialog);
+        } else {
+            content = new InputDialogPane(message, options,
+                    icon, initialValue, selectionValues, choiceListener , dialog);
+        }
+        super.setContent(content);
     }
 
-    private static void adjustDialogSizeToContent(UIObject parent,
-            GFrame internalFrame) {
-        Widget content = internalFrame.getContent();
+    private void adjustDialogSizeToContent(UIObject parent, GDialog dialog) {
+        Widget content = dialog.getContent();
         int height = content.getOffsetHeight();
-        currentDialog.setHeight(height);
+        dialog.setHeight(height);
         int width = content.getOffsetWidth();
-        currentDialog.setWidth(width);
+        dialog.setWidth(width);
         int left = 0;
         int top = 0;
         if (parent != null) {
@@ -243,7 +264,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
         }
         left = left > 0 ? left : 0;
         top = top > 0 ? top : 0;
-        currentDialog.setLocation(top, left);
+        dialog.setLocation(top, left);
 
     }
 
@@ -252,28 +273,48 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
             Object initialValue, Object[] selectionValues,
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
-        Image icon = getIcon(messageType, imagePath);
-        currentDialog.setMessage(new InputDialogPane(message, options, icon,
-                initialValue, selectionValues, choiceListener));
-        parent = parentFrame;
-        computeSizeAndDisplay();
+        internalDialog.setParent(parentFrame);
+        internalDialog.setMessage(message);
+        internalDialog.setMessageType(messageType);
+        internalDialog.setOptions(options);
+        internalDialog.setParent(parentFrame);
+        internalDialog.setInitialValue(initialValue);
+        internalDialog.setSelectionValues(selectionValues);
+        internalDialog.setIcon(getIcon(messageType, imagePath));
+        internalDialog.setGDialogChoiceListener(choiceListener);
+        internalDialog._show(true);
+    }
+
+    private void setIcon(Image icon) {
+        this.icon = icon;
+
+    }
+
+    private void setSelectionValues(Object[] selectionValues) {
+        this.selectionValues = selectionValues;
+
+    }
+
+    private void setInitialValue(Object initialValue) {
+        this.initialValue = initialValue;
+
     }
 
     private static void setDefaultDialogProperties(String title, int messageType) {
-        if (currentDialog != null) {
-            throw new IllegalStateException("A Dialog is already opened!");
-        }
-        currentDialog = new DefaultGDialog();
+//        if (internalDialog != null) {
+//            throw new IllegalStateException("A Dialog is already opened!");
+//        }
+        internalDialog = new DefaultGDialog();
 
-        currentDialog.setClosable(false);
-        currentDialog.setMinimizable(false);
-        currentDialog.setMaximizable(false);
-        currentDialog.setDraggable(false);
-        currentDialog.setResizable(true);
+        internalDialog.setClosable(false);
+        internalDialog.setMinimizable(false);
+        internalDialog.setMaximizable(false);
+        internalDialog.setDraggable(false);
+        internalDialog.setResizable(true);
 
-        currentDialog.setTheme(theme);
+        internalDialog.setTheme(theme);
         if (title != null) {
-            currentDialog.setCaption(title);
+            internalDialog.setCaption(title);
         }
 
     }
@@ -304,7 +345,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
         return "gwm/images/unknown.png";
     }
 
-    static class InputDialogPane extends DialogPane {
+     class InputDialogPane extends DialogPane {
         private TextBox textBoxInput;
 
         private ListBox selectionValuesInput;
@@ -315,8 +356,8 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
         public InputDialogPane(Object message, Option[] options, Image icon,
                 Object initialValue, Object[] selectionValues,
-                GDialogChoiceListener choiceListener) {
-            super(message, options, icon, choiceListener, currentDialog);
+                GDialogChoiceListener choiceListener, DefaultGDialog dialog) {
+            super(message, options, icon, choiceListener, dialog);
             if (selectionValues != null) {
                 selectionValuesInput = new ListBox();
                 for (int i = 0; i < selectionValues.length; i++) {
@@ -413,6 +454,9 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
                             dialog.close();
                             dialog = null;
+                            if(internalDialog !=null){
+                                internalDialog = null;
+                            }
 
                         }
                     });
@@ -503,16 +547,16 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     }
 
-    public static DefaultGDialog getGDialog() {
-        return currentDialog;
-    }
-
     public void setMessageType(int messageType) {
         this.messageType = messageType;
     }
 
     public void setOptionType(int optionsType) {
         this.optionsType = optionsType;
+    }
+
+    public void setOptions(Option[] options) {
+        this.options = options;
     }
 
     public void setGDialogChoiceListener(GDialogChoiceListener choiceListener) {
