@@ -37,11 +37,6 @@ public class GwmDemo implements EntryPoint {
     private DefaultGInternalFrame menuFrame;
 
     public void onModuleLoad() {
-        RootPanel
-                .get()
-                .add(
-                        new HTML(
-                                "<div style='position:relative; font-size:150px; font-family:arial;color:#E6E6E6; line-height: 40px;'>&bull;</div>"));
         buildUI();
         menuFrame.setSize(150, 300);
         Window.enableScrolling(false);

@@ -17,8 +17,10 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDialog;
+import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.impl.DefaultGDialog;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Hyperlink;
 
