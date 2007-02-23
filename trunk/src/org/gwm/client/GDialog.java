@@ -16,6 +16,7 @@
 package org.gwm.client;
 
 import org.gwm.client.event.GDialogChoiceListener;
+import org.gwm.client.impl.DefaultGDialog.Option;
 
 /**
  * Provides the behavior handles to interact with a DefaultGDialog.
@@ -39,6 +40,14 @@ public interface GDialog extends GFrame {
     public static final int YES_NO_CANCEL_OPTION_TYPE = 6;
 
     public static final int OK_CANCEL_OPTION_TYPE = 7;
+    
+    public static final Option OK_OPTION = new Option("Ok");
+
+    public static final Option YES_OPTION = new Option("Yes");
+
+    public static final Option NO_OPTION = new Option("No");
+
+    public static final Option CANCEL_OPTION = new Option("Cancel");
 
     /**
      * Shows the DefaultGDialog.

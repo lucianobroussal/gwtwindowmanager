@@ -67,17 +67,11 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private static GlassPanel overlayLayer;
 
-    public static final Option OK_OPTION = new Option("Ok");
+   
 
-    public static final Option YES_OPTION = new Option("Yes");
+    private Object selectedValue;
 
-    public static final Option NO_OPTION = new Option("No");
-
-    public static final Option CANCEL_OPTION = new Option("Cancel");
-
-    public Object selectedValue;
-
-    public Option selectedOption;
+    private Option selectedOption;
 
     private int messageType = INFORMATION_MESSAGE;
 
@@ -193,7 +187,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
-        currentDialog.setContent(new DialogPane(message, options, icon,
+        currentDialog.setMessage(new DialogPane(message, options, icon,
                 choiceListener, currentDialog));
         parent = parentFrame;
         computeSizeAndDisplay();
@@ -259,7 +253,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
             GDialogChoiceListener choiceListener) {
         setDefaultDialogProperties(title, messageType);
         Image icon = getIcon(messageType, imagePath);
-        currentDialog.setContent(new InputDialogPane(message, options, icon,
+        currentDialog.setMessage(new InputDialogPane(message, options, icon,
                 initialValue, selectionValues, choiceListener));
         parent = parentFrame;
         computeSizeAndDisplay();
@@ -410,10 +404,10 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
                                             .getInputValue();
 
                                 }
-                                currentDialog.selectedOption = option;
-                                currentDialog.selectedValue = inputValue;
+                                dialog.selectedOption = option;
+                                dialog.selectedValue = inputValue;
 
-                                choiceListener.onChoice(currentDialog);
+                                choiceListener.onChoice(dialog);
                             }
                             overlayLayer.hide();
 
