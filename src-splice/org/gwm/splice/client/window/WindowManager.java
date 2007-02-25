@@ -54,9 +54,12 @@ public class WindowManager {
 			window.name = n;
 		}
 		
-		if(window.getTheme() == null) {
+		
+			// always set the default theme
+			// gwm sets "theme1" on init 
+//		if(window.getTheme() == null) {
 			window.setTheme(defaultWindowTheme);
-		}
+//		}
 		
 		windows.put(window.name, window);
 		notify(EVENT_WINDOW_ADDED, window);

@@ -17,6 +17,7 @@ package org.gwm.splice.client.logger;
 
 import java.util.Date;
 
+import org.gwm.client.util.GwmUtilities;
 import org.gwm.splice.client.desktop.DesktopManager;
 import org.gwm.splice.client.window.AbstractWindow;
 
@@ -31,6 +32,7 @@ public class LogWindow extends AbstractWindow implements ILogListener {
 		setWidget(new VerticalPanel());
 		setWidth(400);
 		setHeight(400);
+		GwmUtilities.displayAtParentCenter(this);
 		DesktopManager.getInstance().getLogger().addLogListener(this);
 	}
 
