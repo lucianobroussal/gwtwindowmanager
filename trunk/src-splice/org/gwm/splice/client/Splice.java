@@ -58,9 +58,9 @@ public class Splice implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
-//		if (true) {
-//			return;
-//		}
+		if (true) {
+			return;
+		}
 
 		final Button button = new Button("Launch UserResultList");
 
@@ -73,7 +73,8 @@ public class Splice implements EntryPoint {
 		 * 
 		 * typically this will be something like http:/localhost/joomla/_clicksplice
 		 */
-		svc.setHostedModeTargetBaseUrl("http:/localhost/joomla/_clicksplice");
+//		svc.setHostedModeTargetBaseUrl("http:/localhost/joomla/_clicksplice");
+		svc.setHostedModeTargetBaseUrl("http://bpir.wingnut.com/_clicksplice");
 
 		svc.setController("user");
 		svc.setScriptDir("controllers");
@@ -123,7 +124,7 @@ public class Splice implements EntryPoint {
 
 	private static native void init_stuff() /*-{
 	 $wnd.hello = function(str) {
-	 @org.gwm.splice.client.DeskTop::hello(Ljava/lang/String;)(str);
+	 @org.gwm.splice.client.Splice::hello(Ljava/lang/String;)(str);
 	 }
 	 }-*/;
 

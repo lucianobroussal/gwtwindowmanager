@@ -18,16 +18,15 @@ package org.gwm.splice.client.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gwm.client.util.GwmUtilities;
 import org.gwm.splice.client.service.IRemoteService;
 import org.gwm.splice.client.service.RawResponseHandler;
 import org.gwm.splice.client.window.AbstractWindow;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.xml.client.Attr;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.NamedNodeMap;
 import com.google.gwt.xml.client.Node;
@@ -57,6 +56,8 @@ public class HtmlForm extends AbstractWindow {
 		setMaximizable(false);
 		setMinimizable(false);
 		
+		GwmUtilities.displayAtParentCenter(this);
+		
 		controlbar.getButton("previous").setDisabled(true);
 		
 		service.execute(name, null, new RawResponseHandler() {
@@ -74,7 +75,14 @@ public class HtmlForm extends AbstractWindow {
 
 	private void init() {
 		
-		Document doc = XMLParser.parse(html);
+		Document doc = null;
+		
+		try {
+			doc  = XMLParser.parse(html);
+		}
+		catch(Throwable e) {
+			logInfo("bugger - " + e.getMessage());
+		}
 		NodeList nodeList = doc.getElementsByTagName("body");
 		Node node = nodeList.item(0);
 		node = node.getFirstChild();

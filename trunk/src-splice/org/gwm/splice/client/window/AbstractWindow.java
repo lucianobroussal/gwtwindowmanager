@@ -50,8 +50,6 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 	private boolean _showToolbar;
 	private String _theme = null;
 
-	GInternalFrame iframe = null;
-	private String windowId;
 	
 	private ArrayList listeners = new ArrayList();
 	
@@ -74,15 +72,23 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 	private void init(String title, boolean showMenubar, boolean showToolbar, boolean showControlbar) {
 		_showControlbar = showControlbar;
 		_showToolbar = showToolbar;
+		name = title;
 	}
 
 	public void show() {
-
+		
 		if(useWindowManager) {
 			// do this now in case window manager needs to change name (e.g. "my window (2)")
+			// or set default theme
 			DesktopManager.getInstance().getWindowManager().addWindow(this);
 		}
 		
+		if(_theme != null) {
+			super.setTheme(_theme);
+		}
+
+		setCaption(name);
+
 		if(this.url != null) {
 			super.setUrl(url);
 			setVisible(true);
@@ -113,7 +119,7 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 		toolbar.addListener(this);
 		
 		super.setContent(panel);
-
+		
 		setVisible(true);
 	}
 	
@@ -130,6 +136,7 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 	////////////////////////////////////////////////////////////////////////////////
 	
 	public void setName(String name) {
+		this.name = name;
 		setCaption(name);
 	}
 	
