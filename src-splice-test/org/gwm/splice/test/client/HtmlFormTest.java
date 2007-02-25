@@ -1,6 +1,7 @@
 package org.gwm.splice.test.client;
 
 import org.gwm.splice.client.form.HtmlForm;
+import org.gwm.splice.client.logger.LogWindow;
 import org.gwm.splice.client.service.GenericRemoteService;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -23,10 +24,10 @@ public class HtmlFormTest implements EntryPoint {
     final Button button = new Button("Show Form");
 
 		// init the service to get html forms
-		formService.setController("simple");
+		formService.setController("subscribe");
 		formService.setScriptDir("forms");
 		formService.setScriptExtension(".html");
-//		formService.setHostedModeTargetBaseUrl("file:///home/andy/wstu/GWM/src-splice/org/gwm/splice/test/public/forms");
+		formService.setHostedModeTargetBaseUrl("http://localhost/bpir/_clicksplice");
 
 		button.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
@@ -37,6 +38,7 @@ public class HtmlFormTest implements EntryPoint {
        }
     });
 
+		new LogWindow().show();
     RootPanel.get("slot1").add(button);
   }
 }
