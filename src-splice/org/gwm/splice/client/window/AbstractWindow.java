@@ -268,6 +268,11 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 	public boolean onActionClicked(Widget widget, String name, int actionID) {
 		return true;
 	}
+
+	public void close() {
+		DesktopManager.getInstance().getWindowManager().removeWindow(this);
+		super.close();
+	}
 	
 	
 }
