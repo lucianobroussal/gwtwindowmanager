@@ -22,6 +22,8 @@ import java.util.List;
 import org.gwm.client.GFrame;
 import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
+import org.gwm.client.util.GwmUtilities;
+import org.gwm.client.util.widget.OverlayLayer;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -29,6 +31,7 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.EventPreview;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
@@ -114,6 +117,12 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
     private FlexTable bottomRow;
 
     private boolean freeminimized;
+
+    private boolean modalMode;
+    
+    
+    private static OverlayLayer overlayLayer;
+
 
     public DefaultGFrame() {
         this(DEFAULT_TITLE);
@@ -575,6 +584,15 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
     public boolean isVisible() {
         return visible;
     }
+    
+    public void showModal(){
+        if(overlayLayer == null){
+            overlayLayer = new OverlayLayer();
+        }
+        overlayLayer.show(currentTheme);
+        GwmUtilities.diplayAtScreenCenter(this);
+        modalMode = true;
+    }
 
     public void setVisible(boolean visible) {
         if (this.visible == visible)
@@ -587,6 +605,10 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
         } else {
             super.setVisible(false);
             DOM.removeEventPreview(this);
+            if(modalMode){
+                modalMode = false;
+                overlayLayer.hide();
+            }
         }
         this.visible = visible;
     }
@@ -641,5 +663,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
     public String toString() {
         return this.title;
     }
+    
+   
 
 }

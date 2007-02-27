@@ -330,5 +330,11 @@ public interface GFrame {
      * @param listener
      */
     public void removeGFrameListener(GFrameListener listener);
+    
+    /**
+     * Show the frame in modal mode
+     *
+     */
+    public void showModal();
 
 }

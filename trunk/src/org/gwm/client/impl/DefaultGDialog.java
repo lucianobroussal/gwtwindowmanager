@@ -17,24 +17,21 @@
 package org.gwm.client.impl;
 
 import org.gwm.client.GDialog;
-import org.gwm.client.GFrame;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.util.GWmConstants;
-import org.gwm.client.util.GwmUtilities;
+import org.gwm.client.util.widget.OverlayLayer;
 import org.gwtwidgets.client.ui.PNGImage;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -65,7 +62,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private static DefaultGDialog internalDialog;
 
-    private static GlassPanel overlayLayer;
+    private static OverlayLayer overlayLayer;
 
     private Object initialValue;
 
@@ -216,10 +213,10 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     
     private void _show(boolean isInputDialog) {
         if (overlayLayer == null) {
-            overlayLayer = new GlassPanel();
+            overlayLayer = new OverlayLayer();
         }
         buildContent(isInputDialog);
-        overlayLayer.show();
+        overlayLayer.show(theme);
         getCurrentGDialog().setVisible(true);
         adjustDialogSizeToContent(parent , getCurrentGDialog());
     }
@@ -519,33 +516,6 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     }
 
-    private static class GlassPanel extends ComplexPanel {
-        public GlassPanel() {
-            setElement(DOM.createDiv());
-        }
-
-        public void show() {
-            DOM.setStyleAttribute(getElement(), "position", "absolute");
-            DOM.setStyleAttribute(getElement(), "left", "0px");
-            DOM.setStyleAttribute(getElement(), "top", "0px");
-            DOM.setStyleAttribute(getElement(), "width", "100%");
-            DOM.setStyleAttribute(getElement(), "height", "100%");
-            Window.enableScrolling(false);
-
-            setStyleName("overlay_" + theme);
-
-            DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame
-                    .getLayerOfTheTopWindow() + 1);
-
-            RootPanel.get().add(this);
-            setVisible(true);
-        }
-
-        public void hide() {
-            RootPanel.get().remove(this);
-        }
-
-    }
 
     public void setMessageType(int messageType) {
         this.messageType = messageType;
