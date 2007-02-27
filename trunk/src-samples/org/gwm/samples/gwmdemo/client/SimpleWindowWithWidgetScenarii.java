@@ -43,7 +43,8 @@ public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
         window.setLocation(65, 10);
         window.setTheme("alphacube");
         window.setContent(buildContentWidget());
-        window.setVisible(true);
+        //window.setVisible(true);
+        window.showModal();
     }
 
     private Widget buildContentWidget() {
