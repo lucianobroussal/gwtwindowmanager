@@ -16,10 +16,9 @@
 package org.gwm.splice.client.window;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGFrame;
+import org.gwm.client.util.GwmUtilities;
 import org.gwm.splice.client.desktop.DesktopManager;
 import org.gwm.splice.client.logger.LogItem;
 import org.gwm.splice.client.service.data.Attributes;
@@ -62,21 +61,26 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 	}
 
 	public AbstractWindow(String title) {
-		init(title, false, false, false);
+		this(title, false, false, false);
 	}
 
 	public AbstractWindow(String title, boolean showMenubar, boolean showToolbar, boolean showControlbar) {
-		init(title, showMenubar, showToolbar, showControlbar);
-	}
-
-	private void init(String title, boolean showMenubar, boolean showToolbar, boolean showControlbar) {
+		super(title);
 		_showControlbar = showControlbar;
 		_showToolbar = showToolbar;
 		name = title;
 	}
 
-	public void show() {
+	public void show(boolean modal) {
+		show(-1, -1, modal);
+	}
 		
+	public void show() {
+		show(-1, -1, false);
+	}
+		
+	public void show(int x, int y, boolean modal) {
+			
 		if(useWindowManager) {
 			// do this now in case window manager needs to change name (e.g. "my window (2)")
 			// or set default theme
@@ -89,9 +93,22 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 
 		setCaption(name);
 
+		if((x < 0 || y < 0) && !modal) {
+			GwmUtilities.diplayAtScreenCenter(this);
+		}
+		else {
+			setLocation(y, x);
+		}
+		
+		
 		if(this.url != null) {
 			super.setUrl(url);
-			setVisible(true);
+			if(modal) {
+				super.showModal();
+			}
+			else {
+				setVisible(true);
+			}
 			return;
 		}
 		
@@ -120,7 +137,12 @@ public class AbstractWindow extends DefaultGFrame implements ISerializable, IAct
 		
 		super.setContent(panel);
 		
-		setVisible(true);
+		if(modal) {
+			super.showModal();
+		}
+		else {
+			setVisible(true);
+		}
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////
