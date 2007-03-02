@@ -88,7 +88,7 @@ public class RemoteStatus extends RemoteObject implements IRemoteObjectPrototype
 
 	public void setAttribute(String name, Object value) {
 		if(attributes == null) {
-			return;
+			attributes = new Attributes();
 		}
 		attributes.put(name, value);
 	}
