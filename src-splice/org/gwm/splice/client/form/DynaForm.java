@@ -19,10 +19,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.gwm.splice.client.schema.AttributeSchema;
-import org.gwm.splice.client.schema.ObjectSchema;
+import org.gwm.splice.client.service.data.Attributes;
 import org.gwm.splice.client.service.data.RemoteDataObject;
 import org.gwm.splice.client.service.data.Attributes.Attribute;
 
@@ -33,18 +32,18 @@ public class DynaForm extends VerticalPanel implements IDataForm {
 	
 	public static final int DEFALUT_LABEL_WIDTH = 100;
 
-	private ObjectSchema schema;
-	private RemoteDataObject data;
+	private Attributes schema;
+	private Attributes data;
 	private ArrayList listeners = new ArrayList();
 	private int labelWidth = DEFALUT_LABEL_WIDTH; 
 	
 	/////////////////////////////////////////////////////////////////////////////////////////
 
-	public DynaForm(ObjectSchema schema) {
+	public DynaForm(Attributes schema) {
 		this(schema, null);
 	}
 
-	public DynaForm(ObjectSchema schema, RemoteDataObject data) {
+	public DynaForm(Attributes schema, Attributes data) {
 		this.schema = schema;
 		this.data = data;
 		init();
@@ -57,7 +56,7 @@ public class DynaForm extends VerticalPanel implements IDataForm {
 		FormFieldFactory factory = FormFieldFactory.getInstance();
 		
 		List list = new ArrayList();
-		for (Iterator iter = schema.getAttributes().iterator(); iter.hasNext();) {
+		for (Iterator iter = schema.iterator(); iter.hasNext();) {
 			Attribute attr = (Attribute) iter.next();
 			list.add(attr.getValue());
 		}
@@ -73,7 +72,7 @@ public class DynaForm extends VerticalPanel implements IDataForm {
 			
 			IFormField field = null;
 			if(data != null) {
-				Object value = data.getAttributes().get(attr.name);
+				Object value = data.get(attr.name);
 				field = factory.createField(attr, value);
 			}
 			else {
@@ -97,22 +96,15 @@ public class DynaForm extends VerticalPanel implements IDataForm {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////
 
-	public ObjectSchema getSchema() {
+	public Attributes getSchema() {
 		return schema;
 	}
 
 	public void setData(RemoteDataObject data) {
-		init();
-		this.data = data;
 	}
 
-	public RemoteDataObject getData() {
+	public Attributes getData() {
 		return data;
-	}
-
-	public void setSchema(ObjectSchema schema) {
-		init();
-		this.schema = schema;
 	}
 
 	public int getLabelWidth() {
@@ -121,6 +113,16 @@ public class DynaForm extends VerticalPanel implements IDataForm {
 
 	public void setLabelWidth(int labelWidth) {
 		this.labelWidth = labelWidth;
+	}
+
+	public void setData(Attributes data) {
+		this.data = data;
+		init();
+	}
+
+	public void setSchema(Attributes schema) {
+		this.schema = schema;
+		init();
 	}
 
 }
