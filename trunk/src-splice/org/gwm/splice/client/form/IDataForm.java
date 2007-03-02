@@ -15,14 +15,13 @@
  */
 package org.gwm.splice.client.form;
 
-import org.gwm.splice.client.schema.ObjectSchema;
-import org.gwm.splice.client.service.data.RemoteDataObject;
+import org.gwm.splice.client.service.data.Attributes;
 
 public interface IDataForm {
-	void setData(RemoteDataObject data);
-	RemoteDataObject getData();
-	void setSchema(ObjectSchema schema);
-	ObjectSchema getSchema();
+	void setData(Attributes data);
+	Attributes getData();
+	void setSchema(Attributes schema);
+	Attributes getSchema();
 	void addListener(IDataFormListener listener);
 	void removeListener(IDataFormListener listener);
 }
