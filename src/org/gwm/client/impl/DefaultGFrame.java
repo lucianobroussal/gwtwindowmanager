@@ -28,10 +28,7 @@ import org.gwm.client.util.widget.OverlayLayer;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.EventListener;
-import com.google.gwt.user.client.EventPreview;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
@@ -45,8 +42,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * GWT-based implementation of <code>GFrame</code>
  */
-public class DefaultGFrame extends SimplePanel implements GFrame,
-        EventListener, EventPreview {
+public class DefaultGFrame extends SimplePanel implements GFrame {
 
     protected static GFrame topFrame;
 
@@ -119,10 +115,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
     private boolean freeminimized;
 
     private boolean modalMode;
-    
-    
-    private static OverlayLayer overlayLayer;
 
+    private static OverlayLayer overlayLayer;
 
     public DefaultGFrame() {
         this(DEFAULT_TITLE);
@@ -458,10 +452,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
         }
     }
 
-    public boolean onEventPreview(Event evt) {
-        return true;
-    }
-
     public void setMaximized(boolean v) {
     }
 
@@ -584,9 +574,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
     public boolean isVisible() {
         return visible;
     }
-    
-    public void showModal(){
-        if(overlayLayer == null){
+
+    public void showModal() {
+        if (overlayLayer == null) {
             overlayLayer = new OverlayLayer();
         }
         overlayLayer.show(currentTheme);
@@ -601,11 +591,11 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
             this.minimized = false;
             super.setVisible(true);
             _show();
-            DOM.addEventPreview(this);
+            // DOM.addEventPreview(this);
         } else {
             super.setVisible(false);
-            DOM.removeEventPreview(this);
-            if(modalMode){
+            // DOM.removeEventPreview(this);
+            if (modalMode) {
                 modalMode = false;
                 overlayLayer.hide();
             }
@@ -663,7 +653,5 @@ public class DefaultGFrame extends SimplePanel implements GFrame,
     public String toString() {
         return this.title;
     }
-    
-   
 
 }
