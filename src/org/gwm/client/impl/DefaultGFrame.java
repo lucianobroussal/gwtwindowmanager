@@ -28,12 +28,14 @@ import org.gwm.client.util.widget.OverlayLayer;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.EventPreview;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.KeyboardListenerCollection;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -42,7 +44,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * GWT-based implementation of <code>GFrame</code>
  */
-public class DefaultGFrame extends SimplePanel implements GFrame {
+public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview {
 
     protected static GFrame topFrame;
 
@@ -653,5 +655,32 @@ public class DefaultGFrame extends SimplePanel implements GFrame {
     public String toString() {
         return this.title;
     }
+    
+    public boolean onEventPreview(Event event) {
+        int type = DOM.eventGetType(event);
+        switch (type) {
+          
+
+          case Event.ONMOUSEDOWN:
+          case Event.ONMOUSEUP:
+          case Event.ONMOUSEMOVE:
+          case Event.ONCLICK:
+          case Event.ONDBLCLICK: {
+            // Don't eat events if event capture is enabled, as this can interfere
+            // with dialog dragging, for example.
+            if (DOM.getCaptureElement() == null) {
+              // Disallow mouse events outside of the popup.
+              Element target = DOM.eventGetTarget(event);
+              if (!DOM.isOrHasChild(getElement(), target)) {
+                // If it's a click event, and auto-hide is enabled: hide the popup
+                // and _don't_ eat the event.
+                return false;
+              }
+            }
+            break;
+          }
+        }
+        return true;
+      }
 
 }

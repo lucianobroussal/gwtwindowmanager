@@ -25,13 +25,14 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListener;
 import com.google.gwt.user.client.ui.Widget;
 
 public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
-    private Label caption;
+    private HTML caption;
 
     private String currentTheme;
 
@@ -66,7 +67,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     private void buildGui() {
         this.currentTheme = parent.getTheme();
         this.title = parent.getCaption();
-        caption = new Label(title);
+        caption = new HTML(title);
         caption.addMouseListener(this);
         closeArea = new Label();
         closeArea.addClickListener(this);
@@ -105,37 +106,75 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         }
     }
 
-    public void onBrowserEvent(Event e) {
-        if (draggable) {
-            int type = DOM.eventGetType(e);
-            if (type != Event.ONMOUSEMOVE
-                    || (type == Event.ONMOUSEMOVE && dragging)) {
-                int x = DOM.eventGetClientX(e);
-                int y = DOM.eventGetClientY(e);
-
-                if (type == Event.ONMOUSEMOVE) {
-                    onMouseMove(this, x, y);
-                    // super.onBrowserEvent(e);
-                    return;
-                }
-                if (type == Event.ONMOUSEDOWN) {
-                    onMouseDown(this, x, y);
-                    // super.onBrowserEvent(e);
-                    return;
-                }
-                if (type == Event.ONMOUSEUP) {
-                    onMouseUp(this, x, y);
-                    // super.onBrowserEvent(e);
-                    return;
-                }
-            }
-        }
-    }
+    // public void onBrowserEvent(Event e) {
+    // if (draggable) {
+    // int type = DOM.eventGetType(e);
+    // if (type != Event.ONMOUSEMOVE
+    // || (type == Event.ONMOUSEMOVE && dragging)) {
+    // int x = DOM.eventGetClientX(e);
+    // int y = DOM.eventGetClientY(e);
+    //
+    // if (type == Event.ONMOUSEMOVE) {
+    // onMouseMove(this, x, y);
+    // // super.onBrowserEvent(e);
+    // return;
+    // }
+    // if (type == Event.ONMOUSEDOWN) {
+    // onMouseDown(this, x, y);
+    // // super.onBrowserEvent(e);
+    // return;
+    // }
+    // if (type == Event.ONMOUSEUP) {
+    // onMouseUp(this, x, y);
+    // // super.onBrowserEvent(e);
+    // return;
+    // }
+    // }
+    // }
+    // }
+    //
+    // public void onMouseDown(Widget sender, int x, int y) {
+    // if (draggable && this == sender) {
+    // dragging = true;
+    // DOM.setCapture(sender.getElement());
+    // dragStartX = x;
+    // dragStartY = y;
+    // }
+    // }
+    //
+    // public void onMouseEnter(Widget sender) {
+    // }
+    //
+    // public void onMouseLeave(Widget sender) {
+    // }
+    //
+    // public void onMouseMove(Widget sender, int x, int y) {
+    // if (draggable && dragging) {
+    // int newLeft = x - dragStartX + parent.getLeft();
+    // int newTop = y - dragStartY + parent.getTop();
+    // dragStartX = x;
+    // dragStartY = y;
+    // moving = true;
+    // parent.setLocation(newTop, newLeft);
+    // }
+    // }
+    //
+    // public void onMouseUp(Widget sender, int x, int y) {
+    // if (dragging) {
+    // dragging = false;
+    // if (moving) {
+    // moving = false;
+    // parent.fireFrameMoved();
+    // }
+    // }
+    // DOM.releaseCapture(sender.getElement());
+    // }
 
     public void onMouseDown(Widget sender, int x, int y) {
-        if (draggable && this == sender) {
+        if (draggable) {
             dragging = true;
-            DOM.setCapture(sender.getElement());
+            DOM.addEventPreview(parent);
+            DOM.setCapture(caption.getElement());
             dragStartX = x;
             dragStartY = y;
         }
@@ -148,25 +187,20 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     }
 
     public void onMouseMove(Widget sender, int x, int y) {
-        if (draggable && dragging) {
-            int newLeft = x - dragStartX + parent.getLeft();
-            int newTop = y - dragStartY + parent.getTop();
-            dragStartX = x;
-            dragStartY = y;
-            moving = true;
-            parent.setLocation(newTop, newLeft);
+        if (dragging) {
+            int absX = x + parent.getLeft();
+            int absY = y + parent.getTop();
+            ;
+            parent.setLocation(absY - dragStartY, absX - dragStartX);
         }
     }
 
     public void onMouseUp(Widget sender, int x, int y) {
-        if (dragging) {
+        if (draggable) {
             dragging = false;
-            if (moving) {
-                moving = false;
-                parent.fireFrameMoved();
-            }
+            DOM.releaseCapture(caption.getElement());
+            DOM.removeEventPreview(parent);
         }
-        DOM.releaseCapture(sender.getElement());
     }
 
     public void setCaption(String caption) {
@@ -176,8 +210,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     public void setIconified() {
         clear();
-        Label l = new Label(title);
-        l.addStyleName(parent.getTheme() + "_topBar_icon");
+        caption.setStyleName(parent.getTheme() + "_topBar_icon");
         Label restoreButton = new Label("");
         restoreButton.setStyleName(this.currentTheme + "_topBar_restore");
         restoreButton.addClickListener(new ClickListener() {
@@ -185,7 +218,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
                 setRestored();
             }
         });
-        setWidget(0, 0, l);
+        setWidget(0, 0, caption);
         setWidget(0, 1, restoreButton);
     }
 
@@ -202,7 +235,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     }
 
-    public void setCaption(Label caption) {
+    public void setCaption(HTML caption) {
         this.caption = caption;
     }
 
@@ -243,7 +276,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         maximizeArea.setStyleName(this.currentTheme + "_maximize");
         setStyleName(this.currentTheme + "_topBar");
     }
-    
+
     private void setMovingGuard() {
         parent.addFrameListener(new GFrameAdapter() {
 
@@ -288,6 +321,5 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
         });
     }
-
 
 }
