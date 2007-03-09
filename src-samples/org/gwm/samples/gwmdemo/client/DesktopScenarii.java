@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2006-2007 Luciano Broussal, Johan Vos, Andy Scholz, Marcelo Emanoel  (http://www.gwtwindowmanager.org)
- *
+ * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
+ * (http://www.gwtwindowmanager.org)
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
@@ -13,7 +14,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
