@@ -15,6 +15,8 @@
  */
 package org.gwm.splice.client.util;
 
+import java.util.ArrayList;
+
 /**
  * Helper methods for Strings.
  * 
@@ -24,7 +26,7 @@ package org.gwm.splice.client.util;
 public class StringUtils {
 	
 	/**
-	 * Converts an array of String to a comma-sperated list.
+	 * Converts an array of Strings to a comma-sperated-list.
 	 * 
 	 * @param vals
 	 * @return
@@ -49,4 +51,30 @@ public class StringUtils {
 		return csl;
 	}
 
+	/**
+	 * Parses a comma-seperated-list into an array;
+	 * 
+	 * @param csl
+	 * @return
+	 */
+	public static String[] cslToArray(String csl) {
+		if(csl == null) {
+			return null;
+		}
+		ArrayList list = new ArrayList();
+		String[] vals = csl.split(",");
+		for (int i = 0; i < vals.length; i++) {
+			String val = vals[i].trim();
+			if(val.length() > 0) {
+				list.add(val);
+			}
+		}
+		String[] sl = new String[list.size()];
+		for (int i = 0; i < sl.length; i++) {
+			sl[i] = (String) list.get(i);
+		}
+		return sl;
+		// seems GWT compiler dont like this.....
+		//return (String[]) list.toArray(new String[list.size()]);
+	}
 }
