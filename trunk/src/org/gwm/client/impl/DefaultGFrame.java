@@ -716,4 +716,12 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         return selectBlocker;
     }
 
+	public void fireFrameMoving() {
+		for(int i = 0;i < listeners.size(); i++ ){
+			GFrameListener frameListener = (GFrameListener) listeners.get(i);
+			frameListener.frameMoving(new GFrameEvent(this));
+		}
+		
+	}
+
 }
