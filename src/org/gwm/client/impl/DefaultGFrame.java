@@ -50,6 +50,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview {
 
     protected static GFrame topFrame;
+    
+    private Frame selectBlocker ;
 
     protected static int layerOfTheTopWindow;
 
@@ -151,6 +153,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         imgTopLeft = new Label();
         imgTopRight = new Label();
         imgBotLeft = new Label();
+        selectBlocker = new Frame();
+        selectBlocker.setUrl("#");
+        DOM.setStyleAttribute(selectBlocker.getElement(), "border", "0px");
         this.maxWidth = Window.getClientWidth();
         this.maxHeight = Window.getClientHeight();
         this.width = DEFAULT_WIDTH;
@@ -170,7 +175,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         if (this.height < this.minHeight) {
             this.height = this.minHeight;
         }
-        this.ui.setSize(this.width + "px", this.height + "px");
+        //this.ui.setSize(this.width + "px", this.height + "px");
+        setSize(this.width,this.height);
         topRow.setWidget(0, 0, imgTopLeft);
         topRow.setWidget(0, 1, topBar);
         topRow.setWidget(0, 2, imgTopRight);
@@ -275,6 +281,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         this.previousWidth = getWidth();
         this.previousHeight = getHeight();
         topBar.setIconified();
+        selectBlocker.setVisible(false);
         this.freeminimized = true;
         buildGui();
         this.minimized = true;
@@ -303,7 +310,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         setLocation(this.previousTop, this.previousLeft);
         if (!getContent().isVisible()) {
             getContent().setVisible(true);
+           
         }
+        selectBlocker.setVisible(true);
         buildGui();
         fireFrameRestored();
     }
@@ -331,14 +340,22 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         Element elem = getElement();
         DOM.setStyleAttribute(elem, "left", left + "px");
         DOM.setStyleAttribute(elem, "top", top + "px");
+        
+        Element selectBlockerElement = selectBlocker.getElement();
+        DOM.setStyleAttribute(selectBlockerElement, "left", left + 8 + "px");
+        DOM.setStyleAttribute(selectBlockerElement, "top", top + 8 + "px");
+        
         this.left = left;
         this.top = top;
+        
     }
 
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
         ui.setSize(width + "px", height + "px");
+        System.out.println((width-16) + "px"  + " / " +(height-16) + "px");
+        selectBlocker.setSize((width-16) + "px", (height-16) + "px");
     }
 
     public void setWidth(int width) {
@@ -598,10 +615,12 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         if (visible) {
             this.minimized = false;
             super.setVisible(true);
+            selectBlocker.setVisible(true);
             _show();
             // DOM.addEventPreview(this);
         } else {
             super.setVisible(false);
+            selectBlocker.setVisible(false);
             // DOM.removeEventPreview(this);
             if (modalMode) {
                 modalMode = false;
@@ -647,7 +666,11 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     protected void _show() {
         DOM.setStyleAttribute(getElement(), "position", "absolute");
         RootPanel.get().add(this);
+        RootPanel.get().add(selectBlocker);
+        DOM.setStyleAttribute(selectBlocker.getElement(), "position", "absolute");
+        
 
+        DOM.setIntStyleAttribute(selectBlocker.getElement(), "zIndex", ++layerOfTheTopWindow);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
         fireFrameOpened();
@@ -688,5 +711,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         }
         return true;
       }
+    
+    public Widget getSelectBlockerPanel(){
+        return selectBlocker;
+    }
 
 }
