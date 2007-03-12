@@ -17,19 +17,15 @@ package org.gwm.splice.client.schema;
 
 import java.util.Iterator;
 
-import org.gwm.splice.client.service.IResponseHandler;
 import org.gwm.splice.client.service.data.Attributes;
 import org.gwm.splice.client.service.data.IRemoteObjectPrototype;
-import org.gwm.splice.client.service.data.RemoteStatus;
 import org.gwm.splice.client.service.data.RemoteObject;
-import org.gwm.splice.client.service.data.ValidationError;
-import org.gwm.splice.client.service.query.Filter;
 
 
 
 public class DynamicChoices extends RemoteObject implements IChoices, IRemoteObjectPrototype {
 	private String serviceName;
-	private Filter filter;
+	private String filter;
 
 	public Iterator iterator() {
 		// TODO Auto-generated method stub
@@ -51,6 +47,14 @@ public class DynamicChoices extends RemoteObject implements IChoices, IRemoteObj
 	 */
 	public RemoteObject newInstance() {
 		return new DynamicChoices();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.gwm.splice.client.schema.IChoices#iterator(java.lang.String)
+	 */
+	public Iterator iterator(String filter) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
