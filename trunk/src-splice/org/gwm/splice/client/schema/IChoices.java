@@ -17,6 +17,29 @@ package org.gwm.splice.client.schema;
 
 import java.util.Iterator;
 
+/**
+ * Interface represents a list of choices a user may enter for a field.
+ * 
+ * @author andy
+ *
+ */
 public interface IChoices {
+	
+	/**
+	 * Returns an Iterator of all of the choices available.
+	 * 
+	 * @return
+	 */
 	Iterator iterator();
+	
+	/**
+	 * Returns an Iterator of filtered choices available.
+	 * <p>
+	 * The filter is implementation dependent, and may be ignored by a provider
+	 * if not supported.
+	 * 
+	 * @return
+	 */
+	Iterator iterator(String filter);
+	
 }
