@@ -103,6 +103,9 @@ public class DebugWindow implements GFrameListener {
     public void frameMoved(GFrameEvent evt) {
         addEvent(evt, "Moved");
     }
+    public void frameMoving(GFrameEvent evt) {
+    	addEvent(evt, "Moving");
+    }
 
     private void addEvent(GFrameEvent evt, String action) {
         final GFrame myFrame = evt.getGFrame();
