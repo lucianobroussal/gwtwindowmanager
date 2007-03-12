@@ -15,7 +15,6 @@
  */
 package org.gwm.splice.client.window;
 
-import com.google.gwt.user.client.ui.SimplePanel;
 
 public class UrlWindow extends AbstractWindow {
 
@@ -24,7 +23,6 @@ public class UrlWindow extends AbstractWindow {
 		setUrl(url);
 		setHeight(400);
 		setWidth(600);
-		show();
 	}
 	
 }
