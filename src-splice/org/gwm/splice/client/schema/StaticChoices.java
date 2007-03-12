@@ -65,4 +65,11 @@ public class StaticChoices extends RemoteObject implements IChoices, IRemoteObje
 	public RemoteObject newInstance() {
 		return new StaticChoices();
 	}
+	/* (non-Javadoc)
+	 * @see org.gwm.splice.client.schema.IChoices#iterator(java.lang.String)
+	 */
+	public Iterator iterator(String filter) {
+		// TODO Ignore filter for now
+		return iterator();
+	}
 }
