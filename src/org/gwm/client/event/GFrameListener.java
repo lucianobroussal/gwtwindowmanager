@@ -45,4 +45,6 @@ public interface GFrameListener {
 
     public void frameMoved(GFrameEvent evt);
 
+	public void frameMoving(GFrameEvent event);
+
 }

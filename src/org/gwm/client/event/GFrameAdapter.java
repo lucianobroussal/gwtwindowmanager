@@ -46,4 +46,7 @@ public class GFrameAdapter implements GFrameListener {
     public void frameRestored(GFrameEvent evt) {
     }
 
+	public void frameMoving(GFrameEvent event) {
+	}
+
 }
