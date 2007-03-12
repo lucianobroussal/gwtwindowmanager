@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
+    
     private HTML caption;
 
     private String currentTheme;
@@ -71,6 +72,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         this.currentTheme = parent.getTheme();
         this.title = parent.getCaption();
         caption = new HTML(title);
+        DOM.setStyleAttribute(caption.getElement(), "whiteSpace", "nowrap");
         caption.addMouseListener(this);
         closeArea = new Label();
         closeArea.addClickListener(this);
