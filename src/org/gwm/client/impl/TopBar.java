@@ -56,8 +56,6 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
 
     private boolean draggable;
 
-    private boolean moving;
-
     TopBar(DefaultGFrame parent) {
         super();
         this.parent = parent;
@@ -111,70 +109,6 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         }
     }
 
-    // public void onBrowserEvent(Event e) {
-    // if (draggable) {
-    // int type = DOM.eventGetType(e);
-    // if (type != Event.ONMOUSEMOVE
-    // || (type == Event.ONMOUSEMOVE && dragging)) {
-    // int x = DOM.eventGetClientX(e);
-    // int y = DOM.eventGetClientY(e);
-    //
-    // if (type == Event.ONMOUSEMOVE) {
-    // onMouseMove(this, x, y);
-    // // super.onBrowserEvent(e);
-    // return;
-    // }
-    // if (type == Event.ONMOUSEDOWN) {
-    // onMouseDown(this, x, y);
-    // // super.onBrowserEvent(e);
-    // return;
-    // }
-    // if (type == Event.ONMOUSEUP) {
-    // onMouseUp(this, x, y);
-    // // super.onBrowserEvent(e);
-    // return;
-    // }
-    // }
-    // }
-    // }
-    //
-    // public void onMouseDown(Widget sender, int x, int y) {
-    // if (draggable && this == sender) {
-    // dragging = true;
-    // DOM.setCapture(sender.getElement());
-    // dragStartX = x;
-    // dragStartY = y;
-    // }
-    // }
-    //
-    // public void onMouseEnter(Widget sender) {
-    // }
-    //
-    // public void onMouseLeave(Widget sender) {
-    // }
-    //
-    // public void onMouseMove(Widget sender, int x, int y) {
-    // if (draggable && dragging) {
-    // int newLeft = x - dragStartX + parent.getLeft();
-    // int newTop = y - dragStartY + parent.getTop();
-    // dragStartX = x;
-    // dragStartY = y;
-    // moving = true;
-    // parent.setLocation(newTop, newLeft);
-    // }
-    // }
-    //
-    // public void onMouseUp(Widget sender, int x, int y) {
-    // if (dragging) {
-    // dragging = false;
-    // if (moving) {
-    // moving = false;
-    // parent.fireFrameMoved();
-    // }
-    // }
-    // DOM.releaseCapture(sender.getElement());
-    // }
-
     public void onMouseDown(Widget sender, int x, int y) {
         if (draggable) {
             dragging = true;
@@ -195,8 +129,8 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         if (dragging) {
             int absX = x + parent.getLeft();
             int absY = y + parent.getTop();
-            ;
             parent.setLocation(absY - dragStartY, absX - dragStartX);
+            parent.fireFrameMoving();
         }
     }
 
@@ -205,6 +139,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
             dragging = false;
             DOM.releaseCapture(caption.getElement());
             DOM.removeEventPreview(parent);
+            parent.fireFrameMoved();
         }
     }
 
