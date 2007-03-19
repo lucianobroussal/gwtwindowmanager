@@ -17,10 +17,11 @@
  <html>
   <head>
   <style>
-  	body{
   </style>
     <title>GwtWindowManager Demo</title>
     <meta name='gwt:module' content='org.gwm.samples.gwmdemo.GwmDemo'>
+   	<script type="text/javascript" src="gwm/ext/scripts/prototype.js"></script>
+  	<script type="text/javascript" src="gwm/ext/scripts/scriptaculous.js"></script>
     <link href="style/demo.css" rel="stylesheet" type="text/css"></link>
     <link href="style/html-content.css" rel="stylesheet" type="text/css"></link>
     <link href="gwm/themes/default.css" rel="stylesheet" type="text/css"></link>
@@ -30,8 +31,16 @@
     <link href="themes/darkX.css" rel="stylesheet" type="text/css"></link>
     <link href="themes/theme1.css" rel="stylesheet" type="text/css"></link>
     <link href="themes/alert.css" rel="stylesheet" type="text/css"></link>
+    <script language="javascript">
+    function windowLoaded(evt) {
+    // prevent IE text selection while dragging!!!
+    // Little-known trick!
+    document.body.ondrag = function () { return false; };
+    document.body.onselectstart = function () { alert('start') ; return false; };
+	}
+    </script>
   </head>
-  <body>
+<body>
     <script language="javascript" src="gwt.js"></script>
     <iframe id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
   </body>

@@ -24,46 +24,97 @@ import org.gwm.client.event.GFrameAdapter;
 import org.gwm.client.event.GFrameEvent;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListener;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TopBar extends FlexTable implements ClickListener, MouseListener {
+public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
-    
+    //    
+    static DefaultGFrame debug = new DefaultGFrame();
+
+    static VerticalPanel debugContent = new VerticalPanel();
+
+    static int cpt = 0;
+
+    static {
+        debugContent.setSize("200", "400");
+        debugContent.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
+        debugContent.setSpacing(0);
+        //debug.setSize(300, 400);
+        debug.setContent(debugContent);
+        debug.setLocation(0, 0);
+        debug.setOutlineDragMode(true);
+        //debug.setTheme("alphacube");
+        //debug.setVisible(true);
+    }
+
     private HTML caption;
 
     private String currentTheme;
 
     private String title;
 
-    private DefaultGFrame parent;
+    protected DefaultGFrame parent;
 
-    private Label closeArea;
+    protected Label closeArea;
 
-    private Label maximizeArea;
+    protected Label maximizeArea;
 
-    private Label minimizeArea;
+    protected Label minimizeArea;
 
-    private int dragStartX, dragStartY;
+    protected int dragStartX, dragStartY;
 
-    private boolean dragging;
+    protected boolean dragging;
 
-    private boolean draggable;
+    protected boolean draggable;
 
-    TopBar(DefaultGFrame parent) {
+    protected Label restoreButton;
+
+    protected void addLog(String log) {
+        cpt++;
+        if (cpt % 10 == 0) {
+            debugContent.clear();
+        }
+        debugContent.add(new HTML(log));
+    }
+
+    protected static SimplePanel outline;
+    static {
+        outline = new SimplePanel();
+        DOM.setStyleAttribute(outline.getElement(), "backgroundColor",
+                "#DFF2FF");
+        DOM.setStyleAttribute(outline.getElement(), "position", "absolute");
+        DOM.setStyleAttribute(outline.getElement(), "filter",
+                "progid:DXImageTransform.Microsoft.Alpha(opacity=50)");
+        DOM.setStyleAttribute(outline.getElement(), "-mozOpacity", "0.5");
+        DOM.setStyleAttribute(outline.getElement(), "opacity", "0.5");
+        DOM
+                .setStyleAttribute(outline.getElement(), "border",
+                        "1px dotted gray");
+        outline.setVisible(false);
+        RootPanel.get().add(outline);
+    }
+
+    TopBar() {
         super();
-        this.parent = parent;
+    }
+
+    public void init(DefaultGFrame frame) {
+        this.parent = frame;
         this.draggable = true;
         buildGui();
+        initListeners();
         setMovingGuard();
-        sinkEvents(Event.MOUSEEVENTS);
-
+//        Window.alert("IE-topbar");
     }
 
     private void buildGui() {
@@ -71,13 +122,16 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         this.title = parent.getCaption();
         caption = new HTML(title);
         DOM.setStyleAttribute(caption.getElement(), "whiteSpace", "nowrap");
-        caption.addMouseListener(this);
         closeArea = new Label();
         closeArea.addClickListener(this);
         minimizeArea = new Label();
         minimizeArea.addClickListener(this);
         maximizeArea = new Label();
         maximizeArea.addClickListener(this);
+        restoreButton = new Label("");
+        restoreButton.setStyleName(this.currentTheme + "_topBar_restore");
+        
+        
         setWidget(0, 0, caption);
         getCellFormatter().setWidth(0, 0, "100%");
         setWidget(0, 1, minimizeArea);
@@ -87,6 +141,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         setCellPadding(0);
         setCellSpacing(0);
         setStyleName("topBar");
+        updateTopBar();
     }
 
     public void onClick(Widget w) {
@@ -96,8 +151,13 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         if (w.equals(maximizeArea)) {
             if (parent.isMaximized()) {
                 parent.restore();
+                updateTopBar();
             } else {
                 parent.maximize();
+                if (parent.isMinimizable()) {
+                    minimizeArea.setVisible(false);
+                }
+
             }
         }
         if (w.equals(minimizeArea)) {
@@ -116,29 +176,82 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
             DOM.setCapture(caption.getElement());
             dragStartX = x;
             dragStartY = y;
+
+            if (parent.isDragOutline()) {
+                outline.setSize(parent.getWidth() + "px", parent.getHeight()
+                        + "px");
+                DOM.setStyleAttribute(outline.getElement(), "left", parent
+                        .getLeft()
+                        + "px");
+                DOM.setStyleAttribute(outline.getElement(), "top", parent
+                        .getTop()
+                        + "px");
+                outline.setVisible(true);
+                DOM.setIntStyleAttribute(outline.getElement(), "zIndex",
+                        DefaultGFrame.getLayerOfTheTopWindow() + 1);
+            } else {
+                DOM.setStyleAttribute(parent.getElement(), "filter",
+                        "progid:DXImageTransform.Microsoft.Alpha(opacity=80)");
+                DOM
+                        .setStyleAttribute(parent.getElement(), "-mozOpacity",
+                                "0.9");
+                DOM.setStyleAttribute(parent.getElement(), "opacity", "0.8");
+                parent.getSelectBoxManager().onParentDragStart(parent);
+            }
         }
     }
 
     public void onMouseEnter(Widget sender) {
+        System.out.println("Mouse Enter");
+
     }
 
     public void onMouseLeave(Widget sender) {
+        System.out.println("Mouse Leave");
     }
 
     public void onMouseMove(Widget sender, int x, int y) {
+        System.out.println("Mouse Move " + x + " / " + y);
+
         if (dragging) {
             int absX = x + parent.getLeft();
             int absY = y + parent.getTop();
-            parent.setLocation(absY - dragStartY, absX - dragStartX);
+            ;
+
+            if (parent.isDragOutline()) {
+
+                DOM.setStyleAttribute(outline.getElement(), "left", absX
+                        - dragStartX + "px");
+                DOM.setStyleAttribute(outline.getElement(), "top", absY
+                        - dragStartY + "px");
+            } else {
+                parent.setLocation(absY - dragStartY, absX - dragStartX);
+            }
             parent.fireFrameMoving();
         }
     }
 
     public void onMouseUp(Widget sender, int x, int y) {
+        System.out.println("Mouse Up" + x + " / " + y);
         if (draggable) {
             dragging = false;
             DOM.releaseCapture(caption.getElement());
             DOM.removeEventPreview(parent);
+            int absX = x + parent.getLeft();
+            int absY = y + parent.getTop();
+
+            parent.setLocation(absY - dragStartY, absX - dragStartX);
+            if (parent.isDragOutline()) {
+                outline.setVisible(false);
+            } else {
+                // TODO BLOCKER
+                // parent.getSelectBoxManager().setBlockerVisible(true);
+                DOM.setStyleAttribute(parent.getElement(), "filter",
+                        "progid:DXImageTransform.Microsoft.Alpha(opacity=100)");
+                DOM.setStyleAttribute(parent.getElement(), "-mozOpacity", "1");
+                DOM.setStyleAttribute(parent.getElement(), "opacity", "1");
+                parent.getSelectBoxManager().onParentDragEnd(parent);
+            }
             parent.fireFrameMoved();
         }
     }
@@ -151,13 +264,6 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     public void setIconified() {
         clear();
         caption.setStyleName(parent.getTheme() + "_topBar_icon");
-        Label restoreButton = new Label("");
-        restoreButton.setStyleName(this.currentTheme + "_topBar_restore");
-        restoreButton.addClickListener(new ClickListener() {
-            public void onClick(Widget sender) {
-                setRestored();
-            }
-        });
         setWidget(0, 0, caption);
         setWidget(0, 1, restoreButton);
     }
@@ -184,7 +290,6 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     }
 
     public void setDragging(boolean dragging) {
-        System.out.println("set dragging to " + dragging);
         this.dragging = dragging;
     }
 
@@ -211,6 +316,7 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
     public void setTheme(String theme) {
         currentTheme = theme;
         caption.setStyleName(currentTheme + "_caption");
+        caption.addStyleName("topBar");
         closeArea.setStyleName(this.currentTheme + "_close");
         minimizeArea.setStyleName(this.currentTheme + "_minimize");
         maximizeArea.setStyleName(this.currentTheme + "_maximize");
@@ -262,4 +368,12 @@ public class TopBar extends FlexTable implements ClickListener, MouseListener {
         });
     }
 
+    protected void initListeners() {
+        caption.addMouseListener(this);
+        restoreButton.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                setRestored();
+            }
+        });
+    }
 }

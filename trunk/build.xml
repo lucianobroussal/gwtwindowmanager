@@ -60,8 +60,8 @@
 </delete>
 </target>
 
-<target name="compile-demo">
-<java classname="com.google.gwt.dev.GWTCompiler" fork="yes" failonerror="true">
+<target name="compile-demo" depends="clean">
+<java classname="com.google.gwt.dev.GWTCompiler" fork="yes" failonerror="true" >
 	<classpath>
 		<pathelement location="src" />
 		<pathelement location="src-samples" />

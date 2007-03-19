@@ -45,8 +45,6 @@ public class GwmUtilities {
         if (frame == null)
             throw new IllegalArgumentException("The frame can't be null");
         frame.setVisible(true);
-        System.out.println(Window.getClientWidth()  +  "/" + frame.getWidth());
-        System.out.println(Window.getClientHeight()  +  "/" + frame.getHeight());
         int frameLeft = (Window.getClientWidth() - frame.getWidth()) / 2;
         int frameTop = (Window.getClientHeight() - frame.getHeight()) / 2;
         frame.setLocation(frameTop, frameLeft);

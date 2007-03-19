@@ -18,12 +18,13 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
+import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -41,6 +42,7 @@ public class GwmDemo implements EntryPoint {
         buildUI();
         menuFrame.setSize(150, 300);
         Window.enableScrolling(false);
+
 
     }
 

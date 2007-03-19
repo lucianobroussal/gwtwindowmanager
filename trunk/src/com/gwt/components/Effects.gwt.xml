@@ -23,16 +23,5 @@
 
 <module>
 	<inherits name='com.google.gwt.user.User' />
-	<inherits name='com.gwt.components.Effects' />
 	<inherits name='org.gwtwidgets.WidgetLibrary' />
-	
-	<replace-with class="org.gwm.client.impl.SelectBoxManagerImplIE6">
-		<when-type-is class="org.gwm.client.impl.SelectBoxManagerImpl"/>
-		<when-property-is name="user.agent" value="ie6"/>
-	</replace-with>
-	
-	<replace-with class="org.gwm.client.impl.TopBarFF">
-		<when-type-is class="org.gwm.client.impl.TopBar"/>
-		<when-property-is name="user.agent" value="gecko1_8"/>
-	</replace-with>
 </module>

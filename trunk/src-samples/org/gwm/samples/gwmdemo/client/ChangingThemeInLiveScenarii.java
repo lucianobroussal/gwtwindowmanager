@@ -68,6 +68,7 @@ public class ChangingThemeInLiveScenarii extends AbstractScenarii {
         contentLayout.add(new Label("Change my theme!"));
         contentLayout.add(themesList);
         window.setContent(contentLayout);
+        window.setOutlineDragMode(true);
         GwmUtilities.diplayAtScreenCenter(window);
 
     }

@@ -13,7 +13,6 @@
 	width:100%;
 	color:blue;
 	font-size:10px;
-
 }
 
 .alphacube_topBar {
@@ -29,7 +28,7 @@
 }
 
 .alphacube_n {
-  background: transparent url(alphacube/top-middle.gif) repeat-x 0 0;			
+  background: transparent url(alphacube/top-middle.gif) repeat-x 0 0;	
   height:25px;
 }
 
@@ -46,7 +45,6 @@
 
 .alphacube_e {
   background: transparent url(alphacube/frame-right.gif) repeat-y top right;			
-  background-color:red;
   width:7px;	  
 }
 
@@ -67,9 +65,7 @@
   height:7px;
 }
 
-.alphacube_sizer {
-	cursor:se-resize;	
-}
+
 
 .alphacube_close {
 	width: 23px;
@@ -111,15 +107,6 @@
 	background:#FDFDFD;
 }
 
-/* For alert/confirm dialog */
-.alphacube_window {
-	border:1px solid #F00;	
-	background: #FFF;
-	padding:20px;
-	margin-left:auto;
-	margin-right:auto;
-	width:400px;
-}
 
 .alphacube_message {
 	font-size:12px;
@@ -148,9 +135,9 @@
 }
 
 .alphacube_topBar_icon {
-    background:#C7CBD1;
-    padding: 5px;
-    border: 1px dashed;
+        background:#C7CBD1;
+        padding: 5px;
+        border: 1px dashed;
 }
 
 .alphacube_topBar_restore {
@@ -161,7 +148,7 @@
 }
 
 .alphacube_topBar_iconButton {
-    float: left;
+        float: left;
 }
 
 
