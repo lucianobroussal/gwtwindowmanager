@@ -25,9 +25,11 @@ import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
 import org.gwm.client.impl.DefaultGFrame;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.FiresFormEvents;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
@@ -118,6 +120,7 @@ public class DebugWindow implements GFrameListener {
             }
         });
         this.panel.add(l);
+        ((DefaultGFrame)frame).fireFrameResized();
     }
 
     public GFrame getUI() {

@@ -28,6 +28,7 @@ import org.gwm.client.event.GFrameListener;
 import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.util.widget.OverlayLayer;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
@@ -38,20 +39,22 @@ import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.user.client.ui.KeyboardListenerCollection;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwt.components.client.Effects;
+import com.gwt.components.client.Effects.Effect;
 
 /**
  * GWT-based implementation of <code>GFrame</code>
  */
-public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview {
+public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
-    protected static GFrame topFrame;
     
-    private Frame selectBlocker ;
+    protected static GFrame topFrame;
+
+    protected SelectBoxManagerImpl selectBoxManager;
 
     protected static int layerOfTheTopWindow;
 
@@ -123,13 +126,21 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
 
     private boolean modalMode;
 
+    private boolean outlineDragMode;
+
     private static OverlayLayer overlayLayer;
+
+    private boolean closed = false;
+
+    private SimplePanel panelContent;
 
     public DefaultGFrame() {
         this(DEFAULT_TITLE);
     }
 
     public DefaultGFrame(String caption) {
+        selectBoxManager = (SelectBoxManagerImpl) GWT
+                .create(SelectBoxManagerImpl.class);
         this.currentTheme = DEFAULT_STYLE;
         this.title = caption;
         this.myContent = new HTML("");
@@ -140,6 +151,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         initializeFrame();
         buildGui();
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS);
+        super.setVisible(false);
+        RootPanel.get().add(this);
+        addFrameListener(selectBoxManager.getFrameListener());
     }
 
     private void initializeFrame() {
@@ -149,17 +163,20 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         bottomRow = new FlexTable();
         listeners = new ArrayList();
         resizeImage = new ResizeImage(this);
-        topBar = new TopBar(this);
+        // topBar = new TopBarFF();
+
+        topBar = (TopBar) GWT.create(TopBarFF.class);
+        topBar.init(this);
         imgTopLeft = new Label();
         imgTopRight = new Label();
         imgBotLeft = new Label();
-        selectBlocker = new Frame();
-        selectBlocker.setUrl("#");
-        DOM.setStyleAttribute(selectBlocker.getElement(), "border", "0px");
+        // TODO BLOCKER
         this.maxWidth = Window.getClientWidth();
         this.maxHeight = Window.getClientHeight();
         this.width = DEFAULT_WIDTH;
         this.height = DEFAULT_HEIGHT;
+        DOM.setStyleAttribute(getElement(), "position", "absolute");
+
     }
 
     private void buildGui() {
@@ -175,8 +192,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         if (this.height < this.minHeight) {
             this.height = this.minHeight;
         }
-        //this.ui.setSize(this.width + "px", this.height + "px");
-        setSize(this.width,this.height);
+        // this.ui.setSize(this.width + "px", this.height + "px");
+        setSize(this.width, this.height);
         topRow.setWidget(0, 0, imgTopLeft);
         topRow.setWidget(0, 1, topBar);
         topRow.setWidget(0, 2, imgTopRight);
@@ -187,7 +204,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
             setUrl(url);
         }
         centerRow.setHTML(0, 0, "&nbsp;");
-        centerRow.setWidget(0, 1, myContent);
+        panelContent = new SimplePanel();
+        panelContent.setWidget(myContent);
+        centerRow.setWidget(0, 1, panelContent);
         centerRow.getFlexCellFormatter().setHorizontalAlignment(0, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
         centerRow.setHTML(0, 2, "&nbsp;");
@@ -199,13 +218,13 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         ui.getCellFormatter().setAlignment(1, 0,
                 HasHorizontalAlignment.ALIGN_CENTER,
                 HasVerticalAlignment.ALIGN_MIDDLE);
-        ui.setBorderWidth(0);
+        //ui.setBorderWidth(0);
         ui.setCellPadding(0);
         ui.setCellSpacing(0);
         ui.setWidget(0, 0, topRow);
         ui.setWidget(1, 0, centerRow);
         ui.setWidget(2, 0, bottomRow);
-        super.setWidget(ui);
+        super.setWidget(selectBoxManager.getFrameFinalUI(ui));
         setTheme(currentTheme);
 
         topRow.setCellPadding(0);
@@ -217,6 +236,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         centerRow.setWidth("100%");
         centerRow.setHeight("100%");
         centerRow.getCellFormatter().setWidth(0, 1, "100%");
+        centerRow.setBorderWidth(0);
 
         bottomRow.setCellPadding(0);
         bottomRow.setCellSpacing(0);
@@ -236,22 +256,26 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         imgTopLeft.setStyleName(this.currentTheme + "_nw");
         imgTopRight.setStyleName(this.currentTheme + "_ne");
         imgBotLeft.setStyleName(this.currentTheme + "_sw");
+        // bottomRow.getCellFormatter().setStyleName(0,0, currentTheme + "_sw");
+        bottomRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_s");
         topRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_n");
         centerRow.getCellFormatter().setStyleName(0, 1,
                 currentTheme + "_content");
+        panelContent.setStyleName(currentTheme + "_content");
         centerRow.getCellFormatter().setStyleName(0, 0, currentTheme + "_w");
         centerRow.getCellFormatter().setStyleName(0, 2, currentTheme + "_e");
-        bottomRow.getCellFormatter().setStyleName(0, 1, currentTheme + "_s");
         topRow.getCellFormatter().setVerticalAlignment(0, 0,
                 HasVerticalAlignment.ALIGN_BOTTOM);
         topRow.getCellFormatter().setVerticalAlignment(0, 2,
                 HasVerticalAlignment.ALIGN_BOTTOM);
-        bottomRow.getCellFormatter().setVerticalAlignment(0, 0,
-                HasVerticalAlignment.ALIGN_TOP);
-        bottomRow.getCellFormatter().setVerticalAlignment(0, 2,
-                HasVerticalAlignment.ALIGN_TOP);
+
+         bottomRow.getCellFormatter().setVerticalAlignment(0, 0,
+         HasVerticalAlignment.ALIGN_TOP);
+         bottomRow.getCellFormatter().setVerticalAlignment(0, 2,
+         HasVerticalAlignment.ALIGN_TOP);
         if (resizable) {
             resizeImage.setTheme(currentTheme);
+            bottomRow.setWidget(0, 2, resizeImage);
         } else {
             bottomRow.getCellFormatter().setStyleName(0, 2,
                     currentTheme + "_se");
@@ -281,7 +305,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         this.previousWidth = getWidth();
         this.previousHeight = getHeight();
         topBar.setIconified();
-        selectBlocker.setVisible(false);
+        //selectBoxManager.setBlockerVisible(false);
         this.freeminimized = true;
         buildGui();
         this.minimized = true;
@@ -310,17 +334,34 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         setLocation(this.previousTop, this.previousLeft);
         if (!getContent().isVisible()) {
             getContent().setVisible(true);
-           
+
         }
-        selectBlocker.setVisible(true);
+        selectBoxManager.setBlockerVisible(true);
         buildGui();
         fireFrameRestored();
     }
 
     public void close() {
         fireFrameClosed();
-        setVisible(false);
-        removeFromParent();
+        // setVisible(false);
+        // TODO BLOCKER
+        selectBoxManager.setBlockerVisible(false);
+        Effects.Effect("Puff", this, "{duration : 0.6}").addEffectListener(
+                new Effects.EffectListener() {
+
+                    public void onAfterFinish(Effect sender) {
+                        removeFromParent();
+                        selectBoxManager.removeBlocker();
+                        closed = true;
+                    }
+
+                    public void onAfterUpdate(Effect sender) {
+                    }
+
+                    public void onBeforeUpdate(Effect sender) {
+                    }
+
+                });
     }
 
     public boolean isMinimized() {
@@ -340,22 +381,20 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
         Element elem = getElement();
         DOM.setStyleAttribute(elem, "left", left + "px");
         DOM.setStyleAttribute(elem, "top", top + "px");
-        
-        Element selectBlockerElement = selectBlocker.getElement();
-        DOM.setStyleAttribute(selectBlockerElement, "left", left + 8 + "px");
-        DOM.setStyleAttribute(selectBlockerElement, "top", top + 8 + "px");
-        
+
+        //selectBoxManager.setLocation(top, left);
+
         this.left = left;
         this.top = top;
-        
+
     }
 
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
-        ui.setSize(width + "px", height + "px");
-        System.out.println((width-16) + "px"  + " / " +(height-16) + "px");
-        selectBlocker.setSize((width-16) + "px", (height-16) + "px");
+        ui.setSize(width + "", height + "");
+        ////selectBoxManager.setBlockerSize(width, height);
+
     }
 
     public void setWidth(int width) {
@@ -363,7 +402,20 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     }
 
     public int getWidth() {
-        return this.width;
+        if (getOffsetWidth() > 0) {
+            return getOffsetWidth();
+        }
+        try {
+            String widthStr = DOM.getStyleAttribute(ui.getElement(), "width");
+            // String widthStr = getOffsetWidth();
+            widthStr = widthStr.replaceAll("px", "");
+            int width = Integer.parseInt(widthStr);
+            return width;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        // return getOffsetWidth();
     }
 
     public void setHeight(int height) {
@@ -371,7 +423,20 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     }
 
     public int getHeight() {
-        return this.height;
+        if (getOffsetHeight() > 0)
+            return getOffsetHeight();
+        try {
+            String heightStr = DOM.getStyleAttribute(ui.getElement(), "height");
+            heightStr = heightStr.replaceAll("px", "");
+            int height = Integer.parseInt(heightStr);
+            return height;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        // return getOffsetHeight();
+
     }
 
     public void setMinimumWidth(int minWidth) {
@@ -437,12 +502,12 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     public void setResizable(boolean resizable) {
         this.resizable = resizable;
         if (resizable) {
-            bottomRow.setWidget(0, 2, resizeImage);
+            // bottomRow.setWidget(0, 2, resizeImage);
             resizeImage.setTheme(currentTheme);
         } else {
-            bottomRow.setHTML(0, 2, "&nbsp;");
-            bottomRow.getCellFormatter().setStyleName(0, 2,
-                    currentTheme + "_se");
+            // bottomRow.setHTML(0, 2, "&nbsp;");
+            // bottomRow.getCellFormatter().setStyleName(0, 2,
+            // currentTheme + "_se");
         }
     }
 
@@ -480,7 +545,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     /**
      * Fires the event of the resizing of this frame to its listeners.
      */
-    void fireFrameResized() {
+    public void fireFrameResized() {
         for (int i = 0; i < listeners.size(); i++) {
             GFrameListener listener = (GFrameListener) listeners.get(i);
             listener.frameResized(new GFrameEvent(this));
@@ -610,17 +675,34 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     }
 
     public void setVisible(boolean visible) {
+
+        // buildUI();
+        // if(true){
+        // return;
+        // }
+        //        
+        if (closed) {
+            throw new IllegalStateException(
+                    "This is window has been closed. You can work anymore with a closed window. the garbage collector as released the allocated resources.");
+        }
         if (this.visible == visible)
             return;
         if (visible) {
             this.minimized = false;
-            super.setVisible(true);
-            selectBlocker.setVisible(true);
+            // super.setVisible(true);
+            Effects.Effect("BlindDown", this, "{duration:0.5}")
+                    .addEffectListener(new Effects.EffectListenerAdapter() {
+                        public void onAfterFinish(Effect sender) {
+                            setSize(getOffsetWidth(), getOffsetHeight());
+                        }
+                    });
+           /// selectBoxManager.setBlockerVisible(true);
             _show();
             // DOM.addEventPreview(this);
         } else {
             super.setVisible(false);
-            selectBlocker.setVisible(false);
+            // Effects.Effect("SwitchOff" , this);
+          ///selectBoxManager.setBlockerVisible(false);
             // DOM.removeEventPreview(this);
             if (modalMode) {
                 modalMode = false;
@@ -664,14 +746,10 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     // }
 
     protected void _show() {
-        DOM.setStyleAttribute(getElement(), "position", "absolute");
-        RootPanel.get().add(this);
-        RootPanel.get().add(selectBlocker);
-        DOM.setStyleAttribute(selectBlocker.getElement(), "position", "absolute");
-        
 
-        DOM.setIntStyleAttribute(selectBlocker.getElement(), "zIndex", ++layerOfTheTopWindow);
-        DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
+        selectBoxManager.setBlockerDeepLayer(++layerOfTheTopWindow);
+
+        DOM.setIntStyleAttribute(ui.getElement(), "zIndex", ++layerOfTheTopWindow);
         topFrame = this;
         fireFrameOpened();
 
@@ -684,38 +762,39 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
     public String toString() {
         return this.title;
     }
-    
+
     public boolean onEventPreview(Event event) {
         int type = DOM.eventGetType(event);
         switch (type) {
-          
 
-          case Event.ONMOUSEDOWN:
-          case Event.ONMOUSEUP:
-          case Event.ONMOUSEMOVE:
-          case Event.ONCLICK:
-          case Event.ONDBLCLICK: {
-            // Don't eat events if event capture is enabled, as this can interfere
-            // with dialog dragging, for example.
+        case Event.ONMOUSEDOWN:
+        case Event.ONMOUSEUP:
+        case Event.ONMOUSEMOVE:
+        case Event.ONCLICK:
+        case Event.ONDBLCLICK: {
             if (DOM.getCaptureElement() == null) {
-              // Disallow mouse events outside of the popup.
-              Element target = DOM.eventGetTarget(event);
-              if (!DOM.isOrHasChild(getElement(), target)) {
-                // If it's a click event, and auto-hide is enabled: hide the popup
-                // and _don't_ eat the event.
-                return false;
-              }
+                Element target = DOM.eventGetTarget(event);
+                if (!DOM.isOrHasChild(getElement(), target)) {
+                    return false;
+                }
             }
             break;
-          }
+        }
         }
         return true;
-      }
-    
-    public Widget getSelectBlockerPanel(){
-        return selectBlocker;
     }
 
+    public SelectBoxManagerImpl getSelectBoxManager() {
+        return selectBoxManager;
+    }
+
+    public boolean isDragOutline() {
+        return outlineDragMode;
+    }
+
+    public void setOutlineDragMode(boolean outline) {
+        this.outlineDragMode = outline;
+    }
 	public void fireFrameMoving() {
 		for(int i = 0;i < listeners.size(); i++ ){
 			GFrameListener frameListener = (GFrameListener) listeners.get(i);
@@ -723,5 +802,52 @@ public class DefaultGFrame extends SimplePanel implements GFrame , EventPreview 
 		}
 		
 	}
+    // private void buildUI() {
+    // String html = "<table class='top table_window'>"
+    // + "<tbody>"
+    // + "<tr>"
+    // + "<td class='alphacube_nw'></td>"
+    // + "<td class='alphacube_n'>"
+    // + "<div class='alphacube_title alphacube_window'>Sample window</div>"
+    // + "</td>"
+    // + "<td class='alphacube_ne'></td>"
+    // + "</tr>"
+    // + "</tbody>" + "</table>";
+    // html+= "<table class='top table_window'>"
+    // + "<tbody>"
+    // + "<tr>"
+    // + "<td class='alphacube_w'></td>"
+    // + "<td class='alphacube_content'>"
+    // + "<div class='alphacube_content'>Content</div>"
+    // + "</td>"
+    // + "<td class='alphacube_e'></td>"
+    // + "</tr>"
+    // + "</tbody>" + "</table>";
+    //        
+    // html+="<table class='top table_window'>"
+    // + "<tbody>"
+    // + "<tr>"
+    // + "<td class='alphacube_sw'></td>"
+    // +"<td class='alphacube_s'>"
+    // +"<div class='status_bar'>"
+    // + "<span style='float: left; width: 1px; height: 1px;'></span>"
+    // +"</div>"
+    // +"</td>"
+    // +"<td class='alphacube_sizer' ></td>"
+    // + "</tr>"
+    // + "</tbody>" + "</table>";
+    // SimplePanel p = new SimplePanel();
+    // p.setStyleName("dialog");
+    // DOM.setInnerHTML(p.getElement(), html);
+    // DOM.setStyleAttribute(p.getElement(), "position", "absolute");
+    // DOM.setStyleAttribute(p.getElement(), "top", layerOfTheTopWindow * 100 +
+    // "px");
+    // DOM.setStyleAttribute(p.getElement(), "left", layerOfTheTopWindow * 100 +
+    // "px");
+    // DOM.setIntStyleAttribute(p.getElement(), "zIndex",
+    // ++layerOfTheTopWindow);
+    // RootPanel.get().add(p);
+    // // RootPanel.get().add(new HTML(html));
+    // }
 
 }

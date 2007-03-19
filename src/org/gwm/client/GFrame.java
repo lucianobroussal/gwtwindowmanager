@@ -2,9 +2,6 @@
  * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
  * (http://www.gwtwindowmanager.org)
  * 
- * Main Contributors :
- *      Johan Vos,Andy Scholz,Marcelo Emanoel  
- *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
@@ -340,5 +337,18 @@ public interface GFrame {
      *
      */
     public void showModal();
+    
+    /**
+     * Set the frame drag mode
+     * @param outline true displays a ghost during frame draging
+     * false the window itself is dragged
+     */
+    
+    public void setOutlineDragMode(boolean outline);
+    /**
+     * Return the frame drag mode
+     * @return
+     */
+    public boolean isDragOutline();
 
 }
