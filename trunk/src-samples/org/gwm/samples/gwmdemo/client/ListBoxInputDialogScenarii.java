@@ -14,6 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDialog;
@@ -26,26 +27,32 @@ import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
-public class ConfirmDialogScenarii extends AbstractScenarii {
+public class ListBoxInputDialogScenarii extends AbstractScenarii {
 
-    public ConfirmDialogScenarii() {
+    public ListBoxInputDialogScenarii() {
         super();
     }
 
     public void runScenarii() {
-        DefaultGDialog.showConfirmDialog(null, "Do you like holidays?",
-                "Are you an Iron Man ? :)", GDialog.YES_NO_CANCEL_OPTION_TYPE, 
-                new GDialogChoiceListener() {
+        
 
+        DefaultGDialog.setWrapStringMessage(false);
+        DefaultGDialog.showInputDialog(null, "What is your favorite color? (blue is the default value)",
+                "Asking ...", "blue" , new Object[]{"green" , "red" , "blue" , "white" , "black" , "orange"}, GDialog.QUESTION_MESSAGE , null,   new GDialogChoiceListener() {
                     public void onChoice(GDialog dialog) {
-                        if (dialog.getSelectedOption() == (DefaultGDialog.YES_OPTION)) {
-                            displayResponse("Where do you like go for vacation?");
-                        } else if (dialog.getSelectedOption() == (DefaultGDialog.NO_OPTION)) {
-                            displayResponse("You are an iron man.");
-                        } else if (dialog.getSelectedOption() == (DefaultGDialog.CANCEL_OPTION)) {
-                            displayResponse("You didn't give answer :(");
+                        DefaultGDialog.setWrapStringMessage(true);
+                        if (dialog.getSelectedOption() == DefaultGDialog.OK_OPTION) {
+                            if (dialog.getSelectedValue() != null
+                                    && !((String) dialog.getSelectedValue())
+                                            .trim().equals("")) {
+                                displayResponse("Your favorite color is : <br/>"
+                                        + dialog.getSelectedValue());
+                            } else {
+                                displayResponse("Your input is empty.");
+                            }
+                        } else {
+                            displayResponse("You didn't enter anything.");
                         }
-
                     }
 
                     private void displayResponse(String response) {
@@ -56,13 +63,12 @@ public class ConfirmDialogScenarii extends AbstractScenarii {
                         responseWin.setContent(response);
                         GwmUtilities.diplayAtScreenCenter(responseWin);
                     }
-
                 });
     }
 
     protected Hyperlink createLink() {
-        Hyperlink desktopDemoLink = new Hyperlink("Confirm Dialog",
-                "confirm-dialog");
+        Hyperlink desktopDemoLink = new Hyperlink("Built-in selection dialog",
+                "");
         return desktopDemoLink;
     }
 

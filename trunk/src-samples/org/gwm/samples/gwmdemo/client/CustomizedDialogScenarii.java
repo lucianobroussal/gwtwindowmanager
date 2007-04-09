@@ -20,6 +20,7 @@ package org.gwm.samples.gwmdemo.client;
 import org.gwm.client.GDialog;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.impl.DefaultGDialog;
+import org.gwm.client.impl.DefaultGDialog.Option;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
@@ -34,8 +35,12 @@ public class CustomizedDialogScenarii extends AbstractScenarii {
         DefaultGDialog gdialog = new DefaultGDialog("Customized DefaultGDialog");
         HTML content = new HTML("This a customized GDialog content");
         gdialog.setMessage(content);
-        gdialog.setMessageType(GDialog.PLAIN_MESSAGE);
-        gdialog.setOptionType(GDialog.OK_OPTION_TYPE);
+        gdialog.setMessageType(GDialog.ERROR_MESSAGE);
+        gdialog.setOptions(GDialog.YES_NO_CANCEL_OPTION_TYPE, new String[]{"SURE" , "NEVER" , "DON'T SPAM PLEASE"});
+        gdialog.setGDialogChoiceListener(new GDialogChoiceListener(){
+            public void onChoice(GDialog dialog) {
+                Window.alert(((Option)dialog.getSelectedOption()).getValue().toString());
+            }});
         gdialog.show();
     }
 

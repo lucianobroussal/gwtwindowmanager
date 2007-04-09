@@ -16,10 +16,10 @@
  */
 package org.gwm.samples.gwmdemo.client;
 
-import org.gwm.client.GFrame;
-import org.gwm.client.impl.DefaultGFrame;
-import org.gwm.client.util.GwmUtilities;
+import org.gwm.client.GInternalFrame;
+import org.gwm.client.impl.DefaultGInternalFrame;
 
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class SimpleWindowWithURLScenarii extends AbstractScenarii {
@@ -30,16 +30,32 @@ public class SimpleWindowWithURLScenarii extends AbstractScenarii {
     }
 
     public void runScenarii() {
-        GFrame window = new DefaultGFrame("Window with an URL inside");
-        window.setWidth(620);
-        window.setHeight(335);
-        window.setTheme("alphacube");
-        window.setUrl("simplescenarii.html");
-        GwmUtilities.diplayAtScreenCenter(window);
+        GInternalFrame window = new DefaultGInternalFrame("GWT");
+        window.setWidth(800);
+        window.setHeight(400);
+        window.setUrl("http://code.google.com/webtoolkit/");
+        GwmDemo.getDesktop().addFrame(window);
+        window.setLocation(50, 180);
+        window.setVisible(true);
+        final GInternalFrame window1 = new DefaultGInternalFrame("GWm");
+        window1.setWidth(800);
+        window1.setHeight(400);
+        window1.setUrl("http://code.google.com/p/gwtwindowmanager/");
+        GwmDemo.getDesktop().addFrame(window1);
+        window1.setLocation(100, 220);
+        window1.setVisible(true);
+        new Timer(){
+
+            public void run() {
+                window1.setLocation(0,0);
+                
+            }
+            
+        }.schedule(5000);
     }
 
     protected Hyperlink createLink() {
-        Hyperlink simpleDemo = new Hyperlink("With URL content", "simple");
+        Hyperlink simpleDemo = new Hyperlink("With URL content", "");
         return simpleDemo;
     }
 

@@ -17,6 +17,7 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.impl.DefaultGDialog;
+import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
@@ -28,7 +29,7 @@ public class ErrorDialogScenarii extends AbstractScenarii {
 
     public void runScenarii() {
         DefaultGDialog.showMessage(null, "Houston we have a problem!", "Error",
-                DefaultGDialog.ERROR_MESSAGE);
+                DefaultGDialog.ERROR_MESSAGE , null);
     }
 
     protected Hyperlink createLink() {

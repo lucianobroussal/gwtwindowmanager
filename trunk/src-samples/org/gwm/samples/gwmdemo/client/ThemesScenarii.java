@@ -41,7 +41,6 @@ public class ThemesScenarii extends AbstractScenarii {
         window.setHeight(450);
         window.setLocation(65, 20);
 
-        window.setTheme("alphacube");
         window.setCaption("Themes");
         window.setContent(buildThemesWindowContent());
         window.setVisible(true);

@@ -35,7 +35,6 @@ public class EventScenarii extends AbstractScenarii {
         GFrame window = new DefaultGFrame("Play with me ");
         window.setWidth(530);
         window.setHeight(250);
-        window.setTheme("alphacube");
         window.setCaption("Window with an HTML text inside");
         GwmUtilities.displayAtParentCenter(window);
         window.setContent("<img src='images/logo-mini.png' >"
@@ -46,7 +45,7 @@ public class EventScenarii extends AbstractScenarii {
         debugUI.setLocation(window.getTop(), window.getLeft()
                 + window.getWidth());
         debugUI.setVisible(true);
-        window.addFrameListener(debugWindow);
+        window.addFrameListener(debugWindow.getFrameListener());
 
     }
 
@@ -54,5 +53,7 @@ public class EventScenarii extends AbstractScenarii {
         Hyperlink simpleDemo = new Hyperlink("Frame events", "frame_events");
         return simpleDemo;
     }
+    
+    
 
 }

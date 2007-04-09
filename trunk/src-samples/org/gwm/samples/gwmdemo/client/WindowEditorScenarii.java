@@ -32,7 +32,6 @@ public class WindowEditorScenarii extends AbstractScenarii {
     public void runScenarii() {
         WindowEditor editor = new WindowEditor();
         GFrame editorWindow = new DefaultGFrame("");
-        editorWindow.setTheme("alphacube");
         editorWindow.setWidth(280);
         editorWindow.setHeight(460);
         editorWindow.setCaption("Window editor");
