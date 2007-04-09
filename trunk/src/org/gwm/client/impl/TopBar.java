@@ -22,6 +22,9 @@ package org.gwm.client.impl;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GFrameAdapter;
 import org.gwm.client.event.GFrameEvent;
+import org.gwm.client.util.GWmConstants;
+import org.gwm.client.util.GwmUtilities;
+import org.gwm.client.util.widget.OverlayLayer;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
@@ -31,31 +34,32 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListener;
+import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
-    //    
-    static DefaultGFrame debug = new DefaultGFrame();
+    public static DefaultGFrame debug = new DefaultGFrame();
 
     static VerticalPanel debugContent = new VerticalPanel();
-
-    static int cpt = 0;
 
     static {
         debugContent.setSize("200", "400");
         debugContent.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
         debugContent.setSpacing(0);
-        //debug.setSize(300, 400);
+        // debug.setSize(300, 400);
         debug.setContent(debugContent);
         debug.setLocation(0, 0);
         debug.setOutlineDragMode(true);
-        //debug.setTheme("alphacube");
-        //debug.setVisible(true);
+        // debug.setTheme("alphacube");
+        // debug.setVisible(true);
     }
+
+    protected OverlayLayer fixPanelForFrameWithURL = new OverlayLayer();
+
+    static int cpt = 0;
 
     private HTML caption;
 
@@ -79,29 +83,14 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
     protected Label restoreButton;
 
-    protected void addLog(String log) {
-        cpt++;
-        if (cpt % 10 == 0) {
-            debugContent.clear();
-        }
-        debugContent.add(new HTML(log));
-    }
+    protected boolean dragStarted;
 
-    protected static SimplePanel outline;
+    protected boolean minimized = false;
+
+    protected static OutlinePanel outline;
     static {
-        outline = new SimplePanel();
-        DOM.setStyleAttribute(outline.getElement(), "backgroundColor",
-                "#DFF2FF");
-        DOM.setStyleAttribute(outline.getElement(), "position", "absolute");
-        DOM.setStyleAttribute(outline.getElement(), "filter",
-                "progid:DXImageTransform.Microsoft.Alpha(opacity=50)");
-        DOM.setStyleAttribute(outline.getElement(), "-mozOpacity", "0.5");
-        DOM.setStyleAttribute(outline.getElement(), "opacity", "0.5");
-        DOM
-                .setStyleAttribute(outline.getElement(), "border",
-                        "1px dotted gray");
+        outline = new OutlinePanel();
         outline.setVisible(false);
-        RootPanel.get().add(outline);
     }
 
     TopBar() {
@@ -114,7 +103,6 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
         buildGui();
         initListeners();
         setMovingGuard();
-//        Window.alert("IE-topbar");
     }
 
     private void buildGui() {
@@ -124,14 +112,17 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
         DOM.setStyleAttribute(caption.getElement(), "whiteSpace", "nowrap");
         closeArea = new Label();
         closeArea.addClickListener(this);
+        closeArea.addMouseListener(new FocusAction("CloseButton"));
         minimizeArea = new Label();
         minimizeArea.addClickListener(this);
+        minimizeArea.addMouseListener(new FocusAction("MinimizeButton"));
         maximizeArea = new Label();
         maximizeArea.addClickListener(this);
+        maximizeArea.addMouseListener(new FocusAction("MaximizeButton"));
         restoreButton = new Label("");
-        restoreButton.setStyleName(this.currentTheme + "_topBar_restore");
-        
-        
+        restoreButton.setStyleName("gwm-" + this.currentTheme
+                + "-TopBar-RestoreButton");
+
         setWidget(0, 0, caption);
         getCellFormatter().setWidth(0, 0, "100%");
         setWidget(0, 1, minimizeArea);
@@ -140,7 +131,8 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
         setTheme(currentTheme);
         setCellPadding(0);
         setCellSpacing(0);
-        setStyleName("topBar");
+        setStyleName(getItemTheme("Frame-TopBar"));
+        addStyleName("topBar");
         updateTopBar();
     }
 
@@ -162,8 +154,10 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
         }
         if (w.equals(minimizeArea)) {
             if (parent.isMinimized()) {
+                minimized = false;
                 parent.restore();
             } else {
+                minimized = true;
                 parent.minimize();
             }
         }
@@ -171,70 +165,75 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
     public void onMouseDown(Widget sender, int x, int y) {
         if (draggable) {
-            dragging = true;
+            dragStarted = true;
             DOM.addEventPreview(parent);
             DOM.setCapture(caption.getElement());
             dragStartX = x;
             dragStartY = y;
-
+            if (GWmConstants.isOverlayLayerDisplayOnDragAction()) {
+                fixPanelForFrameWithURL.show(parent.getTheme());
+            }
             if (parent.isDragOutline()) {
+                if (parent instanceof GInternalFrame) {
+                    ((GInternalFrame) parent).getDesktopPane()
+                            .setWidgetLocation(outline, 0, 0);
+                } else {
+                    RootPanel.get().add(outline);
+                }
                 outline.setSize(parent.getWidth() + "px", parent.getHeight()
                         + "px");
-                DOM.setStyleAttribute(outline.getElement(), "left", parent
-                        .getLeft()
-                        + "px");
-                DOM.setStyleAttribute(outline.getElement(), "top", parent
-                        .getTop()
-                        + "px");
+                outline.setTop(parent.getTop());
+                outline.setLeft(parent.getLeft());
+                outline.setDeep(DefaultGFrame.getLayerOfTheTopWindow() + 50);
                 outline.setVisible(true);
-                DOM.setIntStyleAttribute(outline.getElement(), "zIndex",
-                        DefaultGFrame.getLayerOfTheTopWindow() + 1);
             } else {
-                DOM.setStyleAttribute(parent.getElement(), "filter",
-                        "progid:DXImageTransform.Microsoft.Alpha(opacity=80)");
-                DOM
-                        .setStyleAttribute(parent.getElement(), "-mozOpacity",
-                                "0.9");
-                DOM.setStyleAttribute(parent.getElement(), "opacity", "0.8");
+                // DOM.setStyleAttribute(parent.getElement(), "filter",
+                // "progid:DXImageTransform.Microsoft.Alpha(opacity=80)");
+                // DOM
+                // .setStyleAttribute(parent.getElement(), "-mozOpacity",
+                // "0.9");
+                // DOM.setStyleAttribute(parent.getElement(), "opacity", "0.8");
                 parent.getSelectBoxManager().onParentDragStart(parent);
             }
         }
     }
 
     public void onMouseEnter(Widget sender) {
-        System.out.println("Mouse Enter");
-
     }
 
     public void onMouseLeave(Widget sender) {
-        System.out.println("Mouse Leave");
     }
 
     public void onMouseMove(Widget sender, int x, int y) {
-        System.out.println("Mouse Move " + x + " / " + y);
-
+        if (dragStartX == x && dragStartY == y) {
+            return;
+        } else if (dragStarted && !dragging) {
+            dragging = true;
+            if (!parent.isDragOutline()) {
+                GwmUtilities.hideSelect();
+            }
+        }
         if (dragging) {
             int absX = x + parent.getLeft();
             int absY = y + parent.getTop();
-            ;
 
             if (parent.isDragOutline()) {
-
-                DOM.setStyleAttribute(outline.getElement(), "left", absX
-                        - dragStartX + "px");
-                DOM.setStyleAttribute(outline.getElement(), "top", absY
-                        - dragStartY + "px");
+                outline.setTop(absY - dragStartY);
+                outline.setLeft(absX - dragStartX);
+                parent.fireGhostMoving(absY - dragStartY, absX - dragStartX);
             } else {
                 parent.setLocation(absY - dragStartY, absX - dragStartX);
+                parent.fireFrameMoving();
             }
-            parent.fireFrameMoving();
+
         }
     }
 
     public void onMouseUp(Widget sender, int x, int y) {
-        System.out.println("Mouse Up" + x + " / " + y);
-        if (draggable) {
-            dragging = false;
+        if (dragging || dragStarted) {
+            if (GWmConstants.isOverlayLayerDisplayOnDragAction()) {
+                fixPanelForFrameWithURL.hide();
+            }
             DOM.releaseCapture(caption.getElement());
             DOM.removeEventPreview(parent);
             int absX = x + parent.getLeft();
@@ -242,17 +241,28 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
             parent.setLocation(absY - dragStartY, absX - dragStartX);
             if (parent.isDragOutline()) {
+                outline.removeFromParent();
                 outline.setVisible(false);
+                parent.fireGhostMoved(absY - dragStartY, absX - dragStartX);
             } else {
                 // TODO BLOCKER
                 // parent.getSelectBoxManager().setBlockerVisible(true);
-                DOM.setStyleAttribute(parent.getElement(), "filter",
-                        "progid:DXImageTransform.Microsoft.Alpha(opacity=100)");
-                DOM.setStyleAttribute(parent.getElement(), "-mozOpacity", "1");
-                DOM.setStyleAttribute(parent.getElement(), "opacity", "1");
+                // DOM.setStyleAttribute(parent.getElement(), "filter",
+                // "progid:DXImageTransform.Microsoft.Alpha(opacity=100)");
+                // DOM.setStyleAttribute(parent.getElement(), "-mozOpacity",
+                // "1");
+                // DOM.setStyleAttribute(parent.getElement(), "opacity", "1");
                 parent.getSelectBoxManager().onParentDragEnd(parent);
             }
-            parent.fireFrameMoved();
+            if (dragging)
+                parent.fireFrameMoved();
+
+            dragging = false;
+            dragStarted = false;
+            if (!parent.isDragOutline()) {
+                GwmUtilities.showSelect();
+            }
+
         }
     }
 
@@ -263,14 +273,32 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
     public void setIconified() {
         clear();
-        caption.setStyleName(parent.getTheme() + "_topBar_icon");
+        if (parent instanceof GInternalFrame) {
+            caption.setStyleName(getItemTheme("Frame-TopBar-minimized"));
+            restoreButton
+                    .setStyleName(getItemTheme("Frame-TopBar-RestoreButton"));
+        } else {
+            caption.setStyleName(getItemTheme("Frame-TopBar"));
+            restoreButton
+                    .setStyleName(getItemTheme("Frame-TopBar-MaximizeButton"));
+            addStyleName("topBar");
+        }
         setWidget(0, 0, caption);
+        getFlexCellFormatter().setWidth(0, 0, "100%");
         setWidget(0, 1, restoreButton);
+        // OPtion to ajust to parent width :)
+        // setWidth(parent.getWidth() +"px");
+        parent.getSelectBoxManager().setBlockerSize(getOffsetWidth() + 5,
+                getOffsetHeight() + 3);
     }
 
     public void setRestored() {
+        minimized = false;
+        if (parent instanceof GInternalFrame)
+            return;
         clear();
         buildGui();
+        initListeners();
         parent.restore();
     }
 
@@ -315,12 +343,26 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
     public void setTheme(String theme) {
         currentTheme = theme;
-        caption.setStyleName(currentTheme + "_caption");
-        caption.addStyleName("topBar");
-        closeArea.setStyleName(this.currentTheme + "_close");
-        minimizeArea.setStyleName(this.currentTheme + "_minimize");
-        maximizeArea.setStyleName(this.currentTheme + "_maximize");
-        setStyleName(this.currentTheme + "_topBar");
+        if (!minimized) {
+            caption.setStyleName(getItemTheme("FrameCaption"));
+            caption.addStyleName("topBar");
+            closeArea.setStyleName(getItemTheme("Frame-TopBar-CloseButton"));
+            minimizeArea
+                    .setStyleName(getItemTheme("Frame-TopBar-MinimizeButton"));
+            maximizeArea
+                    .setStyleName(getItemTheme("Frame-TopBar-MaximizeButton"));
+            setStyleName(getItemTheme("Frame-TopBar"));
+        } else {
+            if (parent instanceof GInternalFrame) {
+                caption.setStyleName(getItemTheme("Frame-TopBar-minimized"));
+                restoreButton
+                        .setStyleName(getItemTheme("Frame-TopBar-RestoreButton"));
+            } else {
+                caption.setStyleName(getItemTheme("Frame-TopBar"));
+                restoreButton
+                        .setStyleName(getItemTheme("Frame-TopBar-MaximizeButton"));
+            }
+        }
     }
 
     private void setMovingGuard() {
@@ -333,7 +375,7 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
                             .getGFrame();
                     Widget desktopPane = (Widget) internalFrame
                             .getDesktopPane();
-                    if (internalFrame.getTop() < desktopPane.getAbsoluteTop()) {
+                    if (internalFrame.getTop() < 0) {
                         internalFrame.setTop(0);
                     }
                     if (internalFrame.getTop() > desktopPane.getOffsetHeight() - 40) {
@@ -376,4 +418,38 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
             }
         });
     }
+
+    class FocusAction extends MouseListenerAdapter {
+        private String action;
+
+        FocusAction(String action) {
+            this.action = action;
+        }
+
+        public void onMouseEnter(Widget target) {
+            target.setStyleName("gwm-" + currentTheme + "-Frame-TopBar-"
+                    + action + "-active");
+        }
+
+        public void onMouseLeave(Widget target) {
+            target.setStyleName("gwm-" + currentTheme + "-Frame-TopBar-"
+                    + action);
+        }
+
+    }
+
+    private String getItemTheme(String item) {
+        return "gwm-" + currentTheme + "-" + item;
+    }
+
+
+    public static void addLog(String log) {
+        cpt++;
+        if (cpt % 10 == 0) {
+            debugContent.clear();
+        }
+        debugContent.add(new HTML(log));
+    }
+
 }
+

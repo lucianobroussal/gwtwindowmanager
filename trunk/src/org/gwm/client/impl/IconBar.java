@@ -27,7 +27,9 @@ import org.gwm.client.GFrame;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -46,15 +48,27 @@ public class IconBar extends FlowPanel {
         this.buttonIcon = new HashMap();
     }
 
+   
+
     public void addWindow(GFrame gframe) {
         DefaultGFrame frame = (DefaultGFrame) (gframe);
         HorizontalPanel icon = new HorizontalPanel();
-        icon.addStyleName(frame.getTheme() + "_topBar_iconButton");
+
+        HorizontalPanel iconLayout = new HorizontalPanel();
+        icon.setStyleName(getItemTheme(frame,"DeskTop-MinimizedFrameBar"));
         Label label = new Label(frame.getCaption());
-        label.addStyleName(frame.getTheme() + "_topBar_icon");
+        label.setStyleName(getItemTheme(gframe,"Frame-TopBar-minimized"));
         Label restoreButton = new Label("");
-        restoreButton.setStyleName(frame.getTheme() + "_topBar_restore");
-        icon.add(label);
+        restoreButton.setStyleName(getItemTheme(gframe,"Frame-TopBar-RestoreButton"));
+        
+        Image titleIcon = frame.getTitleIcon();
+        if (titleIcon != null) {
+            iconLayout.add(titleIcon);
+            iconLayout.setCellVerticalAlignment(titleIcon,
+                    HasVerticalAlignment.ALIGN_MIDDLE);
+        }
+        iconLayout.add(label);
+        icon.add(iconLayout);
         icon.add(restoreButton);
         buttonFrame.put(restoreButton, frame);
         buttonIcon.put(restoreButton, icon);
@@ -74,5 +88,10 @@ public class IconBar extends FlowPanel {
 
     public void adjustSize() {
     }
+
+    private String getItemTheme(GFrame parent, String item) {
+        return "gwm-" + parent.getTheme() + "-" + item;
+    }
+
 
 }

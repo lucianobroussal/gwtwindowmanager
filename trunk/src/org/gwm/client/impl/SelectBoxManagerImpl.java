@@ -1,9 +1,9 @@
 package org.gwm.client.impl;
 
+import org.gwm.client.GFrame;
 import org.gwm.client.event.GFrameAdapter;
 import org.gwm.client.event.GFrameListener;
 
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -17,7 +17,7 @@ public class SelectBoxManagerImpl {
     }
 
 
-    public void setLocation(int top, int left) {
+    public void setLocation(int top, int left , GFrame associatedFrame) {
     }
 
 
@@ -55,7 +55,7 @@ public class SelectBoxManagerImpl {
         return new GFrameAdapter();
     }
     
-    public native void  setSelectionActive(boolean active)/*-{
+    public native void setSelectionActive(boolean active)/*-{
         if(active){
             $doc.body.ondrag = function () { $wnd.alert('drag'); return false; };
             $doc.body.onselectstart = function () { return false; };
@@ -65,10 +65,7 @@ public class SelectBoxManagerImpl {
         }
     }-*/;
 
-
-    public Widget getFrameFinalUI(FlexTable ui) {
-        return ui;
+    public Widget getBlockerWidget(){
+        return null;
     }
-    
-    
 }

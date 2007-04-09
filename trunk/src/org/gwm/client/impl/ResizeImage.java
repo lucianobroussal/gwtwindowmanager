@@ -40,7 +40,8 @@ public class ResizeImage extends FlowPanel implements MouseListener {
     private String currentStyle;
 
     private Label label;
-
+    
+   
     public ResizeImage(DefaultGFrame parent) {
         super();
         this.parent = parent;
@@ -51,7 +52,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
     private void buildGui() {
         this.currentStyle = parent.getTheme();
         label = new Label("");
-        label.setStyleName(currentStyle + "_sizer");
+        setTheme(currentStyle);
         label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
         label.addMouseListener(this);
         add(label);
@@ -63,7 +64,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
         resizeStartX = x;
         resizeStartY = y;
         parent.startResizing(); // call this and allow the frame to remove
-                                // iframes
+        // iframes
     }
 
     public void onBrowserEvent(Event e) {
@@ -74,7 +75,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
         resizing = false;
         DOM.releaseCapture(label.getElement());
         parent.stopResizing(); // call this and allow the frame to remove
-                                // iframes
+        // iframes
     }
 
     public void onMouseEnter(Widget sender) {
@@ -101,8 +102,7 @@ public class ResizeImage extends FlowPanel implements MouseListener {
     }
 
     public void setTheme(String currentTheme) {
-        label.setStyleName(currentTheme + "_sizer");
-
+        label.setStyleName("gwm-" + currentTheme + "-Frame-ResizeButton");
     }
 
 }
