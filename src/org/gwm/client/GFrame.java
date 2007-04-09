@@ -18,6 +18,7 @@ package org.gwm.client;
 
 import org.gwm.client.event.GFrameListener;
 
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -31,6 +32,8 @@ public interface GFrame {
      * @param theme
      */
     public void setTheme(String theme);
+    
+   
 
     /**
      * Shows window at its current position.
@@ -350,5 +353,17 @@ public interface GFrame {
      * @return
      */
     public boolean isDragOutline();
+    
+    
+    public void updateSize();
+    
+    
+    public void  setTitleIcon(Image icon);
+    
+    public Image getTitleIcon();
+    
+    public String getTheme();
+    
 
+    
 }

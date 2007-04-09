@@ -21,6 +21,8 @@ package org.gwm.client;
 
 import java.util.List;
 
+import com.google.gwt.user.client.ui.Widget;
+
 /**
  * A container used to create a multiple-document interface or a virtual
  * desktop. You create <code>GFrame</code> objects and add them to the
@@ -36,7 +38,8 @@ public interface GDesktopPane {
      *            The GFrame to be added.
      */
     public void addFrame(GInternalFrame internalFrame);
-
+    
+    
     /**
      * Closes all GInternalFrames contained in this GDesktopPane.
      */
@@ -60,5 +63,15 @@ public interface GDesktopPane {
      * @param minimizedWindow
      */
     public void deIconify(GFrame minimizedWindow);
+    
+    
+    public void setWidgetLocation(Widget widget , int top , int left);
 
+    public Widget getFramesContainer();
+    
+    public GInternalFrame getActiveFrame();
+    
+    public void setActivateFrame(GInternalFrame internalFrame);
+    
+    
 }
