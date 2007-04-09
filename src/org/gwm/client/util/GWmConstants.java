@@ -20,8 +20,48 @@
 
 package org.gwm.client.util;
 
-public interface GWmConstants {
+import org.gwtwidgets.client.ui.PNGImage;
 
-    public static final String DEFAULT_THEME = "alphacube";
+import com.google.gwt.user.client.ui.Image;
 
+public abstract class GWmConstants {
+
+    private static String defaultTheme = "spa";
+
+    private static Image windowTitleIcon = new PNGImage(
+            "gwm/images/window.png", 12, 12);
+
+    private static boolean overlayLayerDisplayOnDragAction = true;
+
+    public static void setDefaultFrameTitleIcon(Image windowTitleIcon) {
+        GWmConstants.windowTitleIcon = windowTitleIcon;
+    }
+
+    public static Image getWindowTitleIcon() {
+        return windowTitleIcon;
+    }
+
+    public static void setWindowTitleIcon(Image windowTitleIcon) {
+        GWmConstants.windowTitleIcon = windowTitleIcon;
+    }
+
+    public static String getDefaultTheme() {
+        return defaultTheme;
+    }
+    
+
+    public static void setDefaultTheme(String defaultTheme) {
+        GWmConstants.defaultTheme = defaultTheme;
+    }
+    
+    
+    public static void setOverlayLayerDisplayOnDragAction(boolean  overlay){
+        GWmConstants.overlayLayerDisplayOnDragAction = overlay;
+    }
+
+    public static boolean isOverlayLayerDisplayOnDragAction() {
+        return overlayLayerDisplayOnDragAction;
+    }
+    
+    
 }
