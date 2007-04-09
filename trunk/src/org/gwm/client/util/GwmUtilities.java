@@ -61,4 +61,22 @@ public class GwmUtilities {
         frame.setVisible(true);
 
     }
+
+    public static native void hideSelect()/*-{
+         if(navigator.userAgent.indexOf('MSIE') >=0){
+             selects=$doc.getElementsByTagName("select");
+             for (i = 0; i < selects.length; i++) {
+                 selects[i].style.display = 'none';
+             }
+         }
+     }-*/;
+
+    public static native void showSelect()/*-{
+         if(navigator.userAgent.indexOf('MSIE') >=0){
+             selects=$doc.getElementsByTagName("select");
+             for (i = 0; i < selects.length; i++) {
+                 selects[i].style.display = '';
+             }
+         }
+     }-*/;
 }
