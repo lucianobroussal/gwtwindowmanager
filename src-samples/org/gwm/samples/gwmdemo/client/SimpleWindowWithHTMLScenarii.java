@@ -33,7 +33,6 @@ public class SimpleWindowWithHTMLScenarii extends AbstractScenarii {
         GFrame window = new DefaultGFrame("Window with an HTML text inside");
         window.setWidth(580);
         window.setHeight(400);
-        window.setTheme("alphacube");
        
         window
                 .setContent("<img src='images/logo-mini.png' >"

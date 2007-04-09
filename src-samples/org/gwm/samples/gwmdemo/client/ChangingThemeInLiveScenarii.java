@@ -16,8 +16,13 @@
  */
 package org.gwm.samples.gwmdemo.client;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.gwm.client.GFrame;
+import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGFrame;
+import org.gwm.client.impl.DefaultGInternalFrame;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -30,7 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class ChangingThemeInLiveScenarii extends AbstractScenarii {
     
     
-    private GFrame window;
+    private GInternalFrame window;
     private ListBox themesList;
 
     public ChangingThemeInLiveScenarii() {
@@ -40,36 +45,49 @@ public class ChangingThemeInLiveScenarii extends AbstractScenarii {
 
     public void runScenarii() {
         
+        
+        window = new DefaultGInternalFrame("");
+        window.setWidth(200);
+        window.setHeight(100);
+        window.setTheme("default");
+        window.setCaption("Live theme change");
+        
         themesList =new ListBox();
         themesList.addItem("default", "default");
         themesList.addItem("theme1", "theme1");
         themesList.addItem("alphacube", "alphacube");
         themesList.addItem("spread", "spread");
-        themesList.addItem("alert", "alert");
         themesList.addItem("darkX", "darkX");
+        themesList.addItem("spa", "spa");
+        themesList.addItem("sky", "sky");
+        themesList.addItem("citrus", "citrus");
+        themesList.addItem("cloudy", "cloudy");
+        
+        VerticalPanel contentLayout = new VerticalPanel();
+        contentLayout.add(new Label("Change my theme!"));
+        contentLayout.add(themesList);
+        window.setContent(contentLayout);
         
         themesList.addChangeListener(new ChangeListener() {
 
             public void onChange(Widget sender) {
                 String theme = getCurrentTheme();
                 window.setTheme(theme);
-
+                List frames = GwmDemo.getDesktop().getAllFrames();
+                for (Iterator iter = frames.iterator(); iter.hasNext();) {
+                    GInternalFrame frame = (GInternalFrame) iter.next();
+                    GInternalFrame activeFrame = GwmDemo.getDesktop().getActiveFrame();
+                    frame.setTheme(theme);
+                    
+                }
             }
 
         });
 
         
-        window = new DefaultGFrame("");
-        window.setWidth(200);
-        window.setHeight(100);
-        window.setTheme("default");
-        window.setCaption("Live theme change");
-        VerticalPanel contentLayout = new VerticalPanel();
-        contentLayout.add(new Label("Change my theme!"));
-        contentLayout.add(themesList);
-        window.setContent(contentLayout);
-        window.setOutlineDragMode(true);
-        GwmUtilities.diplayAtScreenCenter(window);
+        
+       GwmDemo.getDesktop().addFrame(window);
+       GwmUtilities.diplayAtScreenCenter(window);
 
     }
     

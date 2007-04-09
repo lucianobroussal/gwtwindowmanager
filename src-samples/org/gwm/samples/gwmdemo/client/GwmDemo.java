@@ -18,13 +18,19 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GFrame;
+import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
+import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
+import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -34,32 +40,63 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GwmDemo implements EntryPoint {
 
-    private GDesktopPane desktop;
+    private static GDesktopPane desktop;
 
     private DefaultGInternalFrame menuFrame;
 
+    static VerticalPanel debugContent = new VerticalPanel();
+
+    static int cpt = 0;
+
+    public static DefaultGFrame debug = new DefaultGFrame();
+
+    static {
+        debugContent.setSize("200", "400");
+        debugContent.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
+        debugContent.setSpacing(0);
+        // debug.setSize(300, 400);
+        debug.setContent(debugContent);
+        debug.setLocation(0, 0);
+        debug.setOutlineDragMode(true);
+        // debug.setTheme("alphacube");
+        // debug.setVisible(true);
+    }
+
     public void onModuleLoad() {
+
         buildUI();
         menuFrame.setSize(150, 300);
-        Window.enableScrolling(false);
 
+        DefaultGDialog.setDefaultTheme(GWmConstants.getDefaultTheme());
+
+        Window.enableScrolling(false);
 
     }
 
     private void buildUI() {
         desktop = new DefaultGDesktopPane();
-        buildMenu();
         RootPanel.get().add((Widget) desktop);
+        GInternalFrame ftest = new DefaultGInternalFrame("Gwm Demo");
+        ftest.setUrl("wintest.html");
+        ftest.setMinimizable(false);
+        ftest.setMaximizable(false);
+        ftest.setClosable(false);
+        ftest.setResizable(false);
+        ftest.setSize(160, 700);
+        desktop.addFrame(ftest);
+        ftest.setLocation(0, Window.getClientWidth() - 160);
+        ftest.setVisible(true);
+        buildMenu();
+
     }
 
     private void buildMenu() {
+
         menuFrame = new DefaultGInternalFrame("Samples");
-        menuFrame.setTheme("alphacube");
+        menuFrame.setTheme("citrus");
         menuFrame.setClosable(false);
         menuFrame.setMaximizable(false);
-        menuFrame.setResizable(false);
         desktop.addFrame(menuFrame);
-        menuFrame.setVisible(true);
         menuFrame.setLocation(5, 5);
         VerticalPanel menuLayout = new VerticalPanel();
         menuLayout.setStyleName("gwmdemo-Menu");
@@ -76,15 +113,16 @@ public class GwmDemo implements EntryPoint {
         menuLayout.add(buildMenu("Desktop"));
         menuLayout.add(buildMenuItem(new DesktopScenarii(desktop)));
         menuLayout.add(buildMenu("Dialog"));
-        menuLayout.add(buildMenuItem(new InputDialogScenarii()));
         menuLayout.add(buildMenuItem(new WarningDialogScenarii()));
         menuLayout.add(buildMenuItem(new ErrorDialogScenarii()));
         menuLayout.add(buildMenuItem(new ConfirmDialogScenarii()));
+        menuLayout.add(buildMenuItem(new InputDialogScenarii()));
+        menuLayout.add(buildMenuItem(new ListBoxInputDialogScenarii()));
         menuLayout.add(buildMenuItem(new CustomizedDialogScenarii()));
         menuLayout.add(buildMenu("Tools"));
         menuLayout.add(buildMenuItem(new WindowEditorScenarii()));
-
         menuFrame.setContent(menuLayout);
+        menuFrame.setVisible(true);
     }
 
     private Widget buildMenu(String name) {
@@ -101,6 +139,18 @@ public class GwmDemo implements EntryPoint {
         menuItemLayout.add(scenarii.getLink());
         menuItemLayout.setStyleName("gwmdemo-MenuItem");
         return menuItemLayout;
+    }
+
+    public static GDesktopPane getDesktop() {
+        return desktop;
+    }
+
+    public static void addLog(String log) {
+        cpt++;
+        if (cpt % 10 == 0) {
+            debugContent.clear();
+        }
+        debugContent.add(new HTML(log));
     }
 
 }

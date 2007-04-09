@@ -17,6 +17,7 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.impl.DefaultGDialog;
+import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
@@ -28,7 +29,7 @@ public class WarningDialogScenarii extends AbstractScenarii {
 
     public void runScenarii() {
         DefaultGDialog.showMessage(null, "Don't forget your umbrella!. It's raining",
-                "Warning", DefaultGDialog.WARNING_MESSAGE);
+                "Warning",  DefaultGDialog.WARNING_MESSAGE , null);
     }
 
     protected Hyperlink createLink() {

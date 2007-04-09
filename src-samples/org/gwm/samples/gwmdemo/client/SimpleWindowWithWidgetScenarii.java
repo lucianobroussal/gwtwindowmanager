@@ -41,10 +41,9 @@ public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
         window.setWidth(380);
         window.setHeight(440);
         window.setLocation(65, 10);
-        window.setTheme("alphacube");
         window.setContent(buildContentWidget());
-        //window.setVisible(true);
-        window.showModal();
+        window.setVisible(true);
+//        window.showModal();
     }
 
     private Widget buildContentWidget() {
@@ -93,7 +92,6 @@ public class SimpleWindowWithWidgetScenarii extends AbstractScenarii {
         window.setWidth(800);
         window.setHeight(440);
         window.setLocation(65, 440);
-        window.setTheme("alphacube");
         window.setUrl("simplewithwidgetscenarii.html");
         window.setVisible(true);
 

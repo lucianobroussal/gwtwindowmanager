@@ -91,6 +91,10 @@ public class WindowEditor extends Composite {
         style.addItem("alphacube", "alphacube");
         style.addItem("spread", "spread");
         style.addItem("darkX", "darkX");
+        style.addItem("spa", "spa");
+        style.addItem("sky", "sky");
+        style.addItem("citrus", "citrus");
+        style.addItem("cloudy", "cloudy");
 
         ui.setSpacing(1);
         ui.add(buildPropertyEditor("Theme : ", style,
@@ -230,7 +234,7 @@ public class WindowEditor extends Composite {
                 } catch (Exception e) {
                     DefaultGDialog.showMessage(null,
                             "Please enter a number for 'width' property",
-                            "Invalid field value", DefaultGDialog.ERROR_MESSAGE);
+                            "Invalid field value",  DefaultGDialog.ERROR_MESSAGE , null);
                     return;
                 }
 
@@ -240,7 +244,7 @@ public class WindowEditor extends Composite {
                 } catch (Exception e) {
                     DefaultGDialog.showMessage(null,
                             "Please a enter number for 'heigth' property",
-                            "Invalid field value", DefaultGDialog.ERROR_MESSAGE);
+                            "Invalid field value", DefaultGDialog.ERROR_MESSAGE , null);
                     return;
                 }
 
@@ -251,7 +255,7 @@ public class WindowEditor extends Composite {
                     } catch (Exception e) {
                         DefaultGDialog.showMessage(null,
                                 "Please a enter an internet URL",
-                                "Invalid field value", DefaultGDialog.ERROR_MESSAGE);
+                                "Invalid field value", DefaultGDialog.ERROR_MESSAGE, null);
                         return;
                     }
                 }
@@ -268,7 +272,7 @@ public class WindowEditor extends Composite {
                                         null,
                                         "Please a enter number for 'mininum width' property",
                                         "Invalid field value",
-                                        DefaultGDialog.ERROR_MESSAGE);
+                                        DefaultGDialog.ERROR_MESSAGE,null);
                         return;
                     }
                 }
@@ -284,7 +288,7 @@ public class WindowEditor extends Composite {
                                         null,
                                         "Please a enter number for 'maximum width' property",
                                         "Invalid field value",
-                                        DefaultGDialog.ERROR_MESSAGE);
+                                        DefaultGDialog.ERROR_MESSAGE,  null);
                         return;
                     }
                 }
@@ -301,7 +305,7 @@ public class WindowEditor extends Composite {
                                         null,
                                         "Please a enter number for 'mininum heigth' property",
                                         "Invalid field value",
-                                        DefaultGDialog.ERROR_MESSAGE);
+                                        DefaultGDialog.ERROR_MESSAGE, null);
                         return;
                     }
                 }
@@ -318,7 +322,7 @@ public class WindowEditor extends Composite {
                                         null,
                                         "Please a enter number for 'maximum height' property",
                                         "Invalid field value",
-                                        DefaultGDialog.ERROR_MESSAGE);
+                                        DefaultGDialog.ERROR_MESSAGE,null);
                         return;
                     }
                 }
@@ -331,7 +335,7 @@ public class WindowEditor extends Composite {
                     } catch (Exception e) {
                         DefaultGDialog.showMessage(null,
                                 "Please a enter number for 'top' property",
-                                "Invalid field value", DefaultGDialog.ERROR_MESSAGE);
+                                "Invalid field value", DefaultGDialog.ERROR_MESSAGE,null);
                         return;
                     }
                 }
@@ -344,7 +348,7 @@ public class WindowEditor extends Composite {
                     } catch (Exception e) {
                         DefaultGDialog.showMessage(null,
                                 "Please a enter number for 'left' property",
-                                "Invalid field value", DefaultGDialog.ERROR_MESSAGE);
+                                "Invalid field value", DefaultGDialog.ERROR_MESSAGE,  null);
                         return;
                     }
                 }

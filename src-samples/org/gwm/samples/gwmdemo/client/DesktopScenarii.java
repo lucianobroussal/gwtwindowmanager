@@ -46,7 +46,6 @@ public class DesktopScenarii extends AbstractScenarii {
     private void buildScreenShotFrame(final String linkCaption, final String url) {
         GInternalFrame window = new DefaultGInternalFrame(linkCaption);
         window.setSize(800, 500);
-        window.setTheme("default");
         window.setUrl(url);
         desktop.addFrame(window);
         window.setVisible(true);
