@@ -33,10 +33,10 @@
 }
 
 .gwm-spa-ActionOverlay{
-	background-color: green;
-	filter:alpha(opacity=90);
-	-moz-opacity: 	0.9;
-	opacity: 0.9;
+	background-color: #85BBEF;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
 }
 
 .gwm-spa-Frame-OutlineDrag{
