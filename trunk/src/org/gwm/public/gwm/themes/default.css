@@ -1,0 +1,169 @@
+.gwm-default-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:blue;
+	font-size:10px;
+}
+.gwm-default-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-default-DialogOverlay{
+	background-color: #666666;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+.gwm-default-ActionOverlay{
+	background-color: #666666;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+.gwm-default-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-default-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background:#FDFDFD;
+}
+
+.gwm-default-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-default-Frame-TopBar-minimized {
+	background: transparent url(default/t.gif) repeat-x 0 0;	
+	background:#C7CBD1;
+	padding: 5px;
+	border: 1px dashed;
+}
+
+.gwm-default-Frame-TopBar-RestoreButton {
+	width: 23px;
+	height: 23px;
+	background: transparent url(default/restore-btn.gif) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-default-FrameBorder-tl {
+  background:  url(default/tl.gif) no-repeat top  left;			
+  width:9px;
+  height:23px;
+}
+
+.gwm-default-FrameBorder-t {
+  background: transparent url(default/t.gif) repeat-x 0 0;	
+  height:23px;
+}
+
+.gwm-default-FrameBorder-tr {
+  background: transparent url(default/tr.gif) no-repeat top right;			
+  width:9px;	  
+  height:23px;
+}
+
+.gwm-default-FrameBorder-l{
+  background: transparent url(default/l.gif) repeat-y ;			
+  background-color:#FFFFFF;
+  width:2px;
+}
+
+.gwm-default-FrameBorder-r {
+  background: transparent url(default/r.gif) repeat-y top right;			
+  background-color:#FFFFFF;
+  width:2px;
+}
+
+.gwm-default-FrameBorder-bl{
+  background: transparent url(default/bl.gif) no-repeat 0 0;			
+  width:9px;
+  height:19px;
+}
+
+.gwm-default-FrameBorder-b {
+  background: transparent url(default/b.gif) repeat-x 0 0;			
+  height:19px;
+}
+
+.gwm-default-FrameBorder-br {
+  background: transparent url(default/br.gif) no-repeat top right;			
+  width:9px;
+  height:19px;
+}
+
+.gwm-default-Frame-ResizeButton  {
+  background: transparent url(default/resize-btn.gif) no-repeat top right;			
+  width:9px;
+  height:19px;
+  cursor:se-resize;	
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-default-Frame-TopBar-CloseButton{
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(default/close-btn.gif) no-repeat center center;			
+	cursor:pointer;
+
+}
+
+.gwm-default-Frame-TopBar-CloseButton-active {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(default/close-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-default-Frame-TopBar-MinimizeButton {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(default/min-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-default-Frame-TopBar-MinimizeButton-active {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(default/min-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-default-Frame-TopBar-MaximizeButton {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(default/max-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-default-Frame-TopBar-MaximizeButton-active {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(default/max-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+
+
+
+
