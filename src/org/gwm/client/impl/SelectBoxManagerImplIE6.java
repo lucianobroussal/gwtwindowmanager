@@ -1,6 +1,7 @@
 package org.gwm.client.impl;
 
 import org.gwm.client.GFrame;
+import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GFrameAdapter;
 import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
@@ -8,9 +9,6 @@ import org.gwm.client.event.GFrameListener;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -29,26 +27,33 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
         selectBlocker.setWidth("100%");
         selectBlocker.setHeight(Window.getClientHeight()+"px");
         selectBlocker.setUrl("#");
-        DOM.setAttribute(selectBlocker.getElement(), "frameBorder", "50");
+        DOM.setAttribute(selectBlocker.getElement(), "frameBorder", "0");
         DOM.setStyleAttribute(selectBlocker.getElement(), "filter",
-                "progid:DXImageTransform.Microsoft.Alpha(opacity=50)");
+                "progid:DXImageTransform.Microsoft.Alpha(opacity=0)");
         DOM.setStyleAttribute(selectBlocker.getElement(), "border",
-                "1px solid red");
+                "0px solid blue");
         DOM.setAttribute(selectBlocker.getElement(), "scrolling", "no");
         DOM.setStyleAttribute(selectBlocker.getElement(), "position",
                 "absolute");
-//        selectBlocker.setVisible(false);
-//        RootPanel.get().add(selectBlocker);
+        selectBlocker.setVisible(false);
+        RootPanel.get().add(selectBlocker);
     }
 
     public void setBlockerVisible(boolean visible) {
         selectBlocker.setVisible(visible);
     }
 
-    public void setLocation(int top, int left) {
-        Element selectBlockerElement = selectBlocker.getElement();
-        DOM.setStyleAttribute(selectBlockerElement, "left", left + "px");
-        DOM.setStyleAttribute(selectBlockerElement, "top", top + "px");
+    public void setLocation(int top, int left, GFrame associatedFrame) {
+        if(associatedFrame instanceof GInternalFrame){
+            DefaultGDesktopPane desktop = (DefaultGDesktopPane) ((GInternalFrame) associatedFrame).getDesktopPane();
+            desktop.setWidgetLocation(selectBlocker, left, top);
+            
+        }else{
+            Element selectBlockerElement = selectBlocker.getElement();
+            DOM.setStyleAttribute(selectBlockerElement, "left", left + "px");
+            DOM.setStyleAttribute(selectBlockerElement, "top", top + "px");
+        }
+        
     }
 
     public void setBlockerSize(int width, int height) {
@@ -83,12 +88,8 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
     public void onParentDragStart(DefaultGFrame parent) {
     }
 
-    public Widget getFrameFinalUI(FlexTable ui) {
-        Window.alert("DIV");
-        AbsolutePanel panel = new AbsolutePanel();
-        panel.add(selectBlocker, 0,0);
-        panel.add(ui, 0,0);
-        return panel;
+    public Widget getBlockerWidget(){
+        return selectBlocker;
     }
 
 }

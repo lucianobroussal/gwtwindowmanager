@@ -21,6 +21,7 @@ package org.gwm.client.impl;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.user.client.DOM;
 
@@ -30,8 +31,20 @@ import com.google.gwt.user.client.DOM;
 public class DefaultGInternalFrame extends DefaultGFrame implements
         GInternalFrame {
 
+    private static final String DEFAULT_TITLE = "GInternalFrame";
+
+    private String inactiveTheme;
+
+    boolean active = false;
+
+    public DefaultGInternalFrame() {
+        this(DEFAULT_TITLE);
+    }
+
     public DefaultGInternalFrame(String caption) {
         super(caption);
+        this.inactiveTheme = GWmConstants.getDefaultTheme() + "-off";
+
     }
 
     private GDesktopPane desktopPane;
@@ -45,6 +58,10 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
     }
 
     public void minimize() {
+        if (desktopPane == null) {
+            throw new IllegalStateException(
+                    "This method can be used only if the GInternalFrame has been already attached to the parent Desktop.");
+        }
         if (desktopPane != null) {
             desktopPane.iconify(this);
             minimized = true;
@@ -52,25 +69,102 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         }
     }
 
+    public void maximize() {
+        if (desktopPane == null) {
+            throw new IllegalStateException(
+                    "This method can be used only if the GInternalFrame has been already attached to the parent Desktop.");
+        }
+
+        if (maxWidth == 0) {
+            this.width = desktopPane.getFramesContainer().getOffsetWidth();
+        } else {
+            this.width = maxWidth;
+        }
+        if (maxHeight == 0) {
+            this.height = desktopPane.getFramesContainer().getOffsetHeight();
+        } else {
+            this.height = maxHeight;
+        }
+        this.previousTop = getAbsoluteTop();
+        this.previousLeft = getAbsoluteLeft();
+        this.previousWidth = getWidth();
+        this.previousHeight = getHeight();
+        setLocation(0, 0);
+        setSize(width, height);
+        this.maximized = true;
+        fireFrameMaximized();
+    }
+
     public void setLocation(int top, int left) {
         if (desktopPane != null) {
-            ((DefaultGDesktopPane) desktopPane).setWidgetPosition(this, left,
-                    top);
+            super.setLocation(top, left);
+            if (selectBoxManager instanceof SelectBoxManagerImplIE6)
+                desktopPane.setWidgetLocation(selectBoxManager
+                        .getBlockerWidget(), left, top);
             this.top = top;
             this.left = left;
         }
     }
 
-    public GDesktopPane getParentDesktop() {
-        // TODO Auto-generated method stub
-        return null;
+    public void setVisible(boolean visible) {
+        if (desktopPane == null) {
+            throw new IllegalStateException(
+                    "This method can be used only if the GInternalFrame has been already attached to the parent Desktop.");
+        }
+        super.setVisible(visible);
+    }
+
+    public void restore() {
+        if (!minimized) {
+            super.restore();
+            return;
+        }
+        topBar.setRestored();
+        setVisible(true);
+        fireFrameRestored();
+    }
+
+    public void setInactiveTheme(String theme) {
+        this.inactiveTheme = theme;
+        if (desktopPane != null) {
+            if (desktopPane.getActiveFrame() != this) {
+                this.currentTheme = theme;
+                applyTheme();
+            }
+        }
     }
 
     protected void _show() {
+        selectBoxManager.setBlockerDeepLayer(++layerOfTheTopWindow);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
+        if (topFrame != null) {
+            GInternalFrame oldActiveFrame = desktopPane.getActiveFrame();
+            desktopPane.setActivateFrame(null);
+            oldActiveFrame.setTheme(oldActiveFrame.getTheme());
+        }
+        getDesktopPane().setActivateFrame(this);
+        this.setTheme(currentTheme);
         topFrame = this;
-        fireFrameOpened();
+        fireFrameSelected();
+    }
 
+    public void setTheme(String theme) {
+        if (!theme.endsWith("-off"))
+            this.inactiveTheme = theme + "-off";
+        if (desktopPane != null) {
+            if (getDesktopPane().getActiveFrame() == this) {
+                if(theme.endsWith("-off")){
+                    String activeTheme = theme.substring(0 , theme.length()-4);
+                    super.setTheme(activeTheme);
+                }else{
+                    super.setTheme(theme);
+                }
+            } else {
+                super.setTheme(inactiveTheme);
+            }
+        } else {
+            super.setTheme(theme);
+        }
     }
 
 }

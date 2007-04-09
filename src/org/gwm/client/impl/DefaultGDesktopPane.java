@@ -33,6 +33,7 @@ import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Widget;
 
 public class DefaultGDesktopPane extends Composite implements
         WindowResizeListener, GDesktopPane {
@@ -44,6 +45,8 @@ public class DefaultGDesktopPane extends Composite implements
     private IconBar buttonBar;
 
     private List frames;
+    
+    private GInternalFrame activeFrame;
 
     public DefaultGDesktopPane() {
         initialize();
@@ -87,8 +90,7 @@ public class DefaultGDesktopPane extends Composite implements
     }
 
     public void deIconify(GFrame theWindow) {
-        theWindow.setVisible(true);
-        ((DefaultGFrame) theWindow).fireFrameRestored();
+        theWindow.restore();
     }
 
     /**
@@ -99,12 +101,18 @@ public class DefaultGDesktopPane extends Composite implements
     public void addFrame(GInternalFrame internalFrame) {
         internalFrame.setDesktopPane(this);
         int spos = (frames.size() + 1) * 30;
-        frameContainer.add((DefaultGFrame) internalFrame, frameContainer
-                .getAbsoluteLeft()
-                + spos, frameContainer.getAbsoluteTop() + spos);
-        internalFrame.setLocation(frameContainer.getAbsoluteLeft() + spos,
-                frameContainer.getAbsoluteTop() + spos);
+        int left = frameContainer.getAbsoluteLeft() + spos;
+        int top = frameContainer.getAbsoluteTop() + spos;
+        SelectBoxManagerImpl selectBoxManager = ((DefaultGFrame) internalFrame)
+                .getSelectBoxManager();
+        if (selectBoxManager instanceof SelectBoxManagerImplIE6) {
+            frameContainer.add(selectBoxManager.getBlockerWidget(), left, top);
+        }
+        frameContainer.add((Widget)internalFrame);
+        internalFrame.setLocation(left, top);
         frames.add(internalFrame);
+        
+        
     }
 
     /**
@@ -124,8 +132,24 @@ public class DefaultGDesktopPane extends Composite implements
         buttonBar.adjustSize();
     }
 
-    public void setWidgetPosition(DefaultGFrame frame, int left, int top) {
-        frameContainer.setWidgetPosition(frame, left, top);
+    
+    public void setWidgetLocation(Widget widget, int left, int top) {
+        frameContainer.remove(widget);
+        frameContainer.add(widget);
+        frameContainer.setWidgetPosition(widget, left, top);
     }
+
+    public Widget getFramesContainer() {
+        return frameContainer;
+    }
+
+    public void setActivateFrame(GInternalFrame internalFrame) {
+        activeFrame = internalFrame;
+    }
+
+    public GInternalFrame getActiveFrame() {
+        return activeFrame;
+    }
+
 
 }
