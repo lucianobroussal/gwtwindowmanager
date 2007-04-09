@@ -1,0 +1,172 @@
+.gwm-sky-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:#FFFFFF;
+	font-size:10px;
+}
+.gwm-sky-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-sky-DialogOverlay{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-sky-ActionOverlay{
+	background-color: white;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
+}
+
+.gwm-sky-Frame-OutlineDrag{
+	background-color: #2376C1;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-sky-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background:#FDFDFD;
+}
+
+.gwm-sky-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-sky-Frame-TopBar-minimized {
+	background: transparent url(sky/t.gif) repeat-x 0 0;	
+      background:#C7CBD1;
+      padding: 5px;
+      border:1px solid #8F9ACA;
+      font-weight:bold;
+	color:#14316B;
+	font-size:10px;
+}
+
+.gwm-sky-Frame-TopBar-RestoreButton {
+	width: 19px;
+	height: 21px;
+	background: transparent url(sky/restore-btn.gif) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-sky-FrameBorder-tl {
+  background:  url(sky/tl.gif) no-repeat top  left;			
+  width:8px;
+  height:30px;
+}
+
+.gwm-sky-FrameBorder-t {
+  background: transparent url(sky/t.gif) repeat-x 0 0;	
+  background-color:#FFFFFF;
+  height:30px;
+}
+
+.gwm-sky-FrameBorder-tr {
+  background: transparent url(sky/tr.gif) no-repeat top right;			
+  width:8px;	  
+  height:30px;
+}
+
+.gwm-sky-FrameBorder-l{
+  background: transparent url(sky/l.gif) repeat-y ;			
+  background-color:#FFFFFF;
+  width:4px;
+}
+
+.gwm-sky-FrameBorder-r {
+  background: transparent url(sky/r.gif) repeat-y top right;			
+  background-color:#FFFFFF;
+  width:4px;
+}
+
+.gwm-sky-FrameBorder-bl{
+  background: transparent url(sky/bl.gif) no-repeat 0 0;			
+  width:10px;
+  height:9px;
+}
+
+.gwm-sky-FrameBorder-b {
+  background: transparent url(sky/b.gif) repeat-x 0 0;			
+  height:9px;
+}
+
+.gwm-sky-FrameBorder-br {
+  background: transparent url(sky/br.gif) no-repeat top right;			
+  width:10px;
+  height:9px;
+}
+
+.gwm-sky-Frame-ResizeButton  {
+  background: transparent url(sky/resize-btn.gif) no-repeat top right;			
+  width:10px;
+  height:9px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-sky-Frame-TopBar-CloseButton{
+	width:  19px;
+	height: 19px;
+	background: transparent url(sky/close-btn.gif) no-repeat center center;			
+	margin:1px;
+	cursor:pointer;
+
+}
+
+.gwm-sky-Frame-TopBar-CloseButton-active {
+	width:  19px;
+	height: 19px;
+	background: transparent url(sky/close-btn-on.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-sky-Frame-TopBar-MinimizeButton {
+	width:  19px;
+	height: 19px;
+	background: transparent url(sky/min-btn.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-sky-Frame-TopBar-MinimizeButton-active {
+	width:  19px;
+	height: 19px;
+	background: transparent url(sky/min-btn-on.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-sky-Frame-TopBar-MaximizeButton {
+	width:  19px;
+	height: 19px;
+	background: transparent url(sky/max-btn.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-sky-Frame-TopBar-MaximizeButton-active {
+	width:  19px;
+	height: 19px;
+	background: transparent url(sky/max-btn-on.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+
+
+
+
