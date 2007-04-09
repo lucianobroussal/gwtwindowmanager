@@ -35,4 +35,8 @@ public interface GInternalFrame extends GFrame {
      */
     public void setDesktopPane(GDesktopPane desktopPane);
 
+    
+
+
+
 }
