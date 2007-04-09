@@ -49,4 +49,13 @@ public class GFrameAdapter implements GFrameListener {
 	public void frameMoving(GFrameEvent event) {
 	}
 
+    public void frameSelected(GFrameEvent event) {
+    }
+
+    public void frameGhostMoved(int top, int left, GFrameEvent event) {
+    }
+
+    public void frameGhostMoving(int top, int left, GFrameEvent event) {
+    }
+
 }

@@ -20,8 +20,8 @@
 
 package org.gwm.client.event;
 
-import org.gwm.client.impl.DefaultGDialog;
+import org.gwm.client.GDialog;
 
 public interface GDialogChoiceListener {
-    public void onChoice(DefaultGDialog dialog);
+    public void onChoice(GDialog dialog);
 }
