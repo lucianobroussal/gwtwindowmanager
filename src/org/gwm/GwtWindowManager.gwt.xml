@@ -35,4 +35,30 @@
 		<when-type-is class="org.gwm.client.impl.TopBar"/>
 		<when-property-is name="user.agent" value="gecko1_8"/>
 	</replace-with>
+	
+ 	<!--*********************  DEFAULT REQUIRED GWM CSS ***********************-->	
+ 	<stylesheet src="gwm/gwm.css"/>
+ 	<stylesheet src="gwm/themes/default.css"/>
+ 	<stylesheet src="gwm/themes/default-off.css"/>
+ 	
+ 	
+ 	<!--*********************  DEFAULT REQUIRED JAVASCRIPT (EFFECTS) **********-->	
+ 	<script src="gwm/ext/scripts/prototype.js">
+     <![CDATA[
+     if ($wnd.$)
+       return true;
+     else
+       return false;
+   ]]>
+   </script>
+   <script src="gwm/ext/scripts/effects.js">
+     <![CDATA[
+     if ($wnd.Effect){
+       return true;
+       }
+     else
+       return false;
+   ]]>
+   </script> 
+ 	
 </module>
