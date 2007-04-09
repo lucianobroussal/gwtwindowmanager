@@ -1,0 +1,172 @@
+.gwm-cloudy-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:#14316B;
+	font-size:10px;
+}
+.gwm-cloudy-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-cloudy-DialogOverlay{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-cloudy-ActionOverlay{
+	background-color: white;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
+}
+
+.gwm-cloudy-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-cloudy-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background:#FDFDFD;
+}
+
+.gwm-cloudy-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-cloudy-Frame-TopBar-minimized {
+	background: transparent url(cloudy/t.gif) repeat-x 0 0;	
+      background:#C7CBD1;
+      padding: 5px;
+      border:1px solid #8F9ACA;
+      font-weight:bold;
+	color:#14316B;
+	font-size:10px;
+}
+
+.gwm-cloudy-Frame-TopBar-RestoreButton {
+	width: 14px;
+	height: 21px;
+	background: transparent url(cloudy/restore-btn.gif) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-cloudy-FrameBorder-tl {
+  background:  url(cloudy/tl.gif) no-repeat top  left;			
+  width:5px;
+  height:21px;
+}
+
+.gwm-cloudy-FrameBorder-t {
+  background: transparent url(cloudy/t.gif) repeat-x 0 0;	
+  background-color:#FFFFFF;
+  height:21px;
+}
+
+.gwm-cloudy-FrameBorder-tr {
+  background: transparent url(cloudy/tr.gif) no-repeat top right;			
+  width:5px;	  
+  height:21px;
+}
+
+.gwm-cloudy-FrameBorder-l{
+  background: transparent url(cloudy/l.gif) repeat-y ;			
+  background-color:#FFFFFF;
+  width:7px;
+}
+
+.gwm-cloudy-FrameBorder-r {
+  background: transparent url(cloudy/r.gif) repeat-y top right;			
+  background-color:#FFFFFF;
+  width:7px;
+}
+
+.gwm-cloudy-FrameBorder-bl{
+  background: transparent url(cloudy/bl.gif) no-repeat 0 0;			
+  width:7px;
+  height:7px;
+}
+
+.gwm-cloudy-FrameBorder-b {
+  background: transparent url(cloudy/b.gif) repeat-x 0 0;			
+  height:7px;
+}
+
+.gwm-cloudy-FrameBorder-br {
+  background: transparent url(cloudy/br.gif) no-repeat top right;			
+  width:7px;
+  height:7px;
+}
+
+.gwm-cloudy-Frame-ResizeButton  {
+  background: transparent url(cloudy/resize-btn.gif) no-repeat top right;			
+  width:7px;
+  height:7px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-cloudy-Frame-TopBar-CloseButton{
+	width:  14px;
+	height: 14px;
+	background: transparent url(cloudy/close-btn.gif) no-repeat center center;			
+	margin:1px;
+	cursor:pointer;
+
+}
+
+.gwm-cloudy-Frame-TopBar-CloseButton-active {
+	width:  14px;
+	height: 14px;
+	background: transparent url(cloudy/close-btn-on.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-cloudy-Frame-TopBar-MinimizeButton {
+	width:  14px;
+	height: 14px;
+	background: transparent url(cloudy/min-btn.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-cloudy-Frame-TopBar-MinimizeButton-active {
+	width:  14px;
+	height: 14px;
+	background: transparent url(cloudy/min-btn-on.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-cloudy-Frame-TopBar-MaximizeButton {
+	width:  14px;
+	height: 14px;
+	background: transparent url(cloudy/max-btn.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+.gwm-cloudy-Frame-TopBar-MaximizeButton-active {
+	width:  14px;
+	height: 14px;
+	background: transparent url(cloudy/max-btn-on.gif) no-repeat  center center;			
+	margin:1px;
+	cursor:pointer;
+}
+
+
+
+
+

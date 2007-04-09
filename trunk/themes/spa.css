@@ -1,0 +1,172 @@
+.gwm-spa-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:#FFFFFF;
+	font-size:10px;
+}
+.gwm-spa-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-spa-DialogOverlay{
+	background-color: red;
+	filter:alpha(opacity=90);
+	-moz-opacity: 	0.9;
+	opacity: 0.9;
+}
+
+.gwm-spa-ActionOverlay{
+	background-color: green;
+	filter:alpha(opacity=90);
+	-moz-opacity: 	0.9;
+	opacity: 0.9;
+}
+
+.gwm-spa-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-spa-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background:#FDFDFD;
+}
+
+.gwm-spa-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-spa-Frame-TopBar-minimized {
+	background: transparent url(spa/t.gif) repeat-x 0 0;	
+    background:#4a8ed6;
+    padding: 5px;
+    border:1px solid #8F9ACA;
+    font-weight:bold;
+	color:#FFFFFF;
+	font-size:10px;
+}
+
+.gwm-spa-Frame-TopBar-RestoreButton {
+	width: 14px;
+	height: 12px;
+	background: transparent url(spa/restore-btn.gif) no-repeat 0 center;
+	background-color:#CCCCCC;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-spa-FrameBorder-tl {
+  background:  url(spa/tl.gif) no-repeat top  left;			
+  width:4px;
+  height:26px;
+}
+
+.gwm-spa-FrameBorder-t {
+  background: transparent url(spa/t.gif) repeat-x 0 0;	
+  height:21px;
+}
+
+.gwm-spa-FrameBorder-tr {
+  background: transparent url(spa/tr.gif) no-repeat top right;			
+  width:4px;	  
+  height:26px;
+}
+
+.gwm-spa-FrameBorder-l{
+  background: transparent url(spa/l.gif) repeat-y ;			
+  width:4px;
+  background-color:white;
+}
+
+.gwm-spa-FrameBorder-r {
+  background: transparent url(spa/r.gif) repeat-y top right;			
+  width:4px;
+  background-color:white;	  
+}
+
+.gwm-spa-FrameBorder-bl{
+  background: transparent url(spa/bl.gif) no-repeat 0 0;			
+  width:4px;
+  height:4px;
+}
+
+.gwm-spa-FrameBorder-b {
+  background: transparent url(spa/b.gif) repeat-x 0 0;			
+  height:4px;
+}
+
+.gwm-spa-FrameBorder-br {
+  background: transparent url(spa/br.gif) no-repeat top right;			
+  width:4px;
+  height:4px;
+}
+
+.gwm-spa-Frame-ResizeButton  {
+  background: transparent url(spa/resize-btn.gif) no-repeat top right;			
+  width:4px;
+  height:4px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-spa-Frame-TopBar-CloseButton{
+	width: 12px;
+	height: 14px;
+	margin-left:5px;
+	background: transparent url(spa/close-btn.gif) no-repeat center center;			
+	cursor:pointer;
+
+}
+
+.gwm-spa-Frame-TopBar-CloseButton-active {
+	width: 12px;
+	height: 14px;
+	margin-left:5px;
+	background: transparent url(spa/close-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spa-Frame-TopBar-MinimizeButton {
+	width: 12px;
+	height: 14px;
+	margin-left:5px;
+	background: transparent url(spa/min-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spa-Frame-TopBar-MinimizeButton-active {
+	width: 12px;
+	height: 14px;
+	margin-left:5px;
+	background: transparent url(spa/min-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spa-Frame-TopBar-MaximizeButton {
+	width: 12px;
+	height: 14px;
+	margin-left:5px;
+	background: transparent url(spa/max-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spa-Frame-TopBar-MaximizeButton-active {
+	width: 12px;
+	height: 14px;
+	margin-left:5px;
+	background: transparent url(spa/max-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+
+
+
+
