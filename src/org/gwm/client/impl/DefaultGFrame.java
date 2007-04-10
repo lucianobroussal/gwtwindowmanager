@@ -594,9 +594,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         }
     }
 
-    public void setMaximized(boolean v) {
-    }
-
     /**
      * Fires the event of the resizing of this frame to its listeners.
      */
