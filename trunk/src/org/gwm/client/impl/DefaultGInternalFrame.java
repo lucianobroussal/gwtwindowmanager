@@ -142,7 +142,7 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
     protected void _show() {
         selectBoxManager.setBlockerDeepLayer(++layerOfTheTopWindow);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
-        if (topFrame != null) {
+        if (desktopPane.getActiveFrame() != null) {
             GInternalFrame oldActiveFrame = desktopPane.getActiveFrame();
             desktopPane.setActivateFrame(null);
             oldActiveFrame.setTheme(oldActiveFrame.getTheme());
