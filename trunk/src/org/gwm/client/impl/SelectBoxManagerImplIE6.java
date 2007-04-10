@@ -1,5 +1,6 @@
 package org.gwm.client.impl;
 
+import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GFrameAdapter;
@@ -45,7 +46,7 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
 
     public void setLocation(int top, int left, GFrame associatedFrame) {
         if(associatedFrame instanceof GInternalFrame){
-            DefaultGDesktopPane desktop = (DefaultGDesktopPane) ((GInternalFrame) associatedFrame).getDesktopPane();
+            GDesktopPane desktop = ((GInternalFrame) associatedFrame).getDesktopPane();
             desktop.setWidgetLocation(selectBlocker, left, top);
             
         }else{

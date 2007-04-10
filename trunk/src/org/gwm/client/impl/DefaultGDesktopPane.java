@@ -28,6 +28,7 @@ import java.util.List;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -47,6 +48,8 @@ public class DefaultGDesktopPane extends Composite implements
     private List frames;
     
     private GInternalFrame activeFrame;
+
+    private String theme = GWmConstants.getDefaultTheme();
 
     public DefaultGDesktopPane() {
         initialize();
@@ -84,13 +87,14 @@ public class DefaultGDesktopPane extends Composite implements
 
     }
 
-    public void iconify(GFrame theWindow) {
-        theWindow.setVisible(false);
-        buttonBar.addWindow(theWindow);
+    public void iconify(GFrame frame) {
+        frame.setVisible(false);
+        buttonBar.addFrame(frame);
     }
 
-    public void deIconify(GFrame theWindow) {
-        theWindow.restore();
+    public void deIconify(GFrame frame) {
+        buttonBar.removeFrame(frame);
+        frame.restore();
     }
 
     /**
@@ -111,7 +115,18 @@ public class DefaultGDesktopPane extends Composite implements
         frameContainer.add((Widget)internalFrame);
         internalFrame.setLocation(left, top);
         frames.add(internalFrame);
-        
+        internalFrame.setTheme(theme);
+    }
+    
+    public void removeFrame(GInternalFrame internalFrame) {
+        frameContainer.remove((Widget)internalFrame);
+        SelectBoxManagerImpl selectBoxManager = ((DefaultGFrame) internalFrame)
+        .getSelectBoxManager();
+        if (selectBoxManager instanceof SelectBoxManagerImplIE6) {
+            frameContainer.remove(selectBoxManager.getBlockerWidget());
+        }
+        frames.remove(internalFrame);
+        buttonBar.removeFrame(internalFrame);
         
     }
 
@@ -151,5 +166,13 @@ public class DefaultGDesktopPane extends Composite implements
         return activeFrame;
     }
 
-
+    public void setTheme(String theme) {
+       this.theme = theme;
+       for (int x = 0; x < frames.size(); x++) {
+           GInternalFrame theFrame = (GInternalFrame) frames.get(x);
+           theFrame.setTheme(theme);
+       }
+    }
+    
+    
 }

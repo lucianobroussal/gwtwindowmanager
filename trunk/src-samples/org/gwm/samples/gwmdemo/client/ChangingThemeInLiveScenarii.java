@@ -73,13 +73,7 @@ public class ChangingThemeInLiveScenarii extends AbstractScenarii {
             public void onChange(Widget sender) {
                 String theme = getCurrentTheme();
                 window.setTheme(theme);
-                List frames = GwmDemo.getDesktop().getAllFrames();
-                for (Iterator iter = frames.iterator(); iter.hasNext();) {
-                    GInternalFrame frame = (GInternalFrame) iter.next();
-                    GInternalFrame activeFrame = GwmDemo.getDesktop().getActiveFrame();
-                    frame.setTheme(theme);
-                    
-                }
+              GwmDemo.getDesktop().setTheme(theme);
             }
 
         });

@@ -111,6 +111,10 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
             throw new IllegalStateException(
                     "This method can be used only if the GInternalFrame has been already attached to the parent Desktop.");
         }
+        if(minimized){
+            throw new IllegalStateException(
+            "The Frame is minimized : use the getDesktopPane().deIconify() intead to restore the frame.");            
+        }
         super.setVisible(visible);
     }
 
@@ -119,6 +123,7 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
             super.restore();
             return;
         }
+        minimized = false;
         topBar.setRestored();
         setVisible(true);
         fireFrameRestored();
@@ -167,4 +172,14 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         }
     }
 
+    public void close() {
+        if(!minimized){
+            super.close();
+        }
+        if(desktopPane != null){
+            desktopPane.removeFrame(this);
+        }
+       
+    }
+    
 }

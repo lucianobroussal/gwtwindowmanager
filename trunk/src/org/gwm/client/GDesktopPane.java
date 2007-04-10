@@ -21,6 +21,8 @@ package org.gwm.client;
 
 import java.util.List;
 
+import org.gwm.client.impl.DefaultGInternalFrame;
+
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -39,6 +41,8 @@ public interface GDesktopPane {
      */
     public void addFrame(GInternalFrame internalFrame);
     
+    
+    public void removeFrame(GInternalFrame internalFrame);
     
     /**
      * Closes all GInternalFrames contained in this GDesktopPane.
@@ -72,6 +76,9 @@ public interface GDesktopPane {
     public GInternalFrame getActiveFrame();
     
     public void setActivateFrame(GInternalFrame internalFrame);
+
+    public void setTheme(String theme);
+  
     
     
 }

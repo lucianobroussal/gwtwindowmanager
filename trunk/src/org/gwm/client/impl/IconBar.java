@@ -39,6 +39,10 @@ public class IconBar extends FlowPanel {
 
     Map buttonFrame;
 
+    Map buttonByFrame;
+
+    Map iconByFrame;
+
     Map buttonIcon;
 
     public IconBar(GDesktopPane parent) {
@@ -46,21 +50,23 @@ public class IconBar extends FlowPanel {
         this.parent = parent;
         this.buttonFrame = new HashMap();
         this.buttonIcon = new HashMap();
+        this.buttonByFrame = new HashMap();
+        this.iconByFrame = new HashMap();
+
     }
 
-   
-
-    public void addWindow(GFrame gframe) {
+    public void addFrame(GFrame gframe) {
         DefaultGFrame frame = (DefaultGFrame) (gframe);
         HorizontalPanel icon = new HorizontalPanel();
 
         HorizontalPanel iconLayout = new HorizontalPanel();
-        icon.setStyleName(getItemTheme(frame,"DeskTop-MinimizedFrameBar"));
+        icon.setStyleName(getItemTheme(frame, "DeskTop-MinimizedFrameBar"));
         Label label = new Label(frame.getCaption());
-        label.setStyleName(getItemTheme(gframe,"Frame-TopBar-minimized"));
+        label.setStyleName(getItemTheme(gframe, "Frame-TopBar-minimized"));
         Label restoreButton = new Label("");
-        restoreButton.setStyleName(getItemTheme(gframe,"Frame-TopBar-RestoreButton"));
-        
+        restoreButton.setStyleName(getItemTheme(gframe,
+                "Frame-TopBar-RestoreButton"));
+
         Image titleIcon = frame.getTitleIcon();
         if (titleIcon != null) {
             iconLayout.add(titleIcon);
@@ -72,16 +78,17 @@ public class IconBar extends FlowPanel {
         icon.add(restoreButton);
         buttonFrame.put(restoreButton, frame);
         buttonIcon.put(restoreButton, icon);
+        buttonByFrame.put(frame, restoreButton);
+        iconByFrame.put(frame, icon);
         this.add(icon);
         restoreButton.addClickListener(new ClickListener() {
             public void onClick(Widget sender) {
                 GFrame myFrame = (GFrame) buttonFrame.get(sender);
-                buttonFrame.remove(sender);
-                HorizontalPanel hpicon = (HorizontalPanel) buttonIcon
-                        .get(sender);
-                remove(hpicon);
+//                buttonFrame.remove(sender);
+//                HorizontalPanel hpicon = (HorizontalPanel) buttonIcon
+//                        .get(sender);
+//                remove(hpicon);
                 parent.deIconify(myFrame);
-
             }
         });
     }
@@ -89,9 +96,15 @@ public class IconBar extends FlowPanel {
     public void adjustSize() {
     }
 
+    public void removeFrame(GFrame frame) {
+        iconByFrame.remove(frame);
+        Object button = buttonByFrame.remove(frame);
+        Object o = buttonFrame.remove(button);
+        HorizontalPanel hpicon = (HorizontalPanel) buttonIcon.remove(button);
+        remove(hpicon);
+    }
+
     private String getItemTheme(GFrame parent, String item) {
         return "gwm-" + parent.getTheme() + "-" + item;
     }
-
-
 }
