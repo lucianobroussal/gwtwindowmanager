@@ -72,14 +72,15 @@ public class DefaultGDesktopPane extends Composite implements
         buttonBar = new IconBar(this);
         desktopWidget.getFlexCellFormatter().setHeight(0, 0, "100%");
         desktopWidget.setWidget(0, 0, frameContainer);
-        frameContainer.setStyleName("gwm-GDesktopPane-FrameContainer");
+        frameContainer.setStyleName("gwm-"+ theme + "-GDesktopPane-FrameContainer");
 
         desktopWidget.setWidget(1, 0, buttonBar);
         desktopWidget.getFlexCellFormatter().setStyleName(1, 0,
-                "gwm-GDesktopPane-TaskBar");
+                "gwm-"+ theme + "-GDesktopPane-TaskBar");
 
         initWidget(desktopWidget);
-        setStyleName("gwm-GDesktopPane");
+        setStyleName("gwm-"+ theme + "-GDesktopPane");
+        theme = GWmConstants.getDefaultTheme();
 
     }
 
@@ -172,6 +173,11 @@ public class DefaultGDesktopPane extends Composite implements
            GInternalFrame theFrame = (GInternalFrame) frames.get(x);
            theFrame.setTheme(theme);
        }
+       frameContainer.setStyleName("gwm-"+ theme + "-GDesktopPane-FrameContainer");
+
+       desktopWidget.getFlexCellFormatter().setStyleName(1, 0,
+               "gwm-"+ theme + "-GDesktopPane-TaskBar");
+       setStyleName("gwm-"+ theme + "-GDesktopPane");
     }
     
     
