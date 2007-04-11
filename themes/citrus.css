@@ -181,6 +181,29 @@
 	cursor:pointer;
 }
 
+/**************************************   DESKTOP **************************/
+ .gwm-citrus-GDesktopPane{
+	background-image: url("citrus/desktop-bg.jpg");
+  	overflow: hidden;
+  	width: 100%;
+  	height:100%;
+}
+.gwm-citrus-GDesktopPane-FrameContainer{
+	overflow: hidden;
+  	width: 100%;
+  	height: 100%;
+}
+
+
+.gwm-citrus-GDesktopPane-TaskBar{
+	background-color: #EFEFFF;
+	filter:alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+
+	height:30px;
+	align-text:left;
+}
 
 
 
