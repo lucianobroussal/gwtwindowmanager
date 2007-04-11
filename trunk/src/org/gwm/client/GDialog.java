@@ -21,7 +21,6 @@
 package org.gwm.client;
 
 import org.gwm.client.event.GDialogChoiceListener;
-import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGDialog.Option;
 
 import com.google.gwt.user.client.ui.Image;
@@ -65,48 +64,111 @@ public interface GDialog extends GFrame {
     public static final String CANCEL_OPTION_LABEL = "Cancel";
 
     /**
-     * Shows the DefaultGDialog.
+     * Shows the dialog.
      * 
      */
     public void show();
 
+    /**
+     * Sets the message type : ERROR_MESSAGE, INFORMATION_MESSAGE ... Implied
+     * the built-in icon that will be displayed if no one is provided.
+     * 
+     * @param messageType
+     */
     public void setMessageType(int messageType);
 
+    /**
+     * @return the message type.
+     */
     public int getMessageType();
 
+    /**
+     * Define the user possibles actions.
+     * 
+     * @param optionType
+     *            the predifined option type values, eg : YES_NO_OPTION_TYPE
+     * @param options
+     *            the button captions (usefull for i18n)
+     */
     public void setOptions(int optionType, Object[] options);
 
+    /**
+     * @return the options.
+     */
     public Object[] getOptions();
 
+    /**
+     * @return the option type.
+     */
     public int getOptionType();
 
+    /**
+     * Sets the callback that will be called when user click an option button.
+     * 
+     * @param choiceListener
+     */
     public void setGDialogChoiceListener(GDialogChoiceListener choiceListener);
 
+    /**
+     * Sets the message to diplay.
+     * 
+     * @param message
+     */
     public void setMessage(Object message);
 
+    /**
+     * @return the message
+     */
     public Object getMessage();
 
+    /**
+     * The selected value for input dialog type.
+     * @return
+     */
     public Object getSelectedValue();
 
+    /**
+     * @return the option button activated by the user.
+     */
     public Object getSelectedOption();
 
+    /**
+     * The relative parent. If provided the dialog is diplayed at its center.
+     * @param parent 
+     */
     public void setParent(UIObject parent);
 
+    /**
+     * Overrides the built-in image.
+     * @param icon
+     */
     public void setIcon(Image icon);
 
+    /**
+     * @return the user provider image.
+     */
     public Image getIcon();
 
+    /**
+     * The values that the user can choose. => build a ListBox with these values.
+     * @param selectionValues
+     */
     public void setSelectionValues(Object[] selectionValues);
 
+    /**
+     * @return the available choice diplayed in the dialog.
+     */
     public Object[] getSelectionValues();
 
+    /**
+     * The initial choice : this is linked with the setSelectionValues()
+     * @param initialValue
+     */
     public void setInitialValue(Object initialValue);
 
+    /**
+     * @return The default choice among the possibles values.
+     */
     public Object getInitialValue();
-
-    public void setValue(Object value);
-
-    public Object getValue();
-    
 
 }

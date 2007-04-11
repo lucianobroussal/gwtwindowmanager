@@ -91,7 +91,7 @@ public class WindowEditor extends Composite {
         style.addItem("alphacube", "alphacube");
         style.addItem("spread", "spread");
         style.addItem("darkX", "darkX");
-        style.addItem("spa", "spa");
+        style.addItem("mac", "mac");
         style.addItem("sky", "sky");
         style.addItem("citrus", "citrus");
         style.addItem("cloudy", "cloudy");

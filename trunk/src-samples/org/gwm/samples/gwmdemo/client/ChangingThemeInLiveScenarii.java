@@ -16,12 +16,7 @@
  */
 package org.gwm.samples.gwmdemo.client;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 import org.gwm.client.util.GwmUtilities;
 
@@ -58,7 +53,7 @@ public class ChangingThemeInLiveScenarii extends AbstractScenarii {
         themesList.addItem("alphacube", "alphacube");
         themesList.addItem("spread", "spread");
         themesList.addItem("darkX", "darkX");
-        themesList.addItem("spa", "spa");
+        themesList.addItem("mac", "mac");
         themesList.addItem("sky", "sky");
         themesList.addItem("citrus", "citrus");
         themesList.addItem("cloudy", "cloudy");

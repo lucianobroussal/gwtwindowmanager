@@ -21,31 +21,37 @@ package org.gwm.client;
 
 import java.util.List;
 
-import org.gwm.client.impl.DefaultGInternalFrame;
-
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A container used to create a multiple-document interface or a virtual
  * desktop. You create <code>GFrame</code> objects and add them to the
  * <code>GDesktopPane</code>.
+ * 
+ * CSS attributes: gwm-theme-GDesktopPane gwm-theme-GDesktopPane-FrameContainer
+ * gwm-theme-GDesktopPane-TaskBar
+ * 
  */
 public interface GDesktopPane {
 
     /**
-     * Adds a new GFrame to this GDesktopPane and select it if its the first
-     * one.
+     * Adds a new frame to this desktop
      * 
      * @param internalFrame
-     *            The GFrame to be added.
+     *            The frame to be added.
      */
     public void addFrame(GInternalFrame internalFrame);
-    
-    
-    public void removeFrame(GInternalFrame internalFrame);
-    
+
     /**
-     * Closes all GInternalFrames contained in this GDesktopPane.
+     * Adds a new frame to this desktop
+     * 
+     * @param internalFrame
+     *            The frame to be removed.
+     */
+    public void removeFrame(GInternalFrame internalFrame);
+
+    /**
+     * Closes all frames contained in this desktop.
      */
     public void closeAllFrames();
 
@@ -55,30 +61,55 @@ public interface GDesktopPane {
     public List getAllFrames();
 
     /**
-     * Minimize a determinated window.
+     * Minimize a frame.
      * 
      * @param internalFrame
      */
     public void iconify(GFrame internalFrame);
 
     /**
-     * Restore the minimized window to its original state.
+     * Restore a frame state.
      * 
      * @param minimizedWindow
      */
-    public void deIconify(GFrame minimizedWindow);
-    
-    
-    public void setWidgetLocation(Widget widget , int top , int left);
+    public void deIconify(GFrame internalFrame);
+
+    /**
+     * Allows the add to any widget into the desktop.
+     * 
+     * @param widget
+     * @param top
+     * @param left
+     */
+    public void setWidgetLocation(Widget widget, int top, int left);
 
     public Widget getFramesContainer();
-    
+
+    /**
+     * @return the actual active frame or null;
+     */
     public GInternalFrame getActiveFrame();
-    
+
+    /**
+     * Activates a frame.
+     * 
+     * @param internalFrame
+     */
     public void setActivateFrame(GInternalFrame internalFrame);
 
+    /**
+     * Sets the desktop theme. This theme is propagated to all the frames of the
+     * desktop. 
+     * 
+     * Desktop dedicated CSS attributes: 
+     * gwm-theme-GDesktopPane
+     * gwm-theme-GDesktopPane-FrameContainer 
+     * gwm-theme-GDesktopPane-TaskBar
+     * 
+     * 
+     * @param theme the desktop theme
+     * 
+     */
     public void setTheme(String theme);
-  
-    
-    
+
 }
