@@ -85,7 +85,7 @@ public class GwmDemo implements EntryPoint {
         ftest.setSize(160, 700);
         desktop.addFrame(ftest);
         ftest.setLocation(0, Window.getClientWidth() - 160);
-        ftest.setVisible(true);
+        //ftest.setVisible(true);
         buildMenu();
 
     }

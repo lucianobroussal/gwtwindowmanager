@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.Image;
 
 public abstract class GWmConstants {
 
-    private static String defaultTheme = "spa";
+    private static String defaultTheme = "default";
 
     private static Image windowTitleIcon = new PNGImage(
             "gwm/images/window.png", 12, 12);
