@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
- * (http://www.gwtwindowmanager.org)
+ * (http://www.gwtframemanager.org)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -27,25 +27,29 @@ import com.google.gwt.user.client.ui.Widget;
 public interface GFrame {
 
     /**
-     * Permits to change the property style on a window.
+     * Change the frame look & feel theme.
      * 
      * @param theme
      */
     public void setTheme(String theme);
     
    
+    /**
+     * @return the actual frame look & feel theme.
+     */
+    public String getTheme();
 
     /**
-     * Shows window at its current position.
+     * Shows the frame at its current position.
      * 
      */
     public void setVisible(boolean isVisible);
 
     /**
-     * Sets window content using an existing Widget.
+     * Sets the frame content using an existing Widget.
      * 
      * @param widget
-     *            the content to show into the window
+     *            the content to show into the frame
      * @see <a
      *      href="http://code.google.com/webtoolkit/documentation/com.google.gwt.user.client.ui.Widget.html">GWT
      *      Widget</a>
@@ -53,90 +57,90 @@ public interface GFrame {
     public void setContent(Widget theContent);
 
     /**
-     * Sets window content using an Plain-Text or Html code.
+     * Sets the frame content using an Plain-Text or Html code.
      * 
      * @param content
-     *            the content to show into the window
+     *            the content to show into the frame
      */
     public void setContent(String content);
 
     /**
-     * Return the content of this window.
+     * Return the content of this frame.
      * 
      * @return
      */
     public Widget getContent();
 
     /**
-     * Window destructor.
+     * The frame destructor.
      */
     public void close();
 
     /**
-     * Sets if the window is resizable.
+     * Sets if the frame is resizable.
      * 
      * @param resizable
      */
     public void setResizable(boolean resizable);
 
     /**
-     * Sets if the window is closable.
+     * Sets if the frame is closable.
      * 
      * @param closable
      */
     public void setClosable(boolean closable);
 
     /**
-     * Sets the window's minimizable state.
+     * Sets the frame's minimizable state.
      * 
      * @param minimizable
      */
     public void setMinimizable(boolean minimizable);
 
     /**
-     * Returns the window minimizable state.
+     * Returns the frame minimizable state.
      */
     public boolean isMinimizable();
 
     /**
-     * Sets the window's maximizable state.
+     * Sets the frame's maximizable state.
      * 
      * @param maximizable
      */
     public void setMaximizable(boolean maximizable);
 
     /**
-     * Returns the window draggable state.
+     * Returns the frame draggable state.
      * 
      * @return
      */
     public boolean isDraggable();
 
     /**
-     * Returns the window maximizable state.
+     * Returns the frame maximizable state.
      * 
      * @return
      */
     public boolean isMaximizable();
 
     /**
-     * Sets if the window is draggable.
+     * Sets if the frame is draggable.
      * 
      * @param draggable
      */
     public void setDraggable(boolean draggable);
 
     /**
-     * Provides the window minimized status.
+     * Provides the frame minimized status.
      * 
-     * @return Returns true if the window is minimized
+     * @return Returns true if the frame is minimized
      */
     public boolean isMinimized();
 
     /**
-     * Provides the window maximized status.
+     * Provides the frame maximized status.
      * 
-     * @return Returns true if the window is maximized
+     * @return Returns true if the frame is maximized
      */
     public boolean isMaximized();
 
@@ -157,7 +161,7 @@ public interface GFrame {
     public void restore();
 
     /**
-     * Sets window top-left position.
+     * Sets frame top-left position.
      * 
      * @param top
      *            Top position in pixels
@@ -167,7 +171,7 @@ public interface GFrame {
     public void setLocation(int top, int left);
 
     /**
-     * Sets window content size.
+     * Sets frame content size.
      * 
      * @param width
      *            Width in pixels
@@ -177,7 +181,7 @@ public interface GFrame {
     public void setSize(int width, int height);
 
     /**
-     * Sets window width.
+     * Sets frame width.
      * 
      * @param width
      *            Width in pixels
@@ -185,14 +189,14 @@ public interface GFrame {
     public void setWidth(int width);
 
     /**
-     * Returns the window's width.
+     * Returns the frame's width.
      * 
      * @return
      */
     public int getWidth();
 
     /**
-     * Sets window height.
+     * Sets frame height.
      * 
      * @param height
      *            Height in pixels
@@ -200,14 +204,14 @@ public interface GFrame {
     public void setHeight(int height);
 
     /**
-     * Returns the window's height.
+     * Returns the frame's height.
      * 
      * @return
      */
     public int getHeight();
 
     /**
-     * Sets the minimum window width.
+     * Sets the minimum frame width.
      * 
      * @param minWidth
      *            minWidth in pixels
@@ -215,7 +219,7 @@ public interface GFrame {
     public void setMinimumWidth(int minWidth);
 
     /**
-     * Sets the minimum window height.
+     * Sets the minimum frame height.
      * 
      * @param minHeight
      *            minHeight in pixels
@@ -223,7 +227,7 @@ public interface GFrame {
     public void setMinimumHeight(int minHeight);
 
     /**
-     * Sets the maximum window width.
+     * Sets the maximum frame width.
      * 
      * @param maxWidth
      *            maxWidth in pixels
@@ -231,7 +235,7 @@ public interface GFrame {
     public void setMaximumWidth(int maxWidth);
 
     /**
-     * Sets the maximum window height.
+     * Sets the maximum frame height.
      * 
      * @param maxHeight
      *            maxHeight in pixels
@@ -239,28 +243,28 @@ public interface GFrame {
     public void setMaximumHeight(int maxHeight);
 
     /**
-     * Returns the window's minimum height.
+     * Returns the frame's minimum height.
      * 
      * @return
      */
     public int getMinimumHeight();
 
     /**
-     * Returns the window's minimum width.
+     * Returns the frame's minimum width.
      * 
      * @return
      */
     public int getMinimumWidth();
 
     /**
-     * Returns the window's maximum height.
+     * Returns the frame's maximum height.
      * 
      * @return
      */
     public int getMaximumHeight();
 
     /**
-     * Returns the window's maximum width.
+     * Returns the frame's maximum width.
      * 
      * @return
      */
@@ -297,22 +301,22 @@ public interface GFrame {
     public int getLeft();
 
     /**
-     * Sets window title.
+     * Sets frame title.
      * 
      * @param caption
-     *            Window title
+     *            frame title
      */
     public void setCaption(String caption);
 
     /**
-     * Gets window title.
+     * Gets frame title.
      * 
-     * @return title Window title
+     * @return title frame title
      */
     public String getCaption();
 
     /**
-     * Sets the URL of window content.
+     * Sets the URL of frame content.
      * 
      * @param url
      *            to display.
@@ -336,34 +340,29 @@ public interface GFrame {
     public void removeGFrameListener(GFrameListener listener);
     
     /**
-     * Show the frame in modal mode
-     *
+     * Show the frame with modal effect.
      */
     public void showModal();
     
     /**
      * Set the frame drag mode
-     * @param outline true displays a ghost during frame draging
-     * false the window itself is dragged
+     * @param outline true displays a ghost during frame dragging. (default:true)
+     * false the full frame itself is visible during the drag action.
      */
     
     public void setOutlineDragMode(boolean outline);
+    
     /**
-     * Return the frame drag mode
+     * Return the frame visibility during the drag action.
      * @return
      */
     public boolean isDragOutline();
     
     
+    /**
+     * Updates the frame size (usefull specially on IE if you dynamically change the content of the frame).  
+     */
     public void updateSize();
     
-    
-    public void  setTitleIcon(Image icon);
-    
-    public Image getTitleIcon();
-    
-    public String getTheme();
-    
-
-    
+        
 }

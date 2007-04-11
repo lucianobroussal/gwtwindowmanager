@@ -25,13 +25,12 @@ package org.gwm.client;
 public interface GInternalFrame extends GFrame {
     /**
      * Returns the GDesktopPane which owns this GInternalFrame
-     * 
-     * @return
+     * @return the desktop
      */
     public GDesktopPane getDesktopPane();
 
     /**
-     * Sets the GDesktopPane which owns this GInternalFrame
+     * Sets the GDesktopPane which owns this GInternalFrame. Should never be called except in the GInternalFrame implementation.
      */
     public void setDesktopPane(GDesktopPane desktopPane);
 

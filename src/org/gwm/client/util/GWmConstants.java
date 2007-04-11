@@ -33,6 +33,12 @@ public abstract class GWmConstants {
 
     private static boolean overlayLayerDisplayOnDragAction = true;
 
+    /**
+     * Defines the default application icon displayed in the frame topbar. Not
+     * supported
+     * 
+     * @param windowTitleIcon
+     */
     public static void setDefaultFrameTitleIcon(Image windowTitleIcon) {
         GWmConstants.windowTitleIcon = windowTitleIcon;
     }
@@ -45,23 +51,30 @@ public abstract class GWmConstants {
         GWmConstants.windowTitleIcon = windowTitleIcon;
     }
 
-    public static String getDefaultTheme() {
-        return defaultTheme;
-    }
-    
-
+    /**
+     * Defines the default theme used for new frames.
+     * 
+     * @param defaultTheme
+     */
     public static void setDefaultTheme(String defaultTheme) {
         GWmConstants.defaultTheme = defaultTheme;
     }
-    
-    
-    public static void setOverlayLayerDisplayOnDragAction(boolean  overlay){
+
+    public static String getDefaultTheme() {
+        return defaultTheme;
+    }
+
+    /**
+     * Defines if an overlay panel is diplayed with the frames drag action.
+     * 
+     * @param overlay
+     */
+    public static void setOverlayLayerDisplayOnDragAction(boolean overlay) {
         GWmConstants.overlayLayerDisplayOnDragAction = overlay;
     }
 
     public static boolean isOverlayLayerDisplayOnDragAction() {
         return overlayLayerDisplayOnDragAction;
     }
-    
-    
+
 }
