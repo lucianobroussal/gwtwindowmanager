@@ -21,8 +21,7 @@ soon
 
  * ListBoxes are no longer visible through frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=18&can=1&q= issue 18]
  * GInternalFrame's visibility bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=19&can=1&q= issue 19]
- * Maximize/Minimize functionality bugs have been fixed
-[http://code.google.com/p/gwtwindowmanager/issues/detail?id=22&can=1&q= issue 22]
+ * Maximize/Minimize functionality bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=22&can=1&q= issue 22]
  * Closed frames will set all references to null so that it can be garbage collected [http://code.google.com/p/gwtwindowmanager/issues/detail?id=29&can=1&q= issue 29]
 
 
