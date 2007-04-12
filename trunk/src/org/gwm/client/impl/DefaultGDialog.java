@@ -81,7 +81,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private static boolean overridesDialogSize;
 
-    private static String defaultTheme;
+    private static String defaultTheme = GWmConstants.getDefaultTheme();
 
     public DefaultGDialog() {
         this(DEFAULT_TITLE);
@@ -314,7 +314,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     public static void showMessage(UIObject parent, Object message,
-            String theme, GDialogChoiceListener choiceListener) {
+             GDialogChoiceListener choiceListener) {
         showMessage(parent, message, null, INFORMATION_MESSAGE, null, null,
                 choiceListener);
     }

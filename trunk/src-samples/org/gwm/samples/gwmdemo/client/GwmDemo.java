@@ -18,6 +18,7 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GDialog;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.DefaultGDialog;
@@ -26,10 +27,7 @@ import org.gwm.client.impl.DefaultGInternalFrame;
 import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -63,7 +61,9 @@ public class GwmDemo implements EntryPoint {
     }
 
     public void onModuleLoad() {
-
+        DefaultGDialog.setDefaultTheme("alphacube");
+        DefaultGDialog.showMessage(null, "", "", GDialog.INFORMATION_MESSAGE, null);
+        if (true)return;
         buildUI();
         menuFrame.setSize(150, 300);
 
@@ -85,7 +85,7 @@ public class GwmDemo implements EntryPoint {
         ftest.setSize(160, 700);
         desktop.addFrame(ftest);
         ftest.setLocation(0, Window.getClientWidth() - 160);
-        //ftest.setVisible(true);
+        ftest.setVisible(true);
         buildMenu();
 
     }
