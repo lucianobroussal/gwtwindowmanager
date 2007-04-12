@@ -1,5 +1,29 @@
 #summary Releases history
-#labels Phase-Requirements
+
+=Release 0.6=
+(2007-04-11)
+
+===New Features===
+
+ * Hide effects when closing frames
+ * 4 new great themes added to the release
+ * Setting a theme on GDesktopPane changes all the themes of its GInternalFrame's
+ * Different themes for selected and unselected frames
+ * GFrameAdapter added for easier listener management
+
+===Improvements===
+
+ * Better code architecture by refactoring into GFrame/GInternalFrame/GDialog
+ * Frames with URL content are no longer reloaded when resized
+ * Faster dragging of frames with different drag modes
+
+===Bug fixing===
+
+ * ListBoxes are no longer visible through frames
+ * GInternalFrame's visibility bugs have been fixed
+ * Maximize/Minimize functionality bugs have been fixed
+ * Closed frames will set all references to null so that it can be garbage collected
+
 
 =Release 0.5.2=
 (2007-02-07)
@@ -43,3 +67,5 @@ The 0.1b release provides the first implementation of Gwm based on the PWC lib.
 Developers can create Free Frames that float everywhere around inside
 the browser window.
 The look and feel of the Frames is defined by themes. The 0.1b release comes with a number of themes, and users can create their own themes by creating a css file and some images.
+
+
