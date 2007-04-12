@@ -1,0 +1,40 @@
+Hi dear GWM'lers,
+
+I'm proud to announce that GWM's release 0.6 is out now and available for download. :)
+
+Some of the great new features you will be able to use are:
+
+* Hide effects when closing frames
+* 4 new great themes added to the release
+* Setting a theme on GDesktopPane changes all the themes of its GInternalFrame's
+* Different themes for selected and unselected frames
+* GFrameAdapter added for easier listener management
+
+Improvements which have been made are:
+
+* Better code architecture by refactoring into GFrame/GInternalFrame/GDialog
+* Frames with URL content are no longer reloaded when resized
+* Faster dragging of frames with different drag modes
+
+Bug fixes of the new release include:
+
+* ListBoxes are no longer visible through frames
+* GInternalFrame's visibility bugs have been fixed
+* Maximize/Minimize functionality bugs have been fixed
+* Closed frames will set all references to null so that it can be garbage collected
+
+Just play with the demo, read the installation/migration guide and grab the release for your project. You will be amazed! :)
+
+For feedback check back at the GWM Forum. Any comments welcome.
+
+Dominik Steiner
+
+GMW Code: http://code.google.com/p/gwtwindowmanager 
+
+GWM Forum: http://groups.google.com/group/gwt-window-manager
+
+GMW Demo: http://www.gwtwindowmanager.org
+
+GWM Java Docs: 
+
+GWM Installatio Guide:
