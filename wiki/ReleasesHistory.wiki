@@ -1,7 +1,7 @@
 #summary Releases history
 
 =Release 0.6=
-
+soon
 
 ===New Features===
 
@@ -67,4 +67,3 @@ The 0.1b release provides the first implementation of Gwm based on the PWC lib.
 Developers can create Free Frames that float everywhere around inside
 the browser window.
 The look and feel of the Frames is defined by themes. The 0.1b release comes with a number of themes, and users can create their own themes by creating a css file and some images.
-
