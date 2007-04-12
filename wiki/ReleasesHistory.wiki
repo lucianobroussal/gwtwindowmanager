@@ -7,22 +7,23 @@ soon
 
  * Hide effects when closing frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=11&can=1&q= issue 11]
  * 4 new great themes added to the release
- * Setting a theme on GDesktopPane changes all the themes of its GInternalFrame's
- * Different themes for selected and unselected frames
- * GFrameAdapter added for easier listener management
+ * Setting a theme on GDesktopPane changes all the themes of its GInternalFrame's [http://code.google.com/p/gwtwindowmanager/issues/detail?id=20&can=1&q= issue 20]
+ * Different themes for selected and unselected frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=26&can=1&q= issue 26]
+ * GFrameAdapter added for easier listener management [http://code.google.com/p/gwtwindowmanager/issues/detail?id=27&can=1&q= issue 27]
 
 ===Improvements===
 
  * Better code architecture by refactoring into GFrame/GInternalFrame/GDialog
- * Frames with URL content are no longer reloaded when resized
+ * Frames with URL content are no longer reloaded when resized [http://code.google.com/p/gwtwindowmanager/issues/detail?id=31&can=1&q= issue 31]
  * Faster dragging of frames with different drag modes
 
 ===Bug fixing===
 
- * ListBoxes are no longer visible through frames
- * GInternalFrame's visibility bugs have been fixed
+ * ListBoxes are no longer visible through frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=18&can=1&q= issue 18]
+ * GInternalFrame's visibility bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=19&can=1&q= issue 19]
  * Maximize/Minimize functionality bugs have been fixed
- * Closed frames will set all references to null so that it can be garbage collected
+[http://code.google.com/p/gwtwindowmanager/issues/detail?id=22&can=1&q= issue 22]
+ * Closed frames will set all references to null so that it can be garbage collected [http://code.google.com/p/gwtwindowmanager/issues/detail?id=29&can=1&q= issue 29]
 
 
 =Release 0.5.2=
