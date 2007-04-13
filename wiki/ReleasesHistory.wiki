@@ -14,15 +14,17 @@ soon
 ===Improvements===
 
  * Better code architecture by refactoring into GFrame/GInternalFrame/GDialog
- * Frames with URL content are no longer reloaded when resized [http://code.google.com/p/gwtwindowmanager/issues/detail?id=31&can=1&q= issue 31]
+ * Frames with URL content are no longer reloaded when resized [http://code.google.com/p/gwtwindowmanager/issues/detail?id=11&can=1&q= issue 11] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=31&can=1&q= issue 31] 
  * Faster dragging of frames with different drag modes
+ * Direct instantiation (besides showXXX() methods) of GDialog possible for more customized dialogs [http://code.google.com/p/gwtwindowmanager/issues/detail?id=24&can=1&q= issue 24] 
 
 ===Bug fixing===
 
  * ListBoxes are no longer visible through frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=18&can=1&q= issue 18]
- * GInternalFrame's visibility bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=19&can=1&q= issue 19]
- * Maximize/Minimize functionality bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=22&can=1&q= issue 22]
+ * GInternalFrame's visibility bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=19&can=1&q= issue 19] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=28&can=1&q= issue 28] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=30&can=1&q= issue 30]
+ * Maximize/Minimize functionality bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=22&can=1&q= issue 22] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=32&can=1&q= issue 32]
  * Closed frames will set all references to null so that it can be garbage collected [http://code.google.com/p/gwtwindowmanager/issues/detail?id=29&can=1&q= issue 29]
+ * Dragging frames is prevented from being dragged outside of viewable area and loosing access to the topbar [http://code.google.com/p/gwtwindowmanager/issues/detail?id=25&can=1&q= issue 25] 
 
 
 =Release 0.5.2=
@@ -67,3 +69,7 @@ The 0.1b release provides the first implementation of Gwm based on the PWC lib.
 Developers can create Free Frames that float everywhere around inside
 the browser window.
 The look and feel of the Frames is defined by themes. The 0.1b release comes with a number of themes, and users can create their own themes by creating a css file and some images.
+
+
+
+
