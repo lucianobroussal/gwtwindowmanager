@@ -10,11 +10,13 @@
  * Setting a theme on GDesktopPane changes all the themes of its GInternalFrame's [http://code.google.com/p/gwtwindowmanager/issues/detail?id=20&can=1&q= issue 20]
  * Different themes for selected and unselected frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=26&can=1&q= issue 26]
  * GFrameAdapter added for easier listener management [http://code.google.com/p/gwtwindowmanager/issues/detail?id=27&can=1&q= issue 27]
+Dragging mode choice: full window or ghost mode.
 
 ===Improvements===
-
+ 
  * Better code architecture by refactoring into GFrame/GInternalFrame/GDialog
- * Frames with URL content are no longer reloaded when resized [http://code.google.com/p/gwtwindowmanager/issues/detail?id=11&can=1&q= issue 11] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=31&can=1&q= issue 31] 
+ * Direct injection of the default theme and javascript files dependencies 
+ * Frames with URL content are no longer reloaded when resized or dragged [http://code.google.com/p/gwtwindowmanager/issues/detail?id=11&can=1&q= issue 11] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=31&can=1&q= issue 31] 
  * Faster dragging of frames with different drag modes
  * Direct instantiation (besides showXXX() methods) of GDialog possible for more customized dialogs [http://code.google.com/p/gwtwindowmanager/issues/detail?id=24&can=1&q= issue 24] 
 
@@ -69,4 +71,3 @@ The 0.1b release provides the first implementation of Gwm based on the PWC lib.
 Developers can create Free Frames that float everywhere around inside
 the browser window.
 The look and feel of the Frames is defined by themes. The 0.1b release comes with a number of themes, and users can create their own themes by creating a css file and some images.
-
