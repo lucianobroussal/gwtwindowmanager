@@ -5,13 +5,12 @@
 
 ===New Features===
 
- * Hide effects when closing frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=11&can=1&q= issue 11]
+ * Hide effect when closing frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=11&can=1&q= issue 11]
  * 4 new great themes added to the release
  * Setting a theme on GDesktopPane changes all the themes of its GInternalFrame's [http://code.google.com/p/gwtwindowmanager/issues/detail?id=20&can=1&q= issue 20]
  * Different themes for selected and unselected frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=26&can=1&q= issue 26]
  * GFrameAdapter added for easier listener management [http://code.google.com/p/gwtwindowmanager/issues/detail?id=27&can=1&q= issue 27]
- * Dragging mode choice: full window or ghost mode.
-
+ 
 ===Improvements===
  
  * Better code architecture by refactoring into GFrame/GInternalFrame/GDialog
