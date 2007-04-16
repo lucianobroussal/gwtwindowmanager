@@ -20,7 +20,7 @@
 
 ===Bug fixing===
 
- * ListBoxs are no longer visible through frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=18&can=1&q= issue 18]
+ * ListBoxes are no longer visible through frames [http://code.google.com/p/gwtwindowmanager/issues/detail?id=18&can=1&q= issue 18]
  * GInternalFrame's visibility bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=19&can=1&q= issue 19] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=28&can=1&q= issue 28] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=30&can=1&q= issue 30]
  * Maximize/Minimize functionality bugs have been fixed [http://code.google.com/p/gwtwindowmanager/issues/detail?id=22&can=1&q= issue 22] and [http://code.google.com/p/gwtwindowmanager/issues/detail?id=32&can=1&q= issue 32]
  * Closed frames will set all references to null so that it can be garbage collected [http://code.google.com/p/gwtwindowmanager/issues/detail?id=29&can=1&q= issue 29]
@@ -69,5 +69,4 @@ The 0.1b release provides the first implementation of Gwm based on the PWC lib.
 Developers can create Free Frames that float everywhere around inside
 the browser window.
 The look and feel of the Frames is defined by themes. The 0.1b release comes with a number of themes, and users can create their own themes by creating a css file and some images.
-
 
