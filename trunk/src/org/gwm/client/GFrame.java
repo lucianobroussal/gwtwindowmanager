@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.Widget;
 public interface GFrame {
 
     /**
-     * Change the frame look & feel theme.
+     * Changes the frame's look & feel theme.
      * 
      * @param theme
      */
@@ -35,7 +35,7 @@ public interface GFrame {
     
    
     /**
-     * @return the actual frame look & feel theme.
+     * @return the actual frame's look & feel theme.
      */
     public String getTheme();
 
@@ -46,7 +46,7 @@ public interface GFrame {
     public void setVisible(boolean isVisible);
 
     /**
-     * Sets the frame content using an existing Widget.
+     * Sets the frame's content using an existing Widget.
      * 
      * @param widget
      *            the content to show into the frame
@@ -57,7 +57,7 @@ public interface GFrame {
     public void setContent(Widget theContent);
 
     /**
-     * Sets the frame content using an Plain-Text or Html code.
+     * Sets the frame's content using a Plain-Text or Html code.
      * 
      * @param content
      *            the content to show into the frame
@@ -67,12 +67,12 @@ public interface GFrame {
     /**
      * Return the content of this frame.
      * 
-     * @return
+     * @return the content of this frame
      */
     public Widget getContent();
 
     /**
-     * The frame destructor.
+     * Closes the frame.
      */
     public void close();
 
@@ -91,33 +91,33 @@ public interface GFrame {
     public void setClosable(boolean closable);
 
     /**
-     * Sets the frame's minimizable state.
+     * Sets if the frame is minimizable.
      * 
      * @param minimizable
      */
     public void setMinimizable(boolean minimizable);
 
     /**
-     * Returns the frame minimizable state.
+     * Returns true if the frame is minimizable.
      */
     public boolean isMinimizable();
 
     /**
-     * Sets the frame's maximizable state.
+     * Sets if the frame is maximizable.
      * 
      * @param maximizable
      */
     public void setMaximizable(boolean maximizable);
 
     /**
-     * Returns the frame draggable state.
+     * Returns true if the frame is draggable.
      * 
      * @return
      */
     public boolean isDraggable();
 
     /**
-     * Returns the frame maximizable state.
+     * Returns true if the frame is maximizable.
      * 
      * @return
      */
@@ -145,12 +145,12 @@ public interface GFrame {
     public boolean isMaximized();
 
     /**
-     * Maximize the frame size.
+     * Maximizes the frame size.
      */
     public void maximize();
 
     /**
-     * Minimize the frame size.
+     * Minimizes the frame size.
      */
     public void minimize();
 
@@ -301,7 +301,7 @@ public interface GFrame {
     public int getLeft();
 
     /**
-     * Sets frame title.
+     * Sets the frame title.
      * 
      * @param caption
      *            frame title
@@ -309,14 +309,14 @@ public interface GFrame {
     public void setCaption(String caption);
 
     /**
-     * Gets frame title.
+     * Gets the frame title.
      * 
      * @return title frame title
      */
     public String getCaption();
 
     /**
-     * Sets the URL of frame content.
+     * Sets the URL of the frame content.
      * 
      * @param url
      *            to display.
@@ -326,26 +326,26 @@ public interface GFrame {
 
     
     /**
-     * Add a GFrameListener from this GFrame.
+     * Adds a GFrameListener to this GFrame.
      * 
      * @param listener
      */
     public void addFrameListener(GFrameListener listener);
 
     /**
-     * Remove a GFrameListener from this GFrame.
+     * Removes a GFrameListener from this GFrame.
      * 
      * @param listener
      */
     public void removeGFrameListener(GFrameListener listener);
     
     /**
-     * Show the frame with modal effect.
+     * Shows the frame in modal mode.
      */
     public void showModal();
     
     /**
-     * Set the frame drag mode
+     * Sets the frame's drag mode
      * @param outline true displays a ghost during frame dragging. (default:true)
      * false the full frame itself is visible during the drag action.
      */
@@ -353,8 +353,9 @@ public interface GFrame {
     public void setOutlineDragMode(boolean outline);
     
     /**
-     * Return the frame visibility during the drag action.
-     * @return
+     * Returns the frame's drag mode.
+     * @return true if the frame is displayed as a ghost image during dragging 
+     * false if the full frame itself is visible during dragging
      */
     public boolean isDragOutline();
     

@@ -22,6 +22,7 @@ package org.gwm.client.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gwm.client.GDialog;
 import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GFrameEvent;
@@ -49,7 +50,8 @@ import com.gwt.components.client.Effects;
 import com.gwt.components.client.Effects.Effect;
 
 /**
- * GWT-based implementation of <code>GFrame</code>
+ * The GWT default implementation of {@link GDialog} 
+ *
  */
 public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
@@ -680,7 +682,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     public void fireFrameSelected() {
         for (int i = 0; i < listeners.size(); i++) {
             GFrameListener listener = (GFrameListener) listeners.get(i);
-            listener.frameSelected(new GFrameEvent(this, topFrame));
+            listener.frameSelected(new GFrameEvent(this));
         }
     }
 

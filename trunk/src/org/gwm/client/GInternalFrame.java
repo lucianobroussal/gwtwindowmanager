@@ -20,7 +20,7 @@
 package org.gwm.client;
 
 /**
- * Provides the behavior handles to interact with a frame.
+ * Provides the behavior handles to interact with a internal frame.
  */
 public interface GInternalFrame extends GFrame {
     /**

@@ -36,6 +36,10 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * The GWT default implementation for {@link GDesktopPane} 
+ *
+ */
 public class DefaultGDesktopPane extends Composite implements
         WindowResizeListener, GDesktopPane {
 

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GDialog;
 import org.gwm.client.GFrame;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -33,6 +34,10 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * The IconBar implementation used from {@link DefaultGDesktopPane} 
+ *
+ */
 public class IconBar extends FlowPanel {
 
     GDesktopPane parent;
