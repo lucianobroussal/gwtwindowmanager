@@ -61,14 +61,14 @@ public interface GDesktopPane {
     public List getAllFrames();
 
     /**
-     * Minimize a frame.
+     * Minimizes a frame.
      * 
      * @param internalFrame
      */
     public void iconify(GFrame internalFrame);
 
     /**
-     * Restore a frame state.
+     * Restores a minimized frame.
      * 
      * @param minimizedWindow
      */
@@ -86,19 +86,19 @@ public interface GDesktopPane {
     public Widget getFramesContainer();
 
     /**
-     * @return the actual active frame or null;
+     * @return the actual active frame or null
      */
     public GInternalFrame getActiveFrame();
 
     /**
      * Activates a frame.
      * 
-     * @param internalFrame
+     * @param internalFrame the frame to be activated
      */
     public void setActivateFrame(GInternalFrame internalFrame);
 
     /**
-     * Sets the desktop theme. This theme is propagated to all the frames of the
+     * Sets the desktop theme. This theme is propagated to all the ginternalframes of the
      * desktop. 
      * 
      * Desktop dedicated CSS attributes: 

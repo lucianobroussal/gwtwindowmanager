@@ -20,6 +20,7 @@
 package org.gwm.client.impl;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GDialog;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.util.GWmConstants;
 
@@ -27,7 +28,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * GWT-based implementation of <code>GInternalFrame</code>
+ * The GWT default implementation of {@link GDialog} 
  */
 public class DefaultGInternalFrame extends DefaultGFrame implements
         GInternalFrame {

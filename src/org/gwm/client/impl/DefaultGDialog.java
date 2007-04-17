@@ -19,6 +19,7 @@
  */
 package org.gwm.client.impl;
 
+import org.gwm.client.GDesktopPane;
 import org.gwm.client.GDialog;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.util.GWmConstants;
@@ -41,6 +42,11 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+
+/**
+ * The GWT default implementation of {@link GDialog} 
+ *
+ */
 public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private static final String DEFAULT_TITLE = "GDialog";
@@ -136,6 +142,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     public void setOptions(int optionType, Object[] options) {
         this.options = getOptions(optionType, options);
+        this.optionsType = optionType;
     }
 
     private void setOptions(Option[] options) {

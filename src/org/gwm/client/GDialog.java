@@ -21,6 +21,7 @@
 package org.gwm.client;
 
 import org.gwm.client.event.GDialogChoiceListener;
+import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGDialog.Option;
 
 import com.google.gwt.user.client.ui.Image;
@@ -70,10 +71,10 @@ public interface GDialog extends GFrame {
     public void show();
 
     /**
-     * Sets the message type : ERROR_MESSAGE, INFORMATION_MESSAGE ... Implied
-     * the built-in icon that will be displayed if no one is provided.
+     * Sets the message type : ERROR_MESSAGE, INFORMATION_MESSAGE ...
+     * Default: INFORMATION_MESSAGE if no message type is set
      * 
-     * @param messageType
+     * @param messageType the message type of the dialog
      */
     public void setMessageType(int messageType);
 
@@ -83,36 +84,37 @@ public interface GDialog extends GFrame {
     public int getMessageType();
 
     /**
-     * Define the user possibles actions.
+     * Defines the user's possibles actions.
+     * Default is OK_OPTION_TYPE.
      * 
      * @param optionType
-     *            the predifined option type values, eg : YES_NO_OPTION_TYPE
+     *            the predifined option type values, eg : YES_NO_OPTION_TYPE, YES_NO_CANCEL_OPTION_TYPE ...
      * @param options
-     *            the button captions (usefull for i18n)
+     *            optional: the button captions (usefull for i18n), if null uses the built in English labels
      */
     public void setOptions(int optionType, Object[] options);
 
     /**
-     * @return the options.
+     * @return the options set for this dialog like OK_OPTION, YES_OPTION....
      */
     public Object[] getOptions();
 
     /**
-     * @return the option type.
+     * @return the option type set for this dialog like YES_NO_OPTION_TYPE, YES_NO_CANCEL_OPTION_TYPE.
      */
     public int getOptionType();
 
     /**
-     * Sets the callback that will be called when user click an option button.
+     * Sets the callback that will be called when user clicks an option button.
      * 
      * @param choiceListener
      */
     public void setGDialogChoiceListener(GDialogChoiceListener choiceListener);
 
     /**
-     * Sets the message to diplay.
+     * Sets the message to display. This can be a normal string, HTML string or a widget 
      * 
-     * @param message
+     * @param message the message object to display in the dialog
      */
     public void setMessage(Object message);
 
@@ -122,18 +124,18 @@ public interface GDialog extends GFrame {
     public Object getMessage();
 
     /**
-     * The selected value for input dialog type.
+     * The selected value for input dialogs created through a showInputDialog() method of {@link DefaultGDialog} .
      * @return
      */
     public Object getSelectedValue();
 
     /**
-     * @return the option button activated by the user.
+     * @return the option button pressed by the user, eg OK_OPTION, YES_OPTION...
      */
     public Object getSelectedOption();
 
     /**
-     * The relative parent. If provided the dialog is diplayed at its center.
+     * The relative parent. If provided the dialog is displayed at its center.
      * @param parent 
      */
     public void setParent(UIObject parent);
@@ -145,18 +147,18 @@ public interface GDialog extends GFrame {
     public void setIcon(Image icon);
 
     /**
-     * @return the user provider image.
+     * @return the user provided image.
      */
     public Image getIcon();
 
     /**
-     * The values that the user can choose. => build a ListBox with these values.
+     * The values that the user can choose in an input dialog. => builds a ListBox with these values.
      * @param selectionValues
      */
     public void setSelectionValues(Object[] selectionValues);
 
     /**
-     * @return the available choice diplayed in the dialog.
+     * @return the available choices displayed in the input dialog.
      */
     public Object[] getSelectionValues();
 

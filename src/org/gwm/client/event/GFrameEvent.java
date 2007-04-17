@@ -26,7 +26,6 @@ import org.gwm.client.GFrame;
  */
 public class GFrameEvent {
     private GFrame source;
-    private GFrame oldFrame;
 
     /**
      * Build a GFrameEvent from a GFrame as the source.
@@ -34,19 +33,9 @@ public class GFrameEvent {
      * @param source
      */
     public GFrameEvent(GFrame source) {
-        this(source , source);
+        this.source = source;
     }
     
-    /**
-     * Build a GFrameEvent from a GFrame as the source and the old GFrame implied by the event.
-     * 
-     * @param source
-     */
-    public GFrameEvent(GFrame source , GFrame oldSource) {
-        this.source = source;
-        this.oldFrame = source;
-    }
-
     /**
      * Returns the source of the event.
      * 
@@ -56,7 +45,4 @@ public class GFrameEvent {
         return this.source;
     }
 
-    public GFrame getOldFrame() {
-        return oldFrame;
-    }
 }
