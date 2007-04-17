@@ -18,9 +18,9 @@
 
 .gwm-default-ActionOverlay{
 	background-color: #85BBEF;
-	filter:alpha(opacity=90);
-	-moz-opacity: 	0.9;
-	opacity: 0.9;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
 }
 
 .gwm-default-Frame-OutlineDrag{

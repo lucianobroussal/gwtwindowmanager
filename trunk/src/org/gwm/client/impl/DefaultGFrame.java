@@ -408,19 +408,19 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         outLine.setVisible(true);
         setVisible(false);
         Effects.Effect("BlindUp", outLine,
-				"{duration : 0.6, scaleFromCenter: true}").addEffectListener(
-				new Effects.EffectListenerAdapter() {
-					public void onAfterFinish(Effect sender) {
-						removeFromParent();
-						outLine.removeFromParent();
-						selectBoxManager.removeBlocker();
-						closed = true;
-						if (modalMode) {
-							overlayLayer.hide();
-						}
-					}
-				});
-        fireFrameClosed();
+                "{duration : 0.6, scaleFromCenter: true}").addEffectListener(
+                new Effects.EffectListenerAdapter() {
+                    public void onAfterFinish(Effect sender) {
+                        removeFromParent();
+                        outLine.removeFromParent();
+                        selectBoxManager.removeBlocker();
+                        closed = true;
+                        if (modalMode) {
+                            overlayLayer.hide();
+                        }
+                        fireFrameClosed();
+                    }
+                });
     }
 
     public boolean isMinimized() {

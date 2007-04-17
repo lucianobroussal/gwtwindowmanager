@@ -82,10 +82,8 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
         	
             public void frameResized(GFrameEvent evt) {
                 GFrame frame = evt.getGFrame();
-                System.out.println(frame.getWidth() + " / " + frame.getHeight());
                 String width = frame.getWidth() + "";
 				String height = frame.getHeight() + "";
-				
 				selectBlocker.setSize(width, height);
             }
         };
