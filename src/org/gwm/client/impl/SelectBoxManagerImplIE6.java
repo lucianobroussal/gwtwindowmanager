@@ -24,19 +24,22 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
     }
 
     private void initBlocker() {
+    	String filter = "progid:DXImageTransform.Microsoft.Alpha(opacity=0)";
+    	String border = "0px solid red";
+    	String position = "absolute";
+    	
         selectBlocker = new Frame();
-        selectBlocker.setWidth("100%");
+        selectBlocker.setWidth(Window.getClientWidth()+"px");
         selectBlocker.setHeight(Window.getClientHeight()+"px");
         selectBlocker.setUrl("#");
+
         DOM.setAttribute(selectBlocker.getElement(), "frameBorder", "0");
-        DOM.setStyleAttribute(selectBlocker.getElement(), "filter",
-                "progid:DXImageTransform.Microsoft.Alpha(opacity=0)");
-        DOM.setStyleAttribute(selectBlocker.getElement(), "border",
-                "0px solid blue");
+		DOM.setStyleAttribute(selectBlocker.getElement(), "filter", filter);
+		DOM.setStyleAttribute(selectBlocker.getElement(), "border", border);
         DOM.setAttribute(selectBlocker.getElement(), "scrolling", "no");
-        DOM.setStyleAttribute(selectBlocker.getElement(), "position",
-                "absolute");
-        selectBlocker.setVisible(false);
+		DOM.setStyleAttribute(selectBlocker.getElement(), "position", position);
+        
+		selectBlocker.setVisible(false);
         RootPanel.get().add(selectBlocker);
     }
 
@@ -48,6 +51,7 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
         if(associatedFrame instanceof GInternalFrame){
             GDesktopPane desktop = ((GInternalFrame) associatedFrame).getDesktopPane();
             desktop.setWidgetLocation(selectBlocker, left, top);
+            setBlockerSize(associatedFrame.getWidth(), associatedFrame.getHeight());
             
         }else{
             Element selectBlockerElement = selectBlocker.getElement();
@@ -71,15 +75,19 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
 
     public GFrameListener getFrameListener() {
         return new GFrameAdapter() {
-
+        	public void frameOpened(GFrameEvent evt) {
+        		GFrame frame = evt.getGFrame();
+        		setLocation(frame.getTop(), frame.getLeft(), frame);
+        	}
+        	
             public void frameResized(GFrameEvent evt) {
                 GFrame frame = evt.getGFrame();
-                System.out.println(frame.getWidth() + " / " + frame.getHeight()
-                        + "");
-                selectBlocker.setSize(frame.getWidth() + "", frame.getHeight()
-                        + "");
+                System.out.println(frame.getWidth() + " / " + frame.getHeight());
+                String width = frame.getWidth() + "";
+				String height = frame.getHeight() + "";
+				
+				selectBlocker.setSize(width, height);
             }
-
         };
     }
 
@@ -92,5 +100,4 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
     public Widget getBlockerWidget(){
         return selectBlocker;
     }
-
 }
