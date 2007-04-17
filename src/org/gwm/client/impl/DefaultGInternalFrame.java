@@ -24,6 +24,7 @@ import org.gwm.client.GInternalFrame;
 import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * GWT-based implementation of <code>GInternalFrame</code>
@@ -85,8 +86,8 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         } else {
             this.height = maxHeight;
         }
-        this.previousTop = getAbsoluteTop();
-        this.previousLeft = getAbsoluteLeft();
+        this.previousTop = getAbsoluteTop() - ((Widget)desktopPane).getAbsoluteTop();
+        this.previousLeft = getAbsoluteLeft() - ((Widget)desktopPane).getAbsoluteLeft();
         this.previousWidth = getWidth();
         this.previousHeight = getHeight();
         setLocation(0, 0);

@@ -18,7 +18,6 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GDialog;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.DefaultGDialog;
@@ -42,6 +41,8 @@ public class GwmDemo implements EntryPoint {
 
     private DefaultGInternalFrame menuFrame;
 
+    private static GwmDemo instance;
+
     static VerticalPanel debugContent = new VerticalPanel();
 
     static int cpt = 0;
@@ -61,21 +62,18 @@ public class GwmDemo implements EntryPoint {
     }
 
     public void onModuleLoad() {
-        DefaultGDialog.setDefaultTheme("alphacube");
-        DefaultGDialog.showMessage(null, "", "", GDialog.INFORMATION_MESSAGE, null);
-        if (true)return;
+        instance  = this;
         buildUI();
         menuFrame.setSize(150, 300);
 
         DefaultGDialog.setDefaultTheme(GWmConstants.getDefaultTheme());
 
         Window.enableScrolling(false);
-
+        
     }
 
     private void buildUI() {
         desktop = new DefaultGDesktopPane();
-        RootPanel.get().add((Widget) desktop);
         GInternalFrame ftest = new DefaultGInternalFrame("Gwm Demo");
         ftest.setUrl("wintest.html");
         ftest.setMinimizable(false);
@@ -112,6 +110,7 @@ public class GwmDemo implements EntryPoint {
         menuLayout.add(buildMenuItem(new ChangingThemeInLiveScenarii()));
         menuLayout.add(buildMenu("Desktop"));
         menuLayout.add(buildMenuItem(new DesktopScenarii(desktop)));
+        menuLayout.add(buildMenuItem(new MultiDesktopsScenarii()));
         menuLayout.add(buildMenu("Dialog"));
         menuLayout.add(buildMenuItem(new WarningDialogScenarii()));
         menuLayout.add(buildMenuItem(new ErrorDialogScenarii()));
@@ -153,4 +152,11 @@ public class GwmDemo implements EntryPoint {
         debugContent.add(new HTML(log));
     }
 
+    public static void reset(){
+        instance  = null;
+        RootPanel.get().clear();
+        instance = new GwmDemo();
+        instance.onModuleLoad();
+    }
+    
 }

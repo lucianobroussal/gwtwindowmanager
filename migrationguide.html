@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
+<head>
+
+<style type="text/css">
+<!--
+.PageTitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	background-color: #CCCCCC;
+	position: relative;
+	width: 100%;
+}
+xmp {
+ background-color:#EFEFEF;
+ color:#000000;
+ border:1px dashed #000000;
+ }
+-->
+</style>
+</head>
+<body>
+<p class="PageTitle">Migration guide 0.6 </p>
+<ol>
+  <li> Save a backup of your project with the old Gwm release! (just for safety ;))  </li>
+  <li>Delete the Gwm themes folder (/public/themes) and the Gwm folder (/public/gwm) in <strong>your public folder</strong> </li>
+  <li>Copy the themes folder from the Gwm distribution to your public folder </li>
+  <li>add an -off.css link entry to your html host file for each theme your referencing (so that in the end you have to links to a theme, one with -off and one without) like this</li>
+</ol>
+
+<xmp>  <link href="themes/alphacube.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/alphacube-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spread.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spread-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/darkX.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/darkX-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/theme1.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/theme1-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spa.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spa-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/citrus.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/citrus-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/cloudy.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/cloudy-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/sky.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/sky-off.css" rel="stylesheet" type="text/css"></link>
+</xmp>
+
+Note: these extra style are optional (the default theme is automatically injected)
+
+<p>5) you can delete the link entry to the default gwm theme. So delete this line in your host html</p>
+<xmp>  <link href="gwm/themes/default.css" rel="stylesheet" type="text/css"></link></xmp>
+
+
+    <p>6) adapt your source code to the changes of the new release. (if you have problem with that, check back at the GWM forum at http://groups.google.com/group/gwt-window-manager)
+      
+      Here are some usage examples:</p>
+    <p> For GFrame:      </p>
+    <xmp>  GFrame window = new DefaultGFrame("Simple window with widget");
+  window.setWidth(380);
+  window.setHeight(440);
+  window.setLocation(65, 10);
+  window.setContent(new Label("My Label"));
+  window.setVisible(true);</xmp>
+    <p>For GInternalFrame:      </p>
+    <xmp>  GDesktopPane desktop = new DefaultGDesktopPane();
+  RootPanel.get().add((Widget) desktop);
+  GInternalFrame window = new DefaultGInternalFrame("My Internal Frame");
+  window.setSize(800, 500);
+  window.setContent(new Label("My Label"));
+  desktop.addFrame(window);
+  window.setVisible(true);      </xmp>
+    <p>For GDialog:      </p>
+    <xmp>  DefaultGDialog gdialog = new DefaultGDialog("Customized DefaultGDialog");
+  HTML content = new HTML("This a customized GDialog content");
+  gdialog.setMessage(content);
+  gdialog.setMessageType(GDialog.ERROR_MESSAGE);
+  gdialog.setOptions(GDialog.YES_NO_CANCEL_OPTION_TYPE, new String[]{"SURE" , "NEVER" , "DON'T SPAM PLEASE"});
+  gdialog.setGDialogChoiceListener(new GDialogChoiceListener(){
+  public void onChoice(GDialog dialog) {
+  Window.alert(((Option)dialog.getSelectedOption()).getValue().toString());
+  }});
+  gdialog.show();
+      </xmp>
+      
+      That's it, you should be ready to go. Have fun! :) </p>
+</body>
+</html>

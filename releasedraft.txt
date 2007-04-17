@@ -1,6 +1,6 @@
 Hi dear GWM'lers,
 
-I'm proud to announce that GWM's release 0.6 is out now and available for download. :)
+I'm glad to announce that GWM's release 0.6 is out now and available for download.
 
 Some of the great new features you will be able to use are:
 
@@ -23,7 +23,7 @@ Bug fixes of the new release include:
 * Maximize/Minimize functionality bugs have been fixed
 * Closed frames will set all references to null so that it can be garbage collected
 
-Just play with the demo, read the installation/migration guide and grab the release for your project. You will be amazed! :)
+Just play with the demo, read the installation/migration guide and grab the release for your project.
 
 For feedback check back at the GWM Forum. Any comments welcome.
 
@@ -35,6 +35,6 @@ GWM Forum: http://groups.google.com/group/gwt-window-manager
 
 GMW Demo: http://www.gwtwindowmanager.org
 
-GWM Java Docs: 
+GWM Java Docs: http://www.gwtwindowmanager.org
 
-GWM Installatio Guide:
+GWM Installation Guide: http://groups.google.com/group/gwt-window-manager
