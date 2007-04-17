@@ -21,11 +21,10 @@ xmp {
 <body>
 <p class="PageTitle">Migration guide 0.6 </p>
 <ol>
-  <li> Save a backup of your project with the old Gwm release! (just for safety ;))  </li>
-  <li>Delete the Gwm themes folder (/public/themes) and the Gwm folder (/public/gwm) in <strong>your public folder</strong> </li>
-  <li>Copy the themes folder from the Gwm distribution to your public folder </li>
-  <li>add an -off.css link entry to your html host file for each theme your referencing (so that in the end you have to links to a theme, one with -off and one without) like this</li>
-</ol>
+  <li> <strong>Save a backup</strong> of your project with the old Gwm release! (just for safety ;))  </li>
+  <li><strong>Delete</strong> the Gwm themes folder (<strong>/public/themes</strong>) and the Gwm folder (<strong>/public/gwm<strong>) in </strong>your public folder</strong> </li>
+  <li><strong>Copy</strong> the <strong>themes folder</strong> from the Gwm distribution to <strong>your public folder</strong> </li>
+  <li><strong>Add</strong> an <strong>-off.css link</strong> entry to <strong>your html host file</strong> for each theme your referencing (so that in the end you have two links to a theme, one with -off and one without) like this</li>
 
 <xmp>  <link href="themes/alphacube.css" rel="stylesheet" type="text/css"></link>
   <link href="themes/alphacube-off.css" rel="stylesheet" type="text/css"></link>
@@ -47,11 +46,11 @@ xmp {
 
 Note: these extra style are optional (the default theme is automatically injected)
 
-<p>5) you can delete the link entry to the default gwm theme. So delete this line in your host html</p>
+<p><li><strong>Delete</strong> the <strong>link</strong> entry to the <strong>default gwm theme</strong>. So delete this line in your host html</li></p>
 <xmp>  <link href="gwm/themes/default.css" rel="stylesheet" type="text/css"></link></xmp>
 
 
-    <p>6) adapt your source code to the changes of the new release. (if you have problem with that, check back at the GWM forum at http://groups.google.com/group/gwt-window-manager)
+<p><li><strong>Adapt your source code</strong> to the changes of the new release. (if you have problem with that, check back at the GWM forum at <a href="http://groups.google.com/group/gwt-window-manager" target="_blank">http://groups.google.com/group/gwt-window-manager</a>)</li>
       
       Here are some usage examples:</p>
     <p> For GFrame:      </p>
@@ -82,6 +81,7 @@ Note: these extra style are optional (the default theme is automatically injecte
   gdialog.show();
       </xmp>
       
-      That's it, you should be ready to go. Have fun! :) </p>
+      That's it, you should be ready to go. <strong>Have fun</strong>! :) </p>
+</ol>
 </body>
 </html>
