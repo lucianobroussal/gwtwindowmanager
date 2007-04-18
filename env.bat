@@ -1,0 +1,2 @@
+set GWT_HOME=set_your_GWT_HOME_path_variable
+set GWT_EXT=set_your_GWT_EXT_path_variable
