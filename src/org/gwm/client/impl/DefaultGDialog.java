@@ -42,10 +42,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 
-/**
- * The GWT default implementation of {@link GDialog} 
- *
- */
 public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private static final String DEFAULT_TITLE = "GDialog";
