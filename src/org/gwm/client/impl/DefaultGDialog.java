@@ -19,7 +19,6 @@
  */
 package org.gwm.client.impl;
 
-import org.gwm.client.GDesktopPane;
 import org.gwm.client.GDialog;
 import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.util.GWmConstants;

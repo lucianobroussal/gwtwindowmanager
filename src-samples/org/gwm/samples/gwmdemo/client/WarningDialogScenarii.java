@@ -17,7 +17,6 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.impl.DefaultGDialog;
-import org.gwm.client.util.GWmConstants;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 

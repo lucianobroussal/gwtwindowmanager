@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GDialog;
 import org.gwm.client.GFrame;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -104,7 +103,7 @@ public class IconBar extends FlowPanel {
     public void removeFrame(GFrame frame) {
         iconByFrame.remove(frame);
         Object button = buttonByFrame.remove(frame);
-        Object o = buttonFrame.remove(button);
+        buttonFrame.remove(button);
         HorizontalPanel hpicon = (HorizontalPanel) buttonIcon.remove(button);
         remove(hpicon);
     }
