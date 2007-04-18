@@ -55,8 +55,8 @@ public class GwmUtilities {
             UIObject absoluteParent) {
         if (frame == null || absoluteParent == null)
             throw new IllegalArgumentException("The parameters can't be null");
-        int frameLeft = (frame.getWidth() + absoluteParent.getOffsetWidth()) / 2;
-        int frameTop = (frame.getHeight() + absoluteParent.getOffsetHeight()) / 2;
+        int frameLeft = absoluteParent.getOffsetWidth()/2 + absoluteParent.getAbsoluteLeft();
+        int frameTop = absoluteParent.getOffsetHeight()/2 + absoluteParent.getAbsoluteTop();
         frame.setLocation(frameTop, frameLeft);
         frame.setVisible(true);
 
