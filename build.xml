@@ -40,13 +40,19 @@
 
 	<target name="javadoc" description="">
 		<javadoc destdir="doc" access="public" source="1.4" use="true" notree="false" nonavbar="false" noindex="false" splitindex="true" author="false" version="true" nodeprecatedlist="false" nodeprecated="false">
-			<sourcepath path="src" />
-			<package name="org.gwm.client" />
+			<packageset dir="src" defaultexcludes="yes">
+			      <include name="org/gwm/client"/>
+			      <include name="org/gwm/client/impl"/>
+			      <include name="org/gwm/client/event"/>
+			      <include name="org/gwm/client/util"/>
+				 
+				 
+			</packageset>
 			<classpath location="${GWT_HOME}/gwt-dev-windows.jar" />
 			<classpath location="${GWT_HOME}/gwt-user.jar" />
 			<link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
 			<bottom>
-			<![CDATA[<i>Copyright &#169; 2008 <a href="http://www.gwtwindowmanager.org">gwtwindowmanager.org</a>.</i> <b style='color:blue'>Version 0.5.2</b>]]>
+			<![CDATA[<i>Copyright &#169; 2008 Luciano Broussal  (<a href="http://www.gwtwindowmanager.org">gwtwindowmanager.org</a>).</i> <b style='color:blue'>Version 0.6</b>]]>
         	</bottom>
 </javadoc>
 </target>
