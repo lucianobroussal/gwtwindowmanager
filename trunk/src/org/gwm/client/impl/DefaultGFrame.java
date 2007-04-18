@@ -50,16 +50,15 @@ import com.gwt.components.client.Effects;
 import com.gwt.components.client.Effects.Effect;
 
 /**
- * The GWT default implementation of {@link GDialog} 
- *
+ * The GWT default implementation of {@link GDialog}
+ * 
  */
 public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
-    
     protected SelectBoxManagerImpl selectBoxManager;
 
     protected static int layerOfTheTopWindow;
-    
+
     protected static GFrame topFrame;
 
     private String title;
@@ -144,7 +143,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     private boolean minimizing = false;
 
-
     public DefaultGFrame() {
         this(DEFAULT_TITLE);
     }
@@ -180,7 +178,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         listeners = new ArrayList();
         resizeImage = new ResizeImage(this);
         topBar = (TopBar) GWT.create(TopBar.class);
-//        topBar = new TopBarFF();
         topBar.init(this);
         imgTopLeft = new Label();
         imgTopRight = new Label();
@@ -304,8 +301,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         return this.currentTheme;
     }
 
-
-
     public void setContent(Widget widget) {
         myContent = widget;
         this.url = null;
@@ -397,7 +392,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     public void close() {
         selectBoxManager.setBlockerVisible(false);
-        outLine.setSize(width + "px", height + "px");
+        outLine.setSize(getWidth() + "px", getHeight() + "px");
         outLine.setDeep(layerOfTheTopWindow + 50);
         if (this instanceof GInternalFrame) {
             ((GInternalFrame) this).getDesktopPane().setWidgetLocation(outLine,
@@ -759,9 +754,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         if (visible) {
             this.minimized = false;
             super.setVisible(true);
-            if (!minimizing) {
-                // setVisible(visible)
-            } else {
+            if (minimizing) {
                 minimizing = false;
             }
             setSize(getOffsetWidth(), getOffsetHeight());
@@ -799,11 +792,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     protected void _show() {
         selectBoxManager.setBlockerDeepLayer(++layerOfTheTopWindow);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
-//        if (topFrame != null) {
-//            topFrame.setActive(false);
-//        }
-//        this.setActive(true);
-//        topFrame = this;
         fireFrameSelected();
 
     }
