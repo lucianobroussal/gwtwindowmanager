@@ -20,10 +20,8 @@
 package org.gwm.client.util.widget;
 
 import org.gwm.client.impl.DefaultGFrame;
-import org.gwm.client.impl.TopBar;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 

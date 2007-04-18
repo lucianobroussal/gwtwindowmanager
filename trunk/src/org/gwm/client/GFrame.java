@@ -18,7 +18,6 @@ package org.gwm.client;
 
 import org.gwm.client.event.GFrameListener;
 
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
