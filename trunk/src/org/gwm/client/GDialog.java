@@ -71,8 +71,8 @@ public interface GDialog extends GFrame {
     public void show();
 
     /**
-     * Sets the message type : ERROR_MESSAGE, INFORMATION_MESSAGE ...
-     * Default: INFORMATION_MESSAGE if no message type is set
+     * Sets the message type : {@link GDialog#ERROR_MESSAGE}, {@link GDialog#INFORMATION_MESSAGE}...
+     * Default: {@link GDialog#INFORMATION_MESSAGE} if no message type is set
      * 
      * @param messageType the message type of the dialog
      */
@@ -85,29 +85,29 @@ public interface GDialog extends GFrame {
 
     /**
      * Defines the user's possibles actions.
-     * Default is OK_OPTION_TYPE.
+     * Default is {@link GDialog#OK_OPTION_TYPE}.
      * 
      * @param optionType
-     *            the predifined option type values, eg : YES_NO_OPTION_TYPE, YES_NO_CANCEL_OPTION_TYPE ...
+     *            the predifined option type values, eg : {@link GDialog#YES_NO_OPTION_TYPE}, {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}...
      * @param options
      *            optional: the button captions (usefull for i18n), if null uses the built in English labels
      */
     public void setOptions(int optionType, Object[] options);
 
     /**
-     * @return the options set for this dialog like OK_OPTION, YES_OPTION....
+     * @return the options set for this dialog like {@link GDialog#OK_OPTION}, {@link GDialog#YES_OPTION}....
      */
     public Object[] getOptions();
 
     /**
-     * @return the option type set for this dialog like YES_NO_OPTION_TYPE, YES_NO_CANCEL_OPTION_TYPE.
+     * @return the option type set for this dialog like {@link GDialog#YES_NO_OPTION_TYPE}, {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}.
      */
     public int getOptionType();
 
     /**
      * Sets the callback that will be called when user clicks an option button.
      * 
-     * @param choiceListener
+     * @param choiceListener the listener which will be called on user action
      */
     public void setGDialogChoiceListener(GDialogChoiceListener choiceListener);
 
@@ -119,30 +119,30 @@ public interface GDialog extends GFrame {
     public void setMessage(Object message);
 
     /**
-     * @return the message
+     * @return the message displayed in the dialog, this can be a string or a widget
      */
     public Object getMessage();
 
     /**
      * The selected value for input dialogs created through a showInputDialog() method of {@link DefaultGDialog} .
-     * @return
+     * @return the selected value of an input dialog
      */
     public Object getSelectedValue();
 
     /**
-     * @return the option button pressed by the user, eg OK_OPTION, YES_OPTION...
+     * @return the option button pressed by the user, eg {@link GDialog#OK_OPTION}, {@link GDialog#YES_OPTION}...
      */
     public Object getSelectedOption();
 
     /**
      * The relative parent. If provided the dialog is displayed at its center.
-     * @param parent 
+     * @param parent the parent of the dialog 
      */
     public void setParent(UIObject parent);
 
     /**
      * Overrides the built-in image.
-     * @param icon
+     * @param icon the icon displayed in the dialog
      */
     public void setIcon(Image icon);
 
@@ -153,7 +153,7 @@ public interface GDialog extends GFrame {
 
     /**
      * The values that the user can choose in an input dialog. => builds a ListBox with these values.
-     * @param selectionValues
+     * @param selectionValues the values to select from of an input dialog
      */
     public void setSelectionValues(Object[] selectionValues);
 
@@ -163,8 +163,8 @@ public interface GDialog extends GFrame {
     public Object[] getSelectionValues();
 
     /**
-     * The initial choice : this is linked with the setSelectionValues()
-     * @param initialValue
+     * The initial choice : this is linked with the {@link GDialog#setSelectionValues(Object[])}
+     * @param initialValue the initial value of the dialog
      */
     public void setInitialValue(Object initialValue);
 

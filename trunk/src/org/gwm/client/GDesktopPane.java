@@ -25,8 +25,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A container used to create a multiple-document interface or a virtual
- * desktop. You create <code>GFrame</code> objects and add them to the
- * <code>GDesktopPane</code>.
+ * desktop. You create {@link GFrame} objects and add them to the
+ * {@link GDesktopPane}.
  * 
  * CSS attributes: gwm-theme-GDesktopPane gwm-theme-GDesktopPane-FrameContainer
  * gwm-theme-GDesktopPane-TaskBar
@@ -37,16 +37,14 @@ public interface GDesktopPane {
     /**
      * Adds a new frame to this desktop
      * 
-     * @param internalFrame
-     *            The frame to be added.
+     * @param internalFrame the frame to be added.
      */
     public void addFrame(GInternalFrame internalFrame);
 
     /**
      * Adds a new frame to this desktop
      * 
-     * @param internalFrame
-     *            The frame to be removed.
+     * @param internalFrame the frame to be removed.
      */
     public void removeFrame(GInternalFrame internalFrame);
 
@@ -63,30 +61,30 @@ public interface GDesktopPane {
     /**
      * Minimizes a frame.
      * 
-     * @param internalFrame
+     * @param internalFrame the frame to minimize
      */
     public void iconify(GFrame internalFrame);
 
     /**
      * Restores a minimized frame.
      * 
-     * @param minimizedWindow
+     * @param internalFrame the minimized frame to restore
      */
     public void deIconify(GFrame internalFrame);
 
     /**
      * Allows the add to any widget into the desktop.
      * 
-     * @param widget
-     * @param top
-     * @param left
+     * @param widget the widget to add
+     * @param top the top location 
+     * @param left the left location
      */
     public void setWidgetLocation(Widget widget, int top, int left);
 
     public Widget getFramesContainer();
 
     /**
-     * @return the actual active frame or null
+     * @return the actual active frame or null if no frame is active
      */
     public GInternalFrame getActiveFrame();
 
@@ -98,7 +96,7 @@ public interface GDesktopPane {
     public void setActivateFrame(GInternalFrame internalFrame);
 
     /**
-     * Sets the desktop theme. This theme is propagated to all the ginternalframes of the
+     * Sets the desktop theme. This theme is propagated to all the {@link GInternalFrame} of the
      * desktop. 
      * 
      * Desktop dedicated CSS attributes: 
