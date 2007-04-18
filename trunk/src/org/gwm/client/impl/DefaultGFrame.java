@@ -27,7 +27,7 @@ import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
-import org.gwm.client.util.GWmConstants;
+import org.gwm.client.util.GwmConstants;
 import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.util.widget.OverlayLayer;
 
@@ -150,7 +150,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     public DefaultGFrame(String caption) {
         selectBoxManager = (SelectBoxManagerImpl) GWT
                 .create(SelectBoxManagerImpl.class);
-        this.theme = GWmConstants.getDefaultTheme();
+        this.theme = GwmConstants.getDefaultTheme();
         this.currentTheme = theme;
         this.title = caption;
         this.myContent = new HTML("");

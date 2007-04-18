@@ -22,7 +22,7 @@ package org.gwm.client.impl;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GFrameAdapter;
 import org.gwm.client.event.GFrameEvent;
-import org.gwm.client.util.GWmConstants;
+import org.gwm.client.util.GwmConstants;
 import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.util.widget.OverlayLayer;
 
@@ -170,7 +170,7 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
             DOM.setCapture(caption.getElement());
             dragStartX = x;
             dragStartY = y;
-            if (GWmConstants.isOverlayLayerDisplayOnDragAction()) {
+            if (GwmConstants.isOverlayLayerDisplayOnDragAction()) {
                 fixPanelForFrameWithURL.show(parent.getTheme());
             }
             if (parent.isDragOutline()) {
@@ -231,7 +231,7 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
     public void onMouseUp(Widget sender, int x, int y) {
         if (dragging || dragStarted) {
-            if (GWmConstants.isOverlayLayerDisplayOnDragAction()) {
+            if (GwmConstants.isOverlayLayerDisplayOnDragAction()) {
                 fixPanelForFrameWithURL.hide();
             }
             DOM.releaseCapture(caption.getElement());
