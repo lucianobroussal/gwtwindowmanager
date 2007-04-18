@@ -74,6 +74,7 @@ public class GwmDemo implements EntryPoint {
 
     private void buildUI() {
         desktop = new DefaultGDesktopPane();
+        RootPanel.get().add((Widget) desktop);
         GInternalFrame ftest = new DefaultGInternalFrame("Gwm Demo");
         ftest.setUrl("wintest.html");
         ftest.setMinimizable(false);
