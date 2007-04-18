@@ -109,8 +109,6 @@ public class MultiDesktopsScenarii extends AbstractScenarii {
         window.setContent(desktopsContainer);
         window.setOutlineDragMode(true);
         window.setVisible(true);
-        //window.maximize();
-      //GwmUtilities.diplayAtScreenCenter(window);
         RootPanel.get().clear();
         RootPanel.get().add(desktopsContainer);
     }
