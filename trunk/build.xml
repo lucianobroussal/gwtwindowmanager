@@ -42,7 +42,7 @@
 		<javadoc destdir="doc" access="public" source="1.4" use="true" notree="false" nonavbar="false" noindex="false" splitindex="true" author="false" version="true" nodeprecatedlist="false" nodeprecated="false">
 			<fileset dir="src" defaultexcludes="yes">
 			      <include name="org/gwm/client/*.java"/>
-			      <include name="org/gwm/client/impl/DefaultG*.java"/>
+			      <include name="org/gwm/client/impl/DefaultGDialog.java"/>
 			      <include name="org/gwm/client/event/*.java"/>
 			      <include name="org/gwm/client/util/*.java"/>
 			</fileset>
