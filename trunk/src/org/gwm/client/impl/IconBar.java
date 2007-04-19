@@ -88,10 +88,6 @@ public class IconBar extends FlowPanel {
         restoreButton.addClickListener(new ClickListener() {
             public void onClick(Widget sender) {
                 GFrame myFrame = (GFrame) buttonFrame.get(sender);
-//                buttonFrame.remove(sender);
-//                HorizontalPanel hpicon = (HorizontalPanel) buttonIcon
-//                        .get(sender);
-//                remove(hpicon);
                 parent.deIconify(myFrame);
             }
         });

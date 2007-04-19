@@ -33,7 +33,7 @@
 }
 
 .gwm-cloudy-ActionOverlay{
-	background-color: white;
+	background-color: #B5BECF;
 	filter:alpha(opacity=15);
 	-moz-opacity: 	0.15;
 	opacity: 0.15;

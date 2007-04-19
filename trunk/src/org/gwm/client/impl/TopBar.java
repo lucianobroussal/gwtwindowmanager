@@ -31,7 +31,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListener;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
@@ -45,21 +44,7 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
     static VerticalPanel debugContent = new VerticalPanel();
 
-    static {
-        debugContent.setSize("200", "400");
-        debugContent.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
-        debugContent.setSpacing(0);
-        // debug.setSize(300, 400);
-        debug.setContent(debugContent);
-        debug.setLocation(0, 0);
-        debug.setOutlineDragMode(true);
-        // debug.setTheme("alphacube");
-        // debug.setVisible(true);
-    }
-
     protected OverlayLayer fixPanelForFrameWithURL = new OverlayLayer();
-
-    static int cpt = 0;
 
     private HTML caption;
 
@@ -441,15 +426,5 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
     private String getItemTheme(String item) {
         return "gwm-" + currentTheme + "-" + item;
     }
-
-
-    public static void addLog(String log) {
-        cpt++;
-        if (cpt % 10 == 0) {
-            debugContent.clear();
-        }
-        debugContent.add(new HTML(log));
-    }
-
 }
 
