@@ -54,7 +54,8 @@ public interface GDesktopPane {
     public void closeAllFrames();
 
     /**
-     * Returns all GInternalFrames currently displayed in the desktop.
+     * Gets all GInternalFrames currently displayed in the desktop.
+     * @return all GInternalFrames currently displayed in the desktop.
      */
     public List getAllFrames();
 
@@ -84,6 +85,7 @@ public interface GDesktopPane {
     public Widget getFramesContainer();
 
     /**
+     * Gets the actual activated frame.
      * @return the actual active frame or null if no frame is active
      */
     public GInternalFrame getActiveFrame();
