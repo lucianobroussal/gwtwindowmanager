@@ -34,6 +34,7 @@ public interface GFrame {
     
    
     /**
+     * Gets the frame's look & feel theme.
      * @return the actual frame's look & feel theme.
      */
     public String getTheme();
@@ -78,54 +79,55 @@ public interface GFrame {
     /**
      * Sets if the frame is resizable.
      * 
-     * @param resizable
+     * @param resizable true if the frame is resizable
      */
     public void setResizable(boolean resizable);
 
     /**
      * Sets if the frame is closable.
      * 
-     * @param closable
+     * @param closable true if the frame is closable
      */
     public void setClosable(boolean closable);
 
     /**
      * Sets if the frame is minimizable.
      * 
-     * @param minimizable
+     * @param minimizable true if the frame is minimizable
      */
     public void setMinimizable(boolean minimizable);
 
     /**
      * Returns true if the frame is minimizable.
+     * @return true if the frame is minimizable
      */
     public boolean isMinimizable();
 
     /**
      * Sets if the frame is maximizable.
      * 
-     * @param maximizable
+     * @param maximizable true if the frame is maximizable
      */
     public void setMaximizable(boolean maximizable);
 
     /**
      * Returns true if the frame is draggable.
      * 
-     * @return
+     * @return true if the frame is draggable
      */
     public boolean isDraggable();
 
     /**
      * Returns true if the frame is maximizable.
      * 
-     * @return
+     * @return true if the frame is maximizable
      */
     public boolean isMaximizable();
 
     /**
      * Sets if the frame is draggable.
      * 
-     * @param draggable
+     * @param draggable true if the frame is draggable
      */
     public void setDraggable(boolean draggable);
 
@@ -188,122 +190,114 @@ public interface GFrame {
     public void setWidth(int width);
 
     /**
-     * Returns the frame's width.
+     * Gets the frame's width.
      * 
-     * @return
+     * @return the widht of the frame in pixels
      */
     public int getWidth();
 
     /**
      * Sets frame height.
      * 
-     * @param height
-     *            Height in pixels
+     * @param height the height of the frame in pixels
      */
     public void setHeight(int height);
 
     /**
-     * Returns the frame's height.
+     * Gets the frame's height.
      * 
-     * @return
+     * @return the height of the frame in pixels
      */
     public int getHeight();
 
     /**
      * Sets the minimum frame width.
      * 
-     * @param minWidth
-     *            minWidth in pixels
+     * @param minWidth the minimum frame width in pixels
      */
     public void setMinimumWidth(int minWidth);
 
     /**
      * Sets the minimum frame height.
      * 
-     * @param minHeight
-     *            minHeight in pixels
+     * @param minHeight the minimum frame height in pixels
      */
     public void setMinimumHeight(int minHeight);
 
     /**
      * Sets the maximum frame width.
      * 
-     * @param maxWidth
-     *            maxWidth in pixels
+     * @param maxWidth the maximum frame width in pixels
      */
     public void setMaximumWidth(int maxWidth);
 
     /**
      * Sets the maximum frame height.
      * 
-     * @param maxHeight
-     *            maxHeight in pixels
+     * @param maxHeight the maximum frame height in pixels
      */
     public void setMaximumHeight(int maxHeight);
 
     /**
-     * Returns the frame's minimum height.
+     * Gets the frame's minimum height.
      * 
-     * @return
+     * @return the frame's minimum height in pixels
      */
     public int getMinimumHeight();
 
     /**
-     * Returns the frame's minimum width.
+     * Gets the frame's minimum width.
      * 
-     * @return
+     * @return the frame's minimum width in pixels
      */
     public int getMinimumWidth();
 
     /**
-     * Returns the frame's maximum height.
+     * Gets the frame's maximum height.
      * 
-     * @return
+     * @return the frame's maximum height in pixels
      */
     public int getMaximumHeight();
 
     /**
      * Returns the frame's maximum width.
      * 
-     * @return
+     * @return the frame's maximum width in pixels
      */
     public int getMaximumWidth();
 
     /**
      * Sets the position from the top.
      * 
-     * @param top
-     *            top in pixels
+     * @param top top in pixels
      */
     public void setTop(int top);
 
     /**
-     * Returns the position from the top.
+     * Gets the position from the top.
      * 
-     * @return
+     * @return the position from the top in pixels
      */
     public int getTop();
 
     /**
      * Sets the position from the left.
      * 
-     * @param left
-     *            left in pixels
+     * @param left the position from the left in pixels
      */
     public void setLeft(int left);
 
     /**
      * Returns the position from the left.
      * 
-     * @return
+     * @return the position from the left in pixels
      */
     public int getLeft();
 
     /**
      * Sets the frame title.
      * 
-     * @param caption
-     *            frame title
+     * @param caption frame title
      */
     public void setCaption(String caption);
 
@@ -317,8 +311,7 @@ public interface GFrame {
     /**
      * Sets the URL of the frame content.
      * 
-     * @param url
-     *            to display.
+     * @param url to display.
      * 
      */
     public void setUrl(String url);
@@ -327,14 +320,14 @@ public interface GFrame {
     /**
      * Adds a GFrameListener to this GFrame.
      * 
-     * @param listener
+     * @param listener to listen for frame events on this frame
      */
     public void addFrameListener(GFrameListener listener);
 
     /**
      * Removes a GFrameListener from this GFrame.
      * 
-     * @param listener
+     * @param listener the listener to remove from this frame
      */
     public void removeGFrameListener(GFrameListener listener);
     
