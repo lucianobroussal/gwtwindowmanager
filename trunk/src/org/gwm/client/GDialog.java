@@ -79,6 +79,7 @@ public interface GDialog extends GFrame {
     public void setMessageType(int messageType);
 
     /**
+     * Gets the messages type of the dialog.
      * @return the message type.
      */
     public int getMessageType();
@@ -95,11 +96,13 @@ public interface GDialog extends GFrame {
     public void setOptions(int optionType, Object[] options);
 
     /**
+     * Gets the options of the dialog.
      * @return the options set for this dialog like {@link GDialog#OK_OPTION}, {@link GDialog#YES_OPTION}....
      */
     public Object[] getOptions();
 
     /**
+     * Gets the option type of the dialog.
      * @return the option type set for this dialog like {@link GDialog#YES_NO_OPTION_TYPE}, {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}.
      */
     public int getOptionType();
@@ -119,6 +122,7 @@ public interface GDialog extends GFrame {
     public void setMessage(Object message);
 
     /**
+     * Gets the message displayed in the dialog.
      * @return the message displayed in the dialog, this can be a string or a widget
      */
     public Object getMessage();
@@ -130,6 +134,7 @@ public interface GDialog extends GFrame {
     public Object getSelectedValue();
 
     /**
+     * Gets the selected option the user has selected.
      * @return the option button pressed by the user, eg {@link GDialog#OK_OPTION}, {@link GDialog#YES_OPTION}...
      */
     public Object getSelectedOption();
@@ -147,6 +152,7 @@ public interface GDialog extends GFrame {
     public void setIcon(Image icon);
 
     /**
+     * Gets the icon of the image.
      * @return the user provided image.
      */
     public Image getIcon();
@@ -158,18 +164,20 @@ public interface GDialog extends GFrame {
     public void setSelectionValues(Object[] selectionValues);
 
     /**
+     * Gets the available choices of the input dialog.
      * @return the available choices displayed in the input dialog.
      */
     public Object[] getSelectionValues();
 
     /**
-     * The initial choice : this is linked with the {@link GDialog#setSelectionValues(Object[])}
+     * Sets the initial selected choice of the input dialog : this is linked with the {@link GDialog#setSelectionValues(Object[])}
      * @param initialValue the initial value of the dialog
      */
     public void setInitialValue(Object initialValue);
 
     /**
-     * @return The default choice among the possibles values.
+     * Gets the initial value of the input dialog.
+     * @return The default choice among the possibles values of an input dialog.
      */
     public Object getInitialValue();
 
