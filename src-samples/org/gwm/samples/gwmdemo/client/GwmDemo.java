@@ -23,7 +23,7 @@ import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
-import org.gwm.client.util.GwmConstants;
+import org.gwm.client.util.Gwm;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
@@ -66,7 +66,7 @@ public class GwmDemo implements EntryPoint {
         buildUI();
         menuFrame.setSize(150, 300);
 
-        DefaultGDialog.setDefaultTheme(GwmConstants.getDefaultTheme());
+        DefaultGDialog.setDefaultTheme(Gwm.getDefaultTheme());
 
         Window.enableScrolling(false);
         

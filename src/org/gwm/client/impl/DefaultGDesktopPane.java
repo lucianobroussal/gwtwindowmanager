@@ -28,7 +28,7 @@ import java.util.List;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.util.GwmConstants;
+import org.gwm.client.util.Gwm;
 
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -53,7 +53,7 @@ public class DefaultGDesktopPane extends Composite implements
     
     private GInternalFrame activeFrame;
 
-    private String theme = GwmConstants.getDefaultTheme();
+    private String theme = Gwm.getDefaultTheme();
 
     public DefaultGDesktopPane() {
         initialize();
@@ -84,7 +84,7 @@ public class DefaultGDesktopPane extends Composite implements
 
         initWidget(desktopWidget);
         setStyleName("gwm-"+ theme + "-GDesktopPane");
-        theme = GwmConstants.getDefaultTheme();
+        theme = Gwm.getDefaultTheme();
 
     }
 

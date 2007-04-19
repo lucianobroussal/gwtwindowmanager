@@ -21,7 +21,7 @@ package org.gwm.client.impl;
 
 import org.gwm.client.GDialog;
 import org.gwm.client.event.GDialogChoiceListener;
-import org.gwm.client.util.GwmConstants;
+import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.util.widget.OverlayLayer;
 import org.gwtwidgets.client.ui.PNGImage;
@@ -82,7 +82,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     private static boolean overridesDialogSize;
 
-    private static String defaultTheme = GwmConstants.getDefaultTheme();
+    private static String defaultTheme = Gwm.getDefaultTheme();
 
     public DefaultGDialog() {
         this(DEFAULT_TITLE);
@@ -90,7 +90,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     public DefaultGDialog(String caption) {
         super(caption);
-        setTheme(GwmConstants.getDefaultTheme());
+        setTheme(Gwm.getDefaultTheme());
         setResizable(false);
         setMaximizable(false);
         setMinimizable(false);
