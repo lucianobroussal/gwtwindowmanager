@@ -52,27 +52,35 @@ public abstract class Gwm {
     }
 
     /**
-     * Defines the default theme used for new frames.
+     * Sets the default theme used for new frames.
      * 
-     * @param defaultTheme
+     * @param defaultTheme the default frame used for new frames.
      */
     public static void setDefaultTheme(String defaultTheme) {
         Gwm.defaultTheme = defaultTheme;
     }
 
+    /**
+     * Gets the default theme for new frames.
+     * @return the default theme for new frames
+     */
     public static String getDefaultTheme() {
         return defaultTheme;
     }
 
     /**
-     * Defines if an overlay panel is diplayed with the frames drag action.
+     * Defines if an overlay panel is displayed during the frames drag action.
      * 
-     * @param overlay
+     * @param overlay true if an overlay panel is displayed during frame drag actions 
      */
     public static void setOverlayLayerDisplayOnDragAction(boolean overlay) {
         Gwm.overlayLayerDisplayOnDragAction = overlay;
     }
 
+    /**
+     * Return if an overlay panel is displayed during the frames drag action.
+     * @return true if am overlay panel is displayed during the frames drag action
+     */
     public static boolean isOverlayLayerDisplayOnDragAction() {
         return overlayLayerDisplayOnDragAction;
     }
