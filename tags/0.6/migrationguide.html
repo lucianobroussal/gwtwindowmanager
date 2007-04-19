@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
+<head>
+
+<style type="text/css">
+<!--
+.PageTitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	background-color: #CCCCCC;
+	position: relative;
+	width: 100%;
+}
+xmp {
+ background-color:#EFEFEF;
+ color:#000000;
+ border:1px dashed #000000;
+ }
+-->
+</style>
+</head>
+<body>
+<p class="PageTitle">Migration guide 0.6 </p>
+<ol>
+  <li> <strong>Save a backup</strong> of your project with the old Gwm release! (just for safety ;))  </li>
+  <li><strong>Delete</strong> the Gwm themes folder (<strong>/public/themes</strong>) and the Gwm folder (<strong>/public/gwm<strong>) in </strong>your public folder</strong> </li>
+  <li><strong>Copy</strong> the <strong>themes folder</strong> from the Gwm distribution to <strong>your public folder</strong> </li>
+  <li><strong>Add</strong> an <strong>-off.css link</strong> entry to <strong>your html host file</strong> for each theme your referencing (so that in the end you have two links to a theme, one with -off and one without) like this</li>
+
+<xmp>  <link href="themes/alphacube.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/alphacube-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spread.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spread-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/darkX.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/darkX-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/theme1.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/theme1-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spa.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spa-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/citrus.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/citrus-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/cloudy.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/cloudy-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/sky.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/sky-off.css" rel="stylesheet" type="text/css"></link>
+</xmp>
+
+Note: these extra style are optional (the default theme is automatically injected)
+
+<p><li><strong>Delete</strong> the <strong>link</strong> entry to the <strong>default gwm theme</strong>. So delete this line in your host html</li></p>
+<xmp>  <link href="gwm/themes/default.css" rel="stylesheet" type="text/css"></link></xmp>
+
+
+<p><li><strong>Adapt your source code</strong> to the changes of the new release. (if you have problem with that, check back at the GWM forum at <a href="http://groups.google.com/group/gwt-window-manager" target="_blank">http://groups.google.com/group/gwt-window-manager</a>)</li>
+      
+      Here are some usage examples:</p>
+    <p> For GFrame:      </p>
+    <xmp>  GFrame window = new DefaultGFrame("Simple window with widget");
+  window.setWidth(380);
+  window.setHeight(440);
+  window.setLocation(65, 10);
+  window.setContent(new Label("My Label"));
+  window.setVisible(true);</xmp>
+    <p>For GInternalFrame:      </p>
+    <xmp>  GDesktopPane desktop = new DefaultGDesktopPane();
+  RootPanel.get().add((Widget) desktop);
+  GInternalFrame window = new DefaultGInternalFrame("My Internal Frame");
+  window.setSize(800, 500);
+  window.setContent(new Label("My Label"));
+  desktop.addFrame(window);
+  window.setVisible(true);      </xmp>
+    <p>For GDialog:      </p>
+    <xmp>  DefaultGDialog gdialog = new DefaultGDialog("Customized DefaultGDialog");
+  HTML content = new HTML("This a customized GDialog content");
+  gdialog.setMessage(content);
+  gdialog.setMessageType(GDialog.ERROR_MESSAGE);
+  gdialog.setOptions(GDialog.YES_NO_CANCEL_OPTION_TYPE, new String[]{"SURE" , "NEVER" , "DON'T SPAM PLEASE"});
+  gdialog.setGDialogChoiceListener(new GDialogChoiceListener(){
+  public void onChoice(GDialog dialog) {
+  Window.alert(((Option)dialog.getSelectedOption()).getValue().toString());
+  }});
+  gdialog.show();
+      </xmp>
+      
+      That's it, you should be ready to go. <strong>Have fun</strong>! :) </p>
+</ol>
+</body>
+</html>
