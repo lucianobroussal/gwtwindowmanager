@@ -32,17 +32,24 @@ public class OverlayLayer extends ComplexPanel {
     }
 
     public void show(String theme) {
-        
-        setStyleName("gwm-" + theme + "-ActionOverlay");
+        show(theme ,1);
+    }
 
+    public void show(String theme, int deep) {
+        setStyleName("gwm-" + theme + "-ActionOverlay");
         RootPanel.get().add(this);
         DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame
-                .getLayerOfTheTopWindow() + 1);
+                .getLayerOfTheTopWindow()
+                + deep);
         setVisible(true);
     }
-    
+
     public void show() {
         show("default");
+    }
+
+    public void show(int deep) {
+        show("default" , deep);
     }
 
     private void initProperties() {

@@ -27,7 +27,7 @@ import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
-import org.gwm.client.util.GwmConstants;
+import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.util.widget.OverlayLayer;
 
@@ -150,7 +150,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     public DefaultGFrame(String caption) {
         selectBoxManager = (SelectBoxManagerImpl) GWT
                 .create(SelectBoxManagerImpl.class);
-        this.theme = GwmConstants.getDefaultTheme();
+        this.theme = Gwm.getDefaultTheme();
         this.currentTheme = theme;
         this.title = caption;
         this.myContent = new HTML("");
@@ -559,7 +559,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         } else {
             bottomRow.setHTML(0, 2, "&nbsp;");
             bottomRow.getCellFormatter().setStyleName(0, 2,
-                    currentTheme + "_se");
+                    getItemTheme("FrameBorder-br"));
         }
     }
 
@@ -778,7 +778,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     public void startResizing() {
         if (topBar instanceof TopBarFF) {
-            overlayLayer.show();
+            overlayLayer.show(10);
         }
     }
 

@@ -22,7 +22,7 @@ package org.gwm.client.impl;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GDialog;
 import org.gwm.client.GInternalFrame;
-import org.gwm.client.util.GwmConstants;
+import org.gwm.client.util.Gwm;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
@@ -45,7 +45,7 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
 
     public DefaultGInternalFrame(String caption) {
         super(caption);
-        this.inactiveTheme = GwmConstants.getDefaultTheme() + "-off";
+        this.inactiveTheme = Gwm.getDefaultTheme() + "-off";
 
     }
 

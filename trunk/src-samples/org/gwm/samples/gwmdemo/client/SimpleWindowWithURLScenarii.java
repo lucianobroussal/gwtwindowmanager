@@ -19,7 +19,6 @@ package org.gwm.samples.gwmdemo.client;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Hyperlink;
 
 public class SimpleWindowWithURLScenarii extends AbstractScenarii {
@@ -44,14 +43,6 @@ public class SimpleWindowWithURLScenarii extends AbstractScenarii {
         GwmDemo.getDesktop().addFrame(window1);
         window1.setLocation(100, 220);
         window1.setVisible(true);
-        new Timer(){
-
-            public void run() {
-                window1.setLocation(0,0);
-                
-            }
-            
-        }.schedule(5000);
     }
 
     protected Hyperlink createLink() {
