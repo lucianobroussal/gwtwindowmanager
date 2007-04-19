@@ -27,7 +27,6 @@ import org.gwm.client.util.Gwm;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -45,31 +44,14 @@ public class GwmDemo implements EntryPoint {
 
     static VerticalPanel debugContent = new VerticalPanel();
 
-    static int cpt = 0;
-
     public static DefaultGFrame debug = new DefaultGFrame();
 
-    static {
-        debugContent.setSize("200", "400");
-        debugContent.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
-        debugContent.setSpacing(0);
-        // debug.setSize(300, 400);
-        debug.setContent(debugContent);
-        debug.setLocation(0, 0);
-        debug.setOutlineDragMode(true);
-        // debug.setTheme("alphacube");
-        // debug.setVisible(true);
-    }
-
     public void onModuleLoad() {
-        instance  = this;
+        instance = this;
         buildUI();
         menuFrame.setSize(150, 300);
-
         DefaultGDialog.setDefaultTheme(Gwm.getDefaultTheme());
-
         Window.enableScrolling(false);
-        
     }
 
     private void buildUI() {
@@ -107,7 +89,6 @@ public class GwmDemo implements EntryPoint {
         menuLayout.add(buildMenu("Frame Listener"));
         menuLayout.add(buildMenuItem(new EventScenarii()));
         menuLayout.add(buildMenu("Themes"));
-        menuLayout.add(buildMenuItem(new ThemesScenarii()));
         menuLayout.add(buildMenuItem(new ChangingThemeInLiveScenarii()));
         menuLayout.add(buildMenu("Desktop"));
         menuLayout.add(buildMenuItem(new DesktopScenarii(desktop)));
@@ -145,19 +126,11 @@ public class GwmDemo implements EntryPoint {
         return desktop;
     }
 
-    public static void addLog(String log) {
-        cpt++;
-        if (cpt % 10 == 0) {
-            debugContent.clear();
-        }
-        debugContent.add(new HTML(log));
-    }
-
-    public static void reset(){
-        instance  = null;
+    public static void reset() {
+        instance = null;
         RootPanel.get().clear();
         instance = new GwmDemo();
         instance.onModuleLoad();
     }
-    
+
 }

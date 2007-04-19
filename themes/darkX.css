@@ -33,7 +33,7 @@
 }
 
 .gwm-darkX-ActionOverlay{
-	background-color: white;
+	background-color: #000000;
 	filter:alpha(opacity=15);
 	-moz-opacity: 	0.15;
 	opacity: 0.15;

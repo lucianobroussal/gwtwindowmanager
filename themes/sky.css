@@ -33,7 +33,7 @@
 }
 
 .gwm-sky-ActionOverlay{
-	background-color: white;
+	background-color: #4C70AF;
 	filter:alpha(opacity=15);
 	-moz-opacity: 	0.15;
 	opacity: 0.15;

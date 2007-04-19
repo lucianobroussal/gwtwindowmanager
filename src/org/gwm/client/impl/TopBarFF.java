@@ -28,8 +28,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class TopBarFF extends TopBar implements EventPreview {
 
-    
-
     TopBarFF() {
         super();
     }
@@ -40,7 +38,7 @@ public class TopBarFF extends TopBar implements EventPreview {
             dragStarted = true;
             dragStartX = x;
             dragStartY = y;
-            if(Gwm.isOverlayLayerDisplayOnDragAction()){
+            if (Gwm.isOverlayLayerDisplayOnDragAction()) {
                 fixPanelForFrameWithURL.show(parent.getTheme());
             }
             if (parent.isDragOutline()) {
@@ -57,15 +55,15 @@ public class TopBarFF extends TopBar implements EventPreview {
                 outline.setDeep(DefaultGFrame.getLayerOfTheTopWindow() + 50);
                 outline.setVisible(true);
             } else {
-//                DOM.setStyleAttribute(parent.getElement(), "filter",
-//                        "progid:DXImageTransform.Microsoft.Alpha(opacity=100)");
-//                DOM
-//                        .setStyleAttribute(parent.getElement(), "-mozOpacity",
-//                                "0.9");
-//                DOM.setStyleAttribute(parent.getElement(), "opacity", "1");
-//                parent.getSelectBoxManager().onParentDragStart(parent);
-//                DOM.setIntStyleAttribute(parent.getElement(), "zIndex",
-//                        DefaultGFrame.getLayerOfTheTopWindow() + 2);
+                // DOM.setStyleAttribute(parent.getElement(), "filter",
+                // "progid:DXImageTransform.Microsoft.Alpha(opacity=100)");
+                // DOM
+                // .setStyleAttribute(parent.getElement(), "-mozOpacity",
+                // "0.9");
+                // DOM.setStyleAttribute(parent.getElement(), "opacity", "1");
+                // parent.getSelectBoxManager().onParentDragStart(parent);
+                // DOM.setIntStyleAttribute(parent.getElement(), "zIndex",
+                // DefaultGFrame.getLayerOfTheTopWindow() + 2);
             }
         }
     }
@@ -117,7 +115,7 @@ public class TopBarFF extends TopBar implements EventPreview {
                 // DOM.setStyleAttribute(parent.getElement(), "-mozOpacity",
                 // "1");
                 // DOM.setStyleAttribute(parent.getElement(), "opacity", "1");
-                //                parent.getSelectBoxManager().onParentDragEnd(parent);
+                // parent.getSelectBoxManager().onParentDragEnd(parent);
             }
             if (dragging)
                 parent.fireFrameMoved();
@@ -176,7 +174,7 @@ public class TopBarFF extends TopBar implements EventPreview {
     }
 
     protected void initListeners() {
-        
+
         sinkEvents(Event.MOUSEEVENTS);
     }
 

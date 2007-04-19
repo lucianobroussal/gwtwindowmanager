@@ -365,7 +365,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         setLocation(0, 0);
         setSize(width, height);
         this.maximized = true;
-        // buildGui();
         fireFrameMaximized();
     }
 
@@ -377,7 +376,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this.freeminimized = false;
         setLocation(this.previousTop, this.previousLeft);
         setSize(width, height);
-        // topRow.setVisible(true);
         centerRow.setVisible(true);
         bottomRow.setVisible(true);
         if (!getContent().isVisible()) {
@@ -386,7 +384,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         }
         selectBoxManager.setBlockerVisible(true);
         selectBoxManager.setBlockerSize(width, height);
-        // buildGui();
         fireFrameRestored();
     }
 
@@ -446,7 +443,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     }
 
     public void setSize(int width, int height) {
-        // System.out.println("set size : " + width + " / " + height);
         this.width = width;
         this.height = height;
         ui.setSize(width + "px", height + "px");
