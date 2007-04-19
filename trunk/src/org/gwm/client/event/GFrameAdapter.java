@@ -20,6 +20,10 @@
 
 package org.gwm.client.event;
 
+/**
+ * Adapter class for {@link GFrameListener} 
+ *
+ */
 public class GFrameAdapter implements GFrameListener {
 
     public void frameClosed(GFrameEvent evt) {

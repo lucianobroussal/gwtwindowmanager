@@ -22,6 +22,14 @@ package org.gwm.client.event;
 
 import org.gwm.client.GDialog;
 
+/**
+ * Listener for user choices on a {@link GDialog}.
+ *
+ */
 public interface GDialogChoiceListener {
+	/**
+	 * Triggered if user made a choice on the dialog. 
+	 * @param dialog the dialog on which the user made a choice
+	 */
     public void onChoice(GDialog dialog);
 }
