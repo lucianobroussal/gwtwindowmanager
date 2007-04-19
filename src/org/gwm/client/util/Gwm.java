@@ -23,7 +23,9 @@ package org.gwm.client.util;
 import org.gwtwidgets.client.ui.PNGImage;
 
 import com.google.gwt.user.client.ui.Image;
-
+/**
+ * Overrides the globals GWT Window Manager behaviors. 
+ */
 public abstract class Gwm {
 
     private static String defaultTheme = "default";
