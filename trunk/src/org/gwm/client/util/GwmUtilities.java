@@ -28,6 +28,10 @@ import org.gwm.client.GInternalFrame;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.UIObject;
 
+/**
+ * Provides GWT Window Manager util methods. 
+ */
+
 public class GwmUtilities {
 
 	/**

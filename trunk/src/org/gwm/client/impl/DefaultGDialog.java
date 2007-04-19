@@ -41,6 +41,12 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * The GWT default implementation for {@link GDialog}. This class providess
+ * also built-in dialog methods showXXX() for message, confirm and input user
+ * interactions.
+ * 
+ */
 
 public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
@@ -208,11 +214,16 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows a confirmation dialog with {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}, no title
-     * and with the default message type {@link GDialog#INFORMATION_MESSAGE}
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows a confirmation dialog with
+     * {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}, no title and with the default
+     * message type {@link GDialog#INFORMATION_MESSAGE}
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showConfirmDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
@@ -220,15 +231,22 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
                 YES_NO_CANCEL_OPTION_TYPE, null), null, choiceListener);
     }
 
-
     /**
-     * Shows a confirmation dialog with the specified option types and
-     * with the default message type {@link GDialog#INFORMATION_MESSAGE}
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param optionType the option types of the dialog, eg. {@link GDialog#YES_NO_OPTION_TYPE}, {@link GDialog#YES_NO_CANCEL_OPTION_TYPE} 
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows a confirmation dialog with the specified option types and with the
+     * default message type {@link GDialog#INFORMATION_MESSAGE}
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param optionType
+     *            the option types of the dialog, eg.
+     *            {@link GDialog#YES_NO_OPTION_TYPE},
+     *            {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showConfirmDialog(UIObject parent, Object message,
             String title, int optionType, GDialogChoiceListener choiceListener) {
@@ -237,13 +255,25 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows a confirmation dialog with the specified option types and message type
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param optionType the option types of the dialog, eg. {@link GDialog#YES_NO_OPTION_TYPE}, {@link GDialog#YES_NO_CANCEL_OPTION_TYPE} 
-     * @param messageType the message type of the dialog, eg {@link GDialog#INFORMATION_MESSAGE}, {@link GDialog#PLAIN_MESSAGE}
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows a confirmation dialog with the specified option types and message
+     * type
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param optionType
+     *            the option types of the dialog, eg.
+     *            {@link GDialog#YES_NO_OPTION_TYPE},
+     *            {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}
+     * @param messageType
+     *            the message type of the dialog, eg
+     *            {@link GDialog#INFORMATION_MESSAGE},
+     *            {@link GDialog#PLAIN_MESSAGE}
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showConfirmDialog(UIObject parent, Object message,
             String title, int optionType, int messageType,
@@ -253,15 +283,28 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows a confirmation dialog with the specified option types and message type
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param optionType the option types of the dialog, eg. {@link GDialog#YES_NO_OPTION_TYPE}, {@link GDialog#YES_NO_CANCEL_OPTION_TYPE} 
-     * @param messageType the message type of the dialog, eg {@link GDialog#INFORMATION_MESSAGE}, {@link GDialog#PLAIN_MESSAGE}
-     * @param imagePath the image path of the icon which will be displayed, if null the default image of 
-     * the message type is choosen
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows a confirmation dialog with the specified option types and message
+     * type
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param optionType
+     *            the option types of the dialog, eg.
+     *            {@link GDialog#YES_NO_OPTION_TYPE},
+     *            {@link GDialog#YES_NO_CANCEL_OPTION_TYPE}
+     * @param messageType
+     *            the message type of the dialog, eg
+     *            {@link GDialog#INFORMATION_MESSAGE},
+     *            {@link GDialog#PLAIN_MESSAGE}
+     * @param imagePath
+     *            the image path of the icon which will be displayed, if null
+     *            the default image of the message type is choosen
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showConfirmDialog(UIObject parent, Object message,
             String title, int optionType, int messageType, String imagePath,
@@ -270,13 +313,17 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
                 null), imagePath, choiceListener);
     }
 
-    
     /**
-     * Shows an input dialog with option type {@link GDialog#OK_CANCEL_OPTION_TYPE}
-     * message type {@link GDialog#QUESTION_MESSAGE} and no title
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows an input dialog with option type
+     * {@link GDialog#OK_CANCEL_OPTION_TYPE} message type
+     * {@link GDialog#QUESTION_MESSAGE} and no title
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showInputDialog(UIObject parent, Object message,
             GDialogChoiceListener choiceListener) {
@@ -285,30 +332,46 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows an input dialog with option type {@link GDialog#OK_CANCEL_OPTION_TYPE} and
-     * message type {@link GDialog#QUESTION_MESSAGE}
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param initialValue the initial value of the input dialog 
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows an input dialog with option type
+     * {@link GDialog#OK_CANCEL_OPTION_TYPE} and message type
+     * {@link GDialog#QUESTION_MESSAGE}
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param initialValue
+     *            the initial value of the input dialog
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showInputDialog(UIObject parent, Object message,
-            String title, Object initialValue, GDialogChoiceListener choiceListener) {
+            String title, Object initialValue,
+            GDialogChoiceListener choiceListener) {
         showInputDialog(parent, message, title, QUESTION_MESSAGE, getOptions(
                 OK_CANCEL_OPTION_TYPE, null), null, initialValue, null,
                 choiceListener);
     }
 
     /**
-     * Shows an input dialog with option type {@link GDialog#OK_CANCEL_OPTION_TYPE} and
-     * the specified message type
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param initialValue the initial value of the input dialog 
-     * @param messageType the message type of the dialog , eg {@link GDialog#QUESTION_MESSAGE}
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows an input dialog with option type
+     * {@link GDialog#OK_CANCEL_OPTION_TYPE} and the specified message type
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param initialValue
+     *            the initial value of the input dialog
+     * @param messageType
+     *            the message type of the dialog , eg
+     *            {@link GDialog#QUESTION_MESSAGE}
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showInputDialog(UIObject parent, Object message,
             String title, Object initialValue, int messageType,
@@ -319,15 +382,25 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows an input dialog with option type {@link GDialog#OK_CANCEL_OPTION_TYPE},
-     * the specified message type and a custom image for the icon displayed
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param initialValue the initial value of the input dialog 
-     * @param messageType the message type of the dialog , eg {@link GDialog#QUESTION_MESSAGE}
-     * @param imagePath the image path for the icon displayed in the dialog
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows an input dialog with option type
+     * {@link GDialog#OK_CANCEL_OPTION_TYPE}, the specified message type and a
+     * custom image for the icon displayed
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param initialValue
+     *            the initial value of the input dialog
+     * @param messageType
+     *            the message type of the dialog , eg
+     *            {@link GDialog#QUESTION_MESSAGE}
+     * @param imagePath
+     *            the image path for the icon displayed in the dialog
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showInputDialog(UIObject parent, Object message,
             String title, Object initialValue, int messageType,
@@ -338,16 +411,27 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows an input dialog with option type {@link GDialog#OK_CANCEL_OPTION_TYPE},
-     * the specified message type and a custom image for the icon displayed
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param initialValue the initial value of the input dialog 
-     * @param selectionValues the default values of the input dialog displayed as a list box
-     * @param messageType the message type of the dialog , eg {@link GDialog#QUESTION_MESSAGE}
-     * @param imagePath the image path for the icon displayed in the dialog
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows an input dialog with option type
+     * {@link GDialog#OK_CANCEL_OPTION_TYPE}, the specified message type and a
+     * custom image for the icon displayed
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param initialValue
+     *            the initial value of the input dialog
+     * @param selectionValues
+     *            the default values of the input dialog displayed as a list box
+     * @param messageType
+     *            the message type of the dialog , eg
+     *            {@link GDialog#QUESTION_MESSAGE}
+     * @param imagePath
+     *            the image path for the icon displayed in the dialog
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showInputDialog(UIObject parent, Object message,
             String title, Object initialValue, Object[] selectionValues,
@@ -359,17 +443,29 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows an input dialog with the specified option type,
-     * the specified message type and a custom image for the icon displayed
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param messageType the message type of the dialog , eg {@link GDialog#QUESTION_MESSAGE}
-     * @param options the option buttons of the dialof, eg {@link GDialog#OK_CANCEL_OPTION_TYPE}
-     * @param imagePath the image path for the icon displayed in the dialog
-     * @param initialValue the initial value of the input dialog 
-     * @param selectionValues the default values of the input dialog displayed as a list box
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows an input dialog with the specified option type, the specified
+     * message type and a custom image for the icon displayed
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param messageType
+     *            the message type of the dialog , eg
+     *            {@link GDialog#QUESTION_MESSAGE}
+     * @param options
+     *            the option buttons of the dialof, eg
+     *            {@link GDialog#OK_CANCEL_OPTION_TYPE}
+     * @param imagePath
+     *            the image path for the icon displayed in the dialog
+     * @param initialValue
+     *            the initial value of the input dialog
+     * @param selectionValues
+     *            the default values of the input dialog displayed as a list box
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showInputDialog(UIObject parentFrame, Object message,
             String title, int messageType, Option[] options, String imagePath,
@@ -387,7 +483,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
         internalDialog.setGDialogChoiceListener(choiceListener);
         internalDialog._show(true);
     }
-    
+
     private static Option[] getOptions(int optionType, Object[] optionsValues) {
         if (optionType == OK_OPTION_TYPE) {
             if (optionsValues != null) {
@@ -432,24 +528,36 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     /**
-     * Shows a message dialog with message type {@link GDialog#INFORMATION_MESSAGE}
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param choiceListener the choiceListener triggered after user selection
+     * Shows a message dialog with message type
+     * {@link GDialog#INFORMATION_MESSAGE}
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showMessage(UIObject parent, Object message,
-             GDialogChoiceListener choiceListener) {
+            GDialogChoiceListener choiceListener) {
         showMessage(parent, message, null, INFORMATION_MESSAGE, null, null,
                 choiceListener);
     }
 
     /**
      * Shows a message dialog with the message type specified
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param messageType the message type of the dialog, eg {@link GDialog#INFORMATION_MESSAGE}
-     * @param choiceListener the choiceListener triggered after user selection
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param messageType
+     *            the message type of the dialog, eg
+     *            {@link GDialog#INFORMATION_MESSAGE}
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showMessage(UIObject parent, Object message,
             String title, int messageType, GDialogChoiceListener choiceListener) {
@@ -474,13 +582,23 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     /**
      * Shows a message dialog with the message type specified
-     * @param parent the parent widget over which the dialog should be shown 
-     * @param message the widget or string message to show up in the dialog
-     * @param title the title of the dialog
-     * @param messageType the message type of the dialog, eg {@link GDialog#INFORMATION_MESSAGE}
-     * @param options the option buttons of the dialog, eg {@link GDialog#OK_OPTION}, {@link GDialog#NO_OPTION}
-     * @param imagePath the image path of the icon displayed in the dialog
-     * @param choiceListener the choiceListener triggered after user selection
+     * 
+     * @param parent
+     *            the parent widget over which the dialog should be shown
+     * @param message
+     *            the widget or string message to show up in the dialog
+     * @param title
+     *            the title of the dialog
+     * @param messageType
+     *            the message type of the dialog, eg
+     *            {@link GDialog#INFORMATION_MESSAGE}
+     * @param options
+     *            the option buttons of the dialog, eg {@link GDialog#OK_OPTION},
+     *            {@link GDialog#NO_OPTION}
+     * @param imagePath
+     *            the image path of the icon displayed in the dialog
+     * @param choiceListener
+     *            the choiceListener triggered after user selection
      */
     public static void showMessage(UIObject parentFrame, Object message,
             String title, int messageType, Option[] options, String imagePath,
@@ -535,7 +653,6 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
         super.setContent(content);
     }
-
 
     private static void setDefaultDialogProperties(String title, int messageType) {
         // if (internalDialog != null) {
@@ -592,7 +709,9 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
                     }
                 }
                 centerContentPanel.add(selectionValuesInput);
-                centerContentPanel.setCellHorizontalAlignment(selectionValuesInput, HasHorizontalAlignment.ALIGN_CENTER);
+                centerContentPanel.setCellHorizontalAlignment(
+                        selectionValuesInput,
+                        HasHorizontalAlignment.ALIGN_CENTER);
             } else {
                 textBoxInput = new TextBox();
                 textBoxInput.setWidth("100%");
@@ -601,7 +720,8 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
                     this.initialValue = initialValue;
                 }
                 centerContentPanel.add(textBoxInput);
-                centerContentPanel.setCellHorizontalAlignment(textBoxInput, HasHorizontalAlignment.ALIGN_CENTER);
+                centerContentPanel.setCellHorizontalAlignment(textBoxInput,
+                        HasHorizontalAlignment.ALIGN_CENTER);
             }
         }
 
@@ -707,7 +827,9 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
         }
 
     }
-
+    /**
+     * Base Class for GDialog options.
+     */
     public static class Option {
         String labelId;
 
@@ -748,25 +870,34 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
         }
 
     }
-
+    /**
+     * Built-in OK Option. 
+     */
     public static class OkOption extends Option {
         public OkOption() {
             super("OK");
         }
     }
-
+    /**
+     * Built-in YES Option. 
+     */
     public static class YesOption extends Option {
         public YesOption() {
             super("Yes");
         }
     }
-
+    /**
+     * Built-in No Option. 
+     */
     public static class NoOption extends Option {
         public NoOption() {
             super("No");
         }
     }
 
+    /**
+     * Built-in Cancel Option 
+     */
     public static class CancelOption extends Option {
         public CancelOption() {
             super("Cancel");
@@ -812,6 +943,5 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     public static void setWrapStringMessage(boolean wrap) {
         DefaultGDialog.wrapStringMessage = wrap;
     }
-    
 
 }
