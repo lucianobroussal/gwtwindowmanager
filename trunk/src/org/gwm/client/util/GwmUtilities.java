@@ -20,6 +20,8 @@
 
 package org.gwm.client.util;
 
+import org.gwm.client.GDesktopPane;
+import org.gwm.client.GDialog;
 import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 
@@ -28,6 +30,12 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public class GwmUtilities {
 
+	/**
+	 * Displays the frame at the center of it's parent widget.
+	 * For {@link GInternalFrame} this is the {@link GDesktopPane}, for {@link GFrame} and {@link GDialog}
+	 * it is the whole screen.
+	 * @param frame the frame to display at the center of the parent widget
+	 */
     static public void displayAtParentCenter(GFrame frame) {
         if (frame == null)
             throw new IllegalArgumentException("The frame can't be null");
@@ -41,6 +49,10 @@ public class GwmUtilities {
         }
     }
 
+    /**
+     * Displays a frame at the center of the screen.
+     * @param frame the frame to display at the center of the screen.
+     */
     static public void diplayAtScreenCenter(GFrame frame) {
         if (frame == null)
             throw new IllegalArgumentException("The frame can't be null");
@@ -51,6 +63,11 @@ public class GwmUtilities {
 
     }
 
+    /**
+     * Displays a frame at the center of the specified widget
+     * @param frame the frame to display
+     * @param absoluteParent the widget at which center the frame will be displayed
+     */
     static public void diplayAtRelativeGivenWidgetCenter(GFrame frame,
             UIObject absoluteParent) {
         if (frame == null || absoluteParent == null)
