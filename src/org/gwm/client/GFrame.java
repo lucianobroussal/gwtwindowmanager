@@ -82,6 +82,13 @@ public interface GFrame {
      * @param resizable true if the frame is resizable
      */
     public void setResizable(boolean resizable);
+    
+    /**
+     * Returns true if the frame is resizable.
+     * 
+     * @return resizable true if the frame is resizable
+     */
+    public boolean isResizable();
 
     /**
      * Sets if the frame is closable.
@@ -89,6 +96,13 @@ public interface GFrame {
      * @param closable true if the frame is closable
      */
     public void setClosable(boolean closable);
+    
+    /**
+     * Returns true if the frame is closable.
+     * 
+     * @return closable true if the frame is closable
+     */
+    public boolean isClosable();
 
     /**
      * Sets if the frame is minimizable.

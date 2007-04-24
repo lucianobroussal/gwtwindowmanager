@@ -559,11 +559,19 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         }
     }
 
+    public boolean isResizable() {
+    	return resizable;
+    }
+    
     public void setClosable(boolean closable) {
         this.closable = closable;
         topBar.updateTopBar();
     }
 
+    public boolean isClosable() {
+    	return closable;
+    }
+    
     public void setMinimizable(boolean minimizable) {
         this.minimizable = minimizable;
         topBar.updateTopBar();
