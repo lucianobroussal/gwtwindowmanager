@@ -24,6 +24,7 @@ import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 import org.gwm.client.util.Gwm;
+import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
@@ -47,6 +48,13 @@ public class GwmDemo implements EntryPoint {
     public static DefaultGFrame debug = new DefaultGFrame();
 
     public void onModuleLoad() {
+        
+       // Gwm.setAppletCompliant(true);
+        
+//        if(true)
+//        return;
+        
+        Gwm.setDefaultTheme("rain");
         instance = this;
         buildUI();
         menuFrame.setSize(150, 300);
@@ -68,6 +76,22 @@ public class GwmDemo implements EntryPoint {
         ftest.setLocation(0, Window.getClientWidth() - 160);
         ftest.setVisible(true);
         buildMenu();
+//        GInternalFrame f = new DefaultGInternalFrame("Applet1" , true);
+//        f.setContent(new HTML("<applet code='HelloWorldApplet' width='150' height='50' style='background-color:green' ><param name='bg' value='blue'></applet>"));
+//        f.setContent(new HTML("<iframe src=edito.html></iframe>"));
+//        f.setUrl("edito1.html");
+//        desktop.addFrame(f);
+//        f.setVisible(true);
+//        f.setLocation(0, 0);
+//        GwmUtilities.diplayAtScreenCenter(f);
+//        GInternalFrame f1 = new DefaultGInternalFrame("Applet2");
+//        f1.setContent(new HTML("<iframe src=edito1.html></iframe>"));
+//        f1.setContent(new HTML("<applet code='HelloWorldApplet' width='150' height='50' style='background-color:green' ><param name='bg' value='blue'></applet>"));
+//      f1.setUrl("edito1.html");
+//        f1.setLocation(100, 200);
+//        f1.setContent(new HTML("<applet code='Circle.class' width=320 height=240><param name=sleeptime value=50></applet>"));
+//        desktop.addFrame(f1);
+//        f1.setVisible(true);
 
     }
 
