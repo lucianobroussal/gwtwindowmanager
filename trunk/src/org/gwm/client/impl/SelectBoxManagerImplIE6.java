@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
 
+    // private Widget selectBlocker;
     private Frame selectBlocker;
 
     public SelectBoxManagerImplIE6() {
@@ -40,22 +41,25 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
     }
 
     private void initBlocker() {
-    	String filter = "progid:DXImageTransform.Microsoft.Alpha(opacity=0)";
-    	String border = "0px solid red";
-    	String position = "absolute";
-    	
+        String filter = "progid:DXImageTransform.Microsoft.Alpha(opacity=0)";
+        // String border = "0px solid red";
+        // String position = "absolute";
+
         selectBlocker = new Frame();
-        selectBlocker.setWidth(Window.getClientWidth()+"px");
-        selectBlocker.setHeight(Window.getClientHeight()+"px");
+        selectBlocker.setWidth(Window.getClientWidth() + "px");
+        selectBlocker.setHeight(Window.getClientHeight() + "px");
         selectBlocker.setUrl("#");
 
-        DOM.setAttribute(selectBlocker.getElement(), "frameBorder", "0");
-		DOM.setStyleAttribute(selectBlocker.getElement(), "filter", filter);
-		DOM.setStyleAttribute(selectBlocker.getElement(), "border", border);
-        DOM.setAttribute(selectBlocker.getElement(), "scrolling", "no");
-		DOM.setStyleAttribute(selectBlocker.getElement(), "position", position);
-        
-		selectBlocker.setVisible(false);
+        DOM.setAttribute(selectBlocker.getElement(), "frameBorder", "2");
+        DOM.setStyleAttribute(selectBlocker.getElement(), "filter", filter);
+        // DOM.setStyleAttribute(selectBlocker.getElement(), "border", border);
+        // DOM.setAttribute(selectBlocker.getElement(), "scrolling", "no");
+        // DOM.setStyleAttribute(selectBlocker.getElement(), "position",
+        // position);
+
+        selectBlocker.addStyleName("blocker");
+
+        selectBlocker.setVisible(false);
         RootPanel.get().add(selectBlocker);
     }
 
@@ -64,17 +68,19 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
     }
 
     public void setLocation(int top, int left, GFrame associatedFrame) {
-        if(associatedFrame instanceof GInternalFrame){
-            GDesktopPane desktop = ((GInternalFrame) associatedFrame).getDesktopPane();
+        if (associatedFrame instanceof GInternalFrame) {
+            GDesktopPane desktop = ((GInternalFrame) associatedFrame)
+                    .getDesktopPane();
             desktop.setWidgetLocation(selectBlocker, left, top);
-            setBlockerSize(associatedFrame.getWidth(), associatedFrame.getHeight());
-            
-        }else{
+            setBlockerSize(associatedFrame.getWidth(), associatedFrame
+                    .getHeight());
+
+        } else {
             Element selectBlockerElement = selectBlocker.getElement();
             DOM.setStyleAttribute(selectBlockerElement, "left", left + "px");
             DOM.setStyleAttribute(selectBlockerElement, "top", top + "px");
         }
-        
+
     }
 
     public void setBlockerSize(int width, int height) {
@@ -91,16 +97,16 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
 
     public GFrameListener getFrameListener() {
         return new GFrameAdapter() {
-        	public void frameOpened(GFrameEvent evt) {
-        		GFrame frame = evt.getGFrame();
-        		setLocation(frame.getTop(), frame.getLeft(), frame);
-        	}
-        	
+            public void frameOpened(GFrameEvent evt) {
+                GFrame frame = evt.getGFrame();
+                setLocation(frame.getTop(), frame.getLeft(), frame);
+            }
+
             public void frameResized(GFrameEvent evt) {
                 GFrame frame = evt.getGFrame();
                 String width = frame.getWidth() + "";
-				String height = frame.getHeight() + "";
-				selectBlocker.setSize(width, height);
+                String height = frame.getHeight() + "";
+                selectBlocker.setSize(width, height);
             }
         };
     }
@@ -111,7 +117,7 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
     public void onParentDragStart(DefaultGFrame parent) {
     }
 
-    public Widget getBlockerWidget(){
+    public Widget getBlockerWidget() {
         return selectBlocker;
     }
 }

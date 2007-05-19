@@ -26,11 +26,12 @@ import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The GWT default implementation of {@link GDialog} 
+ * The GWT default implementation of {@link GDialog}
  */
 public class DefaultGInternalFrame extends DefaultGFrame implements
         GInternalFrame {
@@ -41,24 +42,22 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
 
     boolean active = false;
 
+    private GDesktopPane desktopPane;
+
     public DefaultGInternalFrame() {
         this(DEFAULT_TITLE);
     }
 
-    
-    public DefaultGInternalFrame(String caption , boolean containsApplet) {
-        super(caption , containsApplet);
-        this.inactiveTheme = Gwm.getDefaultTheme() + "-off";
-
-    }
-    
     public DefaultGInternalFrame(String caption) {
-        super(caption);
+        this(caption, false);
         this.inactiveTheme = Gwm.getDefaultTheme() + "-off";
 
     }
 
-    private GDesktopPane desktopPane;
+    public DefaultGInternalFrame(String caption, boolean containsApplet) {
+        super(caption, containsApplet);
+        this.inactiveTheme = Gwm.getDefaultTheme() + "-off";
+    }
 
     public void setDesktopPane(GDesktopPane pane) {
         this.desktopPane = pane;
@@ -96,8 +95,10 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         } else {
             this.height = maxHeight;
         }
-        this.previousTop = getAbsoluteTop() - ((Widget)desktopPane).getAbsoluteTop();
-        this.previousLeft = getAbsoluteLeft() - ((Widget)desktopPane).getAbsoluteLeft();
+        this.previousTop = getAbsoluteTop()
+                - ((Widget) desktopPane).getAbsoluteTop();
+        this.previousLeft = getAbsoluteLeft()
+                - ((Widget) desktopPane).getAbsoluteLeft();
         this.previousWidth = getWidth();
         this.previousHeight = getHeight();
         setLocation(0, 0);
@@ -122,9 +123,9 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
             throw new IllegalStateException(
                     "This method can be used only if the GInternalFrame has been already attached to the parent Desktop.");
         }
-        if(minimized){
+        if (minimized) {
             throw new IllegalStateException(
-            "The Frame is minimized : use the getDesktopPane().deIconify() intead to restore the frame.");            
+                    "The Frame is minimized : use the getDesktopPane().deIconify() intead to restore the frame.");
         }
         super.setVisible(visible);
     }
@@ -151,8 +152,6 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
     }
 
     protected void _show() {
-        selectBoxManager.setBlockerDeepLayer(++layerOfTheTopWindow);
-        DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         if (desktopPane.getActiveFrame() != null) {
             GInternalFrame oldActiveFrame = desktopPane.getActiveFrame();
             desktopPane.setActivateFrame(null);
@@ -161,12 +160,15 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         getDesktopPane().setActivateFrame(this);
         this.setTheme(currentTheme);
         topFrame = this;
-        if(containsApplet && GwmUtilities.isFFBrowser()){
-            centerRow.setWidget(0,1, new HTML(""));
-            centerRow.setWidget(0,1, getContent());
+        if (containsApplet && GwmUtilities.isFFBrowser()) {
+            centerRow.setWidget(0, 1, new HTML(""));
+            centerRow.setWidget(0, 1, getContent());
+
         }
+        selectBoxManager.setBlockerDeepLayer(++layerOfTheTopWindow);
+        DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
+
         fireFrameSelected();
-        
     }
 
     public void setTheme(String theme) {
@@ -174,10 +176,10 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
             this.inactiveTheme = theme + "-off";
         if (desktopPane != null) {
             if (getDesktopPane().getActiveFrame() == this) {
-                if(theme.endsWith("-off")){
-                    String activeTheme = theme.substring(0 , theme.length()-4);
+                if (theme.endsWith("-off")) {
+                    String activeTheme = theme.substring(0, theme.length() - 4);
                     super.setTheme(activeTheme);
-                }else{
+                } else {
                     super.setTheme(theme);
                 }
             } else {
@@ -189,13 +191,13 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
     }
 
     public void close() {
-        if(!minimized){
+        if (!minimized) {
             super.close();
         }
-        if(desktopPane != null){
+        if (desktopPane != null) {
             desktopPane.removeFrame(this);
         }
-       
+
     }
-    
+
 }
