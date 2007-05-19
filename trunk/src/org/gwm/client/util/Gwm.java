@@ -23,8 +23,9 @@ package org.gwm.client.util;
 import org.gwtwidgets.client.ui.PNGImage;
 
 import com.google.gwt.user.client.ui.Image;
+
 /**
- * Overrides the globals GWT Window Manager behaviors. 
+ * Overrides the globals GWT Window Manager behaviors.
  */
 public abstract class Gwm {
 
@@ -58,7 +59,8 @@ public abstract class Gwm {
     /**
      * Sets the default theme used for new frames.
      * 
-     * @param defaultTheme the default frame used for new frames.
+     * @param defaultTheme
+     *            the default frame used for new frames.
      */
     public static void setDefaultTheme(String defaultTheme) {
         Gwm.defaultTheme = defaultTheme;
@@ -66,6 +68,7 @@ public abstract class Gwm {
 
     /**
      * Gets the default theme for new frames.
+     * 
      * @return the default theme for new frames
      */
     public static String getDefaultTheme() {
@@ -75,7 +78,9 @@ public abstract class Gwm {
     /**
      * Defines if an overlay panel is displayed during the frames drag action.
      * 
-     * @param overlay true if an overlay panel is displayed during frame drag actions 
+     * @param overlay
+     *            true if an overlay panel is displayed during frame drag
+     *            actions
      */
     public static void setOverlayLayerDisplayOnDragAction(boolean overlay) {
         Gwm.overlayLayerDisplayOnDragAction = overlay;
@@ -83,18 +88,32 @@ public abstract class Gwm {
 
     /**
      * Return if an overlay panel is displayed during the frames drag action.
-     * @return true if am overlay panel is displayed during the frames drag action
+     * 
+     * @return true if am overlay panel is displayed during the frames drag
+     *         action
      */
     public static boolean isOverlayLayerDisplayOnDragAction() {
         return overlayLayerDisplayOnDragAction;
     }
-    
+
+
+    /**
+     * Indicates if you are using a mixin GWm configuration (Applets and GWT widgets) 
+     * @return
+     */
     public static boolean isAppletCompliant() {
         return appletCompliant;
     }
     
+    /**
+     * Indicates you will you use a mixin configuration (Applets and GWT widgets)
+     * IMPORTANT : if you don't use Applet you should never call this feature since it as performance and rendering effect especially on FF)!  
+     * @param compliant
+     */
     public static void setAppletCompliant(boolean compliant){
         appletCompliant = compliant;
     }
+
+   
 
 }
