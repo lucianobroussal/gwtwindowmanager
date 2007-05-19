@@ -149,7 +149,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this(DEFAULT_TITLE);
     }
 
-    protected DefaultGFrame(String caption, boolean containsApplet) {
+  public DefaultGFrame(String caption, boolean containsApplet) {
         selectBoxManager = (SelectBoxManagerImpl) GWT
                 .create(SelectBoxManagerImpl.class);
         // selectBoxManager = new SelectBoxManagerImplIE6();
@@ -266,7 +266,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         centerRow.setHeight("100%");
         centerRow.setBorderWidth(0);
 
-        // bottomRow.setBorderWidth(1);
         bottomRow.setCellPadding(0);
         bottomRow.setCellSpacing(0);
         bottomRow.setWidth("100%");
@@ -332,7 +331,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         myContent = widget;
         this.url = null;
         buildGui();
-        // centerRow.setWidget(0, 1, myContent);
     }
 
     public void setContent(String content) {
@@ -561,11 +559,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     public void setUrl(String url) {
         this.url = url;
         myContent = getFrame();
-        // if (GwmUtilities.isFFBrowser()) {
-        // removeGFrameListener(selectBoxManager.getFrameListener());
-        // selectBoxManager = new SelectBoxManagerImpl();
-        // addFrameListener(selectBoxManager.getFrameListener());
-        // }
     }
     
     public String getUrl() {
@@ -599,18 +592,18 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     }
 
     public boolean isResizable() {
-    	return resizable;
+        return resizable;
     }
-    
+
     public void setClosable(boolean closable) {
         this.closable = closable;
         topBar.updateTopBar();
     }
 
     public boolean isClosable() {
-    	return closable;
+        return closable;
     }
-    
+
     public void setMinimizable(boolean minimizable) {
         this.minimizable = minimizable;
         topBar.updateTopBar();
@@ -836,7 +829,6 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         selectBoxManager.setBlockerDeepLayer(++layerOfTheTopWindow);
         DOM.setIntStyleAttribute(getElement(), "zIndex", ++layerOfTheTopWindow);
         fireFrameSelected();
-
     }
 
     public static int getLayerOfTheTopWindow() {
@@ -901,7 +893,5 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     private String getItemTheme(String item) {
         return "gwm-" + currentTheme + "-" + item;
     }
-
-
 
 }
