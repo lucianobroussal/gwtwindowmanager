@@ -35,6 +35,8 @@ public abstract class Gwm {
 
     private static boolean overlayLayerDisplayOnDragAction = true;
 
+    private static boolean appletCompliant;
+
     /**
      * Defines the default application icon displayed in the frame topbar. Not
      * supported
@@ -85,6 +87,14 @@ public abstract class Gwm {
      */
     public static boolean isOverlayLayerDisplayOnDragAction() {
         return overlayLayerDisplayOnDragAction;
+    }
+    
+    public static boolean isAppletCompliant() {
+        return appletCompliant;
+    }
+    
+    public static void setAppletCompliant(boolean compliant){
+        appletCompliant = compliant;
     }
 
 }
