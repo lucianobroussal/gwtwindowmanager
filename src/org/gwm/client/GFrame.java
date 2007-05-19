@@ -330,6 +330,14 @@ public interface GFrame {
      */
     public void setUrl(String url);
 
+    /**
+     * Return the URL of the frame content.
+     * 
+     * @param url displayed.
+     * 
+     */
+    public String getUrl();
+
     
     /**
      * Adds a GFrameListener to this GFrame.
