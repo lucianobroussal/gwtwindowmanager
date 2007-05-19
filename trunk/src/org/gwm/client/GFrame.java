@@ -379,5 +379,4 @@ public interface GFrame {
      */
     public void updateSize();
     
-        
 }
