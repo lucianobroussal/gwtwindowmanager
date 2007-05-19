@@ -99,7 +99,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     private Label imgTopRight;
 
-    private Label imgBotLeft;
+    private HTML imgBot;
 
     protected int previousWidth;
 
@@ -121,7 +121,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     private FlexTable topRow;
 
-    private FlexTable centerRow;
+    protected FlexTable centerRow;
 
     private FlexTable bottomRow;
 
@@ -143,13 +143,30 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     private boolean minimizing = false;
 
+    protected boolean containsApplet;
+
     public DefaultGFrame() {
         this(DEFAULT_TITLE);
     }
 
-    public DefaultGFrame(String caption) {
+    protected DefaultGFrame(String caption, boolean containsApplet) {
         selectBoxManager = (SelectBoxManagerImpl) GWT
                 .create(SelectBoxManagerImpl.class);
+        // selectBoxManager = new SelectBoxManagerImplIE6();
+        this.containsApplet = containsApplet;
+
+        if (GwmUtilities.isFFBrowser()) {
+            if (Gwm.isAppletCompliant() && !containsApplet) {
+                selectBoxManager = new SelectBoxManagerImplIE6();
+            } else {
+                selectBoxManager = (SelectBoxManagerImpl) GWT
+                        .create(SelectBoxManagerImpl.class);
+            }
+        }else{
+        	selectBoxManager = (SelectBoxManagerImpl) GWT
+                .create(SelectBoxManagerImpl.class);
+        }
+
         this.theme = Gwm.getDefaultTheme();
         this.currentTheme = theme;
         this.title = caption;
@@ -165,6 +182,11 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         super.setVisible(false);
         RootPanel.get().add(this);
         addFrameListener(selectBoxManager.getFrameListener());
+
+    }
+
+    public DefaultGFrame(String caption) {
+        this(caption, false);
     }
 
     private void initializeFrame() {
@@ -181,7 +203,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         topBar.init(this);
         imgTopLeft = new Label();
         imgTopRight = new Label();
-        imgBotLeft = new Label();
+        imgBot = new HTML("&nbsp;");
         this.width = DEFAULT_WIDTH;
         this.height = DEFAULT_HEIGHT;
         DOM.setStyleAttribute(getElement(), "position", "absolute");
@@ -205,8 +227,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         topRow.setWidget(0, 0, imgTopLeft);
         topRow.setWidget(0, 1, topBar);
         topRow.setWidget(0, 2, imgTopRight);
-        bottomRow.setWidget(0, 0, imgBotLeft);
-        bottomRow.setHTML(0, 1, "&nbsp;");
+        bottomRow.setHTML(0, 0, "&nbsp;");
+        bottomRow.setWidget(0, 1, imgBot);
         bottomRow.setHTML(0, 2, "&nbsp;");
 
         centerLeftLabel = new Label();
@@ -244,10 +266,11 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         centerRow.setHeight("100%");
         centerRow.setBorderWidth(0);
 
+        // bottomRow.setBorderWidth(1);
         bottomRow.setCellPadding(0);
         bottomRow.setCellSpacing(0);
         bottomRow.setWidth("100%");
-        bottomRow.getCellFormatter().setWidth(0, 1, "100%");
+        // bottomRow.getCellFormatter().setWidth(0, 1, "100%");
         if (visible) {
             setSize(getOffsetWidth(), getOffsetHeight());
         }
@@ -264,7 +287,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         resizeImage.setTheme(currentTheme);
         imgTopLeft.setStyleName(getItemTheme("FrameBorder-tl"));
         imgTopRight.setStyleName(getItemTheme("FrameBorder-tr"));
-        imgBotLeft.setStyleName(getItemTheme("FrameBorder-bl"));
+        bottomRow.getCellFormatter().setStyleName(0, 0,
+                getItemTheme("FrameBorder-bl"));
+        imgBot.setStyleName(getItemTheme("FrameBorder-b"));
         bottomRow.getCellFormatter().setStyleName(0, 1,
                 getItemTheme("FrameBorder-b"));
         topRow.getCellFormatter().setStyleName(0, 1,
@@ -290,6 +315,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         if (resizable) {
             resizeImage.setTheme(currentTheme);
             bottomRow.setWidget(0, 2, resizeImage);
+            bottomRow.getCellFormatter().setStyleName(0, 2,
+                    getItemTheme("FrameBorder-br"));
         } else {
             bottomRow.getCellFormatter().setStyleName(0, 2,
                     getItemTheme("FrameBorder-br"));
@@ -305,6 +332,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         myContent = widget;
         this.url = null;
         buildGui();
+        // centerRow.setWidget(0, 1, myContent);
     }
 
     public void setContent(String content) {
@@ -435,7 +463,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         DOM.setStyleAttribute(elem, "left", left + "px");
         DOM.setStyleAttribute(elem, "top", top + "px");
 
-        selectBoxManager.setLocation(top, left, this);
+        // selectBoxManager.setLocation(top, left, this);
 
         this.left = left;
         this.top = top;
@@ -533,6 +561,15 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     public void setUrl(String url) {
         this.url = url;
         myContent = getFrame();
+        // if (GwmUtilities.isFFBrowser()) {
+        // removeGFrameListener(selectBoxManager.getFrameListener());
+        // selectBoxManager = new SelectBoxManagerImpl();
+        // addFrameListener(selectBoxManager.getFrameListener());
+        // }
+    }
+    
+    public String getUrl() {
+        return url;
     }
 
     private Widget getFrame() {
@@ -551,6 +588,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this.resizable = resizable;
         if (resizable) {
             bottomRow.setWidget(0, 2, resizeImage);
+            bottomRow.getCellFormatter().setStyleName(0, 2,
+                    getItemTheme("FrameBorder-br"));
             resizeImage.setTheme(currentTheme);
         } else {
             bottomRow.setHTML(0, 2, "&nbsp;");
@@ -862,5 +901,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     private String getItemTheme(String item) {
         return "gwm-" + currentTheme + "-" + item;
     }
+
+
 
 }

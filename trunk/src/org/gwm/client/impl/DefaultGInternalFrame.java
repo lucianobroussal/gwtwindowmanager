@@ -23,8 +23,10 @@ import org.gwm.client.GDesktopPane;
 import org.gwm.client.GDialog;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.util.Gwm;
+import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -43,6 +45,13 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         this(DEFAULT_TITLE);
     }
 
+    
+    public DefaultGInternalFrame(String caption , boolean containsApplet) {
+        super(caption , containsApplet);
+        this.inactiveTheme = Gwm.getDefaultTheme() + "-off";
+
+    }
+    
     public DefaultGInternalFrame(String caption) {
         super(caption);
         this.inactiveTheme = Gwm.getDefaultTheme() + "-off";
@@ -152,7 +161,12 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         getDesktopPane().setActivateFrame(this);
         this.setTheme(currentTheme);
         topFrame = this;
+        if(containsApplet && GwmUtilities.isFFBrowser()){
+            centerRow.setWidget(0,1, new HTML(""));
+            centerRow.setWidget(0,1, getContent());
+        }
         fireFrameSelected();
+        
     }
 
     public void setTheme(String theme) {
