@@ -34,7 +34,7 @@ public class CustomizedDialogScenarii extends AbstractScenarii {
     public void runScenarii() {
         DefaultGDialog gdialog = new DefaultGDialog("Customized DefaultGDialog");
         HTML content = new HTML("This a customized GDialog content");
-        gdialog.setMessage(content);
+        gdialog.setWidget(content);
         gdialog.setMessageType(GDialog.ERROR_MESSAGE);
         gdialog.setOptions(GDialog.YES_NO_CANCEL_OPTION_TYPE, new String[]{"SURE" , "NEVER" , "DON'T SPAM PLEASE"});
         gdialog.setGDialogChoiceListener(new GDialogChoiceListener(){
