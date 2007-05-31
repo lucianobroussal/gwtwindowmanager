@@ -20,6 +20,9 @@
 
 package org.gwm.client.util;
 
+import org.gwm.client.impl.GWmImageBundle;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -28,11 +31,10 @@ import com.google.gwt.user.client.ui.Image;
 public abstract class Gwm {
 
     private static String defaultTheme = "default";
+    
+    private static GWmImageBundle imageBundle = (GWmImageBundle) GWT.create(GWmImageBundle.class);
 
-//    private static Image windowTitleIcon = new PNGImage(
-//            "gwm/images/window.png", 12, 12);
-    private static Image windowTitleIcon = new Image(
-            "gwm/images/window.png");
+    private static Image windowTitleIcon = imageBundle.window_icon().createImage();
 
     private static boolean overlayLayerDisplayOnDragAction = true;
 
@@ -112,6 +114,10 @@ public abstract class Gwm {
      */
     public static void setAppletCompliant(boolean compliant){
         appletCompliant = compliant;
+    }
+
+    public static GWmImageBundle getImageBundle() {
+        return imageBundle;
     }
 
    

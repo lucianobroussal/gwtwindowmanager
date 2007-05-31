@@ -25,6 +25,7 @@ import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.util.widget.OverlayLayer;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -88,7 +89,8 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     private static boolean overridesDialogSize;
 
     private static String defaultTheme = Gwm.getDefaultTheme();
-
+    
+    
     public DefaultGDialog() {
         this(DEFAULT_TITLE);
     }
@@ -195,8 +197,27 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     private static Image getIcon(int messageType, String imagePath) {
 //        Image icon = new PNGImage(getImagePath(messageType, imagePath), 32, 32);
 //        return icon;
-        return new Image("");
-
+        
+        if (imagePath != null) {
+            return new Image(imagePath);
+        }
+        
+        GWmImageBundle imagesBundle = Gwm.getImageBundle();
+        
+        switch (messageType) {
+        case INFORMATION_MESSAGE:
+            return imagesBundle.information_icon().createImage();
+        case QUESTION_MESSAGE:
+            return imagesBundle.question_icon().createImage();
+        case PLAIN_MESSAGE:
+            return imagesBundle.text_icon().createImage();
+        case WARNING_MESSAGE:
+            return imagesBundle.warning_icon().createImage();
+        case ERROR_MESSAGE:
+            return imagesBundle.error_icon().createImage();
+        default:
+            return imagesBundle.unknown_icon().createImage();
+        }
     }
 
     public void show() {
@@ -667,25 +688,7 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
 
     }
 
-    private static String getImagePath(int messageType, String image) {
-        if (image != null) {
-            return image;
-        }
-        switch (messageType) {
-        case INFORMATION_MESSAGE:
-            return "gwm/images/information.png";
-        case QUESTION_MESSAGE:
-            return "gwm/images/question.png";
-        case PLAIN_MESSAGE:
-            return "gwm/images/text.png";
-        case WARNING_MESSAGE:
-            return "gwm/images/warning.png";
-        case ERROR_MESSAGE:
-            return "gwm/images/error.png";
-        default:
-        }
-        return "gwm/images/unknown.png";
-    }
+   
 
     class InputDialogPane extends DialogPane {
         private TextBox textBoxInput;
