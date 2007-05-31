@@ -42,9 +42,11 @@ public class TopBarFF extends TopBar implements EventPreview {
                 fixPanelForFrameWithURL.show(parent.getTheme());
             }
             if (parent.isDragOutline()) {
+                outline = new OutlinePanel();
+                outline.setVisible(false);
                 if (parent instanceof GInternalFrame) {
                     ((GInternalFrame) parent).getDesktopPane()
-                            .setWidgetLocation(outline, 0, 0);
+                            .addWidget(outline, 0, 0);
                 } else {
                     RootPanel.get().add(outline);
                 }
@@ -82,6 +84,7 @@ public class TopBarFF extends TopBar implements EventPreview {
 
                 outline.setTop(absY - dragStartY);
                 outline.setLeft(absX - dragStartX);
+                
                 parent.fireGhostMoving(absY - dragStartY, absX - dragStartX);
             } else {
                 parent.setLocation(parent.getTop() + y - dragStartY, parent
@@ -104,8 +107,11 @@ public class TopBarFF extends TopBar implements EventPreview {
 
             parent.setLocation(absY - dragStartY, absX - dragStartX);
             if (parent.isDragOutline()) {
-                outline.removeFromParent();
-                outline.setVisible(false);
+                if(parent instanceof GInternalFrame){
+                    outline.removeFromParent();
+                }else{
+                    RootPanel.get().remove(outline);
+                }
                 parent.fireGhostMoved(absY - dragStartY, absX - dragStartX);
             } else {
                 // TODO BLOCKER

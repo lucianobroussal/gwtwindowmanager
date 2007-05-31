@@ -71,7 +71,7 @@ public class SelectBoxManagerImplIE6 extends SelectBoxManagerImpl {
         if (associatedFrame instanceof GInternalFrame) {
             GDesktopPane desktop = ((GInternalFrame) associatedFrame)
                     .getDesktopPane();
-            desktop.setWidgetLocation(selectBlocker, left, top);
+            desktop.addWidget(selectBlocker, left, top);
             setBlockerSize(associatedFrame.getWidth(), associatedFrame
                     .getHeight());
 

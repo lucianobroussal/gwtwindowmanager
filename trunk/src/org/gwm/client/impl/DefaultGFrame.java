@@ -418,7 +418,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         outLine.setSize(getWidth() + "px", getHeight() + "px");
         outLine.setDeep(layerOfTheTopWindow + 50);
         if (this instanceof GInternalFrame) {
-            ((GInternalFrame) this).getDesktopPane().setWidgetLocation(outLine,
+            ((GInternalFrame) this).getDesktopPane().addWidget(outLine,
                     0, 0);
         } else {
             RootPanel.get().add(outLine);

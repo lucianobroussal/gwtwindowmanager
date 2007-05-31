@@ -24,7 +24,6 @@
 <module>
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name='com.gwt.components.Effects' />
-	<inherits name='org.gwtwidgets.WidgetLibrary' />
 	
 	<replace-with class="org.gwm.client.impl.SelectBoxManagerImplIE6">
 		<when-type-is class="org.gwm.client.impl.SelectBoxManagerImpl"/>

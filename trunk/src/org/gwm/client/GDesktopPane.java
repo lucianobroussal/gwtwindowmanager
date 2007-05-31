@@ -80,7 +80,16 @@ public interface GDesktopPane {
      * @param top the top location 
      * @param left the left location
      */
-    public void setWidgetLocation(Widget widget, int top, int left);
+    public void addWidget(Widget widget, int left, int top);
+    
+    /**
+     * Allows to set a widget position.
+     * 
+     * @param widget the widget for the position to be set
+     * @param top the top location 
+     * @param left the left location
+     */
+    public void setWidgetPosition(Widget widget, int left, int top);
 
     public Widget getFramesContainer();
 

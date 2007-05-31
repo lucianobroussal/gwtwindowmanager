@@ -153,9 +153,13 @@ public class DefaultGDesktopPane extends Composite implements
     }
 
     
-    public void setWidgetLocation(Widget widget, int left, int top) {
+    public void addWidget(Widget widget, int left, int top) {
         frameContainer.remove(widget);
         frameContainer.add(widget);
+        frameContainer.setWidgetPosition(widget, left, top);
+    }
+    
+    public void setWidgetPosition(Widget widget, int left, int top) {
         frameContainer.setWidgetPosition(widget, left, top);
     }
 

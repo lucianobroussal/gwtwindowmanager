@@ -20,8 +20,6 @@
 
 package org.gwm.client.util;
 
-import org.gwtwidgets.client.ui.PNGImage;
-
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -31,8 +29,10 @@ public abstract class Gwm {
 
     private static String defaultTheme = "default";
 
-    private static Image windowTitleIcon = new PNGImage(
-            "gwm/images/window.png", 12, 12);
+//    private static Image windowTitleIcon = new PNGImage(
+//            "gwm/images/window.png", 12, 12);
+    private static Image windowTitleIcon = new Image(
+            "gwm/images/window.png");
 
     private static boolean overlayLayerDisplayOnDragAction = true;
 

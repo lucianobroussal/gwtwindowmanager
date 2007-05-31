@@ -24,7 +24,6 @@ import org.gwm.client.event.GDialogChoiceListener;
 import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.util.widget.OverlayLayer;
-import org.gwtwidgets.client.ui.PNGImage;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
@@ -194,8 +193,9 @@ public class DefaultGDialog extends DefaultGFrame implements GDialog {
     }
 
     private static Image getIcon(int messageType, String imagePath) {
-        Image icon = new PNGImage(getImagePath(messageType, imagePath), 32, 32);
-        return icon;
+//        Image icon = new PNGImage(getImagePath(messageType, imagePath), 32, 32);
+//        return icon;
+        return new Image("");
 
     }
 
