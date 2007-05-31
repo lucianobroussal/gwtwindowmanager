@@ -40,10 +40,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
-    public static DefaultGFrame debug = new DefaultGFrame();
-
-    static VerticalPanel debugContent = new VerticalPanel();
-
     protected OverlayLayer fixPanelForFrameWithURL = new OverlayLayer();
 
     private HTML caption;
@@ -72,12 +68,8 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
     protected boolean minimized = false;
 
-    protected static OutlinePanel outline;
-    static {
-        outline = new OutlinePanel();
-        outline.setVisible(false);
-    }
-
+    protected OutlinePanel outline;
+    
     TopBar() {
         super();
     }
@@ -159,10 +151,13 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
                 fixPanelForFrameWithURL.show(parent.getTheme());
             }
             if (parent.isDragOutline()) {
+                outline = new OutlinePanel();
+                outline.setVisible(false);
                 if (parent instanceof GInternalFrame) {
                     ((GInternalFrame) parent).getDesktopPane()
-                            .setWidgetLocation(outline, 0, 0);
+                            .addWidget(outline, 0, 0);
                 } else {
+                    outline = new OutlinePanel();
                     RootPanel.get().add(outline);
                 }
                 outline.setSize(parent.getWidth() + "px", parent.getHeight()
@@ -201,7 +196,7 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
         if (dragging) {
             int absX = x + parent.getLeft();
             int absY = y + parent.getTop();
-
+            
             if (parent.isDragOutline()) {
                 outline.setTop(absY - dragStartY);
                 outline.setLeft(absX - dragStartX);
@@ -226,8 +221,11 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
             parent.setLocation(absY - dragStartY, absX - dragStartX);
             if (parent.isDragOutline()) {
-                outline.removeFromParent();
-                outline.setVisible(false);
+                if(parent instanceof GInternalFrame){
+                    outline.removeFromParent();
+                }else{
+                    RootPanel.get().remove(outline);
+                }
                 parent.fireGhostMoved(absY - dragStartY, absX - dragStartX);
             } else {
                 // TODO BLOCKER
@@ -426,5 +424,7 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
     private String getItemTheme(String item) {
         return "gwm-" + currentTheme + "-" + item;
     }
+    
+   
 }
 

@@ -75,7 +75,6 @@
 		<pathelement location="classes" />
 		<pathelement location="${GWT_HOME}/gwt-dev-windows.jar" />
 		<pathelement location="${GWT_HOME}/gwt-user.jar" />
-		<pathelement location="lib/gwt-widgets-0.1.3.jar" />
 	</classpath>
 	<arg value="-out" />
 	<arg file="www" />

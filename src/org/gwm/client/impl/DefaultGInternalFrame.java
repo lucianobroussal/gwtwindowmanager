@@ -27,6 +27,7 @@ import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -109,9 +110,9 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
 
     public void setLocation(int top, int left) {
         if (desktopPane != null) {
-            super.setLocation(top, left);
+            desktopPane.setWidgetPosition(this, left, top);
             if (selectBoxManager instanceof SelectBoxManagerImplIE6)
-                desktopPane.setWidgetLocation(selectBoxManager
+                desktopPane.addWidget(selectBoxManager
                         .getBlockerWidget(), left, top);
             this.top = top;
             this.left = left;

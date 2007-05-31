@@ -25,6 +25,7 @@ import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
 import org.gwm.client.impl.DefaultGFrame;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;

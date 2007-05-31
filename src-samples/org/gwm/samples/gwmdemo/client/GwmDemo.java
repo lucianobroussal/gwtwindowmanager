@@ -18,16 +18,18 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 import org.gwm.client.util.Gwm;
-import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -48,13 +50,37 @@ public class GwmDemo implements EntryPoint {
     public static DefaultGFrame debug = new DefaultGFrame();
 
     public void onModuleLoad() {
+//        GInternalFrame frame = new DefaultGInternalFrame();
+//        Button button = new Button("click me");
+//        button.addClickListener(new ClickListener(){
+//
+//            public void onClick(Widget arg0) {
+//                Window.alert("clicked");
+//                
+//            }
+//            
+//        });
+//        frame.setContent(button);
+//        
+//        //frame.setOutlineDragMode(false);
+//        
+//        desktop = new DefaultGDesktopPane();
+//        desktop.addFrame(frame);
+//        frame.setVisible(true);
+//        frame.setLocation(100, 100);
+//        
+//        RootPanel.get().add((Widget)desktop);
+//        
+//        if(true){
+//            return;
+//        }
         
        // Gwm.setAppletCompliant(true);
         
 //        if(true)
 //        return;
         
-        Gwm.setDefaultTheme("rain");
+        //Gwm.setDefaultTheme("sky");
         instance = this;
         buildUI();
         menuFrame.setSize(150, 300);
