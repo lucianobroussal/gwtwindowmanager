@@ -8,7 +8,7 @@ This Release is essentially  compliant with GWT 1.4
 ===Improvements===
  
  * Applet Management improvements
- * No more white space at the bottom of the windows  when slim theme border are used
+ * No more white spaces at the bottom of the windows  when slim themed borders are used.
 
 =Release 0.6=
 (2007-04-19)
