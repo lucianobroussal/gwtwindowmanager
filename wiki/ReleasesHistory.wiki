@@ -9,6 +9,7 @@ This Release is essentially  compliant with GWT 1.4.
  
  * Applet Management improvements
  * No more white spaces at the bottom of the windows  when slim themed borders are used
+ * No more 3rd lib dependencies
  * Performances increased. 
 
 =Release 0.6=
