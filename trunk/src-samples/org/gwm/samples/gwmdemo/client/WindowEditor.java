@@ -377,7 +377,7 @@ public class WindowEditor extends Composite {
         Label propertyLabel = new Label(propertyName);
         propertyLabel.setStyleName(labelStyle);
         horizontalPanel.add(propertyLabel);
-        inputWidget.setStyleName(inputStyle);
+        //inputWidget.setStyleName(inputStyle);
         horizontalPanel.add(inputWidget);
         return horizontalPanel;
 
