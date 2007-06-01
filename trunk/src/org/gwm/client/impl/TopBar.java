@@ -35,12 +35,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListener;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class TopBar extends FlexTable implements MouseListener, ClickListener {
 
-    protected OverlayLayer fixPanelForFrameWithURL = new OverlayLayer();
+    protected OverlayLayer fixPanelForFrameWithURL;
 
     private HTML caption;
 
@@ -148,6 +147,7 @@ public class TopBar extends FlexTable implements MouseListener, ClickListener {
             dragStartX = x;
             dragStartY = y;
             if (Gwm.isOverlayLayerDisplayOnDragAction()) {
+                fixPanelForFrameWithURL = new OverlayLayer();
                 fixPanelForFrameWithURL.show(parent.getTheme());
             }
             if (parent.isDragOutline()) {

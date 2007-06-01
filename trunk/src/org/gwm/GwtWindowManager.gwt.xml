@@ -42,22 +42,6 @@
  	
  	
  	<!--*********************  DEFAULT REQUIRED JAVASCRIPT (EFFECTS) **********-->	
- 	<script src="gwm/ext/scripts/prototype.js">
-     <![CDATA[
-	     if ($wnd.$)
-	       return true;
-	     else
-	       return false;
-   	 ]]>
-   </script>
-   <script src="gwm/ext/scripts/effects.js">
-     <![CDATA[
-	     if ($wnd.Effect){
-	       return true;
-	       }
-	     else
-	       return false;
-   	 ]]>
-   </script> 
- 	
+   <script src="gwm/ext/scripts/prototype.js"/>
+   <script src="gwm/ext/scripts/effects.js"/>
 </module>

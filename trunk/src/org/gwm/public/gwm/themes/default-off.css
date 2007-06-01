@@ -112,23 +112,28 @@
   background: transparent url(default-off/bl.gif) no-repeat 0 0;			
   width:4px;
   height:4px;
+  font-size:0px;
 }
 
 .gwm-default-off-FrameBorder-b {
   background: transparent url(default-off/b.gif) repeat-x 0 0;			
   height:4px;
+  font-size:1px;
+
 }
 
 .gwm-default-off-FrameBorder-br {
   background: transparent url(default-off/br.gif) no-repeat top right;			
   width:4px;
   height:4px;
+  font-size:0px;
 }
 
 .gwm-default-off-Frame-ResizeButton  {
   background: transparent url(default-off/resize-btn.gif) no-repeat top right;			
   width:4px;
   height:4px;
+  font-size:0px;
 }
 
 /************************************* BUTTONS ********************************/

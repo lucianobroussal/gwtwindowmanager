@@ -109,7 +109,7 @@ public abstract class Gwm {
     
     /**
      * Indicates you will you use a mixin configuration (Applets and GWT widgets)
-     * IMPORTANT : if you don't use Applet you should never call this feature since it as performance and rendering effect especially on FF)!  
+     * <b style='color:red'>IMPORTANT </b>: if you don't use Applet you should never call this feature since it has performance and rendering effect especially on FF)!  
      * @param compliant
      */
     public static void setAppletCompliant(boolean compliant){

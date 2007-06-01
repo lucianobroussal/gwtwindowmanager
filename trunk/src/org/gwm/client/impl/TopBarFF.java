@@ -18,6 +18,7 @@ package org.gwm.client.impl;
 
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.util.Gwm;
+import org.gwm.client.util.widget.OverlayLayer;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -39,6 +40,7 @@ public class TopBarFF extends TopBar implements EventPreview {
             dragStartX = x;
             dragStartY = y;
             if (Gwm.isOverlayLayerDisplayOnDragAction()) {
+                fixPanelForFrameWithURL = new OverlayLayer();
                 fixPanelForFrameWithURL.show(parent.getTheme());
             }
             if (parent.isDragOutline()) {
@@ -75,7 +77,7 @@ public class TopBarFF extends TopBar implements EventPreview {
             return;
         } else if (dragStarted && !dragging) {
             dragging = true;
-            fixPanelForFrameWithURL.show(parent.getTheme());
+            //fixPanelForFrameWithURL.show(parent.getTheme());
         }
         if (dragging) {
             int absX = x + parent.getLeft();
