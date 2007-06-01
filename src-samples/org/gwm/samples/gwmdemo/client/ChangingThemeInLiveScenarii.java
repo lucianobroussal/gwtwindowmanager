@@ -57,7 +57,6 @@ public class ChangingThemeInLiveScenarii extends AbstractScenarii {
         themesList.addItem("sky", "sky");
         themesList.addItem("citrus", "citrus");
         themesList.addItem("cloudy", "cloudy");
-        themesList.addItem("blue1", "blue1");
         
         VerticalPanel contentLayout = new VerticalPanel();
         contentLayout.add(new Label("Change my theme!"));
