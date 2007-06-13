@@ -1,5 +1,15 @@
 #summary Releases history
 
+
+=Release 0.6.5=
+(2007-06-03)
+
+
+===Bug fixing===
+ 
+ * Demo fixes
+
+
 =Release 0.6.5=
 (2007-06-02)
 
