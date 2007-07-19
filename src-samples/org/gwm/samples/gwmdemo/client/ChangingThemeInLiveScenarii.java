@@ -76,7 +76,7 @@ public class ChangingThemeInLiveScenarii extends AbstractScenarii {
         
         
        GwmDemo.getDesktop().addFrame(window);
-       GwmUtilities.diplayAtScreenCenter(window);
+       GwmUtilities.displayAtScreenCenter(window);
 
     }
     

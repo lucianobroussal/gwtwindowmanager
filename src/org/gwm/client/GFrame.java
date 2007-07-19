@@ -18,6 +18,8 @@ package org.gwm.client;
 
 import org.gwm.client.event.GFrameListener;
 
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -25,6 +27,10 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public interface GFrame {
 
+    
+    public static final int CONTENT_ALIGNMENT_LEFT = 0;
+    public static final int CONTENT_ALIGNMENT_CENTER = 1;
+    public static final int CONTENT_ALIGNMENT_RIGHT = 2;
     /**
      * Changes the frame's look & feel theme.
      * 
@@ -33,6 +39,9 @@ public interface GFrame {
     public void setTheme(String theme);
     
    
+   public void setContentHorizontalAlignment(HasHorizontalAlignment.HorizontalAlignmentConstant alignmentConstant);
+   public void setContentVerticalAlignment(HasVerticalAlignment.VerticalAlignmentConstant alignmentConstant);
+    
     /**
      * Gets the frame's look & feel theme.
      * @return the actual frame's look & feel theme.
