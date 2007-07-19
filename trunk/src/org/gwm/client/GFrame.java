@@ -27,23 +27,16 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public interface GFrame {
 
-    
-    public static final int CONTENT_ALIGNMENT_LEFT = 0;
-    public static final int CONTENT_ALIGNMENT_CENTER = 1;
-    public static final int CONTENT_ALIGNMENT_RIGHT = 2;
-    /**
+	/**
      * Changes the frame's look & feel theme.
      * 
      * @param theme
      */
     public void setTheme(String theme);
-    
-   
-   public void setContentHorizontalAlignment(HasHorizontalAlignment.HorizontalAlignmentConstant alignmentConstant);
-   public void setContentVerticalAlignment(HasVerticalAlignment.VerticalAlignmentConstant alignmentConstant);
-    
+
     /**
      * Gets the frame's look & feel theme.
+     * 
      * @return the actual frame's look & feel theme.
      */
     public String getTheme();
@@ -88,10 +81,11 @@ public interface GFrame {
     /**
      * Sets if the frame is resizable.
      * 
-     * @param resizable true if the frame is resizable
+     * @param resizable
+     *            true if the frame is resizable
      */
     public void setResizable(boolean resizable);
-    
+
     /**
      * Returns true if the frame is resizable.
      * 
@@ -102,10 +96,11 @@ public interface GFrame {
     /**
      * Sets if the frame is closable.
      * 
-     * @param closable true if the frame is closable
+     * @param closable
+     *            true if the frame is closable
      */
     public void setClosable(boolean closable);
-    
+
     /**
      * Returns true if the frame is closable.
      * 
@@ -116,12 +111,14 @@ public interface GFrame {
     /**
      * Sets if the frame is minimizable.
      * 
-     * @param minimizable true if the frame is minimizable
+     * @param minimizable
+     *            true if the frame is minimizable
      */
     public void setMinimizable(boolean minimizable);
 
     /**
      * Returns true if the frame is minimizable.
+     * 
      * @return true if the frame is minimizable
      */
     public boolean isMinimizable();
@@ -129,7 +126,8 @@ public interface GFrame {
     /**
      * Sets if the frame is maximizable.
      * 
-     * @param maximizable true if the frame is maximizable
+     * @param maximizable
+     *            true if the frame is maximizable
      */
     public void setMaximizable(boolean maximizable);
 
@@ -150,7 +148,8 @@ public interface GFrame {
     /**
      * Sets if the frame is draggable.
      * 
-     * @param draggable true if the frame is draggable
+     * @param draggable
+     *            true if the frame is draggable
      */
     public void setDraggable(boolean draggable);
 
@@ -222,7 +221,8 @@ public interface GFrame {
     /**
      * Sets frame height.
      * 
-     * @param height the height of the frame in pixels
+     * @param height
+     *            the height of the frame in pixels
      */
     public void setHeight(int height);
 
@@ -236,28 +236,32 @@ public interface GFrame {
     /**
      * Sets the minimum frame width.
      * 
-     * @param minWidth the minimum frame width in pixels
+     * @param minWidth
+     *            the minimum frame width in pixels
      */
     public void setMinimumWidth(int minWidth);
 
     /**
      * Sets the minimum frame height.
      * 
-     * @param minHeight the minimum frame height in pixels
+     * @param minHeight
+     *            the minimum frame height in pixels
      */
     public void setMinimumHeight(int minHeight);
 
     /**
      * Sets the maximum frame width.
      * 
-     * @param maxWidth the maximum frame width in pixels
+     * @param maxWidth
+     *            the maximum frame width in pixels
      */
     public void setMaximumWidth(int maxWidth);
 
     /**
      * Sets the maximum frame height.
      * 
-     * @param maxHeight the maximum frame height in pixels
+     * @param maxHeight
+     *            the maximum frame height in pixels
      */
     public void setMaximumHeight(int maxHeight);
 
@@ -292,7 +296,8 @@ public interface GFrame {
     /**
      * Sets the position from the top.
      * 
-     * @param top top in pixels
+     * @param top
+     *            top in pixels
      */
     public void setTop(int top);
 
@@ -306,7 +311,8 @@ public interface GFrame {
     /**
      * Sets the position from the left.
      * 
-     * @param left the position from the left in pixels
+     * @param left
+     *            the position from the left in pixels
      */
     public void setLeft(int left);
 
@@ -320,7 +326,8 @@ public interface GFrame {
     /**
      * Sets the frame title.
      * 
-     * @param caption frame title
+     * @param caption
+     *            frame title
      */
     public void setCaption(String caption);
 
@@ -334,7 +341,8 @@ public interface GFrame {
     /**
      * Sets the URL of the frame content.
      * 
-     * @param url to display.
+     * @param url
+     *            to display.
      * 
      */
     public void setUrl(String url);
@@ -342,50 +350,68 @@ public interface GFrame {
     /**
      * Return the URL of the frame content.
      * 
-     * @param url displayed.
+     * @param url
+     *            displayed.
      * 
      */
     public String getUrl();
 
-    
     /**
      * Adds a GFrameListener to this GFrame.
      * 
-     * @param listener to listen for frame events on this frame
+     * @param listener
+     *            to listen for frame events on this frame
      */
     public void addFrameListener(GFrameListener listener);
 
     /**
      * Removes a GFrameListener from this GFrame.
      * 
-     * @param listener the listener to remove from this frame
+     * @param listener
+     *            the listener to remove from this frame
      */
     public void removeGFrameListener(GFrameListener listener);
-    
+
     /**
      * Shows the frame in modal mode.
      */
     public void showModal();
-    
+
     /**
      * Sets the frame's drag mode
-     * @param outline true displays a ghost during frame dragging. (default:true)
-     * false the full frame itself is visible during the drag action.
+     * 
+     * @param outline
+     *            true displays a ghost during frame dragging. (default:true)
+     *            false the full frame itself is visible during the drag action.
      */
-    
+
     public void setOutlineDragMode(boolean outline);
-    
+
     /**
      * Returns the frame's drag mode.
-     * @return true if the frame is displayed as a ghost image during dragging 
-     * false if the full frame itself is visible during dragging
+     * 
+     * @return true if the frame is displayed as a ghost image during dragging
+     *         false if the full frame itself is visible during dragging
      */
     public boolean isDragOutline();
-    
-    
+
     /**
-     * Updates the frame size (usefull specially on IE if you dynamically change the content of the frame).  
+     * Updates the frame size (usefull specially on IE if you dynamically change
+     * the content of the frame).
      */
     public void updateSize();
     
+    /**
+     * Set the horizontal alignment of the content.
+     * @param alignmentConstant
+     */
+    public void setContentHorizontalAlignment(HasHorizontalAlignment.HorizontalAlignmentConstant alignmentConstant);
+    
+    /**
+     * Set the vertical alignment of the content.
+     * @param alignmentConstant
+     */
+    public void setContentVerticalAlignment(HasVerticalAlignment.VerticalAlignmentConstant alignmentConstant);
+    
+
 }
