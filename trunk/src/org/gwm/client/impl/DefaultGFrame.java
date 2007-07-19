@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
  * (http://www.gwtwindowmanager.org)
  * 
@@ -46,6 +46,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.gwt.components.client.Effects;
 import com.gwt.components.client.Effects.Effect;
 
@@ -149,9 +150,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this(DEFAULT_TITLE);
     }
 
-  public DefaultGFrame(String caption, boolean containsApplet) {
-        selectBoxManager = (SelectBoxManagerImpl) GWT
-                .create(SelectBoxManagerImpl.class);
+    public DefaultGFrame(String caption, boolean containsApplet) {
+        selectBoxManager = (SelectBoxManagerImpl) GWT.create(SelectBoxManagerImpl.class);
         // selectBoxManager = new SelectBoxManagerImplIE6();
         this.containsApplet = containsApplet;
 
@@ -159,12 +159,10 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
             if (Gwm.isAppletCompliant() && !containsApplet) {
                 selectBoxManager = new SelectBoxManagerImplIE6();
             } else {
-                selectBoxManager = (SelectBoxManagerImpl) GWT
-                        .create(SelectBoxManagerImpl.class);
+                selectBoxManager = (SelectBoxManagerImpl) GWT.create(SelectBoxManagerImpl.class);
             }
-        }else{
-        	selectBoxManager = (SelectBoxManagerImpl) GWT
-                .create(SelectBoxManagerImpl.class);
+        } else {
+            selectBoxManager = (SelectBoxManagerImpl) GWT.create(SelectBoxManagerImpl.class);
         }
 
         this.theme = Gwm.getDefaultTheme();
@@ -192,7 +190,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     private void initializeFrame() {
         outLine = new OutlinePanel();
         outLine.setVisible(false);
-        if(!(this instanceof GInternalFrame)){
+        if (!(this instanceof GInternalFrame)) {
             RootPanel.get().add(outLine);
         }
         ui = new FlexTable();
@@ -247,8 +245,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
         ui.getCellFormatter().setHeight(1, 0, "100%");
         ui.getCellFormatter().setWidth(1, 0, "100%");
-        ui.getCellFormatter().setAlignment(1, 0,
-                HasHorizontalAlignment.ALIGN_CENTER,
+        ui.getCellFormatter().setAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER,
                 HasVerticalAlignment.ALIGN_MIDDLE);
         ui.setCellPadding(0);
         ui.setCellSpacing(0);
@@ -288,39 +285,27 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         resizeImage.setTheme(currentTheme);
         imgTopLeft.setStyleName(getItemTheme("FrameBorder-tl"));
         imgTopRight.setStyleName(getItemTheme("FrameBorder-tr"));
-        bottomRow.getCellFormatter().setStyleName(0, 0,
-                getItemTheme("FrameBorder-bl"));
+        bottomRow.getCellFormatter().setStyleName(0, 0, getItemTheme("FrameBorder-bl"));
         imgBot.setStyleName(getItemTheme("FrameBorder-b"));
-        bottomRow.getCellFormatter().setStyleName(0, 1,
-                getItemTheme("FrameBorder-b"));
-        topRow.getCellFormatter().setStyleName(0, 1,
-                getItemTheme("FrameBorder-t"));
-        centerRow.getCellFormatter().setStyleName(0, 1,
-                getItemTheme("FrameContent"));
+        bottomRow.getCellFormatter().setStyleName(0, 1, getItemTheme("FrameBorder-b"));
+        topRow.getCellFormatter().setStyleName(0, 1, getItemTheme("FrameBorder-t"));
+        centerRow.getCellFormatter().setStyleName(0, 1, getItemTheme("FrameContent"));
         myContent.setStyleName(getItemTheme("FrameContent"));
-        centerRow.getCellFormatter().setStyleName(0, 0,
-                getItemTheme("FrameBorder-l"));
-        centerRow.getCellFormatter().setStyleName(0, 2,
-                getItemTheme("FrameBorder-r"));
+        centerRow.getCellFormatter().setStyleName(0, 0, getItemTheme("FrameBorder-l"));
+        centerRow.getCellFormatter().setStyleName(0, 2, getItemTheme("FrameBorder-r"));
         centerLeftLabel.setStyleName(getItemTheme("FrameBorder-l"));
         centerRightLabel.setStyleName(getItemTheme("FrameBorder-r"));
-        topRow.getCellFormatter().setVerticalAlignment(0, 0,
-                HasVerticalAlignment.ALIGN_BOTTOM);
-        topRow.getCellFormatter().setVerticalAlignment(0, 2,
-                HasVerticalAlignment.ALIGN_BOTTOM);
+        topRow.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_BOTTOM);
+        topRow.getCellFormatter().setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_BOTTOM);
 
-        bottomRow.getCellFormatter().setVerticalAlignment(0, 0,
-                HasVerticalAlignment.ALIGN_TOP);
-        bottomRow.getCellFormatter().setVerticalAlignment(0, 2,
-                HasVerticalAlignment.ALIGN_TOP);
+        bottomRow.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_TOP);
+        bottomRow.getCellFormatter().setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
         if (resizable) {
             resizeImage.setTheme(currentTheme);
             bottomRow.setWidget(0, 2, resizeImage);
-            bottomRow.getCellFormatter().setStyleName(0, 2,
-                    getItemTheme("FrameBorder-br"));
+            bottomRow.getCellFormatter().setStyleName(0, 2, getItemTheme("FrameBorder-br"));
         } else {
-            bottomRow.getCellFormatter().setStyleName(0, 2,
-                    getItemTheme("FrameBorder-br"));
+            bottomRow.getCellFormatter().setStyleName(0, 2, getItemTheme("FrameBorder-br"));
         }
 
     }
@@ -364,8 +349,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
                         bottomRow.setVisible(false);
                         myContent.setVisible(false);
                         // buildGui();
-                        setSize(topBar.getOffsetWidth() + 5, topBar
-                                .getOffsetHeight() + 3);
+                        setSize(topBar.getOffsetWidth() + 5, topBar.getOffsetHeight() + 3);
                         minimized = true;
                         fireFrameMinimized();
                     }
@@ -424,9 +408,8 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         outLine.setTop(top);
         outLine.setLeft(left);
         setVisible(false);
-        Effects.Effect("BlindUp", outLine,
-                "{duration : 0.6, scaleFromCenter: true}").addEffectListener(
-                new Effects.EffectListenerAdapter() {
+        Effects.Effect("BlindUp", outLine, "{duration : 0.6, scaleFromCenter: true}")
+                .addEffectListener(new Effects.EffectListenerAdapter() {
                     public void onAfterFinish(Effect sender) {
                         removeFromParent();
                         outLine.removeFromParent();
@@ -557,7 +540,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this.url = url;
         myContent = getFrame();
     }
-    
+
     public String getUrl() {
         return url;
     }
@@ -578,13 +561,11 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this.resizable = resizable;
         if (resizable) {
             bottomRow.setWidget(0, 2, resizeImage);
-            bottomRow.getCellFormatter().setStyleName(0, 2,
-                    getItemTheme("FrameBorder-br"));
+            bottomRow.getCellFormatter().setStyleName(0, 2, getItemTheme("FrameBorder-br"));
             resizeImage.setTheme(currentTheme);
         } else {
             bottomRow.setHTML(0, 2, "&nbsp;");
-            bottomRow.getCellFormatter().setStyleName(0, 2,
-                    getItemTheme("FrameBorder-br"));
+            bottomRow.getCellFormatter().setStyleName(0, 2, getItemTheme("FrameBorder-br"));
         }
     }
 
@@ -889,6 +870,16 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     private String getItemTheme(String item) {
         return "gwm-" + currentTheme + "-" + item;
+    }
+
+    public void setContentHorizontalAlignment(
+            HasHorizontalAlignment.HorizontalAlignmentConstant alignmentConstant) {
+            centerRow.getFlexCellFormatter().setHorizontalAlignment(0, 1, alignmentConstant);
+    }
+
+    public void setContentVerticalAlignment(
+            HasVerticalAlignment.VerticalAlignmentConstant alignmentConstant) {
+            centerRow.getFlexCellFormatter().setVerticalAlignment(0, 1, alignmentConstant);
     }
 
 }
