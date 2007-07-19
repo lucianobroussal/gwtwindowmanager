@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
  * (http://www.gwtwindowmanager.org)
  * 
@@ -139,7 +139,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     private Label centerRightLabel;
 
-    private OutlinePanel outLine;
+    protected OutlinePanel outLine;
 
     private boolean minimizing = false;
 
@@ -192,7 +192,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     private void initializeFrame() {
         outLine = new OutlinePanel();
         outLine.setVisible(false);
-        RootPanel.get().add(outLine);
+        if(!(this instanceof GInternalFrame)){
+            RootPanel.get().add(outLine);
+        }
         ui = new FlexTable();
         topRow = new FlexTable();
         centerRow = new FlexTable();
@@ -417,15 +419,10 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         selectBoxManager.setBlockerVisible(false);
         outLine.setSize(getWidth() + "px", getHeight() + "px");
         outLine.setDeep(layerOfTheTopWindow + 50);
-        if (this instanceof GInternalFrame) {
-            ((GInternalFrame) this).getDesktopPane().addWidget(outLine,
-                    0, 0);
-        } else {
-            RootPanel.get().add(outLine);
-        }
+        outLine.setDeep(layerOfTheTopWindow + 50);
+        outLine.setVisible(true);
         outLine.setTop(top);
         outLine.setLeft(left);
-        outLine.setVisible(true);
         setVisible(false);
         Effects.Effect("BlindUp", outLine,
                 "{duration : 0.6, scaleFromCenter: true}").addEffectListener(
@@ -776,7 +773,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         setMaximizable(false);
         setMinimizable(false);
         setResizable(false);
-        GwmUtilities.diplayAtScreenCenter(this);
+        GwmUtilities.displayAtScreenCenter(this);
         modalMode = true;
     }
 

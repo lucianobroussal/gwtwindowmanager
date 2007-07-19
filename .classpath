@@ -3,8 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="src-samples"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="GWT_HOME/gwt-windows-1.4.10/gwt-dev-windows.jar"/>
-	<classpathentry kind="var" path="GWT_HOME/gwt-windows-1.4.10/gwt-servlet.jar"/>
-	<classpathentry kind="var" path="GWT_HOME/gwt-windows-1.4.10/gwt-user.jar"/>
+	<classpathentry kind="var" path="GWT_HOME/gwt-dev-windows.jar"/>
+	<classpathentry kind="var" path="GWT_HOME/gwt-user.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
