@@ -18,6 +18,7 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.DefaultGDialog;
@@ -26,6 +27,8 @@ import org.gwm.client.impl.DefaultGInternalFrame;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -51,6 +54,15 @@ public class GwmDemo implements EntryPoint {
         menuFrame.setSize(150, 300);
         DefaultGDialog.setDefaultTheme("simple1");
         Window.enableScrolling(false);
+
+        GInternalFrame f = new DefaultGInternalFrame("");
+        f.setContent(new Button("Left"));
+        f.setContentHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        f.setContentVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
+        f.setSize(300, 300);
+        desktop.addFrame(f);
+        f.setVisible(true);
+
     }
 
     private void buildUI() {
