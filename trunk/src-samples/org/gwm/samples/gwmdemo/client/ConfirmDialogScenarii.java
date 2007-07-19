@@ -53,7 +53,7 @@ public class ConfirmDialogScenarii extends AbstractScenarii {
                         responseWin.setMaximizable(false);
                         responseWin.setResizable(false);
                         responseWin.setContent(response);
-                        GwmUtilities.diplayAtScreenCenter(responseWin);
+                        GwmUtilities.displayAtScreenCenter(responseWin);
                     }
 
                 });

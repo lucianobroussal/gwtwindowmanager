@@ -128,6 +128,12 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
             throw new IllegalStateException(
                     "The Frame is minimized : use the getDesktopPane().deIconify() intead to restore the frame.");
         }
+        
+        if(outLine.getParent() == null){
+                ((GInternalFrame) this).getDesktopPane().addWidget(outLine,
+                             0, 0);
+        }
+        
         super.setVisible(visible);
     }
 

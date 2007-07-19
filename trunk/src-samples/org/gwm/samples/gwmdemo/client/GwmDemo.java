@@ -18,12 +18,14 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
 import org.gwm.client.util.Gwm;
+import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
@@ -47,11 +49,28 @@ public class GwmDemo implements EntryPoint {
     public static DefaultGFrame debug = new DefaultGFrame();
 
     public void onModuleLoad() {
+        
+
+        
         instance = this;
         buildUI();
         menuFrame.setSize(150, 300);
-        DefaultGDialog.setDefaultTheme(Gwm.getDefaultTheme());
+        DefaultGDialog.setDefaultTheme("simple1");
         Window.enableScrolling(false);
+ 
+        GFrame frame = new DefaultGFrame();
+        frame.setOutlineDragMode(false );
+        //frame.setLocation(100, 100);
+        frame.setContent(new Label("KKKKDSAIIIISD"));
+        frame.setVisible(true);
+        return;
+        
+        
+//        frame = new DefaultGFrame();
+//        frame.setSize(200, 200);
+//        frame.setContent("<b style='color:blue'>Drag me and look at my mirrot on the others browsers :)</b>");
+//        frame.setOutlineDragMode(false);
+//        frame.setVisible(true);
     }
 
     private void buildUI() {

@@ -94,6 +94,7 @@ public class TopBarFF extends TopBar implements EventPreview {
                         + x - dragStartX);
                 dragStartX = x;
                 dragStartY = y;
+                parent.fireFrameMoving();
 
             }
 

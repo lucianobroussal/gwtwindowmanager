@@ -57,7 +57,7 @@ public class SimpleWindowWithHTMLScenarii extends AbstractScenarii {
                         +"</div></td></tr></table>");
 
         window.setOutlineDragMode(true);  
-        GwmUtilities.diplayAtScreenCenter(window);
+        GwmUtilities.displayAtScreenCenter(window);
     }
 
     protected Hyperlink createLink() {

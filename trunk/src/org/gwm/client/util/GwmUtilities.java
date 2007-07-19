@@ -49,7 +49,7 @@ public class GwmUtilities {
                 diplayAtRelativeGivenWidgetCenter(frame,
                         (UIObject) internalFrame.getDesktopPane());
         } else {
-            diplayAtScreenCenter(frame);
+            displayAtScreenCenter(frame);
         }
     }
 
@@ -57,7 +57,7 @@ public class GwmUtilities {
      * Displays a frame at the center of the screen.
      * @param frame the frame to display at the center of the screen.
      */
-    static public void diplayAtScreenCenter(GFrame frame) {
+    static public void displayAtScreenCenter(GFrame frame) {
         if (frame == null)
             throw new IllegalArgumentException("The frame can't be null");
         frame.setVisible(true);
@@ -76,8 +76,8 @@ public class GwmUtilities {
             UIObject absoluteParent) {
         if (frame == null || absoluteParent == null)
             throw new IllegalArgumentException("The parameters can't be null");
-        int frameLeft = absoluteParent.getOffsetWidth()/2 + absoluteParent.getAbsoluteLeft();
-        int frameTop = absoluteParent.getOffsetHeight()/2 + absoluteParent.getAbsoluteTop();
+        int frameLeft = (absoluteParent.getOffsetWidth() -frame.getWidth()) /2;
+        int frameTop = (absoluteParent.getOffsetHeight() - frame.getHeight())/2;
         frame.setLocation(frameTop, frameLeft);
         frame.setVisible(true);
 
