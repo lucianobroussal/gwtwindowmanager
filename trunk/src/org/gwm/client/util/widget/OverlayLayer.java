@@ -29,6 +29,8 @@ public class OverlayLayer extends ComplexPanel {
     public OverlayLayer() {
         setElement(DOM.createDiv());
         initProperties();
+        setVisible(false);
+        RootPanel.get().add(this);
     }
 
     public void show(String theme) {
@@ -37,7 +39,6 @@ public class OverlayLayer extends ComplexPanel {
 
     public void show(String theme, int deep) {
         setStyleName("gwm-" + theme + "-ActionOverlay");
-        RootPanel.get().add(this);
         DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame
                 .getLayerOfTheTopWindow()
                 + deep);
@@ -61,7 +62,12 @@ public class OverlayLayer extends ComplexPanel {
     }
 
     public void hide() {
-        RootPanel.get().remove(this);
+        //RootPanel.get().remove(this);
+        setVisible(false);
+    }
+    
+    public void finalize(){
+            RootPanel.get().remove(this);
     }
 
 }
