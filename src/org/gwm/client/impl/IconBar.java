@@ -34,8 +34,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The IconBar implementation used from {@link DefaultGDesktopPane} 
- *
+ * The IconBar implementation used from {@link DefaultGDesktopPane}
+ * 
  */
 public class IconBar extends FlowPanel {
 
@@ -68,14 +68,12 @@ public class IconBar extends FlowPanel {
         Label label = new Label(frame.getCaption());
         label.setStyleName(getItemTheme(gframe, "Frame-TopBar-minimized"));
         Label restoreButton = new Label("");
-        restoreButton.setStyleName(getItemTheme(gframe,
-                "Frame-TopBar-RestoreButton"));
+        restoreButton.setStyleName(getItemTheme(gframe, "Frame-TopBar-RestoreButton"));
 
         Image titleIcon = frame.getTitleIcon();
         if (titleIcon != null) {
             iconLayout.add(titleIcon);
-            iconLayout.setCellVerticalAlignment(titleIcon,
-                    HasVerticalAlignment.ALIGN_MIDDLE);
+            iconLayout.setCellVerticalAlignment(titleIcon, HasVerticalAlignment.ALIGN_MIDDLE);
         }
         iconLayout.add(label);
         icon.add(iconLayout);
@@ -99,9 +97,11 @@ public class IconBar extends FlowPanel {
     public void removeFrame(GFrame frame) {
         iconByFrame.remove(frame);
         Object button = buttonByFrame.remove(frame);
-        buttonFrame.remove(button);
-        HorizontalPanel hpicon = (HorizontalPanel) buttonIcon.remove(button);
-        remove(hpicon);
+        if (button != null) {
+            buttonFrame.remove(button);
+            HorizontalPanel hpicon = (HorizontalPanel) buttonIcon.remove(button);
+            remove(hpicon);
+        }
     }
 
     private String getItemTheme(GFrame parent, String item) {
