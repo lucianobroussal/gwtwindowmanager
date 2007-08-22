@@ -108,6 +108,9 @@ public class GwmUtilities {
    public static native boolean isFFBrowser()/*-{
     return navigator.userAgent.indexOf('Firefox') >=0;
     }-*/;
+   public static native boolean isSafariBrowser()/*-{
+    return navigator.userAgent.indexOf('Safari') >=0;
+    }-*/;
 
    public static native String getUserAgent()/*-{
     return navigator.userAgent;

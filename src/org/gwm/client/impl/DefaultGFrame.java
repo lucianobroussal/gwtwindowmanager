@@ -333,27 +333,32 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this.previousWidth = getWidth();
         this.previousHeight = getHeight();
 
-        outLine.setSize(width + "px", height + "px");
-        outLine.setTop(top);
-        outLine.setLeft(left);
-        outLine.setDeep(layerOfTheTopWindow + 50);
-        outLine.setVisible(true);
-        setVisible(false);
-        Effects.Effect("Fade", outLine, "{duration:0.3}").addEffectListener(
-                new Effects.EffectListenerAdapter() {
-                    public void onAfterFinish(Effect sender) {
-                        setVisible(true);
-                        topBar.setIconified();
-                        freeminimized = true;
-                        centerRow.setVisible(false);
-                        bottomRow.setVisible(false);
-                        myContent.setVisible(false);
-                        // buildGui();
-                        setSize(topBar.getOffsetWidth() + 5, topBar.getOffsetHeight() + 3);
-                        minimized = true;
-                        fireFrameMinimized();
-                    }
-                });
+        if (!GwmUtilities.isSafariBrowser()) {
+            outLine.setSize(width + "px", height + "px");
+            outLine.setTop(top);
+            outLine.setLeft(left);
+            outLine.setDeep(layerOfTheTopWindow + 50);
+            setVisible(false);
+            Window.alert("Fade");
+            Effects.Effect("Fade", outLine, "{duration:0.3}").addEffectListener(
+                    new Effects.EffectListenerAdapter() {
+                        public void onAfterFinish(Effect sender) {
+                            setVisible(true);
+                            topBar.setIconified();
+                            freeminimized = true;
+                            centerRow.setVisible(false);
+                            bottomRow.setVisible(false);
+                            myContent.setVisible(false);
+                            // buildGui();
+                            setSize(topBar.getOffsetWidth() + 5, topBar.getOffsetHeight() + 3);
+                            minimized = true;
+                            fireFrameMinimized();
+                        }
+                    });
+        } else {
+            Window.alert("Hide");
+            outLine.setVisible(false);
+        }
 
     }
 
@@ -408,19 +413,23 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         outLine.setTop(top);
         outLine.setLeft(left);
         setVisible(false);
-        Effects.Effect("BlindUp", outLine, "{duration : 0.6, scaleFromCenter: true}")
-                .addEffectListener(new Effects.EffectListenerAdapter() {
-                    public void onAfterFinish(Effect sender) {
-                        removeFromParent();
-                        outLine.removeFromParent();
-                        selectBoxManager.removeBlocker();
-                        closed = true;
-                        if (modalMode) {
-                            overlayLayer.hide();
+        if (!GwmUtilities.isSafariBrowser()) {
+            Effects.Effect("BlindUp", outLine, "{duration : 0.6, scaleFromCenter: true}")
+                    .addEffectListener(new Effects.EffectListenerAdapter() {
+                        public void onAfterFinish(Effect sender) {
+                            removeFromParent();
+                            outLine.removeFromParent();
+                            selectBoxManager.removeBlocker();
+                            closed = true;
+                            if (modalMode) {
+                                overlayLayer.hide();
+                            }
+                            fireFrameClosed();
                         }
-                        fireFrameClosed();
-                    }
-                });
+                    });
+        } else {
+            outLine.setVisible(false);
+        }
     }
 
     public boolean isMinimized() {
@@ -874,12 +883,12 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
     public void setContentHorizontalAlignment(
             HasHorizontalAlignment.HorizontalAlignmentConstant alignmentConstant) {
-            centerRow.getFlexCellFormatter().setHorizontalAlignment(0, 1, alignmentConstant);
+        centerRow.getFlexCellFormatter().setHorizontalAlignment(0, 1, alignmentConstant);
     }
 
     public void setContentVerticalAlignment(
             HasVerticalAlignment.VerticalAlignmentConstant alignmentConstant) {
-            centerRow.getFlexCellFormatter().setVerticalAlignment(0, 1, alignmentConstant);
+        centerRow.getFlexCellFormatter().setVerticalAlignment(0, 1, alignmentConstant);
     }
 
 }
