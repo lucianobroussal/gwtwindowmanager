@@ -1,9 +1,8 @@
 #labels Featured
-=H1 List of the top donatations=
+=List of the top donatations=
 
 
-You can make a donation by visiting this page.
-
+You can make a donation by visiting [http://www.gwtwindowmanager.org/supporting-gwm.html the Gwm website]
 ==Thank you for supporting the Gwt Window Manager project!== 
 
 || *User / Company* || *Company / Application*||
