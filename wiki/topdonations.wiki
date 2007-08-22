@@ -6,4 +6,4 @@ You can make a donation by visiting the [http://www.gwtwindowmanager.org/support
 *Thank you for supporting the Gwt Window Manager project* 
 
 || *User / Company* || *Company / Application*|| *Demo* ||
-|| Scooter Willis|| [http://www.videoprotein.com/ Video Protein].|| [http://www.videoprotein.com/demo3min/Demo3.html Demo]
+|| Scooter Willis|| [http://www.videoprotein.com/ Video Protein]|| [http://www.videoprotein.com/demo3min/Demo3.html Demo]||
