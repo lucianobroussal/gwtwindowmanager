@@ -1,11 +1,10 @@
 #labels Featured
-# List of the top donatations
+=H1 List of the top donatations=
 
 
 You can make a donation by visiting this page.
 
-Thank you for supporting the Gwt Window Manager project! 
+==Thank you for supporting the Gwt Window Manager project!== 
 
 || *User / Company* || *Company / Application*||
 || Scooter Willis|| [http://www.videoprotein.com/ Video Protein].||
-
