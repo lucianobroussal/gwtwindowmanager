@@ -2,8 +2,8 @@
 =List of the top donatations=
 
 
-You can make a donation by visiting [http://www.gwtwindowmanager.org/supporting-gwm.html the Gwm website]
-==Thank you for supporting the Gwt Window Manager project!== 
+You can make a donation by visiting the [http://www.gwtwindowmanager.org/supporting-gwm.html  Gwm website]
+==Thank you for supporting the Gwt Window Manager project== 
 
-|| *User / Company* || *Company / Application*||
-|| Scooter Willis|| [http://www.videoprotein.com/ Video Protein].||
+|| *User / Company* || *Company / Application*|| *Demo*
+|| Scooter Willis|| [http://www.videoprotein.com/ Video Protein].|| [http://www.videoprotein.com/demo3min/Demo3.html Demo]
