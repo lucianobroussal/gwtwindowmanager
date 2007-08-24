@@ -1,5 +1,5 @@
 #labels Featured
-=List of the top donatations=
+=List of the top donations=
 
 
 You can make a donation by visiting the [http://www.gwtwindowmanager.org/supporting-gwm.html  Gwm website]
