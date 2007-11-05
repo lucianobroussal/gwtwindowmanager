@@ -339,28 +339,31 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
             outLine.setLeft(left);
             outLine.setDeep(layerOfTheTopWindow + 50);
             setVisible(false);
-            Window.alert("Fade");
             Effects.Effect("Fade", outLine, "{duration:0.3}").addEffectListener(
                     new Effects.EffectListenerAdapter() {
                         public void onAfterFinish(Effect sender) {
-                            setVisible(true);
-                            topBar.setIconified();
-                            freeminimized = true;
-                            centerRow.setVisible(false);
-                            bottomRow.setVisible(false);
-                            myContent.setVisible(false);
-                            // buildGui();
-                            setSize(topBar.getOffsetWidth() + 5, topBar.getOffsetHeight() + 3);
-                            minimized = true;
-                            fireFrameMinimized();
+                            doMinimize();
                         }
                     });
         } else {
-            Window.alert("Hide");
             outLine.setVisible(false);
-        }
+            doMinimize();
+       }
 
     }
+
+	private void doMinimize() {
+		setVisible(true);
+		topBar.setIconified();
+		freeminimized = true;
+		centerRow.setVisible(false);
+		bottomRow.setVisible(false);
+		myContent.setVisible(false);
+		// buildGui();
+		setSize(topBar.getOffsetWidth() + 5, topBar.getOffsetHeight() + 3);
+		minimized = true;
+		fireFrameMinimized();
+	}
 
     public void maximize() {
 
@@ -417,20 +420,25 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
             Effects.Effect("BlindUp", outLine, "{duration : 0.6, scaleFromCenter: true}")
                     .addEffectListener(new Effects.EffectListenerAdapter() {
                         public void onAfterFinish(Effect sender) {
-                            removeFromParent();
-                            outLine.removeFromParent();
-                            selectBoxManager.removeBlocker();
-                            closed = true;
-                            if (modalMode) {
-                                overlayLayer.hide();
-                            }
-                            fireFrameClosed();
+                            doClose();
                         }
                     });
         } else {
             outLine.setVisible(false);
+            doClose();
         }
     }
+
+	private void doClose() {
+		removeFromParent();
+		outLine.removeFromParent();
+		selectBoxManager.removeBlocker();
+		closed = true;
+		if (modalMode) {
+		    overlayLayer.hide();
+		}
+		fireFrameClosed();
+	}
 
     public boolean isMinimized() {
         return this.minimized;
