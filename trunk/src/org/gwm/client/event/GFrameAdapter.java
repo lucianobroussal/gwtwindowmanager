@@ -26,6 +26,10 @@ package org.gwm.client.event;
  */
 public class GFrameAdapter implements GFrameListener {
 
+    public boolean onFrameClosing(GFrameEvent evt) {
+        return true;
+    }
+    
     public void frameClosed(GFrameEvent evt) {
     }
 
@@ -61,5 +65,7 @@ public class GFrameAdapter implements GFrameListener {
 
     public void frameGhostMoving(int top, int left, GFrameEvent event) {
     }
+
+    
 
 }
