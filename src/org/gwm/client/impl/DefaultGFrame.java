@@ -408,6 +408,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     }
 
     public void close() {
+        boolean continueClosingOperation = fireFrameOnClosing();
+        if (continueClosingOperation == false)
+            return;
         selectBoxManager.setBlockerVisible(false);
         outLine.setSize(getWidth() + "px", getHeight() + "px");
         outLine.setDeep(layerOfTheTopWindow + 50);
@@ -640,6 +643,19 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
             GFrameListener listener = (GFrameListener) listeners.get(i);
             listener.frameMoved(new GFrameEvent(this));
         }
+    }
+
+    /**
+     * Fires the closing event of this frame to its listeners.
+     */
+    private boolean fireFrameOnClosing() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            if (!listener.onFrameClosing(new GFrameEvent(this))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -144,6 +144,11 @@ public class DebugWindow {
                 
             }
 
+            public boolean onFrameClosing(GFrameEvent evt) {
+                addEvent(evt , "On closing");
+                return true;
+            }
+
         };
     }
 

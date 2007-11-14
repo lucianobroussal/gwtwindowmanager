@@ -28,6 +28,8 @@ package org.gwm.client.event;
  * 
  */
 public interface GFrameListener {
+    
+    public boolean onFrameClosing(GFrameEvent evt);
 
     public void frameResized(GFrameEvent evt);
 
