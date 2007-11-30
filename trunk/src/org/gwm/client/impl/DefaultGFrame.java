@@ -46,7 +46,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.gwt.components.client.Effects;
 import com.gwt.components.client.Effects.Effect;
 
@@ -913,6 +912,12 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
     public void setContentVerticalAlignment(
             HasVerticalAlignment.VerticalAlignmentConstant alignmentConstant) {
         centerRow.getFlexCellFormatter().setVerticalAlignment(0, 1, alignmentConstant);
+    }
+
+    
+    public void setPixelSize(int width, int height) {
+        throw new IllegalStateException(
+        "Should never be called. Instead use public void setSize(int width, int height){...}");
     }
 
 }
