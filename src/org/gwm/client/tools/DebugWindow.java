@@ -44,8 +44,6 @@ public class DebugWindow {
     private Button clearLog;
 
     private GFrame frame;
-    
-     
 
     public DebugWindow() {
         frame = new DefaultGFrame("Debug Window");
@@ -62,10 +60,8 @@ public class DebugWindow {
         this.dock.add(panel, DockPanel.CENTER);
         this.dock.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         this.dock.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
-        this.dock.setCellHorizontalAlignment(clearLog,
-                HasHorizontalAlignment.ALIGN_CENTER);
-        this.dock.setCellVerticalAlignment(clearLog,
-                HasVerticalAlignment.ALIGN_TOP);
+        this.dock.setCellHorizontalAlignment(clearLog, HasHorizontalAlignment.ALIGN_CENTER);
+        this.dock.setCellVerticalAlignment(clearLog, HasVerticalAlignment.ALIGN_TOP);
         frame.setContent(this.dock);
     }
 
@@ -75,19 +71,17 @@ public class DebugWindow {
         this.dock.add(panel, DockPanel.CENTER);
     }
 
-   
-
     private void addEvent(GFrameEvent evt, String action) {
-        if(panel.getWidgetCount() % 10 == 0){
+        if (panel.getWidgetCount() % 10 == 0) {
             clearPanel();
         }
-        
+
         final GFrame myFrame = evt.getGFrame();
         String title = myFrame.getCaption();
         Label l = new Label(action + " " + title);
         l.addStyleName("gwm-DebugEvent");
         this.panel.add(l);
-        ((DefaultGFrame)frame).fireFrameResized();
+        ((DefaultGFrame) frame).fireFrameResized();
     }
 
     public GFrame getUI() {
@@ -95,7 +89,7 @@ public class DebugWindow {
     }
 
     public GFrameListener getFrameListener() {
-       return  new GFrameListener(){
+        return new GFrameListener() {
             public void frameResized(GFrameEvent evt) {
                 addEvent(evt, "Resized");
             }
@@ -127,26 +121,31 @@ public class DebugWindow {
             public void frameMoved(GFrameEvent evt) {
                 addEvent(evt, "Moved");
             }
+
             public void frameMoving(GFrameEvent evt) {
                 addEvent(evt, "Moving");
             }
-            
+
             public void frameSelected(GFrameEvent evt) {
                 addEvent(evt, "Selected");
             }
 
             public void frameGhostMoving(int top, int left, GFrameEvent evt) {
-                addEvent(evt , "Ghost moving");
+                addEvent(evt, "Ghost moving");
             }
 
             public void frameGhostMoved(int top, int left, GFrameEvent evt) {
-                addEvent(evt , "Ghost moved");
-                
+                addEvent(evt, "Ghost moved");
+
             }
 
             public boolean onFrameClosing(GFrameEvent evt) {
-                addEvent(evt , "On closing");
+                addEvent(evt, "On closing");
                 return true;
+            }
+
+            public void onFrameMaximizing(GFrameEvent evt) {
+                addEvent(evt, "On Maximizing");
             }
 
         };

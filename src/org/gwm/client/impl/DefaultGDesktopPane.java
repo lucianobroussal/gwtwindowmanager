@@ -23,25 +23,29 @@
 package org.gwm.client.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
+import org.gwm.client.event.GFrameAdapter;
+import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.util.Gwm;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The GWT default implementation for {@link GDesktopPane} 
- *
+ * The GWT default implementation for {@link GDesktopPane}
+ * 
  */
-public class DefaultGDesktopPane extends Composite implements
-        WindowResizeListener, GDesktopPane {
+public class DefaultGDesktopPane extends Composite implements WindowResizeListener, GDesktopPane {
 
     private AbsolutePanel frameContainer;
 
@@ -50,10 +54,18 @@ public class DefaultGDesktopPane extends Composite implements
     private IconBar buttonBar;
 
     private List frames;
-    
+
     private GInternalFrame activeFrame;
 
+    private FrameListenerForScrollableDesktop frameListenerForScrollableDesktop;
+
     private String theme = Gwm.getDefaultTheme();
+
+    private boolean scrollable;
+
+    private int buttonBarX = 0;
+
+    private int buttonBarY = 0;
 
     public DefaultGDesktopPane() {
         initialize();
@@ -73,23 +85,21 @@ public class DefaultGDesktopPane extends Composite implements
         frameContainer = new AbsolutePanel();
         frameContainer.setWidth("100%");
         frameContainer.setHeight("100%");
-        buttonBar = new IconBar(this);
-        desktopWidget.getFlexCellFormatter().setHeight(0, 0, "100%");
-        desktopWidget.setWidget(0, 0, frameContainer);
-        frameContainer.setStyleName("gwm-"+ theme + "-GDesktopPane-FrameContainer");
-
-        desktopWidget.setWidget(1, 0, buttonBar);
-        desktopWidget.getFlexCellFormatter().setStyleName(1, 0,
-                "gwm-"+ theme + "-GDesktopPane-TaskBar");
+        buttonBar = new HorizontalIconBar(this);
+        setMinimizedWindowBarDirection(LayoutConstant.SOUTH);
+        desktopWidget.getFlexCellFormatter().setStyleName(1, 1,
+                "gwm-" + theme + "-GDesktopPane-FrameContainer");
+        desktopWidget.setWidget(1, 1, frameContainer);
+        frameContainer.add(new HTML("&nbsp"));
 
         initWidget(desktopWidget);
-        setStyleName("gwm-"+ theme + "-GDesktopPane");
+        setStyleName("gwm-" + theme + "-GDesktopPane");
         theme = Gwm.getDefaultTheme();
 
     }
 
     private void setupListeners() {
-
+        frameListenerForScrollableDesktop = new FrameListenerForScrollableDesktop();
     }
 
     public void iconify(GFrame frame) {
@@ -108,6 +118,9 @@ public class DefaultGDesktopPane extends Composite implements
      * @param internalFrame
      */
     public void addFrame(GInternalFrame internalFrame) {
+        if (scrollable) {
+            internalFrame.addFrameListener(frameListenerForScrollableDesktop);
+        }
         internalFrame.setDesktopPane(this);
         int spos = (frames.size() + 1) * 30;
         int left = frameContainer.getAbsoluteLeft() + spos;
@@ -117,22 +130,25 @@ public class DefaultGDesktopPane extends Composite implements
         if (selectBoxManager instanceof SelectBoxManagerImplIE6) {
             frameContainer.add(selectBoxManager.getBlockerWidget(), left, top);
         }
-        frameContainer.add((Widget)internalFrame);
+        frameContainer.add((Widget) internalFrame);
         internalFrame.setLocation(left, top);
         frames.add(internalFrame);
         internalFrame.setTheme(theme);
     }
-    
+
     public void removeFrame(GInternalFrame internalFrame) {
-        frameContainer.remove((Widget)internalFrame);
+        if (scrollable) {
+            internalFrame.removeGFrameListener(frameListenerForScrollableDesktop);
+        }
+        frameContainer.remove((Widget) internalFrame);
         SelectBoxManagerImpl selectBoxManager = ((DefaultGFrame) internalFrame)
-        .getSelectBoxManager();
+                .getSelectBoxManager();
         if (selectBoxManager instanceof SelectBoxManagerImplIE6) {
             frameContainer.remove(selectBoxManager.getBlockerWidget());
         }
         frames.remove(internalFrame);
         buttonBar.removeFrame(internalFrame);
-        
+
     }
 
     /**
@@ -152,13 +168,12 @@ public class DefaultGDesktopPane extends Composite implements
         buttonBar.adjustSize();
     }
 
-    
     public void addWidget(Widget widget, int left, int top) {
         frameContainer.remove(widget);
         frameContainer.add(widget);
         frameContainer.setWidgetPosition(widget, left, top);
     }
-    
+
     public void setWidgetPosition(Widget widget, int left, int top) {
         frameContainer.setWidgetPosition(widget, left, top);
     }
@@ -176,17 +191,116 @@ public class DefaultGDesktopPane extends Composite implements
     }
 
     public void setTheme(String theme) {
-       this.theme = theme;
-       for (int x = 0; x < frames.size(); x++) {
-           GInternalFrame theFrame = (GInternalFrame) frames.get(x);
-           theFrame.setTheme(theme);
-       }
-       frameContainer.setStyleName("gwm-"+ theme + "-GDesktopPane-FrameContainer");
+        this.theme = theme;
+        for (int x = 0; x < frames.size(); x++) {
+            GInternalFrame theFrame = (GInternalFrame) frames.get(x);
+            theFrame.setTheme(theme);
+        }
+        frameContainer.setStyleName("gwm-" + theme + "-GDesktopPane-FrameContainer");
 
-       desktopWidget.getFlexCellFormatter().setStyleName(1, 0,
-               "gwm-"+ theme + "-GDesktopPane-TaskBar");
-       setStyleName("gwm-"+ theme + "-GDesktopPane");
+        desktopWidget.getFlexCellFormatter().setStyleName(1, 0,
+                "gwm-" + theme + "-GDesktopPane-TaskBar");
+        setStyleName("gwm-" + theme + "-GDesktopPane");
     }
-    
-    
+
+    private class FrameListenerForScrollableDesktop extends GFrameAdapter {
+
+        public void onFrameMaximizing(GFrameEvent evt) {
+            DOM.setStyleAttribute(frameContainer.getElement(), "overflow", "hidden");
+        }
+
+        public void frameRestored(GFrameEvent evt) {
+            DOM.setStyleAttribute(frameContainer.getElement(), "overflow", "auto");
+        }
+    }
+
+    public void enableScrolling(boolean scrollable) {
+        this.scrollable = scrollable;
+        if (scrollable) {
+            if (frameListenerForScrollableDesktop == null) {
+                frameListenerForScrollableDesktop = new FrameListenerForScrollableDesktop();
+            } else {
+                if (frameListenerForScrollableDesktop != null) {
+                    for (Iterator iter = frames.iterator(); iter.hasNext();) {
+                        GInternalFrame frame = (GInternalFrame) iter.next();
+                        frame.removeGFrameListener(frameListenerForScrollableDesktop);
+                    }
+                }
+            }
+            DOM.setStyleAttribute(frameContainer.getElement(), "overflow", "auto");
+        }
+
+    }
+
+    public void setMinimizedWindowBarDirection(LayoutConstant direction) {
+
+        int newbuttonBarX = getButtonBarX(direction);
+        int newbuttonBarY = getButtonBarY(direction);
+        desktopWidget.getFlexCellFormatter().setStyleName(buttonBarY, buttonBarX, "");
+        
+
+        if (direction == LayoutConstant.NORTH || direction == LayoutConstant.SOUTH) {
+            if (buttonBar instanceof HorizontalIconBar) {
+                desktopWidget.setWidget(newbuttonBarY, newbuttonBarX, buttonBar.getUI());
+                desktopWidget.getFlexCellFormatter().setStyleName(newbuttonBarY, newbuttonBarX,
+                        buttonBar.getTheme(theme));
+            } else {
+                IconBar newButtonBar = new HorizontalIconBar(this);
+                copyMinimizedWindow(buttonBar, newButtonBar);
+                desktopWidget.getFlexCellFormatter().setStyleName(newbuttonBarY, newbuttonBarX,
+                        newButtonBar.getTheme(theme));
+                desktopWidget.setWidget(newbuttonBarY, newbuttonBarX, newButtonBar.getUI());
+                buttonBar = newButtonBar;
+            }
+        }
+
+        if (direction == LayoutConstant.EAST || direction == LayoutConstant.WEST) {
+            if (buttonBar instanceof VerticalIconBar) {
+                desktopWidget.setWidget(newbuttonBarY, newbuttonBarX, buttonBar.getUI());
+                desktopWidget.getFlexCellFormatter().setStyleName(newbuttonBarY, newbuttonBarX,
+                        buttonBar.getTheme(theme));
+            } else {
+                IconBar newButtonBar = new VerticalIconBar(this);
+                desktopWidget.getFlexCellFormatter().setStyleName(newbuttonBarY, newbuttonBarX,
+                        newButtonBar.getTheme(theme));
+                desktopWidget.setWidget(newbuttonBarY, newbuttonBarX, newButtonBar.getUI());
+                copyMinimizedWindow(buttonBar, newButtonBar);
+                buttonBar = newButtonBar;
+            }
+
+        }
+        buttonBarX = newbuttonBarX;
+        buttonBarY = newbuttonBarY;
+
+    }
+
+    private void copyMinimizedWindow(IconBar source, IconBar newButtonBar) {
+        for (Iterator iter = source.getGFrames().iterator(); iter.hasNext();) {
+            GFrame frame = (GFrame) iter.next();
+            newButtonBar.addFrame(frame);
+            source.removeFrame(frame);
+        }
+
+    }
+
+    private int getButtonBarX(LayoutConstant direction) {
+        if (direction == LayoutConstant.NORTH)
+            return 1;
+        if (direction == LayoutConstant.EAST)
+            return 2;
+        if (direction == LayoutConstant.SOUTH)
+            return 1;
+        return 0;
+    }
+
+    private int getButtonBarY(LayoutConstant direction) {
+        if (direction == LayoutConstant.NORTH)
+            return 0;
+        if (direction == LayoutConstant.EAST)
+            return 1;
+        if (direction == LayoutConstant.SOUTH)
+            return 2;
+        return 1;
+    }
+
 }

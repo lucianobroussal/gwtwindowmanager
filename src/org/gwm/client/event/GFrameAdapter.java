@@ -21,19 +21,22 @@
 package org.gwm.client.event;
 
 /**
- * Adapter class for {@link GFrameListener} 
- *
+ * Adapter class for {@link GFrameListener}
+ * 
  */
 public class GFrameAdapter implements GFrameListener {
 
     public boolean onFrameClosing(GFrameEvent evt) {
         return true;
     }
-    
+
     public void frameClosed(GFrameEvent evt) {
     }
 
     public void frameIconified(GFrameEvent evt) {
+    }
+
+    public void onFrameMaximizing(GFrameEvent evt) {
     }
 
     public void frameMaximized(GFrameEvent evt) {
@@ -54,8 +57,8 @@ public class GFrameAdapter implements GFrameListener {
     public void frameRestored(GFrameEvent evt) {
     }
 
-	public void frameMoving(GFrameEvent event) {
-	}
+    public void frameMoving(GFrameEvent event) {
+    }
 
     public void frameSelected(GFrameEvent event) {
     }
@@ -65,7 +68,5 @@ public class GFrameAdapter implements GFrameListener {
 
     public void frameGhostMoving(int top, int left, GFrameEvent event) {
     }
-
-    
 
 }

@@ -26,8 +26,6 @@ import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -85,7 +83,7 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
             throw new IllegalStateException(
                     "This method can be used only if the GInternalFrame has been already attached to the parent Desktop.");
         }
-
+        fireFrameMaximizing();
         if (maxWidth == 0) {
             this.width = desktopPane.getFramesContainer().getOffsetWidth();
         } else {

@@ -686,6 +686,15 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
             listener.frameMaximized(new GFrameEvent(this));
         }
     }
+    /**
+     * Fires the frameMaximized event of this frame to its listeners.
+     */
+    public void fireFrameMaximizing() {
+        for (int i = 0; i < listeners.size(); i++) {
+            GFrameListener listener = (GFrameListener) listeners.get(i);
+            listener.onFrameMaximizing(new GFrameEvent(this));
+        }
+    }
 
     /**
      * Fires the frameMinimized event of this frame to its listeners.
