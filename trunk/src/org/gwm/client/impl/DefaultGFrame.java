@@ -46,8 +46,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwt.components.client.Effects;
-import com.gwt.components.client.Effects.Effect;
 
 /**
  * The GWT default implementation of {@link GDialog}
@@ -333,36 +331,31 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         this.previousHeight = getHeight();
 
         if (!GwmUtilities.isSafariBrowser()) {
-            outLine.setSize(width + "px", height + "px");
-            outLine.setTop(top);
-            outLine.setLeft(left);
-            outLine.setDeep(layerOfTheTopWindow + 50);
+//            outLine.setSize(width + "px", height + "px");
+//            outLine.setTop(top);
+//            outLine.setLeft(left);
+//            outLine.setDeep(layerOfTheTopWindow + 50);
             setVisible(false);
-            Effects.Effect("Fade", outLine, "{duration:0.3}").addEffectListener(
-                    new Effects.EffectListenerAdapter() {
-                        public void onAfterFinish(Effect sender) {
-                            doMinimize();
-                        }
-                    });
-        } else {
-            outLine.setVisible(false);
             doMinimize();
-       }
+        } else {
+            //outLine.setVisible(false);
+            doMinimize();
+        }
 
     }
 
-	private void doMinimize() {
-		setVisible(true);
-		topBar.setIconified();
-		freeminimized = true;
-		centerRow.setVisible(false);
-		bottomRow.setVisible(false);
-		myContent.setVisible(false);
-		// buildGui();
-		setSize(topBar.getOffsetWidth() + 5, topBar.getOffsetHeight() + 3);
-		minimized = true;
-		fireFrameMinimized();
-	}
+    private void doMinimize() {
+        setVisible(true);
+        topBar.setIconified();
+        freeminimized = true;
+        centerRow.setVisible(false);
+        bottomRow.setVisible(false);
+        myContent.setVisible(false);
+        // buildGui();
+        setSize(topBar.getOffsetWidth() + 5, topBar.getOffsetHeight() + 3);
+        minimized = true;
+        fireFrameMinimized();
+    }
 
     public void maximize() {
 
@@ -411,36 +404,31 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         if (continueClosingOperation == false)
             return;
         selectBoxManager.setBlockerVisible(false);
-        outLine.setSize(getWidth() + "px", getHeight() + "px");
-        outLine.setDeep(layerOfTheTopWindow + 50);
-        outLine.setDeep(layerOfTheTopWindow + 50);
-        outLine.setVisible(true);
-        outLine.setTop(top);
-        outLine.setLeft(left);
+//        outLine.setSize(getWidth() + "px", getHeight() + "px");
+//        outLine.setDeep(layerOfTheTopWindow + 50);
+//        outLine.setDeep(layerOfTheTopWindow + 50);
+//        outLine.setVisible(true);
+//        outLine.setTop(top);
+//        outLine.setLeft(left);
         setVisible(false);
         if (!GwmUtilities.isSafariBrowser()) {
-            Effects.Effect("BlindUp", outLine, "{duration : 0.6, scaleFromCenter: true}")
-                    .addEffectListener(new Effects.EffectListenerAdapter() {
-                        public void onAfterFinish(Effect sender) {
-                            doClose();
-                        }
-                    });
+            doClose();
         } else {
-            outLine.setVisible(false);
+//            outLine.setVisible(false);
             doClose();
         }
     }
 
-	private void doClose() {
-		removeFromParent();
-		outLine.removeFromParent();
-		selectBoxManager.removeBlocker();
-		closed = true;
-		if (modalMode) {
-		    overlayLayer.hide();
-		}
-		fireFrameClosed();
-	}
+    private void doClose() {
+        removeFromParent();
+        outLine.removeFromParent();
+        selectBoxManager.removeBlocker();
+        closed = true;
+        if (modalMode) {
+            overlayLayer.hide();
+        }
+        fireFrameClosed();
+    }
 
     public boolean isMinimized() {
         return this.minimized;
@@ -686,6 +674,7 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
             listener.frameMaximized(new GFrameEvent(this));
         }
     }
+
     /**
      * Fires the frameMaximized event of this frame to its listeners.
      */
@@ -923,10 +912,9 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
         centerRow.getFlexCellFormatter().setVerticalAlignment(0, 1, alignmentConstant);
     }
 
-    
     public void setPixelSize(int width, int height) {
         throw new IllegalStateException(
-        "Should never be called. Instead use public void setSize(int width, int height){...}");
+                "Should never be called. Instead use public void setSize(int width, int height){...}");
     }
 
 }

@@ -54,7 +54,6 @@ public class GwmDemo implements EntryPoint {
         instance = this;
         buildUI();
         menuFrame.setSize(150, 300);
-        DefaultGDialog.setDefaultTheme("simple1");
         Window.enableScrolling(false);
     }
 
