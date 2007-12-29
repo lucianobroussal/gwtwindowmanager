@@ -198,20 +198,31 @@
 }
 .gwm-default-GDesktopPane-FrameContainer{
 	overflow: hidden;
-  	width: 100%;
-  	height: 100%;
+	height:100%;
 }
 
 
-.gwm-default-GDesktopPane-TaskBar{
-	background-color: #EFEFFF;
+.gwm-default-GDesktopPane-VTaskBar{
+	background-color:#EFEFFF;
 	filter:alpha(opacity=80);
 	-moz-opacity: 0.8;
 	opacity: 0.8;
+	height:100%;
+	width:50px;
+	vertical-align:top;
+}
 
+.gwm-default-GDesktopPane-HTaskBar{
+	background-color:#EFEFFF;
+	filter:alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
 	height:30px;
+	width:100%;
 	align-text:left;
 }
+
+
 
 
 

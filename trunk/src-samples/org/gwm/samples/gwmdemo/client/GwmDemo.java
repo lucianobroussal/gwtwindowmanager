@@ -18,16 +18,18 @@
 package org.gwm.samples.gwmdemo.client;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GFrame;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.impl.DefaultGDialog;
 import org.gwm.client.impl.DefaultGFrame;
 import org.gwm.client.impl.DefaultGInternalFrame;
+import org.gwm.client.impl.LayoutConstant;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -54,19 +56,11 @@ public class GwmDemo implements EntryPoint {
         menuFrame.setSize(150, 300);
         DefaultGDialog.setDefaultTheme("simple1");
         Window.enableScrolling(false);
-
-        GInternalFrame f = new DefaultGInternalFrame("");
-        f.setContent(new Button("Left"));
-        f.setContentHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        f.setContentVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
-        f.setSize(300, 300);
-        desktop.addFrame(f);
-        f.setVisible(true);
-
     }
 
     private void buildUI() {
         desktop = new DefaultGDesktopPane();
+        desktop.enableScrolling(true);
         RootPanel.get().add((Widget) desktop);
         GInternalFrame ftest = new DefaultGInternalFrame("Gwm Demo");
         ftest.setUrl("wintest.html");
@@ -100,6 +94,8 @@ public class GwmDemo implements EntryPoint {
         menuLayout.add(buildMenuItem(new EventScenarii()));
         menuLayout.add(buildMenu("Themes"));
         menuLayout.add(buildMenuItem(new ChangingThemeInLiveScenarii()));
+        menuLayout.add(buildMenu("Windows Bar"));
+        menuLayout.add(buildMenuItem(new ChangingMiminizedWindowsBarDirection()));
         menuLayout.add(buildMenu("Desktop"));
         menuLayout.add(buildMenuItem(new DesktopScenarii(desktop)));
         menuLayout.add(buildMenuItem(new MultiDesktopsScenarii()));

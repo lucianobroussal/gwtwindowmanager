@@ -19,27 +19,37 @@
  */
 package org.gwm.client.impl;
 
-import java.util.List;
+import org.gwm.client.GDesktopPane;
 
-import org.gwm.client.GFrame;
-
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public abstract interface IconBar {
+/**
+ * The VerticalIconBar implementation used from {@link DefaultGDesktopPane}
+ * 
+ */
+public class VerticalIconBar extends AbstractIconBar {
 
-    public void addMinimizedWindow(Widget minimizedWindow);
+    VerticalPanel ui = new VerticalPanel();
 
-    public void removeMinimizedWindow(Widget minimizedWindow);
+    public VerticalIconBar(GDesktopPane parent) {
+        super(parent);
+    }
 
-    public String getTheme(String theme);
+    public void addMinimizedWindow(Widget minimizedWindow) {
+        ui.add(minimizedWindow);
+    }
 
-    public Widget getUI();
+    public String getTheme(String theme) {
+        return "gwm-" + theme + "-GDesktopPane-VTaskBar";
+    }
 
-    public void addFrame(GFrame gframe);
+    public void removeMinimizedWindow(Widget minimizedWindow) {
+        ui.remove(minimizedWindow);
+    }
 
-    public void removeFrame(GFrame frame);
-    
-    public void adjustSize();
-    
-    public List getGFrames();
+    public Widget getUI() {
+        return ui;
+    }
+
 }

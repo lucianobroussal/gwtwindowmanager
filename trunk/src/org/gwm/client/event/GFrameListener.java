@@ -31,6 +31,8 @@ public interface GFrameListener {
     
     public boolean onFrameClosing(GFrameEvent evt);
 
+    public void onFrameMaximizing(GFrameEvent evt);
+
     public void frameResized(GFrameEvent evt);
 
     public void frameOpened(GFrameEvent evt);
@@ -54,5 +56,6 @@ public interface GFrameListener {
     public void frameGhostMoving(int top, int left, GFrameEvent event);
 
     public void frameGhostMoved(int top, int left, GFrameEvent event);
+
 
 }
