@@ -61,8 +61,8 @@
 
 
 <target name="clean">
-<delete dir="${class.dir}" />
-<delete includeemptydirs="true">
+<delete dir="${class.dir}" failonerror="no"/>
+<delete includeemptydirs="true" failonerror="no">
 	<fileset dir=".gwt-cache" />
 </delete>
 </target>

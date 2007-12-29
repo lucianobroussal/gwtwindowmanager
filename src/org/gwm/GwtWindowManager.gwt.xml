@@ -1,47 +1,41 @@
 <!--
-/*
- * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
- * (http://www.gwtwindowmanager.org)
- * 
- * Main Contributors :
- *      Johan Vos,Andy Scholz,Marcelo Emanoel  
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
+	/*
+	* Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
+	* (http://www.gwtwindowmanager.org)
+	* 
+	* Main Contributors :
+	*      Johan Vos,Andy Scholz,Marcelo Emanoel  
+	*
+	* Licensed under the Apache License, Version 2.0 (the "License"); you may not
+	* use this file except in compliance with the License. You may obtain a copy of
+	* the License at
+	*
+	* http://www.apache.org/licenses/LICENSE-2.0
+	*
+	* Unless required by applicable law or agreed to in writing, software
+	* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+	* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+	* License for the specific language governing permissions and limitations under
+	* the License.
+	*/
 	
 -->
 
 <module>
 	<inherits name='com.google.gwt.user.User' />
-	<inherits name='com.gwt.components.Effects' />
-	
+
 	<replace-with class="org.gwm.client.impl.SelectBoxManagerImplIE6">
-		<when-type-is class="org.gwm.client.impl.SelectBoxManagerImpl"/>
-		<when-property-is name="user.agent" value="ie6"/>
+		<when-type-is class="org.gwm.client.impl.SelectBoxManagerImpl" />
+		<when-property-is name="user.agent" value="ie6" />
 	</replace-with>
-	
+
 	<replace-with class="org.gwm.client.impl.TopBarFF">
-		<when-type-is class="org.gwm.client.impl.TopBar"/>
-		<when-property-is name="user.agent" value="gecko1_8"/>
+		<when-type-is class="org.gwm.client.impl.TopBar" />
+		<when-property-is name="user.agent" value="gecko1_8" />
 	</replace-with>
-	
- 	<!--*********************  DEFAULT REQUIRED GWM CSS ***********************-->	
- 	<stylesheet src="gwm/gwm.css"/>
- 	<stylesheet src="gwm/themes/default.css"/>
- 	<stylesheet src="gwm/themes/default-off.css"/>
- 	
- 	
- 	<!--*********************  DEFAULT REQUIRED JAVASCRIPT (EFFECTS) **********-->	
-   <script src="gwm/ext/scripts/prototype.js"/>
-   <script src="gwm/ext/scripts/effects.js"/>
+
+	<!--*********************  DEFAULT REQUIRED GWM CSS ***********************-->
+	<stylesheet src="gwm/gwm.css" />
+	<stylesheet src="gwm/themes/default.css" />
+	<stylesheet src="gwm/themes/default-off.css" />
 </module>
