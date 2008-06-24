@@ -1,0 +1,87 @@
+<!--
+ /*  Copyright (c) 2006-2007 Luciano Broussal, Johan Vos,  Andy Scholz,  Marcelo Emanoel   .
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+-->
+
+
+<project basedir="." name="gwm">
+
+	<property file="build.properties"/>
+	
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="../lib/ant-contrib.jar" />
+		</classpath>
+	</taskdef>
+
+
+
+	<target name="package" description="Package jar">
+		<delete file="dist/gwm.jar" />
+		<jar destfile="dist/gwm.jar" update="false" manifest="MANIFEST.MF">
+			<fileset dir="src" excludes="**/*.html" />
+			<fileset dir="classes" includes="**/*.class" />
+			<fileset dir="LICENSES" includes="*.txt">
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="javadoc" description="">
+		<javadoc destdir="doc" access="public" source="1.4" use="true" notree="false" nonavbar="false" noindex="false" splitindex="true" author="false" version="true" nodeprecatedlist="false" nodeprecated="false"  windowtitle="GWT Window Manager v0.6.6">
+			<fileset dir="src" defaultexcludes="yes">
+			      <include name="org/gwm/client/*.java"/>
+			      <include name="org/gwm/client/impl/DefaultGDialog.java"/>
+			      <include name="org/gwm/client/event/*.java"/>
+			      <include name="org/gwm/client/util/*.java"/>
+			</fileset>
+			<classpath location="${GWT_HOME}/gwt-dev-windows.jar" />
+			<classpath location="${GWT_HOME}/gwt-user.jar" />
+			<link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
+			<header>
+			<![CDATA[<img src=http://www.gwtwindowmanager.org/images/logo-mini.png align=bottom>&nbsp; v0.6.6]]>
+			</header>
+			<bottom>
+			<![CDATA[<i>Copyright &#169; 2006-2007 Luciano Broussal  (<a href="http://www.gwtwindowmanager.org">gwtwindowmanager.org</a>).</i>]]>
+        	</bottom>
+</javadoc>
+</target>
+
+
+
+<target name="clean">
+<delete dir="${class.dir}" failonerror="no"/>
+<delete includeemptydirs="true" failonerror="no">
+	<fileset dir=".gwt-cache" />
+</delete>
+</target>
+
+<target name="compile-demo" depends="clean">
+<java classname="com.google.gwt.dev.GWTCompiler" fork="yes" failonerror="true" >
+	<classpath>
+		<pathelement location="src" />
+		<pathelement location="src-samples" />
+		<pathelement location="classes" />
+		<pathelement location="${GWT_HOME}/gwt-dev-windows.jar" />
+		<pathelement location="${GWT_HOME}/gwt-user.jar" />
+	</classpath>
+	<arg value="-out" />
+	<arg file="www" />
+	<arg value="org.gwm.samples.gwmdemo.GwmDemo" />
+</java>
+<replace token="var Anb=$doc.createElement('iframe');" value="var Anb=$doc.createElement('iframe');Anb.src='javascript:false';" dir="www" includes="**/*.cache.html" />
+</target>
+
+
+</project>
