@@ -1,0 +1,193 @@
+/*
+body {
+	color: black;
+	font-family: arial, veranda, sans-serif;
+	font-size: 76%;
+	background-image: url("../images/wallpapers/seaofconero.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin: 0;
+	padding: 0;
+}
+*/
+/*******************************************************************************
+* result list stuff
+*/
+.resultList {
+	font-size: 0.9em;
+}
+
+.resultList .columnsHeader {
+	border-bottom-style: outset; background-color : #cccccc;
+	cursor: pointer;
+	font-weight: bold;;
+	background-color: #cccccc;
+}
+
+.resultList .clickableCell {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.resultList .oddRow {
+	background-color: #eeeeee;
+}
+
+/*******************************************************************************
+* toolbar stuff
+*/
+
+
+.controlbar {
+	height: 26px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #cccccc;
+	border-top: 2px outset;
+}
+
+.toolbar {
+	height: 26px;
+	vertical-align: middle;
+	background-color: #cccccc;
+	border-bottom: 1px outset;
+}
+
+.toolbarButton {
+	padding-top: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 4px;
+	text-align: center;
+	vertical-align: middle;
+	margin: 3px;
+	cursor: pointer;
+}
+
+.toolbarButtonImage {
+	border: none;
+	height: 16px;
+	width: 16px;
+}
+
+.toolbarButtonLabel {
+	padding-left: 3px;
+	font-size: 0.8em;
+}
+
+.toolbarButton-over {
+	padding-top: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 4px;
+	border-width: 1px;
+	border-style: outset;
+	text-align: center;
+	vertical-align: middle;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.toolbarButton-pressed {
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	border-width: 1px;
+	border-style: inset;
+	text-align: center;
+	vertical-align: middle;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.toolbarButton-disabled {
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	border-width: 1px;
+	border-style: outset;
+	border-color: grey;
+	text-align: center;
+	vertical-align: middle;
+	margin: 2px;
+	color: grey;
+	cursor: default;
+}
+
+.toolbarButton-disabled .toolbarButtonLabel {
+	color: grey;
+}
+
+.toolbarButton-disabled .toolbarButtonImage {
+	opacity: 0.5;
+}
+
+.filterWidget {
+	font-size: 0.8em;
+	padding-top: 4px;
+}
+
+.filterWidget input {
+	margin-left: 5px;
+	font-size: 0.8em;
+	width: 80px;
+}
+
+.toolbarSeperator {
+	margin-top: 4px;
+	margin-left: 6px;
+	margin-right: 6px;
+	margin-bottom: 2px;
+	height: 22px;
+	border-left: 3px groove gray;
+}
+
+/*******************************************************************************
+* icon stuff
+*/
+
+.desktopIcon {
+	cursor: pointer;
+}
+
+/*******************************************************************************
+* form stuff
+*/
+
+.windowPanel {
+	background-color: #dddddd;
+	width: 100%;
+}
+
+.htmlFormPanel {
+	padding: 10px;
+	height: 344px;
+	position: static;
+	overflow: auto;
+}
+
+.formPanel {
+	padding: 5px;
+	background-color: #dddddd;
+	width: 100%;
+}
+
+.formField {
+	padding: 3px;
+}
+
+.formField .label {
+	padding-right: 5px;
+	text-align: right;
+}
+
+.formField .labelRequired {
+	padding-right: 5px;
+	font-weight: bold;
+	text-align: right;
+}
+
+

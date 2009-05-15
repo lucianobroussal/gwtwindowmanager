@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
+<head>
+
+<style type="text/css">
+<!--
+.PageTitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	background-color: #CCCCCC;
+	position: relative;
+	width: 100%;
+	padding:5px;
+	font-weight:bold;
+	color:black;
+}
+xmp {
+ background-color:#EFEFEF;
+ color:#000000;
+ border:1px dashed #000000;
+ }
+-->
+</style>
+</head>
+<body>
+<img src="http://www.gwtwindowmanager.org/images/logo-mini.png"/>
+<p class="PageTitle">Migration guide 0.6.5 </p>
+<ol>
+  <li> <strong>Save a backup</strong> of your project with the old Gwm release! (just for safety ;))  </li>
+  <li><strong>Delete</strong> the Gwm themes folder (<strong>/public/themes</strong>) and the Gwm folder (<strong>/public/gwm<strong>) in </strong>your public folder</strong> </li>
+  <li><strong>Copy</strong> the <strong>themes folder</strong> from the Gwm distribution to <strong>your public folder</strong> </li>
+
+<xmp>  <link href="themes/alphacube.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/alphacube-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spread.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spread-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/darkX.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/darkX-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/theme1.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/theme1-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spa.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/spa-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/citrus.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/citrus-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/cloudy.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/cloudy-off.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/sky.css" rel="stylesheet" type="text/css"></link>
+  <link href="themes/sky-off.css" rel="stylesheet" type="text/css"></link>
+</xmp>
+
+Note: these extra style are optional (the default theme is automatically injected)
+
+<li><strong>GDesktop use</strong>  </li>
+	Replace the calls to <font color=red style="text-decoration:line-through" >setWidgetPosition(Widget widget, int left, int top)</font>  <br/>by<font color=blue>  addWidget(Widget widget, int left, int top);</font>
+</ol>
+</body>
+</html>
