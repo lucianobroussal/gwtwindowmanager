@@ -25,35 +25,34 @@ import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.event.GFrameListener;
 import org.gwm.client.impl.DefaultGFrame;
 
-import com.google.gwt.user.client.Window;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class DebugWindow {
 
     private DockPanel dock;
-
     private VerticalPanel panel;
-
     private Button clearLog;
-
     private GFrame frame;
 
     public DebugWindow() {
         frame = new DefaultGFrame("Debug Window");
         this.dock = new DockPanel();
         this.panel = new VerticalPanel();
-        this.clearLog = new Button("Clear window", new ClickListener() {
-            public void onClick(Widget w) {
-                clearPanel();
-            }
-        });
+        this.clearLog = new Button("Clear window", new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				clearPanel();
+			}
+		});
+        
         this.clearLog.addStyleName("gwm_DebugWindow-ClearLogButton");
         this.dock.addStyleName("gwm-DebugWindow");
         this.dock.add(clearLog, DockPanel.NORTH);

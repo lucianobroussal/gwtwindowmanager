@@ -780,12 +780,10 @@ public class DefaultGFrame extends SimplePanel implements GFrame, EventPreview {
 
 	@Override
 	public void setVisible(boolean visible) {
-		if (closed) {
-			throw new IllegalStateException(
-					"This is window has been closed. You can work anymore with a closed window. the garbage collector as released the allocated resources.");
-		}
-		if (this.visible == visible)
+		if (closed || this.visible == visible) {
 			return;
+		}
+		
 		if (visible) {
 			this.minimized = false;
 			super.setVisible(true);

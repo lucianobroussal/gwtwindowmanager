@@ -202,7 +202,6 @@ public class DefaultGInternalFrame extends DefaultGFrame implements
         if (desktopPane != null) {
             desktopPane.removeFrame(this);
         }
-
     }
 
 }
