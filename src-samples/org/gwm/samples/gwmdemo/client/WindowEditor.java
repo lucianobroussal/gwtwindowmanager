@@ -379,6 +379,9 @@ public class WindowEditor extends Composite {
         horizontalPanel.add(propertyLabel);
         //inputWidget.setStyleName(inputStyle);
         horizontalPanel.add(inputWidget);
+        
+        //test nicolas ciaravola
+        
         return horizontalPanel;
 
     }
