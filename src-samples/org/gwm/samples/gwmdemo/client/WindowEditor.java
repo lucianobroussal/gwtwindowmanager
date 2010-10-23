@@ -380,8 +380,6 @@ public class WindowEditor extends Composite {
         //inputWidget.setStyleName(inputStyle);
         horizontalPanel.add(inputWidget);
         
-        //test nicolas ciaravola
-        
         return horizontalPanel;
 
     }
