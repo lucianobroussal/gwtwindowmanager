@@ -20,5 +20,5 @@ Open the ant build.xml file with the Ant view and hit the javadoc task.
 
 
 ------------------------------------------------------------------------
-Copyright (c) 2006-2007 Luciano Broussal (http://www.gwtwindowmanager.org)
+Copyright (c) 2006-2016 Luciano Broussal (http://www.gwtwindowmanager.org)
    
